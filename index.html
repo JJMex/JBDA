@@ -34,36 +34,57 @@
 
         /* --- Navegación Minimalista --- */
         nav {
-            padding: 20px 8%;
+            padding: 15px 8%; /* Ajustado padding vertical para compensar logo más grande */
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             z-index: 1000;
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border);
+            height: 110px; /* Altura fija para estabilidad visual */
         }
 
         .logo-container img {
-            height: 60px;
+            height: 85px; /* AUMENTADO: De 60px a 85px para mayor impacto */
             width: auto;
-            transition: transform 0.4s ease;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: block;
+        }
+
+        /* Efecto sutil al pasar el mouse sobre el logo principal */
+        .logo-container img:hover {
+            transform: scale(1.05);
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--dark-grey);
             margin-left: 40px;
-            font-size: 12px;
+            font-size: 13px; /* Ligeramente más legible */
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: 600;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .nav-links a:hover { color: var(--pink-premium); }
+        
+        /* Línea animada bajo los links */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--pink-premium);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
 
         /* --- Hero Section --- */
         header {
@@ -72,7 +93,7 @@
             flex-direction: column;
             justify-content: center;
             padding: 0 10%;
-            background: radial-gradient(circle at 80% 20%, #fff0f6 0%, #ffffff 50%);
+            background: radial-gradient(circle at 85% 15%, #fff0f6 0%, #ffffff 60%);
         }
 
         header h2 { 
@@ -213,7 +234,7 @@
         }
         .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; }
 
-        /* --- Trust / Certificaciones (MODIFICADO) --- */
+        /* --- Trust / Certificaciones (MEJORADO) --- */
         .trust-bar {
             padding: 80px 10%;
             border-top: 1px solid var(--border);
@@ -224,34 +245,44 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 80px;
-            margin-top: 40px;
+            gap: 60px; /* Espacio optimizado entre logos */
+            margin-top: 50px;
             flex-wrap: wrap;
         }
         .cert-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
+            transition: transform 0.3s ease;
+            cursor: default;
         }
-        .cert-item:hover { opacity: 1; }
+        
+        .cert-item:hover {
+            transform: translateY(-5px); /* Pequeña elevación al pasar mouse */
+        }
         
         .cert-item img {
-            height: 60px; /* Tamaño controlado de los logos */
+            height: 80px; /* Tamaño aumentado para mejor legibilidad */
             width: auto;
-            margin-bottom: 15px;
-            filter: grayscale(100%); /* Efecto minimalista */
-            transition: filter 0.3s;
+            margin-bottom: 20px;
+            filter: grayscale(100%); /* Estilo minimalista inicial */
+            opacity: 0.6; /* Un poco transparente para no robar atención */
+            transition: all 0.4s ease;
         }
-        .cert-item:hover img { filter: grayscale(0%); }
+        
+        /* Al pasar el mouse, recuperan su color y opacidad total */
+        .cert-item:hover img { 
+            filter: grayscale(0%); 
+            opacity: 1;
+        }
         
         .cert-text {
             font-weight: 700;
-            font-size: 13px;
-            letter-spacing: 1px;
+            font-size: 12px;
+            letter-spacing: 2px;
             color: var(--dark-grey);
             text-transform: uppercase;
+            opacity: 0.8;
         }
 
         /* --- CTA --- */
@@ -281,6 +312,12 @@
             gap: 12px;
             z-index: 1000;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.3);
         }
 
         footer { 
@@ -293,10 +330,13 @@
         }
 
         @media (max-width: 900px) {
+            nav { height: 90px; padding: 15px 5%; }
+            .logo-container img { height: 60px; } /* Ajuste en móvil para que no ocupe toda la pantalla */
             #diferenciadores { grid-template-columns: 1fr; gap: 50px; }
             #contacto { margin: 20px; padding: 60px 30px; }
             header { padding-top: 100px; }
             .cert-container { gap: 40px; }
+            .cert-item img { height: 60px; }
         }
     </style>
 </head>
@@ -385,12 +425,12 @@
     <div class="trust-bar">
         <span class="section-label">Certificaciones Oficiales</span>
         <div class="cert-container">
-            <div class="cert-item">
-                <img src="https://lh6.googleusercontent.com/proxy/pjQdGO3edakGCLu-EPqsUq2sPcCenJd_L1zNYCe1J0bBCkejhUwb7XLzHGu2EamyhjV2pU68yvqfeEYKUPR2IZh-_K5xpshs2m1QZo_9" alt="Huawei Certified">
+            <div class="cert-item" data-aos="zoom-in" data-aos-delay="100">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/HCIA.png" alt="Huawei Certified HCIA">
                 <span class="cert-text">HCIA Datacom</span>
             </div>
-            <div class="cert-item">
-                <img src="https://pacybersecurity.org/wp-content/uploads/2022/01/ccna_600.png" alt="Cisco Certified">
+            <div class="cert-item" data-aos="zoom-in" data-aos-delay="200">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/CCNA.png" alt="Cisco Certified CCNA">
                 <span class="cert-text">CCNA Datacom</span>
             </div>
         </div>
