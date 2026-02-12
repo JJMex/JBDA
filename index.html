@@ -3,184 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JBDA | Consultoría Estratégica en Redes y Conectividad</title>
+    
+    <title>JBDA | Consultoría Estratégica en Infraestructura de Red</title>
+    <meta name="description" content="Ingeniería de alto nivel para asegurar la continuidad operativa y optimización de CAPEX en redes Cisco y Huawei.">
+    <meta property="og:title" content="JBDA | Arquitectura de Red y Telecomunicaciones">
+    <meta property="og:description" content="Especialistas en implementación multivendor y gestión proactiva de infraestructura crítica.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF007F'><path d='M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 4.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5zm0 13c-2.12 0-4.43-1.02-6-2.6 0-1.87 2.67-3.1 6-3.1s6 1.23 6 3.1c-1.57 1.58-3.88 2.6-6 2.6z'/></svg>">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --white: #ffffff;
-            --silver: #f8f9fa;
-            --dark-grey: #1a1a1a;
-            --pink: #FF007F; /* Rosa Magenta JBDA */
+            --silver: #f9fafb;
+            --dark-grey: #121212;
+            --pink: #FF007F; 
             --text-grey: #4a4a4a;
-            --border: #e9ecef;
+            --border: #ececec;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--white); color: var(--dark-grey); line-height: 1.8; -webkit-font-smoothing: antialiased; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--white);
-            color: var(--dark-grey);
-            line-height: 1.7;
-        }
+        section { padding: 120px 10%; }
+        h1, h2, h3 { letter-spacing: -0.02em; }
 
-        /* --- Navegación --- */
+        /* --- Navegación Ejecutiva --- */
         nav {
-            padding: 15px 8%;
+            padding: 10px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
-            background: rgba(255, 255, 255, 0.95); /* Un poco más opaco para que el logo resalte */
+            background: rgba(255, 255, 255, 0.98);
             z-index: 1000;
             border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(12px);
-            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
-
-        /* AJUSTE REALIZADO: Logo más grande */
-        .logo-container img {
-            height: 75px; /* Aumentado de 50px a 75px para mayor presencia */
-            width: auto;
-            display: block;
-            transition: transform 0.3s ease; /* Suaviza el efecto hover */
-        }
-
-        /* Efecto opcional: el logo crece sutilmente al pasar el mouse */
-        .logo-container img:hover {
-            transform: scale(1.05);
-        }
+        .logo-container img { height: 75px; width: auto; transition: transform 0.3s ease; }
+        .logo-container img:hover { transform: scale(1.02); }
 
         .nav-links a {
             text-decoration: none;
             color: var(--dark-grey);
             margin-left: 35px;
-            font-size: 13px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             font-weight: 600;
             transition: 0.3s;
-            position: relative;
         }
-
         .nav-links a:hover { color: var(--pink); }
 
-        /* Pequeña línea animada debajo de los links del menú */
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--pink);
-            transition: width 0.3s;
-        }
-        .nav-links a:hover::after { width: 100%; }
-
-
-        /* --- Hero Section --- */
+        /* --- Hero: Enfoque Consultivo --- */
         header {
-            min-height: 90vh; /* Asegura altura mínima en pantallas grandes */
+            height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: flex-start;
-            padding: 50px 10%; /* Un poco más de padding vertical */
-            background: radial-gradient(circle at bottom left, #fff0f6, #ffffff);
+            padding: 0 10%;
+            background: linear-gradient(to right, #ffffff 40%, #fffbfd 100%);
         }
-
-        header h2 { color: var(--pink); font-size: 14px; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; font-weight: 700; }
-        header h1 { font-size: clamp(40px, 5vw, 58px); /* Tamaño de fuente responsivo */ line-height: 1.1; margin-bottom: 20px; font-weight: 800; max-width: 850px; letter-spacing: -1px; }
-        header p { font-size: 20px; color: var(--text-grey); max-width: 650px; margin-bottom: 40px; font-weight: 300; }
-
-        .btn-main {
-            padding: 18px 50px;
-            background-color: var(--dark-grey);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-main:hover { background-color: var(--pink); box-shadow: 0 10px 25px rgba(255, 0, 127, 0.3); transform: translateY(-3px); }
-
-        /* --- Introducción / Misión --- */
-        #introduccion { padding: 120px 10%; text-align: center; }
-        #introduccion p { font-size: clamp(20px, 3vw, 26px); font-weight: 300; color: var(--dark-grey); max-width: 950px; margin: 0 auto; line-height: 1.5; }
-        #introduccion strong { color: var(--pink); font-weight: 700; }
-
-        /* --- Servicios --- */
-        #servicios { padding: 120px 10%; background-color: var(--silver); }
-        .section-header { margin-bottom: 80px; text-align: left; }
-        .section-header span { color: var(--pink); font-weight: 700; font-size: 13px; letter-spacing: 2px; display: block; margin-bottom: 10px; }
-        .section-header h2 { font-size: 42px; font-weight: 800; color: var(--dark-grey); }
-
-        .grid-servicios { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 50px; }
-        .card { background: var(--white); padding: 50px; border-radius: 8px; transition: all 0.4s ease; border: 1px solid transparent; }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px rgba(0,0,0,0.08); border-color: rgba(255, 0, 127, 0.1); }
-        .card-num { color: var(--pink); font-weight: 800; font-size: 16px; margin-bottom: 25px; display: block; opacity: 0.8; }
-        .card h3 { font-size: 24px; margin-bottom: 25px; font-weight: 700; }
-        .card ul { list-style: none; }
-        .card ul li { margin-bottom: 15px; font-size: 16px; color: var(--text-grey); position: relative; padding-left: 25px; line-height: 1.6; }
-        .card ul li::before { content: "•"; color: var(--pink); position: absolute; left: 0; font-weight: bold; font-size: 18px; line-height: 1; top: 2px; }
-
-        /* --- Diferenciadores --- */
-        #diferenciadores { padding: 120px 10%; display: grid; grid-template-columns: 40% 55%; gap: 5%; align-items: flex-start; }
-        .quote-container { position: sticky; top: 150px; }
-        .quote { font-size: 42px; font-weight: 800; line-height: 1.1; color: var(--dark-grey); }
-        .quote .highlight { color: var(--pink); display: block; margin-top: 10px; }
+        .hero-tag { color: var(--pink); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 20px; }
+        header h1 { font-size: clamp(40px, 5vw, 65px); line-height: 1.1; margin-bottom: 25px; font-weight: 700; max-width: 900px; }
+        header p { font-size: 19px; color: var(--text-grey); max-width: 650px; margin-bottom: 45px; font-weight: 400; opacity: 0.9; }
         
-        .diff-list div { margin-bottom: 50px; padding-left: 30px; border-left: 3px solid var(--silver); transition: 0.3s; }
-        .diff-list div:hover { border-left-color: var(--pink); }
-        .diff-list h4 { color: var(--dark-grey); margin-bottom: 15px; text-transform: uppercase; font-size: 15px; font-weight: 800; letter-spacing: 1px; }
-        .diff-list p { font-size: 17px; color: var(--text-grey); }
+        .hero-btns { display: flex; gap: 20px; }
+        .btn { padding: 18px 45px; font-size: 13px; font-weight: 700; text-decoration: none; transition: 0.3s; border: 1px solid var(--dark-grey); border-radius: 2px; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-fill { background: var(--dark-grey); color: var(--white); }
+        .btn-fill:hover { background: var(--pink); border-color: var(--pink); transform: translateY(-3px); }
+        .btn-outline { color: var(--dark-grey); }
+        .btn-outline:hover { border-color: var(--pink); color: var(--pink); }
 
-        /* --- CTA / Diagnóstico --- */
-        #contacto { padding: 140px 10%; background: linear-gradient(45deg, var(--dark-grey), #2a2a2a); color: var(--white); text-align: center; position: relative; overflow: hidden; }
-        #contacto h2 { font-size: clamp(36px, 4vw, 48px); margin-bottom: 25px; font-weight: 800; }
-        #contacto p { margin-bottom: 50px; opacity: 0.9; font-weight: 300; font-size: 20px; max-width: 700px; margin-left: auto; margin-right: auto; }
+        /* --- Trust Bar: Autoridad Visual --- */
+        .trust-bar { padding: 60px 10%; border-top: 1px solid var(--border); background: var(--white); display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 80px; }
+        .trust-bar img { height: 40px; filter: grayscale(1); opacity: 0.6; transition: 0.4s ease; }
+        .trust-bar img:hover { filter: grayscale(0); opacity: 1; }
 
-        /* --- WhatsApp Botón Flotante --- */
+        /* --- Servicios: Ingeniería Visual --- */
+        #servicios { background-color: var(--silver); }
+        .section-header span { color: var(--pink); font-weight: 700; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; }
+        .section-header h2 { font-size: 38px; margin-top: 10px; margin-bottom: 80px; font-weight: 700; }
+
+        .grid-servicios { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1px; background-color: var(--border); }
+        .card { background: var(--white); padding: 60px; transition: 0.4s ease-in-out; }
+        .card:hover { background: var(--silver); }
+        .card-num { color: var(--pink); font-weight: 700; font-size: 13px; margin-bottom: 20px; display: block; }
+        .card h3 { font-size: 22px; margin-bottom: 25px; font-weight: 700; }
+        .card ul { list-style: none; }
+        .card ul li { margin-bottom: 15px; font-size: 14px; color: var(--text-grey); display: flex; align-items: flex-start; line-height: 1.6; }
+        .card ul li::before { content: "—"; color: var(--pink); margin-right: 15px; font-weight: 700; }
+
+        /* --- Certificaciones (Trust Badges) --- */
+        .cert-section { text-align: center; padding: 100px 10%; border-top: 1px solid var(--border); }
+        .badge-container { display: flex; justify-content: center; gap: 30px; margin-top: 50px; flex-wrap: wrap; }
+        .badge {
+            border: 2px solid var(--dark-grey);
+            padding: 22px 45px;
+            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            position: relative;
+            background: var(--white);
+        }
+        .badge span { color: var(--pink); }
+        .badge::after {
+            content: "";
+            position: absolute;
+            top: 4px; left: 4px; right: 4px; bottom: 4px;
+            border: 1px solid var(--border);
+            pointer-events: none;
+        }
+
+        /* --- WhatsApp Consultivo --- */
         .whatsapp-btn {
             position: fixed;
-            bottom: 40px;
-            right: 40px;
-            background-color: #25d366;
-            color: white;
-            padding: 16px 32px;
-            border-radius: 50px;
+            bottom: 40px; right: 40px;
+            background: var(--dark-grey);
+            color: var(--white);
+            padding: 20px 35px;
             text-decoration: none;
-            font-weight: 700;
-            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.3);
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 1000;
             display: flex;
             align-items: center;
-            gap: 12px;
-            z-index: 1000;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid white;
+            gap: 15px;
+            transition: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border-radius: 2px;
         }
-        .whatsapp-btn:hover { transform: scale(1.05) translateY(-5px); background-color: #20bd5a; box-shadow: 0 20px 40px rgba(37, 211, 102, 0.4); }
+        .whatsapp-btn:hover { background: var(--pink); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255, 0, 127, 0.25); }
+        .whatsapp-btn svg { fill: currentColor; width: 18px; }
 
-        footer { padding: 60px 10%; background: var(--white); border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #888; }
-        footer .certs-footer { font-weight: 700; color: var(--dark-grey); letter-spacing: 3px; }
+        /* --- Footer --- */
+        footer { padding: 80px 10%; background: var(--dark-grey); color: var(--white); display: flex; justify-content: space-between; align-items: flex-start; border-top: 10px solid var(--pink); }
+        .footer-logo img { height: 65px; filter: brightness(0) invert(1); margin-bottom: 25px; }
+        .footer-info p { opacity: 0.6; font-size: 13px; max-width: 400px; margin-bottom: 10px; font-weight: 300; }
 
         @media (max-width: 900px) {
-            nav { padding: 15px 5%; }
-            .logo-container img { height: 60px; } /* Logo un poco más pequeño en móvil pero aún grande */
-            #diferenciadores { grid-template-columns: 1fr; gap: 60px; }
-            .quote-container { position: static; margin-bottom: 40px; }
-            .quote { font-size: 36px; }
+            header h1 { font-size: 38px; }
+            section { padding: 80px 5%; }
+            .hero-btns { flex-direction: column; width: 100%; }
             .nav-links { display: none; }
-            header { padding-top: 120px; align-items: center; text-align: center; }
-            footer { flex-direction: column; gap: 20px; text-align: center; }
-            .whatsapp-btn { bottom: 20px; right: 20px; padding: 12px 24px; font-size: 14px; }
+            footer { flex-direction: column; gap: 50px; text-align: center; align-items: center; }
+            .trust-bar { gap: 40px; }
+            .whatsapp-btn { bottom: 20px; right: 20px; padding: 15px 25px; }
         }
     </style>
 </head>
@@ -191,98 +166,89 @@
             <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo">
         </div>
         <div class="nav-links">
-            <a href="#inicio">Inicio</a>
             <a href="#servicios">Servicios</a>
-            <a href="#diferenciadores">Nosotros</a>
-            <a href="#contacto">Diagnóstico</a>
+            <a href="#expertise">Expertise</a>
+            <a href="https://wa.me/525613388030" target="_blank" rel="noopener noreferrer">Contacto</a>
         </div>
     </nav>
 
     <header id="inicio">
-        <h2>Infraestructura & Telecomunicaciones</h2>
-        <h1>Consultoría Estratégica en Redes y Conectividad</h1>
-        <p>Ingeniería de alto nivel diseñada para asegurar la continuidad operativa y la eficiencia de costos de su infraestructura tecnológica.</p>
-        <a href="#servicios" class="btn-main">Nuestras Competencias</a>
+        <span class="hero-tag">JBDA Consulting</span>
+        <h1>Arquitectura de Red para la Continuidad del Negocio</h1>
+        <p>Ingeniería de alto nivel diseñada para asegurar la estabilidad operativa y eficiencia de costos en infraestructuras Cisco y Huawei[cite: 3, 4, 13].</p>
+        <div class="hero-btns">
+            <a href="#servicios" class="btn btn-fill">Nuestras Competencias</a>
+            <a href="https://wa.me/525613388030" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Solicitar Diagnóstico</a>
+        </div>
     </header>
 
-    <section id="introduccion">
-        <p>En un entorno digital, la red no es un commodity; es la <strong>columna vertebral de su operación.</strong> Fusionamos precisión técnica certificada con visión estratégica de preventa.</p>
-    </section>
+    <div class="trust-bar">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Huawei_logo_2018.svg" alt="Huawei Network Solutions">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" alt="Cisco Systems">
+    </div>
 
     <section id="servicios">
         <div class="section-header">
-            <span>PORTAFOLIO</span>
-            <h2>Servicios de Ingeniería Especializada</h2>
+            <span>UNIDADES DE NEGOCIO</span>
+            <h2>Ingeniería de Red de Alto Nivel [cite: 8]</h2>
         </div>
         <div class="grid-servicios">
             <div class="card">
                 <span class="card-num">01</span>
-                <h3>Arquitectura y Diseño (Network Engineering)</h3>
+                <h3>Arquitectura y Diseño Estratégico</h3>
                 <ul>
-                    <li><strong>Optimización de CAPEX:</strong> Validación técnica para evitar sobredimensionamiento y asegurar inversiones exactas.</li>
-                    <li><strong>Diseño Escalable:</strong> Planificación de redes LAN/WAN/WLAN preparadas para el crecimiento futuro.</li>
-                    <li><strong>Arquitectura de Futuro:</strong> Diseño integral de nuevos nodos pensando en escalabilidad y rentabilidad.</li>
+                    <li><strong>Optimización de CAPEX:</strong> Validación técnica para evitar el sobredimensionamiento de hardware[cite: 9].</li>
+                    <li><strong>Planificación Escalable:</strong> Redes diseñadas para el crecimiento futuro, minimizando reinversiones[cite: 10].</li>
+                    <li><strong>Visión de Arquitecto:</strong> Diseño integral de nuevos nodos garantizando rentabilidad operativa.</li>
                 </ul>
             </div>
             <div class="card">
                 <span class="card-num">02</span>
-                <h3>Implementación Multivendor</h3>
+                <h3>Implementación Especializada</h3>
                 <ul>
-                    <li><strong>Configuración Avanzada:</strong> Despliegue experto en entornos <strong>Huawei (HCIA)</strong> y <strong>Cisco (CCNA)</strong>.</li>
-                    <li><strong>Segmentación y Seguridad:</strong> Hardening, VLANs para aislamiento crítico y políticas de QoS.</li>
-                    <li><strong>Recuperación de Infraestructura:</strong> Diagnóstico y reingeniería de redes con latencia o inestabilidad.</li>
+                    <li><strong>Despliegue Multivendor:</strong> Configuración avanzada en ecosistemas Huawei y Cisco[cite: 13, 27].</li>
+                    <li><strong>Seguridad de Acceso:</strong> Hardening de dispositivos, segmentación por VLANs y políticas de QoS[cite: 14].</li>
+                    <li><strong>Trayectoria Técnica:</strong> Experiencia consolidada en soporte L1 y L2 para resolución de incidentes críticos.</li>
                 </ul>
             </div>
             <div class="card">
                 <span class="card-num">03</span>
-                <h3>Gestión Proactiva (NOC Services)</h3>
+                <h3>Gestión Proactiva (NOC)</h3>
                 <ul>
-                    <li><strong>Visibilidad Total:</strong> Dashboards en tiempo real basados en soluciones Open Source para el control total de cada nodo.</li>
-                    <li><strong>Mantenimiento Preventivo:</strong> Detección temprana de anomalías antes de que impacten al negocio.</li>
+                    <li><strong>Visibilidad Total:</strong> Dashboards en tiempo real para el control total de cada nodo[cite: 18].</li>
+                    <li><strong>Prevención de Incidentes:</strong> Detección de anomalías antes de que impacten al negocio[cite: 19].</li>
+                    <li><strong>Troubleshooting Experto:</strong> Capacidad analítica para la recuperación de infraestructura inestable[cite: 15].</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <section id="diferenciadores">
-        <div class="quote-container">
-            <div class="quote">
-                "No vendemos cajas;
-                <span class="highlight">integramos soluciones."</span>
-            </div>
+    <section class="cert-section" id="expertise">
+        <div class="section-header">
+            <span>VALIDACIÓN TÉCNICA</span>
+            <h2>Certificaciones y Experiencia [cite: 25]</h2>
         </div>
-        <div class="diff-list">
-            <div>
-                <h4>Experiencia Multisectorial</h4>
-                <p>Trayectoria comprobada en implementación y preventa técnica en sectores corporativo, hotelería e industria.</p>
-            </div>
-            <div>
-                <h4>Agnósticos a la Marca</h4>
-                <p>Nuestra lealtad es con la funcionalidad de su red. Somos expertos en Huawei y Cisco, pero priorizamos su necesidad operativa.</p>
-            </div>
-            <div>
-                <h4>Cobertura Ejecutiva</h4>
-                <p>Presencia presencial en CDMX y Morelos, con capacidad de gestión y troubleshooting remoto a nivel global.</p>
-            </div>
+        <div class="badge-container">
+            <div class="badge">Huawei <span>HCIA Datacom</span></div>
+            <div class="badge">Cisco <span>CCNA Datacom</span></div>
         </div>
-    </section>
-
-    <section id="contacto">
-        <h2>Sesión de Diagnóstico Preliminar</h2>
-        <p>Evaluaremos la arquitectura lógica de su red y su postura de seguridad actual sin compromiso.</p>
-        <a href="https://wa.me/525613388030?text=Hola%20JBDA,%20solicito%20una%20Sesión%20de%20Diagnóstico%20Preliminar%20para%20mi%20red." class="btn-main" style="background-color: var(--pink);" target="_blank">Solicitar Sesión Gratuita</a>
+        <p style="margin-top: 50px; font-weight: 300; color: var(--text-grey);">Trayectoria comprobada como Soporte L1/L2 e Ingeniero de Preventa en sectores corporativo e industrial[cite: 25].</p>
     </section>
 
     <footer>
-        <div>
-            &copy; 2026 JBDA | Consultoría en Telecomunicaciones<br>
-            <span style="opacity: 0.7; margin-top: 5px; display: block;">Morelos • CDMX • Global Remote</span>
+        <div class="footer-logo">
+            <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo">
+            <p><strong>JBDA</strong> | "No vendemos cajas; integramos soluciones"[cite: 21].</p>
         </div>
-        <div class="certs-footer">HCIA • CCNA</div>
+        <div class="footer-info">
+            <p>Atención Presencial: CDMX & Morelos[cite: 26].</p>
+            <p>Soporte Remoto: Global Operations.</p>
+            <p style="margin-top: 25px;">&copy; 2026 JBDA. Todos los derechos reservados.</p>
+        </div>
     </footer>
 
-    <a href="https://wa.me/525613388030?text=Hola%20JBDA,%20solicito%20una%20Sesión%20de%20Diagnóstico%20Preliminar%20para%20mi%20red." class="whatsapp-btn" target="_blank">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>
+    <a href="https://wa.me/525613388030?text=Hola%20JBDA,%20solicito%20una%20Sesión%20de%20Diagnóstico%20Preliminar." class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>
         <span>Diagnóstico Preliminar</span>
     </a>
 
