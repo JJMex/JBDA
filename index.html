@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JBDA | Consultoría Estratégica en Infraestructura de Red</title>
     <meta name="description" content="JBDA: Ingeniería de alto nivel para asegurar la continuidad operativa y optimización de CAPEX en redes Cisco y Huawei.">
-    <meta property="og:title" content="JBDA | Arquitectura de Red y Telecomunicaciones">
-    <meta property="og:description" content="Especialistas en implementación multivendor y gestión proactiva de infraestructura crítica.">
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --white: #ffffff;
             --silver: #f9fafb;
-            --dark-grey: #121212; /* Gris profundo para mayor seriedad */
+            --dark-grey: #121212;
             --pink: #FF007F; 
             --text-grey: #4a4a4a;
             --border: #ececec;
@@ -23,11 +21,10 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; background-color: var(--white); color: var(--dark-grey); line-height: 1.8; }
 
-        /* --- Estética de Ingeniería: Bordes y Espacios --- */
         section { padding: 120px 10%; }
         h1, h2, h3 { letter-spacing: -0.02em; }
 
-        /* --- Navegación Ejecutiva --- */
+        /* --- Navegación --- */
         nav {
             padding: 10px 8%;
             display: flex;
@@ -52,7 +49,7 @@
         }
         .nav-links a:hover { color: var(--pink); }
 
-        /* --- Hero: Arquitectura de Futuro --- */
+        /* --- Hero --- */
         header {
             height: 90vh;
             display: flex;
@@ -62,8 +59,8 @@
             background: linear-gradient(to right, #ffffff 40%, #fff9fb 100%);
         }
         .hero-tag { color: var(--pink); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 20px; }
-        header h1 { font-size: clamp(45px, 6vw, 65px); line-height: 1; margin-bottom: 25px; font-weight: 700; max-width: 900px; }
-        header p { font-size: 20px; color: var(--text-grey); max-width: 600px; margin-bottom: 45px; font-weight: 300; }
+        header h1 { font-size: clamp(40px, 5vw, 65px); line-height: 1.1; margin-bottom: 25px; font-weight: 700; max-width: 900px; }
+        header p { font-size: 20px; color: var(--text-grey); max-width: 650px; margin-bottom: 45px; font-weight: 300; }
         
         .hero-btns { display: flex; gap: 20px; }
         .btn { padding: 18px 45px; font-size: 14px; font-weight: 700; text-decoration: none; transition: 0.3s; border: 1px solid var(--dark-grey); border-radius: 2px; }
@@ -72,25 +69,26 @@
         .btn-outline { color: var(--dark-grey); }
         .btn-outline:hover { border-color: var(--pink); color: var(--pink); }
 
-        /* --- Sección de Confianza (Logos) --- */
-        .trust-bar { padding: 60px 10%; border-top: 1px solid var(--border); background: var(--white); display: flex; justify-content: space-around; align-items: center; filter: grayscale(1); opacity: 0.4; flex-wrap: wrap; gap: 40px; }
-        .trust-bar img { height: 35px; }
+        /* --- Trust Bar --- */
+        .trust-bar { padding: 60px 10%; border-top: 1px solid var(--border); background: var(--white); display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 80px; }
+        .trust-bar img { height: 45px; filter: grayscale(1); opacity: 0.6; transition: 0.3s; }
+        .trust-bar img:hover { filter: grayscale(0); opacity: 1; }
 
-        /* --- Servicios: Cards Minimalistas --- */
+        /* --- Servicios --- */
         #servicios { background-color: var(--silver); }
         .section-header span { color: var(--pink); font-weight: 700; font-size: 11px; letter-spacing: 3px; }
         .section-header h2 { font-size: 40px; margin-top: 10px; margin-bottom: 80px; font-weight: 700; }
 
-        .grid-servicios { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1px; background-color: var(--border); }
+        .grid-servicios { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1px; background-color: var(--border); }
         .card { background: var(--white); padding: 60px; transition: 0.4s; }
         .card:hover { background: var(--silver); }
-        .card-icon { width: 40px; height: 40px; margin-bottom: 30px; color: var(--pink); }
+        .card-num { color: var(--pink); font-weight: 700; font-size: 14px; margin-bottom: 20px; display: block; }
         .card h3 { font-size: 24px; margin-bottom: 25px; font-weight: 600; }
         .card ul { list-style: none; }
         .card ul li { margin-bottom: 15px; font-size: 15px; color: var(--text-grey); display: flex; align-items: flex-start; }
         .card ul li::before { content: "—"; color: var(--pink); margin-right: 15px; font-weight: 700; }
 
-        /* --- Certificaciones (Badges) --- */
+        /* --- Certificaciones --- */
         .cert-section { text-align: center; padding: 100px 10%; }
         .badge-container { display: flex; justify-content: center; gap: 30px; margin-top: 40px; flex-wrap: wrap; }
         .badge {
@@ -102,15 +100,9 @@
             letter-spacing: 2px;
             position: relative;
         }
-        .badge::after {
-            content: "";
-            position: absolute;
-            top: 5px; right: 5px; bottom: 5px; left: 5px;
-            border: 1px solid var(--border);
-        }
         .badge span { color: var(--pink); }
 
-        /* --- WhatsApp Ejecutivo --- */
+        /* --- WhatsApp --- */
         .whatsapp-btn {
             position: fixed;
             bottom: 40px; right: 40px;
@@ -159,7 +151,7 @@
     <header id="inicio">
         <span class="hero-tag">JBDA Consulting</span>
         <h1>Arquitectura de Red para la Continuidad del Negocio</h1>
-        <p>Expertos en diseño, implementación y optimización estratégica de infraestructura Cisco y Huawei[cite: 3, 11, 13].</p>
+        <p>Ingeniería de alto nivel para asegurar la estabilidad operativa y eficiencia de costos en infraestructuras Cisco y Huawei[cite: 4, 7].</p>
         <div class="hero-btns">
             <a href="#servicios" class="btn btn-fill">Nuestras Competencias</a>
             <a href="https://wa.me/525613388030" target="_blank" class="btn btn-outline">Solicitar Diagnóstico</a>
@@ -169,7 +161,6 @@
     <div class="trust-bar">
         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Huawei_logo_2018.svg" alt="Huawei">
         <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" alt="Cisco">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Zabbix_logo.svg" alt="Zabbix">
     </div>
 
     <section id="servicios">
@@ -179,32 +170,30 @@
         </div>
         <div class="grid-servicios">
             <div class="card">
-                <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16m-16 5h16" stroke-linecap="round"/></svg>
                 <span class="card-num">01</span>
-                <h3>Arquitectura y Diseño</h3>
+                <h3>Arquitectura y Diseño Estratégico</h3>
                 <ul>
-                    <li><strong>Optimización de CAPEX:</strong> Validación estratégica para evitar el sobredimensionamiento de hardware.</li>
-                    <li><strong>Planificación Escalable:</strong> Redes LAN/WAN y WLAN diseñadas para el crecimiento futuro[cite: 10].</li>
-                    <li><strong>Arquitectura de Futuro:</strong> Diseño integral de nuevos nodos garantizando rentabilidad operativa.</li>
+                    <li><strong>Optimización de CAPEX:</strong> Validación técnica para evitar el sobredimensionamiento de hardware[cite: 9].</li>
+                    <li><strong>Planificación Escalable:</strong> Redes diseñadas para el crecimiento futuro, minimizando reinversiones[cite: 10].</li>
+                    <li><strong>Visión de Arquitecto:</strong> Diseño integral de nuevos nodos garantizando rentabilidad operativa.</li>
                 </ul>
             </div>
             <div class="card">
-                <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20m10-10H2" stroke-linecap="round"/></svg>
                 <span class="card-num">02</span>
                 <h3>Implementación Especializada</h3>
                 <ul>
                     <li><strong>Despliegue Multivendor:</strong> Configuración avanzada en ecosistemas Huawei y Cisco[cite: 13, 27].</li>
                     <li><strong>Seguridad de Acceso:</strong> Hardening de dispositivos, segmentación por VLANs y políticas de QoS[cite: 14].</li>
-                    <li><strong>Reingeniería:</strong> Recuperación de infraestructura con problemas de latencia o inestabilidad[cite: 15].</li>
+                    <li><strong>Soporte de Trayectoria:</strong> Experiencia consolidada en soporte L1 y L2 para resolución de incidentes críticos.</li>
                 </ul>
             </div>
             <div class="card">
-                <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"/></svg>
                 <span class="card-num">03</span>
                 <h3>Gestión Proactiva (NOC)</h3>
                 <ul>
-                    <li><strong>Visibilidad Total:</strong> Dashboards en tiempo real basados en soluciones Open Source robustas[cite: 18].</li>
-                    <li><strong>Prevención de Incidentes:</strong> Detección de anomalías antes de que impacten la operación crítica[cite: 19].</li>
+                    <li><strong>Visibilidad Total:</strong> Dashboards en tiempo real para el control total de cada nodo[cite: 18].</li>
+                    <li><strong>Prevención de Incidentes:</strong> Detección de anomalías antes de que impacten al negocio[cite: 19].</li>
+                    <li><strong>Troubleshooting Experto:</strong> Capacidad analítica para la recuperación de infraestructura inestable[cite: 15].</li>
                 </ul>
             </div>
         </div>
@@ -213,13 +202,13 @@
     <section class="cert-section" id="expertise">
         <div class="section-header">
             <span>VALIDACIÓN TÉCNICA</span>
-            <h2>Certificaciones de Industria</h2>
+            <h2>Certificaciones y Experiencia</h2>
         </div>
         <div class="badge-container">
             <div class="badge">Huawei <span>HCIA Datacom</span></div>
             <div class="badge">Cisco <span>CCNA Datacom</span></div>
         </div>
-        <p style="margin-top: 50px; font-weight: 300; opacity: 0.7;">Trayectoria comprobada en sectores Corporativo, Hotelería e Industria.</p>
+        <p style="margin-top: 50px; font-weight: 300; opacity: 0.7;">Trayectoria comprobada como Soporte L1/L2 e Ingeniero de Preventa en diversos sectores[cite: 25].</p>
     </section>
 
     <footer>
@@ -234,7 +223,7 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/525613388030?text=Hola%20JBDA,%20solicito%20una%20Sesión%20de%20Diagnóstico%20Preliminar%20para%20mi%20red." class="whatsapp-btn" target="_blank">
+    <a href="https://wa.me/525613388030?text=Hola%20JBDA,%20solicito%20una%20Sesión%20de%20Diagnóstico%20Preliminar." class="whatsapp-btn" target="_blank">
         <svg viewBox="0 0 24 24"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>
         <span>Diagnóstico Preliminar</span>
     </a>
