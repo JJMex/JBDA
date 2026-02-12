@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JBDA | Consultoría Estratégica en Redes</title>
     
-    <link rel="icon" href="https://img.icons8.com/fluency/48/shield.png" type="image/png">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4006D'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z'/%3E%3C/svg%3E" type="image/svg+xml">
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
@@ -17,7 +17,7 @@
             --silver: #f4f7f6;
             --dark-grey: #121212;
             --soft-grey: #666666;
-            --pink-premium: #D4006D; /* Un rosa más profundo y profesional */
+            --pink-premium: #D4006D;
             --border: #ececec;
         }
 
@@ -213,20 +213,45 @@
         }
         .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; }
 
-        /* --- Trust / Certificaciones --- */
+        /* --- Trust / Certificaciones (MODIFICADO) --- */
         .trust-bar {
-            padding: 60px 10%;
+            padding: 80px 10%;
             border-top: 1px solid var(--border);
             text-align: center;
             background: var(--white);
         }
-        .cert-logos {
+        .cert-container {
             display: flex;
             justify-content: center;
-            gap: 60px;
-            filter: grayscale(1);
-            opacity: 0.5;
-            margin-top: 30px;
+            align-items: center;
+            gap: 80px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        .cert-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        .cert-item:hover { opacity: 1; }
+        
+        .cert-item img {
+            height: 60px; /* Tamaño controlado de los logos */
+            width: auto;
+            margin-bottom: 15px;
+            filter: grayscale(100%); /* Efecto minimalista */
+            transition: filter 0.3s;
+        }
+        .cert-item:hover img { filter: grayscale(0%); }
+        
+        .cert-text {
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1px;
+            color: var(--dark-grey);
+            text-transform: uppercase;
         }
 
         /* --- CTA --- */
@@ -271,6 +296,7 @@
             #diferenciadores { grid-template-columns: 1fr; gap: 50px; }
             #contacto { margin: 20px; padding: 60px 30px; }
             header { padding-top: 100px; }
+            .cert-container { gap: 40px; }
         }
     </style>
 </head>
@@ -358,9 +384,15 @@
 
     <div class="trust-bar">
         <span class="section-label">Certificaciones Oficiales</span>
-        <div class="cert-logos">
-            <span style="font-weight: 800; font-size: 24px;">HUAWEI HCIA</span>
-            <span style="font-weight: 800; font-size: 24px;">CISCO CCNA</span>
+        <div class="cert-container">
+            <div class="cert-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Huawei_Logo.svg" alt="Huawei Certified">
+                <span class="cert-text">HCIA Datacom</span>
+            </div>
+            <div class="cert-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" alt="Cisco Certified">
+                <span class="cert-text">CCNA Datacom</span>
+            </div>
         </div>
     </div>
 
