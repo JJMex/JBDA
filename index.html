@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JBDA | Consultoría en Telecomunicaciones</title>
+    <title>JBDA | Ingeniería en Telecomunicaciones</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --white: #ffffff;
             --silver: #f4f4f9;
-            --dark-grey: #2d2d2d;
+            --dark-grey: #1a1a1a;
             --pink: #FF007F; /* Rosa Magenta JBDA */
-            --text-grey: #555555;
+            --text-grey: #4a4a4a;
         }
 
         * {
@@ -30,20 +30,20 @@
 
         /* --- Navegación --- */
         nav {
-            padding: 10px 10%;
+            padding: 10px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.9);
             z-index: 1000;
-            border-bottom: 1px solid var(--silver);
-            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            backdrop-filter: blur(10px);
         }
 
         .logo-container img {
-            height: 60px; /* Tamaño optimizado para el navbar */
+            height: 55px; /* Altura optimizada para que el logo luzca elegante */
             width: auto;
             display: block;
         }
@@ -70,58 +70,60 @@
             align-items: center;
             text-align: center;
             padding: 0 10%;
-            background: radial-gradient(circle at top right, #fff5f9, #ffffff);
+            background: radial-gradient(circle at top right, #fff0f6, #ffffff);
         }
 
         header h1 {
-            font-size: 48px;
-            margin-bottom: 10px;
+            font-size: 52px;
+            margin-bottom: 15px;
             font-weight: 700;
-            color: var(--dark-grey);
+            letter-spacing: -1px;
         }
 
         header p {
             font-size: 18px;
             color: var(--text-grey);
-            max-width: 650px;
-            margin-bottom: 35px;
+            max-width: 700px;
+            margin-bottom: 40px;
+            font-weight: 300;
         }
 
         .btn-main {
-            padding: 15px 45px;
+            padding: 16px 45px;
             background-color: var(--dark-grey);
             color: var(--white);
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 4px;
             font-weight: 700;
+            font-size: 15px;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .btn-main:hover {
             background-color: var(--pink);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 0, 127, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 0, 127, 0.2);
         }
 
         /* --- Servicios --- */
         #servicios {
-            padding: 100px 10%;
+            padding: 120px 10%;
             background-color: var(--silver);
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 70px;
         }
 
         .section-title h2 {
-            font-size: 32px;
+            font-size: 34px;
             margin-bottom: 15px;
+            font-weight: 700;
         }
 
         .section-title .bar {
-            width: 50px;
+            width: 40px;
             height: 4px;
             background-color: var(--pink);
             margin: 0 auto;
@@ -130,60 +132,60 @@
         .grid-servicios {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 40px;
         }
 
         .card {
             background: var(--white);
-            padding: 45px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            padding: 50px;
+            border-radius: 4px;
             transition: 0.4s;
-            border: 1px solid transparent;
+            border-bottom: 3px solid transparent;
         }
 
         .card:hover {
             transform: translateY(-10px);
-            border-color: var(--pink);
+            border-bottom: 3px solid var(--pink);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
         }
 
         .card h3 {
-            margin-bottom: 15px;
-            color: var(--pink);
+            margin-bottom: 20px;
             font-size: 20px;
+            font-weight: 700;
         }
 
         /* --- Experiencia --- */
         #experiencia {
-            padding: 100px 10%;
+            padding: 120px 10%;
             text-align: center;
         }
 
         .certs {
-            margin: 25px 0;
+            margin: 30px 0;
             font-weight: 700;
             color: var(--dark-grey);
-            letter-spacing: 5px;
-            font-size: 1.2rem;
+            letter-spacing: 6px;
+            font-size: 1.4rem;
         }
 
         /* --- WhatsApp Boton Flotante --- */
         .whatsapp-btn {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 40px;
+            right: 40px;
             background-color: #25d366;
             color: white;
-            padding: 18px 30px;
+            padding: 16px 28px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
             display: flex;
             align-items: center;
             gap: 12px;
             z-index: 1000;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.3s;
         }
 
         .whatsapp-btn:hover {
@@ -192,17 +194,18 @@
         }
 
         footer {
-            padding: 50px;
+            padding: 60px;
             text-align: center;
             font-size: 13px;
-            color: var(--text-grey);
-            border-top: 1px solid var(--silver);
+            color: #999;
+            background-color: var(--white);
         }
 
         @media (max-width: 768px) {
-            header h1 { font-size: 36px; }
+            header h1 { font-size: 38px; }
             .nav-links { display: none; }
             nav { justify-content: center; }
+            .whatsapp-btn { bottom: 20px; right: 20px; padding: 12px 20px; }
         }
     </style>
 </head>
@@ -210,7 +213,7 @@
 
     <nav>
         <div class="logo-container">
-            <img src="http://googleusercontent.com/image_generation_content/3" alt="Logo JBDA">
+            <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo">
         </div>
         <div class="nav-links">
             <a href="#inicio">Inicio</a>
@@ -220,49 +223,49 @@
     </nav>
 
     <header id="inicio">
-        <h1>Ingeniería de Redes Proactiva</h1>
-        <p>Expertos en arquitectura Huawei y Cisco. Optimizamos su infraestructura para garantizar la continuidad operativa de su empresa.</p>
-        <a href="#servicios" class="btn-main">Nuestras Soluciones</a>
+        <h1>Conectividad de Alto Nivel</h1>
+        <p>Consultoría especializada en infraestructura Huawei y Cisco. Diseñamos redes robustas, escalables y orientadas a resultados.</p>
+        <a href="#servicios" class="btn-main">Ver Soluciones</a>
     </header>
 
     <section id="servicios">
         <div class="section-title">
-            <h2>Nuestra Propuesta de Valor</h2>
+            <h2>Nuestra Especialización</h2>
             <div class="bar"></div>
         </div>
         <div class="grid-servicios">
             <div class="card">
-                <h3>Consultoría Estratégica</h3>
-                <p>Ingeniería de preventa y validación técnica para asegurar inversiones inteligentes en hardware y software de red.</p>
+                <h3>Ingeniería de Red</h3>
+                <p>Diseño de arquitectura lógica y física. Configuración experta de protocolos de ruteo y conmutación de datos.</p>
             </div>
             <div class="card">
-                <h3>Implementación Profesional</h3>
-                <p>Configuración experta de Routing, Switching y Seguridad (Capa 2 y 3) bajo estándares internacionales.</p>
+                <h3>Optimización CAPEX</h3>
+                <p>Validación técnica en preventa para asegurar que su inversión en hardware sea la adecuada para su operación.</p>
             </div>
             <div class="card">
-                <h3>Monitoreo Proactivo</h3>
-                <p>Gestión centralizada mediante sistemas Open Source para la detección temprana de anomalías e incidentes.</p>
+                <h3>Monitoreo Activo</h3>
+                <p>Implementación de herramientas de visibilidad total para el control preventivo de su infraestructura.</p>
             </div>
         </div>
     </section>
 
     <section id="experiencia">
         <div class="section-title">
-            <h2>Expertise Multinivel</h2>
+            <h2>Trayectoria y Certificación</h2>
             <div class="bar"></div>
         </div>
-        <p>Trayectoria comprobada en entornos corporativos, hotelería e industria.</p>
+        <p>Experiencia multisectorial en entornos de alta demanda operativa.</p>
         <div class="certs">HCIA • CCNA</div>
-        <p style="margin-top: 20px; color: var(--text-grey); font-weight: 300;">Morelos | CDMX | Soporte Remoto Global</p>
+        <p style="margin-top: 20px; color: var(--text-grey); font-weight: 300;">Morelos | CDMX | Global Remote Support</p>
     </section>
 
     <footer>
-        &copy; 2026 JBDA | Ingeniería en Telecomunicaciones.
+        &copy; 2026 JBDA | Ingeniería y Consultoría en Telecomunicaciones.
     </footer>
 
-    <a href="https://wa.me/525613388030?text=Hola%20JBDA,%20me%20gustaría%20agendar%20una%20consultoría%20técnica." class="whatsapp-btn" target="_blank">
+    <a href="https://wa.me/525613388030?text=Hola%20JBDA,%20solicito%20una%20consultoría%20para%20mi%20infraestructura%20de%20red." class="whatsapp-btn" target="_blank">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>
-        <span>Agendar Diagnóstico</span>
+        <span>Consultoría Directa</span>
     </a>
 
 </body>
