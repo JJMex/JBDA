@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JBDA | Consultoría Estratégica en Redes</title>
     
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4006D'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z'/%3E%3C/svg%3E" type="image/svg+xml">
+    <link rel="icon" href="https://raw.githubusercontent.com/JJMex/JBDA/main/Isotipo.png" type="image/png">
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
@@ -32,9 +31,9 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- Navegación Minimalista --- */
+        /* --- Navegación --- */
         nav {
-            padding: 15px 8%; /* Ajustado padding vertical para compensar logo más grande */
+            padding: 15px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -44,26 +43,23 @@
             z-index: 1000;
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border);
-            height: 110px; /* Altura fija para estabilidad visual */
+            height: 110px;
         }
 
         .logo-container img {
-            height: 85px; /* AUMENTADO: De 60px a 85px para mayor impacto */
+            height: 85px;
             width: auto;
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: block;
         }
 
-        /* Efecto sutil al pasar el mouse sobre el logo principal */
-        .logo-container img:hover {
-            transform: scale(1.05);
-        }
+        .logo-container img:hover { transform: scale(1.05); }
 
         .nav-links a {
             text-decoration: none;
             color: var(--dark-grey);
             margin-left: 40px;
-            font-size: 13px; /* Ligeramente más legible */
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: 600;
@@ -73,7 +69,6 @@
 
         .nav-links a:hover { color: var(--pink-premium); }
         
-        /* Línea animada bajo los links */
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -134,6 +129,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: all 0.4s ease;
+            cursor: pointer;
         }
 
         .btn-main:hover { 
@@ -154,11 +150,6 @@
             color: var(--dark-grey); 
             max-width: 1100px; 
             line-height: 1.4; 
-        }
-
-        #introduccion strong { 
-            font-weight: 700; 
-            border-bottom: 3px solid var(--pink-premium);
         }
 
         /* --- Servicios --- */
@@ -214,7 +205,7 @@
             border-left: 2px solid var(--border);
         }
 
-        /* --- Metodología / Diferenciadores --- */
+        /* --- Metodología --- */
         #diferenciadores { 
             padding: 160px 10%; 
             display: grid; 
@@ -234,7 +225,7 @@
         }
         .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; }
 
-        /* --- Trust / Certificaciones (MEJORADO) --- */
+        /* --- Trust / Certificaciones --- */
         .trust-bar {
             padding: 80px 10%;
             border-top: 1px solid var(--border);
@@ -245,7 +236,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 60px; /* Espacio optimizado entre logos */
+            gap: 60px;
             margin-top: 50px;
             flex-wrap: wrap;
         }
@@ -257,20 +248,17 @@
             cursor: default;
         }
         
-        .cert-item:hover {
-            transform: translateY(-5px); /* Pequeña elevación al pasar mouse */
-        }
+        .cert-item:hover { transform: translateY(-5px); }
         
         .cert-item img {
-            height: 80px; /* Tamaño aumentado para mejor legibilidad */
+            height: 80px;
             width: auto;
             margin-bottom: 20px;
-            filter: grayscale(100%); /* Estilo minimalista inicial */
-            opacity: 0.6; /* Un poco transparente para no robar atención */
+            filter: grayscale(100%);
+            opacity: 0.6;
             transition: all 0.4s ease;
         }
         
-        /* Al pasar el mouse, recuperan su color y opacidad total */
         .cert-item:hover img { 
             filter: grayscale(0%); 
             opacity: 1;
@@ -295,7 +283,7 @@
             border-radius: 4px;
         }
 
-        /* --- WhatsApp --- */
+        /* --- WhatsApp Flotante --- */
         .whatsapp-btn {
             position: fixed;
             bottom: 40px;
@@ -331,7 +319,7 @@
 
         @media (max-width: 900px) {
             nav { height: 90px; padding: 15px 5%; }
-            .logo-container img { height: 60px; } /* Ajuste en móvil para que no ocupe toda la pantalla */
+            .logo-container img { height: 60px; }
             #diferenciadores { grid-template-columns: 1fr; gap: 50px; }
             #contacto { margin: 20px; padding: 60px 30px; }
             header { padding-top: 100px; }
@@ -362,7 +350,7 @@
         </div>
     </header>
 
-   <section id="introduccion" data-aos="fade-up">
+    <section id="introduccion" data-aos="fade-up">
         <p>
             La red no es un accesorio; es el sistema circulatorio de la empresa moderna. 
             En <span style="color: var(--pink-premium); font-weight: 800;">JBDA</span> 
@@ -445,7 +433,7 @@
         <p style="font-size: 20px; font-weight: 300; opacity: 0.8; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
             Analicemos la salud de su red y detectemos cuellos de botella antes de que afecten su operación.
         </p>
-        <a href="https://wa.me/525613388030?text=Hola%20JBDA,%20solicito%20un%20diagnóstico%20de%20red." class="btn-main" style="background: var(--pink-premium);">Solicitar Consultoría</a>
+        <a id="btn-diagnostico" href="#" class="btn-main" style="background: var(--pink-premium);">Solicitar Consultoría</a>
     </section>
 
     <footer>
@@ -459,17 +447,44 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/525613388030" class="whatsapp-btn" target="_blank">
+    <a id="btn-whatsapp-float" href="#" class="whatsapp-btn" target="_blank">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>
         WhatsApp
     </a>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <script>
+        // ==========================================
+        // CONFIGURACIÓN: CAMBIA EL NÚMERO AQUÍ
+        // ==========================================
+        const numeroWhatsApp = "525613388030";
+        // ==========================================
+        
+        // Inicializar Animaciones
         AOS.init({
             duration: 1000,
             once: true,
             offset: 100
+        });
+
+        // Lógica para actualizar los enlaces de WhatsApp automáticamente
+        document.addEventListener("DOMContentLoaded", function() {
+            // Mensajes predefinidos
+            const mensajeDiagnostico = "Hola JBDA, solicito un diagnóstico de red.";
+            const mensajeGeneral = "Hola JBDA, quisiera más información sobre sus servicios.";
+
+            // Generar enlaces
+            const linkDiagnostico = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeDiagnostico)}`;
+            const linkGeneral = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeGeneral)}`;
+
+            // Asignar al botón de Diagnóstico (Sección Contacto)
+            const btnDiag = document.getElementById('btn-diagnostico');
+            if(btnDiag) btnDiag.href = linkDiagnostico;
+
+            // Asignar al botón Flotante
+            const btnFloat = document.getElementById('btn-whatsapp-float');
+            if(btnFloat) btnFloat.href = linkGeneral;
         });
     </script>
 </body>
