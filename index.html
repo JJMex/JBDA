@@ -14,8 +14,8 @@
         /* --- PALETA DE COLORES HIGH-TICKET --- */
         :root {
             --white: #ffffff;
-            --silver: #f8f9fa; /* Gris super claro y elegante para fondos */
-            --dark-grey: #0f172a; /* Azul noche profundo, más corporativo que el negro puro */
+            --silver: #f8f9fa; 
+            --dark-grey: #0f172a; 
             --soft-grey: #64748b;
             --pink-premium: #D4006D;
             --border: #e2e8f0;
@@ -199,12 +199,49 @@
             line-height: 1.6;
         }
 
-        /* --- CONSULTORÍA --- */
+        /* --- IMPACTO Y RESULTADOS --- */
+        #impacto {
+            padding: 140px 10%;
+            background-color: var(--white);
+            text-align: center;
+        }
+
+        .grid-impacto {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .impacto-item h3 {
+            font-size: 72px;
+            font-weight: 800;
+            color: var(--pink-premium);
+            line-height: 1;
+            margin-bottom: 15px;
+            letter-spacing: -2px;
+        }
+
+        .impacto-item h4 {
+            font-size: 18px;
+            color: var(--dark-grey);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .impacto-item p {
+            font-size: 15px;
+            color: var(--soft-grey);
+            line-height: 1.6;
+        }
+
+        /* --- CONSULTORÍA / DIFERENCIADORES --- */
         #diferenciadores { 
             padding: 160px 10%; 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
             gap: 120px;
+            background-color: var(--silver);
         }
 
         .quote { font-size: 52px; font-weight: 800; line-height: 1.1; letter-spacing: -2px; }
@@ -258,7 +295,7 @@
 
         /* --- CTA FINAL --- */
         #contacto { 
-            margin: 0 5% 100px 5%;
+            margin: 0 5% 60px 5%;
             padding: 120px 50px; 
             background: var(--dark-grey); 
             color: var(--white); 
@@ -293,14 +330,34 @@
             box-shadow: 0 15px 35px rgba(37, 211, 102, 0.3);
         }
 
+        /* --- FOOTER OPTIMIZADO CON CONTACTO --- */
         footer { 
-            padding: 60px 10%; 
-            border-top: 1px solid var(--border); 
+            padding: 60px 10% 80px 10%; 
             display: flex; 
             justify-content: space-between; 
+            align-items: flex-start;
             color: var(--soft-grey);
             font-size: 14px;
             background: var(--white);
+        }
+
+        .footer-col h5 {
+            color: var(--dark-grey);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .footer-col p, .footer-col a {
+            color: var(--soft-grey);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .footer-col a:hover {
+            color: var(--pink-premium);
         }
 
         @media (max-width: 900px) {
@@ -312,6 +369,7 @@
             header { padding-top: 100px; min-height: 80vh; }
             .quote { font-size: 40px; }
             .cert-container { gap: 40px; }
+            footer { flex-direction: column; gap: 40px; }
         }
     </style>
 </head>
@@ -354,49 +412,70 @@
                 <span class="card-num">01</span>
                 <h3>Arquitectura Estratégica</h3>
                 <ul>
-                    <li>Optimización de CAPEX para evitar gastos innecesarios.</li>
-                    <li>Diseño de topologías escalables LAN/WAN.</li>
-                    <li>Planificación proactiva de nodos de red.</li>
+                    <li><strong>Optimización de CAPEX:</strong> Evaluación de necesidades previas a la compra. Evitamos sobredimensionamientos.</li>
+                    <li><strong>Diseño Escalable:</strong> Planificación de redes LAN/WAN preparadas para el crecimiento.</li>
                 </ul>
             </div>
             <div class="card" data-aos="fade-up" data-aos-delay="200">
                 <span class="card-num">02</span>
                 <h3>Implementación Elite</h3>
                 <ul>
-                    <li>Configuración experta en entornos Huawei y Cisco.</li>
-                    <li>Segmentación avanzada para seguridad crítica.</li>
-                    <li>Reingeniería de redes con baja latencia.</li>
+                    <li><strong>Configuración Avanzada:</strong> Despliegue experto en entornos Huawei y Cisco.</li>
+                    <li><strong>Segmentación y Seguridad:</strong> Blindaje de dispositivos (Hardening), VLANs y políticas QoS.</li>
+                    <li><strong>Reingeniería:</strong> Recuperación de redes heredadas para eliminar latencia.</li>
                 </ul>
             </div>
             <div class="card" data-aos="fade-up" data-aos-delay="300">
                 <span class="card-num">03</span>
-                <h3>Continuidad Operativa</h3>
+                <h3>Gestión Proactiva</h3>
                 <ul>
-                    <li>Visibilidad total mediante Dashboards en tiempo real.</li>
-                    <li>Mantenimiento preventivo basado en datos.</li>
-                    <li>Soporte técnico de segundo nivel (L2).</li>
+                    <li><strong>Visibilidad Total:</strong> Dashboards en tiempo real para el control de cada nodo en su red.</li>
+                    <li><strong>Mantenimiento Preventivo:</strong> Detección temprana de anomalías antes de que impacten la operación.</li>
                 </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="impacto">
+        <span class="section-label" data-aos="fade-up">Casos de Éxito</span>
+        <h2 style="font-size: 42px; font-weight: 800; color: var(--dark-grey);" data-aos="fade-up">Transformación de Infraestructura</h2>
+        
+        <div class="grid-impacto">
+            <div class="impacto-item" data-aos="zoom-in" data-aos-delay="100">
+                <h3>85%</h3>
+                <h4>Reducción de Downtime</h4>
+                <p>Minimización de caídas del sistema y tiempo de inactividad operativa.</p>
+            </div>
+            <div class="impacto-item" data-aos="zoom-in" data-aos-delay="200">
+                <h3>40%</h3>
+                <h4>Ahorro en CAPEX</h4>
+                <p>Optimización estratégica de la inversión en hardware y equipamiento.</p>
+            </div>
+            <div class="impacto-item" data-aos="zoom-in" data-aos-delay="300">
+                <h3>99.8%</h3>
+                <h4>Disponibilidad de Red</h4>
+                <p>Garantía de conectividad continua para operaciones críticas.</p>
             </div>
         </div>
     </section>
 
     <section id="diferenciadores">
         <div class="quote" data-aos="fade-right">
-            "No instalamos equipos; <br>
-            <span style="color: var(--pink-premium)">integramos soluciones de negocio."</span>
+            "No vendemos cajas; <br>
+            <span style="color: var(--pink-premium)">integramos soluciones."</span>
         </div>
         <div class="diff-content" data-aos="fade-left">
             <div class="diff-item">
-                <h4>Multisectorial</h4>
-                <p>Experiencia profunda en los sectores de hotelería de lujo e industria pesada.</p>
+                <h4>Experiencia Multisectorial</h4>
+                <p>Trayectoria comprobada en Corporativo, Hotelería premium e Industria.</p>
             </div>
             <div class="diff-item">
-                <h4>Agnósticos</h4>
-                <p>Nuestra prioridad es el rendimiento, no una marca. Expertos en Huawei y Cisco.</p>
+                <h4>Agnósticos a la Marca</h4>
+                <p>Lealtad absoluta a su rendimiento y retorno de inversión, no a un fabricante específico.</p>
             </div>
             <div class="diff-item">
-                <h4>Alcance</h4>
-                <p>Consultoría presencial en CDMX y Morelos. Gestión remota con alcance global.</p>
+                <h4>Cobertura Híbrida</h4>
+                <p>Presencia física en CDMX y Morelos, combinada con capacidades de gestión remota global.</p>
             </div>
         </div>
     </section>
@@ -418,19 +497,28 @@
     <section id="contacto" data-aos="zoom-in">
         <h2>Sesión de Diagnóstico Preliminar</h2>
         <p style="font-size: 20px; font-weight: 300; opacity: 0.8; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
-            Analicemos la salud de su red y detectemos cuellos de botella antes de que afecten su operación.
+            Evaluemos la salud lógica y postura de seguridad de su red actual. Sin costo, sin compromiso.
         </p>
         <a id="link-cta" href="#" class="btn-main" style="background: var(--pink-premium); border-color: var(--pink-premium);" target="_blank">Solicitar Consultoría</a>
     </section>
 
     <footer>
-        <div>
-            <strong style="color: var(--dark-grey);">JBDA 2026</strong><br>
-            Estrategia en Telecomunicaciones.
+        <div class="footer-col">
+            <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px;">
+            <p><strong>JBDA 2026</strong><br>Consultoría Estratégica en<br>Infraestructura de Redes.</p>
         </div>
-        <div style="text-align: right;">
-            Morelos • CDMX • Global<br>
-            <a id="link-linkedin" href="#" style="color: var(--pink-premium); text-decoration: none; font-weight: 600;" target="_blank">LinkedIn</a>
+        
+        <div class="footer-col">
+            <h5>Contacto Directo</h5>
+            <p><strong>Ing. Jose Juan Cruz Bahena</strong><br>Consultor Principal</p>
+            <a href="mailto:JBDA_Tech@icloud.com">✉️ JBDA_Tech@icloud.com</a>
+            <a href="tel:+525613388030">📞 +52 56 1338 8030</a>
+        </div>
+
+        <div class="footer-col">
+            <h5>Cobertura Operativa</h5>
+            <p>Atención Presencial:<br>CDMX • Morelos</p>
+            <p>Soporte Remoto:<br>Alcance Global</p>
         </div>
     </footer>
 
@@ -443,37 +531,27 @@
     
     <script>
         const CONFIG_ENLACES = {
-            // 1. Tu número de WhatsApp (con código de país, ej. 52 para México)
+            // 1. Tu número de WhatsApp 
             numeroWhatsApp: "525613388030",
             
-            // 2. Mensajes predeterminados para WhatsApp
+            // 2. Mensajes predeterminados
             mensajeGeneral: "Hola JBDA, solicito información de consultoría.",
             mensajeDiagnostico: "Hola JBDA, quiero agendar un diagnóstico de red.",
             
-            // 3. Enlace para agendar citas. 
-            // Si usas Calendly, pon el link aquí (ej: "https://calendly.com/tu-usuario"). 
-            // Si lo dejas vacío (""), el sistema usará WhatsApp automáticamente.
-            enlaceAgenda: "", 
-            
-            // 4. Enlace a LinkedIn
-            enlaceLinkedIn: "https://www.linkedin.com/"
+            // 3. Enlace para agendar citas (Vacío usa WhatsApp por defecto)
+            enlaceAgenda: ""
         };
 
-        // --- Lógica automática (No es necesario modificar esto) ---
         document.addEventListener("DOMContentLoaded", () => {
             AOS.init({ duration: 1000, once: true, offset: 100 });
 
-            // Generar URLs de WhatsApp dinámicamente
             const urlWhatsGeneral = `https://wa.me/${CONFIG_ENLACES.numeroWhatsApp}?text=${encodeURIComponent(CONFIG_ENLACES.mensajeGeneral)}`;
             const urlWhatsDiag = `https://wa.me/${CONFIG_ENLACES.numeroWhatsApp}?text=${encodeURIComponent(CONFIG_ENLACES.mensajeDiagnostico)}`;
 
-            // Determinar a dónde apuntan los botones principales (Calendly o WhatsApp)
             const linkFinalAgenda = CONFIG_ENLACES.enlaceAgenda !== "" ? CONFIG_ENLACES.enlaceAgenda : urlWhatsDiag;
 
-            // Inyectar los enlaces en el HTML
             document.getElementById('link-hero').href = linkFinalAgenda;
             document.getElementById('link-cta').href = linkFinalAgenda;
-            document.getElementById('link-linkedin').href = CONFIG_ENLACES.enlaceLinkedIn;
             document.getElementById('link-whatsapp-float').href = urlWhatsGeneral;
         });
     </script>
