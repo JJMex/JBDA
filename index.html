@@ -14,7 +14,12 @@
     <meta property="og:type" content="website">
 
     <link rel="icon" href="https://raw.githubusercontent.com/JJMex/JBDA/main/Isotipo.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/JJMex/JBDA/main/Isotipo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
@@ -99,21 +104,21 @@
             transition: transform 0.3s ease;
         }
 
-/* --- HERO SECTION --- */
-header {
-    min-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 10%;
-    /* TEXTURA TECNOLÓGICA MEJORADA */
-    background-color: var(--white);
-    background-image: 
-        radial-gradient(rgba(212, 0, 109, 0.15) 2px, transparent 2px), /* Malla arriba (15% opacidad) */
-        linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); /* Degradado abajo */
-    background-size: 40px 40px, 100% 100%; /* Puntos más separados para mantener minimalismo */
-    background-position: center center, center top;
-}
+        /* --- HERO SECTION --- */
+        header {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+            /* TEXTURA TECNOLÓGICA MEJORADA (Malla sobre Degradado) */
+            background-color: var(--white);
+            background-image: 
+                radial-gradient(rgba(212, 0, 109, 0.15) 2px, transparent 2px), 
+                linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%);
+            background-size: 40px 40px, 100% 100%; 
+            background-position: center center, center top;
+        }
 
         header h2 { 
             color: var(--pink-premium); 
@@ -214,7 +219,7 @@ header {
         .card:hover { 
             transform: translateY(-8px);
             box-shadow: 0 30px 60px rgba(0,0,0,0.05);
-            border-color: transparent;
+            border-color: var(--pink-premium); /* Micro-interacción: Borde rosa al pasar el mouse */
         }
 
         .card-num { 
@@ -545,11 +550,11 @@ header {
             <span class="section-label">Certificaciones Oficiales</span>
             <div class="cert-container">
                 <div class="cert-item" data-aos="zoom-in" data-aos-delay="100">
-                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/HCIA.png" alt="Huawei Certified HCIA">
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/HCIA.png" alt="Huawei Certified HCIA" loading="lazy">
                     <span class="cert-text">HCIA Datacom</span>
                 </div>
                 <div class="cert-item" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/CCNA.png" alt="Cisco Certified CCNA">
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/CCNA.png" alt="Cisco Certified CCNA" loading="lazy">
                     <span class="cert-text">CCNA Datacom</span>
                 </div>
             </div>
@@ -566,7 +571,7 @@ header {
 
     <footer>
         <div class="footer-col">
-            <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px;">
+            <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px;" loading="lazy">
             <p><strong>JBDA 2026</strong><br>Consultoría Estratégica en<br>Infraestructura de Redes.</p>
         </div>
         
@@ -583,7 +588,7 @@ header {
             
             <a id="link-whatsapp-footer" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Contactar por WhatsApp">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>
-                WhatsApp
+                WhatsApp (+52 56 1338 8030)
             </a>
 
             <a id="link-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visitar perfil de LinkedIn de la empresa">
