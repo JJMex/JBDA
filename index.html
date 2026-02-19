@@ -46,6 +46,34 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* --- MICRO-OPTIMIZACIÓN 1: Selección de texto Premium --- */
+        ::selection {
+            background-color: var(--pink-premium);
+            color: #ffffff;
+        }
+
+        /* --- MICRO-OPTIMIZACIÓN 2: Scrollbar Customizado --- */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--white);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--pink-premium);
+        }
+
+        /* --- MICRO-OPTIMIZACIÓN 5: Accesibilidad de Teclado (Focus) --- */
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--pink-premium);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+
         /* --- NAVEGACIÓN --- */
         nav {
             padding: 15px 8%;
@@ -59,6 +87,14 @@
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border);
             height: 110px;
+            /* Transición para la sombra dinámica */
+            transition: box-shadow 0.3s ease, background 0.3s ease;
+        }
+
+        /* MICRO-OPTIMIZACIÓN 4: Sombra dinámica al hacer scroll */
+        nav.nav-scrolled {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            background: rgba(253, 242, 248, 0.98);
         }
 
         .logo-container img {
@@ -111,7 +147,7 @@
             flex-direction: column;
             justify-content: center;
             padding: 0 10%;
-            /* TEXTURA TECNOLÓGICA MEJORADA (Malla sobre Degradado) */
+            /* TEXTURA TECNOLÓGICA (Malla sobre Degradado) */
             background-color: var(--white);
             background-image: 
                 radial-gradient(rgba(212, 0, 109, 0.15) 2px, transparent 2px), 
@@ -174,18 +210,21 @@
         #introduccion { 
             padding: 160px 10%; 
             background-color: var(--white); 
+            text-align: center; /* Alineación centrada para elegancia */
         }
 
         #introduccion p { 
             font-size: clamp(24px, 3.5vw, 36px); 
             font-weight: 300; 
             color: var(--dark-grey); 
-            max-width: 1100px; 
+            /* MICRO-OPTIMIZACIÓN 3: Ancho de lectura ideal */
+            max-width: 850px; 
+            margin: 0 auto; 
             line-height: 1.5; 
             letter-spacing: -0.5px;
         }
 
-        /* --- SERVICIOS (TRANSICIÓN FLUÍDA) --- */
+        /* --- SERVICIOS --- */
         #servicios { 
             padding: 140px 10%; 
             background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%);
@@ -219,7 +258,7 @@
         .card:hover { 
             transform: translateY(-8px);
             box-shadow: 0 30px 60px rgba(0,0,0,0.05);
-            border-color: var(--pink-premium); /* Micro-interacción: Borde rosa al pasar el mouse */
+            border-color: var(--pink-premium); 
         }
 
         .card-num { 
@@ -243,7 +282,7 @@
             line-height: 1.6;
         }
 
-        /* --- IMPACTO Y RESULTADOS (TRANSICIÓN FLUÍDA) --- */
+        /* --- IMPACTO Y RESULTADOS --- */
         #impacto {
             padding: 140px 10%;
             text-align: center;
@@ -279,7 +318,7 @@
             line-height: 1.6;
         }
 
-        /* --- CONSULTORÍA / DIFERENCIADORES (TRANSICIÓN FLUÍDA) --- */
+        /* --- CONSULTORÍA / DIFERENCIADORES --- */
         #diferenciadores { 
             padding: 160px 10%; 
             display: grid; 
@@ -301,7 +340,7 @@
         }
         .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; line-height: 1.7; }
 
-        /* --- CERTIFICACIONES (TRANSICIÓN FLUÍDA) --- */
+        /* --- CERTIFICACIONES --- */
         .trust-bar {
             padding: 100px 10%;
             text-align: center;
@@ -336,7 +375,7 @@
             text-transform: uppercase;
         }
 
-        /* --- CTA FINAL (TARJETA FLOTANTE CON CORTE SÓLIDO) --- */
+        /* --- CTA FINAL --- */
         #contacto { 
             margin: 0 5% 60px 5%;
             padding: 120px 50px; 
@@ -435,7 +474,7 @@
 </head>
 <body>
 
-    <nav>
+    <nav id="main-nav">
         <div class="logo-container">
             <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo">
         </div>
@@ -615,7 +654,6 @@
         
         // Desactiva los atajos de teclado del inspector de elementos
         document.addEventListener('keydown', event => {
-            // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
             if (event.keyCode === 123 || 
                (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || 
                (event.ctrlKey && event.keyCode === 85)) {
@@ -623,7 +661,17 @@
             }
         });
 
-        // --- 2. LÓGICA DEL MENÚ MÓVIL ---
+        // --- 2. SOMBRA DINÁMICA EN NAVEGACIÓN (Scroll) ---
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('nav-scrolled');
+            } else {
+                nav.classList.remove('nav-scrolled');
+            }
+        });
+
+        // --- 3. LÓGICA DEL MENÚ MÓVIL ---
         const menuBtn = document.getElementById('mobile-menu-btn');
         const navLinks = document.getElementById('nav-links');
         const navItems = document.querySelectorAll('.nav-item');
@@ -648,7 +696,7 @@
             });
         });
 
-        // --- 3. CONFIGURACIÓN DE ENLACES DINÁMICOS ---
+        // --- 4. CONFIGURACIÓN DE ENLACES DINÁMICOS ---
         const CONFIG_ENLACES = {
             numeroWhatsApp: "525613388030",
             mensajeGeneral: "Hola JBDA, solicito información de consultoría.",
