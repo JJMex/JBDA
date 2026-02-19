@@ -20,12 +20,12 @@
     <style>
         /* --- PALETA DE COLORES HIGH-TICKET (ROSA ULTRA-PREMIUM) --- */
         :root {
-            --white: #fdf2f8; /* Rosa casi blanco para fondo principal */
-            --silver: #fce7f3; /* Rosa pálido elegante para alternar secciones */
-            --dark-grey: #0f172a; /* Azul/Gris Noche corporativo */
-            --soft-grey: #475569; /* Gris oscuro para textos largos (alta legibilidad) */
-            --pink-premium: #D4006D; /* Tu rosa magenta de marca */
-            --border: #fbcfe8; /* Bordes con un toque rosado fino */
+            --white: #fdf2f8; 
+            --silver: #fce7f3; 
+            --dark-grey: #0f172a; 
+            --soft-grey: #475569; 
+            --pink-premium: #D4006D; 
+            --border: #fbcfe8; 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -47,7 +47,7 @@
             align-items: center;
             position: sticky;
             top: 0;
-            background: rgba(253, 242, 248, 0.95); /* Adaptado al nuevo fondo */
+            background: rgba(253, 242, 248, 0.95);
             z-index: 1000;
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border);
@@ -81,7 +81,6 @@
 
         .nav-links a:hover { color: var(--pink-premium); }
 
-        /* Botón Menú Hamburguesa (Oculto en Escritorio) */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -105,7 +104,8 @@
             flex-direction: column;
             justify-content: center;
             padding: 0 10%;
-            background: radial-gradient(circle at 90% 10%, #fce7f3 0%, var(--white) 60%);
+            /* Inicia un poco más oscuro y se funde hacia el blanco de la introducción */
+            background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%);
         }
 
         header h2 { 
@@ -161,7 +161,7 @@
         /* --- INTRODUCCIÓN --- */
         #introduccion { 
             padding: 160px 10%; 
-            background-color: var(--white);
+            background-color: var(--white); /* Recibe el blanco del header */
         }
 
         #introduccion p { 
@@ -173,8 +173,12 @@
             letter-spacing: -0.5px;
         }
 
-        /* --- SERVICIOS --- */
-        #servicios { padding: 140px 10%; background-color: var(--silver); }
+        /* --- SERVICIOS (TRANSICIÓN FLUÍDA) --- */
+        #servicios { 
+            padding: 140px 10%; 
+            /* Se funde desde el blanco de Introducción hacia el tono Silver */
+            background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%);
+        }
 
         .section-label {
             color: var(--pink-premium);
@@ -224,15 +228,16 @@
             font-size: 16px; 
             color: var(--soft-grey); 
             padding-left: 20px; 
-            border-left: 2px solid var(--pink-premium); /* Acento sutil en viñetas */
+            border-left: 2px solid var(--pink-premium);
             line-height: 1.6;
         }
 
-        /* --- IMPACTO Y RESULTADOS --- */
+        /* --- IMPACTO Y RESULTADOS (TRANSICIÓN FLUÍDA) --- */
         #impacto {
             padding: 140px 10%;
-            background-color: var(--white);
             text-align: center;
+            /* Se funde de regreso desde el Silver de Servicios al Blanco */
+            background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%);
         }
 
         .grid-impacto {
@@ -264,13 +269,14 @@
             line-height: 1.6;
         }
 
-        /* --- CONSULTORÍA / DIFERENCIADORES --- */
+        /* --- CONSULTORÍA / DIFERENCIADORES (TRANSICIÓN FLUÍDA) --- */
         #diferenciadores { 
             padding: 160px 10%; 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
             gap: 120px;
-            background-color: var(--silver);
+            /* Se funde del Blanco de Impacto hacia el Silver */
+            background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%);
         }
 
         .quote { font-size: 52px; font-weight: 800; line-height: 1.1; letter-spacing: -2px; color: var(--dark-grey); }
@@ -286,12 +292,12 @@
         }
         .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; line-height: 1.7; }
 
-        /* --- CERTIFICACIONES --- */
+        /* --- CERTIFICACIONES (TRANSICIÓN FLUÍDA) --- */
         .trust-bar {
             padding: 100px 10%;
-            border-top: 1px solid var(--border);
             text-align: center;
-            background: var(--white);
+            /* Se funde del Silver de Diferenciadores de regreso al Blanco para el final de la página */
+            background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%);
         }
         .cert-container {
             display: flex;
@@ -322,21 +328,21 @@
             text-transform: uppercase;
         }
 
-        /* --- CTA FINAL --- */
+        /* --- CTA FINAL (TARJETA FLOTANTE CON CORTE SÓLIDO) --- */
         #contacto { 
             margin: 0 5% 60px 5%;
             padding: 120px 50px; 
-            background: var(--dark-grey); /* Fondo azul oscuro para cerrar con autoridad */
-            color: #ffffff; /* Texto blanco en esta sección oscura */
+            background: var(--dark-grey); 
+            color: #ffffff; 
             text-align: center; 
             border-radius: 8px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08); /* Sombra para darle profundidad */
         }
 
         #contacto h2 { font-size: 40px; margin-bottom: 25px; font-weight: 800; letter-spacing: -1px; }
+        #contacto p { color: #e2e8f0; }
 
-        #contacto p { color: #e2e8f0; } /* Gris claro sobre azul oscuro para legibilidad */
-
-        /* --- FOOTER OPTIMIZADO --- */
+        /* --- FOOTER --- */
         footer { 
             padding: 60px 10% 80px 10%; 
             display: flex; 
@@ -386,7 +392,6 @@
             nav { height: 90px; padding: 15px 5%; }
             .logo-container img { height: 60px; }
             
-            /* Lógica Menú Pantalla Completa */
             .mobile-menu-btn { display: block; }
             .nav-links {
                 position: fixed;
@@ -394,7 +399,7 @@
                 right: -100%;
                 width: 100%;
                 height: 100vh;
-                background: rgba(253, 242, 248, 0.98); /* Mismo tono rosado ultra claro */
+                background: rgba(253, 242, 248, 0.98);
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -573,7 +578,7 @@
             
             <a id="link-whatsapp-footer" href="#" target="_blank" class="social-link" aria-label="Contactar por WhatsApp">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>
-                WhatsApp (+52 56 1338 8030)
+                WhatsApp
             </a>
 
             <a id="link-linkedin" href="#" target="_blank" class="social-link" aria-label="Visitar perfil de LinkedIn de la empresa">
@@ -594,18 +599,15 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
-        // --- LÓGICA DEL MENÚ MÓVIL (HAMBURGUESA) ---
         const menuBtn = document.getElementById('mobile-menu-btn');
         const navLinks = document.getElementById('nav-links');
         const navItems = document.querySelectorAll('.nav-item');
         let menuOpen = false;
 
-        // Abrir / Cerrar menú
         menuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             menuOpen = !menuOpen;
             
-            // Cambiar icono: Hamburguesa <-> "X"
             if(menuOpen) {
                 menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>';
             } else {
@@ -613,7 +615,6 @@
             }
         });
 
-        // Cerrar menú al hacer clic en cualquier enlace
         navItems.forEach(item => {
             item.addEventListener('click', () => {
                 navLinks.classList.remove('active');
@@ -622,13 +623,11 @@
             });
         });
 
-
-        // --- CONFIGURACIÓN DE ENLACES DINÁMICOS ---
         const CONFIG_ENLACES = {
             numeroWhatsApp: "525613388030",
             mensajeGeneral: "Hola JBDA, solicito información de consultoría.",
             mensajeDiagnostico: "Hola JBDA, me interesa agendar la evaluación ejecutiva de 30 minutos.",
-            enlaceAgenda: "", // Si usas Calendly, pon el link aquí en el futuro
+            enlaceAgenda: "",
             enlaceLinkedIn: "https://www.linkedin.com/company/jbdamx/"
         };
 
