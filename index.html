@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>JBDA | Consultoría Estratégica en Redes</title>
+    <meta name="description" content="Diseñamos la columna vertebral de su negocio. Consultoría estratégica en redes y telecomunicaciones para optimizar CAPEX y asegurar disponibilidad.">
     
+    <meta property="og:title" content="JBDA | Consultoría Estratégica en Redes">
+    <meta property="og:description" content="Ingeniería de alto nivel. Evaluamos las necesidades de su red para optimizar la inversión tecnológica y reducir el downtime en un 85%.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png">
+    <meta property="og:url" content="https://jjmex.github.io/JBDA/">
+    <meta property="og:type" content="website">
+
     <link rel="icon" href="https://raw.githubusercontent.com/JJMex/JBDA/main/Isotipo.png" type="image/png">
-    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -56,6 +63,11 @@
 
         .logo-container img:hover { transform: scale(1.03); }
 
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
         .nav-links a {
             text-decoration: none;
             color: var(--soft-grey);
@@ -68,6 +80,23 @@
         }
 
         .nav-links a:hover { color: var(--pink-premium); }
+
+        /* Botón Menú Hamburguesa (Oculto en Escritorio) */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--dark-grey);
+            z-index: 1001; /* Siempre por encima del menú */
+        }
+
+        .mobile-menu-btn svg {
+            width: 32px;
+            height: 32px;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+        }
 
         /* --- HERO SECTION --- */
         header {
@@ -293,7 +322,7 @@
             text-transform: uppercase;
         }
 
-        /* --- CTA FINAL (CONTACTO REESTRUCTURADO) --- */
+        /* --- CTA FINAL --- */
         #contacto { 
             margin: 0 5% 60px 5%;
             padding: 120px 50px; 
@@ -305,7 +334,7 @@
 
         #contacto h2 { font-size: 40px; margin-bottom: 25px; font-weight: 800; letter-spacing: -1px; }
 
-        /* --- FOOTER OPTIMIZADO CON CONTACTO --- */
+        /* --- FOOTER OPTIMIZADO --- */
         footer { 
             padding: 60px 10% 80px 10%; 
             display: flex; 
@@ -323,23 +352,17 @@
             margin-bottom: 15px;
         }
         
-        .footer-col p, .footer-col a {
+        .footer-col p {
             color: var(--soft-grey);
-            text-decoration: none;
-            display: block;
             margin-bottom: 8px;
             line-height: 1.6;
         }
 
-        .footer-col a:hover {
-            color: var(--pink-premium);
-        }
-
-        /* --- ESTILOS PARA ENLACES SOCIALES / CONTACTO (LinkedIn y WhatsApp) --- */
+        /* --- ESTILOS PARA ENLACES SOCIALES UNIFICADOS --- */
         .social-link {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            margin-top: 12px;
+            margin-bottom: 12px; /* Separación uniforme */
             font-weight: 600;
             color: var(--dark-grey) !important;
             transition: color 0.3s ease;
@@ -351,18 +374,47 @@
         }
 
         .social-link svg {
-            margin-right: 8px;
+            margin-right: 10px;
             fill: currentColor;
+            flex-shrink: 0;
         }
 
+        /* --- RESPONSIVE DESIGN (MÓVILES) --- */
         @media (max-width: 900px) {
             nav { height: 90px; padding: 15px 5%; }
             .logo-container img { height: 60px; }
-            .nav-links { display: none; }
+            
+            /* Lógica Menú Pantalla Completa */
+            .mobile-menu-btn { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%; /* Oculto por la derecha */
+                width: 100%;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.4s ease-in-out;
+                z-index: 999;
+            }
+            .nav-links.active {
+                right: 0; /* Menú visible */
+            }
+            .nav-links a {
+                margin: 20px 0;
+                margin-left: 0;
+                font-size: 20px;
+                font-weight: 700;
+                color: var(--dark-grey);
+            }
+
             #diferenciadores { grid-template-columns: 1fr; gap: 60px; padding: 100px 10%; }
             #contacto { margin: 20px; padding: 80px 30px; }
             header { padding-top: 100px; min-height: 80vh; }
-            .quote { font-size: 40px; }
+            .quote { font-size: 32px; }
             .cert-container { gap: 40px; }
             footer { flex-direction: column; gap: 40px; }
         }
@@ -374,11 +426,16 @@
         <div class="logo-container">
             <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo">
         </div>
-        <div class="nav-links">
-            <a href="#servicios">Servicios</a>
-            <a href="#diferenciadores">Consultoría</a>
-            <a href="#contacto">Contacto</a>
+        
+        <div class="nav-links" id="nav-links">
+            <a href="#servicios" class="nav-item">Servicios</a>
+            <a href="#diferenciadores" class="nav-item">Consultoría</a>
+            <a href="#contacto" class="nav-item">Contacto</a>
         </div>
+
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú de navegación">
+            <svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+        </button>
     </nav>
 
     <header>
@@ -505,15 +562,21 @@
         
         <div class="footer-col">
             <h5>Contacto Directo</h5>
-            <p><strong>Ing. Jose Juan Cruz Bahena</strong><br>Consultor Principal</p>
-            <a href="mailto:JBDA_Tech@icloud.com" style="margin-bottom: 5px;">✉️ JBDA_Tech@icloud.com</a>
+            <p style="margin-bottom: 15px;"><strong>Ing. Jose Juan Cruz Bahena</strong><br>Consultor Principal</p>
             
-            <a id="link-whatsapp-footer" href="#" target="_blank" class="social-link" style="display: flex;">
+            <a href="mailto:JBDA_Tech@icloud.com" class="social-link" aria-label="Enviar correo electrónico a JBDA">
+                <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                JBDA_Tech@icloud.com
+            </a>
+            
+            <a id="link-whatsapp-footer" href="#" target="_blank" class="social-link" aria-label="Contactar por WhatsApp">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>
-                WhatsApp
+                WhatsApp (+52 56 1338 8030)
             </a>
 
-            <a id="link-linkedin" href="#" target="_blank" class="social-link" style="display: flex;">
+            <a id="link-linkedin" href="#" target="_blank" class="social-link" aria-label="Visitar perfil de LinkedIn">
                 <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                 </svg>
@@ -531,18 +594,41 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
-        const CONFIG_ENLACES = {
-            // 1. Tu número de WhatsApp 
-            numeroWhatsApp: "525613388030",
+        // --- LÓGICA DEL MENÚ MÓVIL (HAMBURGUESA) ---
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.getElementById('nav-links');
+        const navItems = document.querySelectorAll('.nav-item');
+        let menuOpen = false;
+
+        // Abrir / Cerrar menú
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuOpen = !menuOpen;
             
-            // 2. Mensajes predeterminados
+            // Cambiar icono: Hamburguesa <-> "X"
+            if(menuOpen) {
+                menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>';
+            } else {
+                menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>';
+            }
+        });
+
+        // Cerrar menú al hacer clic en cualquier enlace
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuOpen = false;
+                menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>';
+            });
+        });
+
+
+        // --- CONFIGURACIÓN DE ENLACES DINÁMICOS ---
+        const CONFIG_ENLACES = {
+            numeroWhatsApp: "525613388030",
             mensajeGeneral: "Hola JBDA, solicito información de consultoría.",
             mensajeDiagnostico: "Hola JBDA, me interesa agendar la evaluación ejecutiva de 30 minutos.",
-            
-            // 3. Enlace para agendar citas (Vacío usa WhatsApp por defecto)
-            enlaceAgenda: "",
-            
-            // 4. Enlace de la empresa en LinkedIn
+            enlaceAgenda: "", // Si usas Calendly, pon el link aquí en el futuro
             enlaceLinkedIn: "https://www.linkedin.com/company/jbdamx/"
         };
 
@@ -557,7 +643,6 @@
             document.getElementById('link-hero').href = linkFinalAgenda;
             document.getElementById('link-cta').href = linkFinalAgenda;
             
-            // Inyectamos los enlaces en el Footer
             document.getElementById('link-whatsapp-footer').href = urlWhatsGeneral;
             document.getElementById('link-linkedin').href = CONFIG_ENLACES.enlaceLinkedIn;
         });
