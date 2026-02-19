@@ -11,10 +11,11 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
+        /* --- PALETA DE COLORES HIGH-TICKET --- */
         :root {
             --white: #ffffff;
-            --silver: #f8f9fa; /* Gris super claro para fondos alternos */
-            --dark-grey: #0f172a; /* Tono más profundo y elegante */
+            --silver: #f8f9fa; /* Gris super claro y elegante para fondos */
+            --dark-grey: #0f172a; /* Azul noche profundo, más corporativo que el negro puro */
             --soft-grey: #64748b;
             --pink-premium: #D4006D;
             --border: #e2e8f0;
@@ -70,7 +71,7 @@
 
         /* --- HERO SECTION --- */
         header {
-            min-height: 90vh; /* Más espacio para respirar */
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -111,7 +112,7 @@
             background-color: var(--dark-grey);
             color: var(--white);
             text-decoration: none;
-            border-radius: 2px;
+            border-radius: 4px;
             font-weight: 600;
             font-size: 13px;
             text-transform: uppercase;
@@ -124,11 +125,11 @@
         .btn-main:hover { 
             background-color: var(--pink-premium); 
             border-color: var(--pink-premium);
-            transform: translateY(-3px);
+            transform: translateY(-4px);
             box-shadow: 0 15px 30px rgba(212, 0, 109, 0.15);
         }
 
-        /* --- INTRODUCCIÓN (CORRECCIÓN DE IMAGEN) --- */
+        /* --- INTRODUCCIÓN --- */
         #introduccion { 
             padding: 160px 10%; 
             background-color: var(--white);
@@ -166,14 +167,14 @@
         .card { 
             background: var(--white); 
             padding: 60px 50px; 
-            border-radius: 4px; 
+            border-radius: 6px; 
             transition: all 0.4s ease;
             border: 1px solid var(--border);
         }
 
         .card:hover { 
             transform: translateY(-8px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.03);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.04);
             border-color: transparent;
         }
 
@@ -198,7 +199,7 @@
             line-height: 1.6;
         }
 
-        /* --- CONSULTORÍA / DIFERENCIADORES --- */
+        /* --- CONSULTORÍA --- */
         #diferenciadores { 
             padding: 160px 10%; 
             display: grid; 
@@ -234,11 +235,7 @@
             margin-top: 50px;
             flex-wrap: wrap;
         }
-        .cert-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        .cert-item { display: flex; flex-direction: column; align-items: center; }
         
         .cert-item img {
             height: 70px;
@@ -249,10 +246,7 @@
             transition: all 0.5s ease;
         }
         
-        .cert-item:hover img { 
-            filter: grayscale(0%); 
-            opacity: 1;
-        }
+        .cert-item:hover img { filter: grayscale(0%); opacity: 1; }
         
         .cert-text {
             font-weight: 700;
@@ -269,12 +263,12 @@
             background: var(--dark-grey); 
             color: var(--white); 
             text-align: center; 
-            border-radius: 8px; /* Ligeramente más redondeado para suavizar */
+            border-radius: 8px; 
         }
 
         #contacto h2 { font-size: 40px; margin-bottom: 25px; font-weight: 800; letter-spacing: -1px; }
 
-        /* --- WHATSAPP FLOTANTE --- */
+        /* --- WHATSAPP FLOTANTE PÍLDORA --- */
         .whatsapp-btn {
             position: fixed;
             bottom: 40px;
@@ -282,7 +276,7 @@
             background-color: #25d366;
             color: white;
             padding: 16px 24px;
-            border-radius: 50px; /* Estilo píldora más moderno */
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             font-size: 14px;
@@ -299,7 +293,6 @@
             box-shadow: 0 15px 35px rgba(37, 211, 102, 0.3);
         }
 
-        /* --- FOOTER --- */
         footer { 
             padding: 60px 10%; 
             border-top: 1px solid var(--border); 
@@ -310,11 +303,10 @@
             background: var(--white);
         }
 
-        /* RESPONSIVE */
         @media (max-width: 900px) {
             nav { height: 90px; padding: 15px 5%; }
             .logo-container img { height: 60px; }
-            .nav-links { display: none; } /* En móvil se ocultan los links para mantener limpieza */
+            .nav-links { display: none; }
             #diferenciadores { grid-template-columns: 1fr; gap: 60px; padding: 100px 10%; }
             #contacto { margin: 20px; padding: 80px 30px; }
             header { padding-top: 100px; min-height: 80vh; }
@@ -396,15 +388,15 @@
         <div class="diff-content" data-aos="fade-left">
             <div class="diff-item">
                 <h4>Multisectorial</h4>
-                <p>Experiencia profunda en los sectores de hotelería de lujo e industria pesada, entendiendo sus tiempos críticos.</p>
+                <p>Experiencia profunda en los sectores de hotelería de lujo e industria pesada.</p>
             </div>
             <div class="diff-item">
                 <h4>Agnósticos</h4>
-                <p>Nuestra prioridad es el rendimiento, no vender una marca. Somos expertos certificados en entornos de Huawei y Cisco.</p>
+                <p>Nuestra prioridad es el rendimiento, no una marca. Expertos en Huawei y Cisco.</p>
             </div>
             <div class="diff-item">
-                <h4>Cobertura Ejecutiva</h4>
-                <p>Consultoría presencial en CDMX y Morelos, respaldada por un esquema de gestión y troubleshooting remoto a nivel global.</p>
+                <h4>Alcance</h4>
+                <p>Consultoría presencial en CDMX y Morelos. Gestión remota con alcance global.</p>
             </div>
         </div>
     </section>
@@ -426,7 +418,7 @@
     <section id="contacto" data-aos="zoom-in">
         <h2>Sesión de Diagnóstico Preliminar</h2>
         <p style="font-size: 20px; font-weight: 300; opacity: 0.8; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
-            Analicemos la salud de su red corporativa y detectemos cuellos de botella antes de que afecten su operación.
+            Analicemos la salud de su red y detectemos cuellos de botella antes de que afecten su operación.
         </p>
         <a id="link-cta" href="#" class="btn-main" style="background: var(--pink-premium); border-color: var(--pink-premium);" target="_blank">Solicitar Consultoría</a>
     </section>
@@ -444,38 +436,45 @@
 
     <a id="link-whatsapp-float" href="#" class="whatsapp-btn" target="_blank">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>
-        Hablemos
+        WhatsApp
     </a>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
         const CONFIG_ENLACES = {
-            // 1. Tu número de WhatsApp con código de país (ej. 52 para México)
+            // 1. Tu número de WhatsApp (con código de país, ej. 52 para México)
             numeroWhatsApp: "525613388030",
             
-            // 2. Mensaje por defecto para el botón flotante
-            mensajeWhatsApp: "Hola JBDA, solicito información de consultoría.",
+            // 2. Mensajes predeterminados para WhatsApp
+            mensajeGeneral: "Hola JBDA, solicito información de consultoría.",
+            mensajeDiagnostico: "Hola JBDA, quiero agendar un diagnóstico de red.",
             
-            // 3. Enlace principal para agendar citas (Puedes poner tu Calendly, Google Meets o el mismo de WhatsApp)
-            enlaceAgenda: "https://wa.me/525613388030?text=Hola%20JBDA,%20quiero%20agendar%20un%20diagnóstico.",
+            // 3. Enlace para agendar citas. 
+            // Si usas Calendly, pon el link aquí (ej: "https://calendly.com/tu-usuario"). 
+            // Si lo dejas vacío (""), el sistema usará WhatsApp automáticamente.
+            enlaceAgenda: "", 
             
-            // 4. Tu enlace al perfil o página de LinkedIn
+            // 4. Enlace a LinkedIn
             enlaceLinkedIn: "https://www.linkedin.com/"
         };
 
         // --- Lógica automática (No es necesario modificar esto) ---
         document.addEventListener("DOMContentLoaded", () => {
-            // Inicializar Animaciones
             AOS.init({ duration: 1000, once: true, offset: 100 });
 
-            // Asignar variables a los botones HTML
-            document.getElementById('link-hero').href = CONFIG_ENLACES.enlaceAgenda;
-            document.getElementById('link-cta').href = CONFIG_ENLACES.enlaceAgenda;
+            // Generar URLs de WhatsApp dinámicamente
+            const urlWhatsGeneral = `https://wa.me/${CONFIG_ENLACES.numeroWhatsApp}?text=${encodeURIComponent(CONFIG_ENLACES.mensajeGeneral)}`;
+            const urlWhatsDiag = `https://wa.me/${CONFIG_ENLACES.numeroWhatsApp}?text=${encodeURIComponent(CONFIG_ENLACES.mensajeDiagnostico)}`;
+
+            // Determinar a dónde apuntan los botones principales (Calendly o WhatsApp)
+            const linkFinalAgenda = CONFIG_ENLACES.enlaceAgenda !== "" ? CONFIG_ENLACES.enlaceAgenda : urlWhatsDiag;
+
+            // Inyectar los enlaces en el HTML
+            document.getElementById('link-hero').href = linkFinalAgenda;
+            document.getElementById('link-cta').href = linkFinalAgenda;
             document.getElementById('link-linkedin').href = CONFIG_ENLACES.enlaceLinkedIn;
-            
-            const urlWhatsAppFlotante = `https://wa.me/${CONFIG_ENLACES.numeroWhatsApp}?text=${encodeURIComponent(CONFIG_ENLACES.mensajeWhatsApp)}`;
-            document.getElementById('link-whatsapp-float').href = urlWhatsAppFlotante;
+            document.getElementById('link-whatsapp-float').href = urlWhatsGeneral;
         });
     </script>
 </body>
