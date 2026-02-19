@@ -99,21 +99,21 @@
             transition: transform 0.3s ease;
         }
 
-        /* --- HERO SECTION --- */
-        header {
-            min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 10%;
-            /* TEXTURA TECNOLÓGICA: Malla de nodos + Degradado */
-            background-color: var(--white);
-            background-image: 
-                linear-gradient(to bottom, rgba(252, 231, 243, 0.8) 0%, rgba(253, 242, 248, 1) 100%),
-                radial-gradient(rgba(212, 0, 109, 0.08) 2px, transparent 2px); 
-            background-size: 100% 100%, 30px 30px; 
-            background-position: center top, center center;
-        }
+/* --- HERO SECTION --- */
+header {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10%;
+    /* TEXTURA TECNOLÓGICA MEJORADA */
+    background-color: var(--white);
+    background-image: 
+        radial-gradient(rgba(212, 0, 109, 0.15) 2px, transparent 2px), /* Malla arriba (15% opacidad) */
+        linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); /* Degradado abajo */
+    background-size: 40px 40px, 100% 100%; /* Puntos más separados para mantener minimalismo */
+    background-position: center center, center top;
+}
 
         header h2 { 
             color: var(--pink-premium); 
