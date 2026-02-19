@@ -23,7 +23,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* --- PALETA DE COLORES HIGH-TICKET (ROSA ULTRA-PREMIUM) --- */
+        /* --- PALETA DE COLORES HIGH-TICKET --- */
         :root {
             --white: #fdf2f8; 
             --silver: #fce7f3; 
@@ -35,8 +35,13 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        /* CORRECCIÓN UX: Navegación perfecta sin tapar títulos */
-        html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+        /* CORRECCIÓN UX: Navegación y soporte Firefox Scrollbar */
+        html { 
+            scroll-behavior: smooth; 
+            scroll-padding-top: 110px; 
+            scrollbar-width: thin; /* Para Firefox */
+            scrollbar-color: rgba(212, 0, 109, 0.4) var(--white); /* Para Firefox */
+        }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -46,35 +51,34 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- MICRO-OPTIMIZACIÓN 1: Selección de texto Premium --- */
         ::selection {
             background-color: var(--pink-premium);
             color: #ffffff;
         }
 
-        /* --- MICRO-OPTIMIZACIÓN 2: Scrollbar Customizado --- */
+        /* --- SCROLLBAR CUSTOMIZADO (Chrome, Edge, Safari) --- */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
         ::-webkit-scrollbar-track {
             background: var(--white);
         }
         ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
+            background: rgba(212, 0, 109, 0.3); /* Rosa suave por defecto */
             border-radius: 10px;
+            border: 2px solid var(--white); /* Crea un efecto de margen */
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--pink-premium);
+            background: var(--pink-premium); /* Rosa intenso al pasar el cursor */
         }
 
-        /* --- MICRO-OPTIMIZACIÓN 5: Accesibilidad de Teclado (Focus) --- */
         a:focus-visible, button:focus-visible {
             outline: 2px solid var(--pink-premium);
             outline-offset: 4px;
             border-radius: 4px;
         }
 
-        /* --- NAVEGACIÓN --- */
+        /* --- NAVEGACIÓN (ESTADO INICIAL) --- */
         nav {
             padding: 15px 8%;
             display: flex;
@@ -82,19 +86,21 @@
             align-items: center;
             position: sticky;
             top: 0;
-            background: rgba(253, 242, 248, 0.95);
+            background: rgba(253, 242, 248, 1); /* Sólido al inicio */
             z-index: 1000;
-            backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border);
             height: 110px;
-            /* Transición para la sombra dinámica */
-            transition: box-shadow 0.3s ease, background 0.3s ease;
+            /* Transición súper suave para el efecto Liquid Glass */
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* MICRO-OPTIMIZACIÓN 4: Sombra dinámica al hacer scroll */
+        /* --- EFECTO "LIQUID GLASS" ROSA (AL HACER SCROLL) --- */
         nav.nav-scrolled {
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            background: rgba(253, 242, 248, 0.98);
+            background: rgba(253, 242, 248, 0.4); /* Mayor transparencia */
+            backdrop-filter: blur(24px) saturate(180%); /* Desenfoque intenso */
+            -webkit-backdrop-filter: blur(24px) saturate(180%); /* Soporte obligatorio para Safari/iPhone */
+            border-bottom: 1px solid rgba(212, 0, 109, 0.15); /* Borde rosado sutil */
+            box-shadow: 0 15px 35px -5px rgba(212, 0, 109, 0.15); /* Brillo/Sombra rosa proyectada */
         }
 
         .logo-container img {
@@ -106,10 +112,7 @@
 
         .logo-container img:hover { transform: scale(1.03); }
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-        }
+        .nav-links { display: flex; align-items: center; }
 
         .nav-links a {
             text-decoration: none;
@@ -133,12 +136,7 @@
             z-index: 1001;
         }
 
-        .mobile-menu-btn svg {
-            width: 32px;
-            height: 32px;
-            fill: currentColor;
-            transition: transform 0.3s ease;
-        }
+        .mobile-menu-btn svg { width: 32px; height: 32px; fill: currentColor; transition: transform 0.3s ease; }
 
         /* --- HERO SECTION --- */
         header {
@@ -147,7 +145,6 @@
             flex-direction: column;
             justify-content: center;
             padding: 0 10%;
-            /* TEXTURA TECNOLÓGICA (Malla sobre Degradado) */
             background-color: var(--white);
             background-image: 
                 radial-gradient(rgba(212, 0, 109, 0.15) 2px, transparent 2px), 
@@ -156,32 +153,9 @@
             background-position: center center, center top;
         }
 
-        header h2 { 
-            color: var(--pink-premium); 
-            font-size: 13px; 
-            text-transform: uppercase; 
-            letter-spacing: 4px; 
-            margin-bottom: 25px; 
-            font-weight: 700; 
-        }
-
-        header h1 { 
-            font-size: clamp(40px, 6vw, 72px); 
-            line-height: 1.1; 
-            margin-bottom: 30px; 
-            font-weight: 800; 
-            max-width: 900px; 
-            letter-spacing: -1.5px; 
-            color: var(--dark-grey);
-        }
-
-        header p { 
-            font-size: 22px; 
-            color: var(--soft-grey); 
-            max-width: 650px; 
-            margin-bottom: 50px; 
-            font-weight: 300; 
-        }
+        header h2 { color: var(--pink-premium); font-size: 13px; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 25px; font-weight: 700; }
+        header h1 { font-size: clamp(40px, 6vw, 72px); line-height: 1.1; margin-bottom: 30px; font-weight: 800; max-width: 900px; letter-spacing: -1.5px; color: var(--dark-grey); }
+        header p { font-size: 22px; color: var(--soft-grey); max-width: 650px; margin-bottom: 50px; font-weight: 300; }
 
         .btn-main {
             display: inline-block;
@@ -206,263 +180,66 @@
             box-shadow: 0 15px 30px rgba(212, 0, 109, 0.2);
         }
 
-        /* --- INTRODUCCIÓN --- */
-        #introduccion { 
-            padding: 160px 10%; 
-            background-color: var(--white); 
-            text-align: center; /* Alineación centrada para elegancia */
-        }
+        /* --- SECCIONES --- */
+        #introduccion { padding: 160px 10%; background-color: var(--white); text-align: center; }
+        #introduccion p { font-size: clamp(24px, 3.5vw, 36px); font-weight: 300; color: var(--dark-grey); max-width: 850px; margin: 0 auto; line-height: 1.5; letter-spacing: -0.5px; }
 
-        #introduccion p { 
-            font-size: clamp(24px, 3.5vw, 36px); 
-            font-weight: 300; 
-            color: var(--dark-grey); 
-            /* MICRO-OPTIMIZACIÓN 3: Ancho de lectura ideal */
-            max-width: 850px; 
-            margin: 0 auto; 
-            line-height: 1.5; 
-            letter-spacing: -0.5px;
-        }
+        #servicios { padding: 140px 10%; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
 
-        /* --- SERVICIOS --- */
-        #servicios { 
-            padding: 140px 10%; 
-            background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%);
-        }
+        .section-label { color: var(--pink-premium); font-weight: 800; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: block; }
 
-        .section-label {
-            color: var(--pink-premium);
-            font-weight: 800;
-            font-size: 12px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            display: block;
-        }
+        .grid-servicios { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; margin-top: 60px; }
 
-        .grid-servicios { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
-            gap: 40px; 
-            margin-top: 60px;
-        }
-
-        .card { 
-            background: var(--white); 
-            padding: 60px 50px; 
-            border-radius: 6px; 
-            transition: all 0.4s ease;
-            border: 1px solid var(--border);
-        }
-
-        .card:hover { 
-            transform: translateY(-8px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.05);
-            border-color: var(--pink-premium); 
-        }
-
-        .card-num { 
-            font-size: 12px; 
-            font-weight: 800; 
-            color: var(--pink-premium); 
-            margin-bottom: 30px; 
-            display: block; 
-        }
-
+        .card { background: var(--white); padding: 60px 50px; border-radius: 6px; transition: all 0.4s ease; border: 1px solid var(--border); }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.05); border-color: var(--pink-premium); }
+        .card-num { font-size: 12px; font-weight: 800; color: var(--pink-premium); margin-bottom: 30px; display: block; }
         .card h3 { font-size: 24px; margin-bottom: 25px; letter-spacing: -0.5px; font-weight: 700; color: var(--dark-grey); }
-
         .card ul { list-style: none; }
+        .card ul li { margin-bottom: 20px; font-size: 16px; color: var(--soft-grey); padding-left: 20px; border-left: 2px solid var(--pink-premium); line-height: 1.6; }
 
-        .card ul li { 
-            margin-bottom: 20px; 
-            font-size: 16px; 
-            color: var(--soft-grey); 
-            padding-left: 20px; 
-            border-left: 2px solid var(--pink-premium);
-            line-height: 1.6;
-        }
+        #impacto { padding: 140px 10%; text-align: center; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); }
+        .grid-impacto { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 60px; margin-top: 60px; }
+        .impacto-item h3 { font-size: 72px; font-weight: 800; color: var(--pink-premium); line-height: 1; margin-bottom: 15px; letter-spacing: -2px; }
+        .impacto-item h4 { font-size: 18px; color: var(--dark-grey); margin-bottom: 10px; font-weight: 700; }
+        .impacto-item p { font-size: 15px; color: var(--soft-grey); line-height: 1.6; }
 
-        /* --- IMPACTO Y RESULTADOS --- */
-        #impacto {
-            padding: 140px 10%;
-            text-align: center;
-            background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%);
-        }
-
-        .grid-impacto {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 60px;
-            margin-top: 60px;
-        }
-
-        .impacto-item h3 {
-            font-size: 72px;
-            font-weight: 800;
-            color: var(--pink-premium);
-            line-height: 1;
-            margin-bottom: 15px;
-            letter-spacing: -2px;
-        }
-
-        .impacto-item h4 {
-            font-size: 18px;
-            color: var(--dark-grey);
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .impacto-item p {
-            font-size: 15px;
-            color: var(--soft-grey);
-            line-height: 1.6;
-        }
-
-        /* --- CONSULTORÍA / DIFERENCIADORES --- */
-        #diferenciadores { 
-            padding: 160px 10%; 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 120px;
-            background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%);
-        }
-
+        #diferenciadores { padding: 160px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 120px; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
         .quote { font-size: 52px; font-weight: 800; line-height: 1.1; letter-spacing: -2px; color: var(--dark-grey); }
-        
         .diff-item { margin-bottom: 60px; }
-        .diff-item h4 { 
-            font-size: 14px; 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            margin-bottom: 15px; 
-            color: var(--pink-premium);
-            font-weight: 700;
-        }
+        .diff-item h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--pink-premium); font-weight: 700; }
         .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; line-height: 1.7; }
 
-        /* --- CERTIFICACIONES --- */
-        .trust-bar {
-            padding: 100px 10%;
-            text-align: center;
-            background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%);
-        }
-        .cert-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 80px;
-            margin-top: 50px;
-            flex-wrap: wrap;
-        }
+        .trust-bar { padding: 100px 10%; text-align: center; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); }
+        .cert-container { display: flex; justify-content: center; align-items: center; gap: 80px; margin-top: 50px; flex-wrap: wrap; }
         .cert-item { display: flex; flex-direction: column; align-items: center; }
-        
-        .cert-item img {
-            height: 70px;
-            width: auto;
-            margin-bottom: 20px;
-            filter: grayscale(100%);
-            opacity: 0.5;
-            transition: all 0.5s ease;
-        }
-        
+        .cert-item img { height: 70px; width: auto; margin-bottom: 20px; filter: grayscale(100%); opacity: 0.5; transition: all 0.5s ease; }
         .cert-item:hover img { filter: grayscale(0%); opacity: 1; }
-        
-        .cert-text {
-            font-weight: 700;
-            font-size: 12px;
-            letter-spacing: 2px;
-            color: var(--soft-grey);
-            text-transform: uppercase;
-        }
+        .cert-text { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--soft-grey); text-transform: uppercase; }
 
-        /* --- CTA FINAL --- */
-        #contacto { 
-            margin: 0 5% 60px 5%;
-            padding: 120px 50px; 
-            background: var(--dark-grey); 
-            color: #ffffff; 
-            text-align: center; 
-            border-radius: 8px; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08); 
-        }
-
+        #contacto { margin: 0 5% 60px 5%; padding: 120px 50px; background: var(--dark-grey); color: #ffffff; text-align: center; border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
         #contacto h2 { font-size: 40px; margin-bottom: 25px; font-weight: 800; letter-spacing: -1px; }
         #contacto p { color: #e2e8f0; }
 
-        /* --- FOOTER --- */
-        footer { 
-            padding: 60px 10% 80px 10%; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-start;
-            color: var(--soft-grey);
-            font-size: 14px;
-            background: var(--white);
-        }
+        footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-between; align-items: flex-start; color: var(--soft-grey); font-size: 14px; background: var(--white); }
+        .footer-col h5 { color: var(--dark-grey); font-size: 16px; font-weight: 700; margin-bottom: 15px; }
+        .footer-col p { color: var(--soft-grey); margin-bottom: 8px; line-height: 1.6; }
 
-        .footer-col h5 {
-            color: var(--dark-grey);
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        
-        .footer-col p {
-            color: var(--soft-grey);
-            margin-bottom: 8px;
-            line-height: 1.6;
-        }
-
-        /* --- ESTILOS PARA ENLACES SOCIALES UNIFICADOS --- */
-        .social-link {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-            font-weight: 600;
-            color: var(--dark-grey) !important;
-            transition: color 0.3s ease;
-            text-decoration: none;
-        }
-
-        .social-link:hover {
-            color: var(--pink-premium) !important;
-        }
-
-        .social-link svg {
-            margin-right: 10px;
-            fill: currentColor;
-            flex-shrink: 0;
-        }
+        .social-link { display: flex; align-items: center; margin-bottom: 12px; font-weight: 600; color: var(--dark-grey) !important; transition: color 0.3s ease; text-decoration: none; }
+        .social-link:hover { color: var(--pink-premium) !important; }
+        .social-link svg { margin-right: 10px; fill: currentColor; flex-shrink: 0; }
 
         /* --- RESPONSIVE DESIGN (MÓVILES) --- */
         @media (max-width: 900px) {
             nav { height: 90px; padding: 15px 5%; }
             .logo-container img { height: 60px; }
-            
             .mobile-menu-btn { display: block; }
             .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 100%;
-                height: 100vh;
-                background: rgba(253, 242, 248, 0.98);
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transition: right 0.4s ease-in-out;
-                z-index: 999;
+                position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
+                background: rgba(253, 242, 248, 0.98); display: flex; flex-direction: column;
+                justify-content: center; align-items: center; transition: right 0.4s ease-in-out; z-index: 999;
             }
             .nav-links.active { right: 0; }
-            .nav-links a {
-                margin: 20px 0;
-                margin-left: 0;
-                font-size: 20px;
-                font-weight: 700;
-                color: var(--dark-grey);
-            }
-
+            .nav-links a { margin: 20px 0; font-size: 20px; font-weight: 700; color: var(--dark-grey); }
             #diferenciadores { grid-template-columns: 1fr; gap: 60px; padding: 100px 10%; }
             #contacto { margin: 20px; padding: 80px 30px; }
             header { padding-top: 100px; min-height: 80vh; }
@@ -648,74 +425,70 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
-        // --- 1. SCRIPT DE PROTECCIÓN (Clic Derecho y Teclado) ---
-        // Desactiva el clic derecho (menú contextual)
-        document.addEventListener('contextmenu', event => event.preventDefault());
-        
-        // Desactiva los atajos de teclado del inspector de elementos
-        document.addEventListener('keydown', event => {
-            if (event.keyCode === 123 || 
-               (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || 
-               (event.ctrlKey && event.keyCode === 85)) {
-                event.preventDefault();
-            }
-        });
-
-        // --- 2. SOMBRA DINÁMICA EN NAVEGACIÓN (Scroll) ---
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('main-nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('nav-scrolled');
-            } else {
-                nav.classList.remove('nav-scrolled');
-            }
-        });
-
-        // --- 3. LÓGICA DEL MENÚ MÓVIL ---
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const navLinks = document.getElementById('nav-links');
-        const navItems = document.querySelectorAll('.nav-item');
-        let menuOpen = false;
-
-        menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            menuOpen = !menuOpen;
-            
-            if(menuOpen) {
-                menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>';
-            } else {
-                menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>';
-            }
-        });
-
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                menuOpen = false;
-                menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>';
-            });
-        });
-
-        // --- 4. CONFIGURACIÓN DE ENLACES DINÁMICOS ---
-        const CONFIG_ENLACES = {
-            numeroWhatsApp: "525613388030",
-            mensajeGeneral: "Hola JBDA, solicito información de consultoría.",
-            mensajeDiagnostico: "Hola JBDA, me interesa agendar la evaluación ejecutiva de 30 minutos.",
-            enlaceAgenda: "",
-            enlaceLinkedIn: "https://www.linkedin.com/company/jbdamx/"
-        };
-
+        // Todo el JavaScript debe ejecutarse una vez que el DOM esté listo
         document.addEventListener("DOMContentLoaded", () => {
+            
+            // --- 1. SCRIPT DE PROTECCIÓN ---
+            document.addEventListener('contextmenu', event => event.preventDefault());
+            document.addEventListener('keydown', event => {
+                if (event.keyCode === 123 || 
+                   (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || 
+                   (event.ctrlKey && event.keyCode === 85)) {
+                    event.preventDefault();
+                }
+            });
+
+            // --- 2. SOMBRA DINÁMICA (EFECTO LIQUID GLASS) ---
+            const nav = document.getElementById('main-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('nav-scrolled');
+                } else {
+                    nav.classList.remove('nav-scrolled');
+                }
+            });
+
+            // --- 3. LÓGICA DEL MENÚ MÓVIL ---
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const navLinks = document.getElementById('nav-links');
+            const navItems = document.querySelectorAll('.nav-item');
+            let menuOpen = false;
+
+            menuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                menuOpen = !menuOpen;
+                if(menuOpen) {
+                    menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>';
+                } else {
+                    menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>';
+                }
+            });
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    menuOpen = false;
+                    menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>';
+                });
+            });
+
+            // --- 4. INICIALIZACIÓN DE ENLACES Y ANIMACIONES ---
             AOS.init({ duration: 1000, once: true, offset: 100 });
+
+            const CONFIG_ENLACES = {
+                numeroWhatsApp: "525613388030",
+                mensajeGeneral: "Hola JBDA, solicito información de consultoría.",
+                mensajeDiagnostico: "Hola JBDA, me interesa agendar la evaluación ejecutiva de 30 minutos.",
+                enlaceAgenda: "",
+                enlaceLinkedIn: "https://www.linkedin.com/company/jbdamx/"
+            };
 
             const urlWhatsGeneral = `https://wa.me/${CONFIG_ENLACES.numeroWhatsApp}?text=${encodeURIComponent(CONFIG_ENLACES.mensajeGeneral)}`;
             const urlWhatsDiag = `https://wa.me/${CONFIG_ENLACES.numeroWhatsApp}?text=${encodeURIComponent(CONFIG_ENLACES.mensajeDiagnostico)}`;
-
             const linkFinalAgenda = CONFIG_ENLACES.enlaceAgenda !== "" ? CONFIG_ENLACES.enlaceAgenda : urlWhatsDiag;
 
             document.getElementById('link-hero').href = linkFinalAgenda;
             document.getElementById('link-cta').href = linkFinalAgenda;
-            
             document.getElementById('link-whatsapp-footer').href = urlWhatsGeneral;
             document.getElementById('link-linkedin').href = CONFIG_ENLACES.enlaceLinkedIn;
         });
