@@ -13,11 +13,11 @@
     <style>
         :root {
             --white: #ffffff;
-            --silver: #f4f7f6;
-            --dark-grey: #121212;
-            --soft-grey: #666666;
+            --silver: #f8f9fa; /* Gris super claro para fondos alternos */
+            --dark-grey: #0f172a; /* Tono más profundo y elegante */
+            --soft-grey: #64748b;
             --pink-premium: #D4006D;
-            --border: #ececec;
+            --border: #e2e8f0;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,7 +31,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- Navegación --- */
+        /* --- NAVEGACIÓN --- */
         nav {
             padding: 15px 8%;
             display: flex;
@@ -49,46 +49,33 @@
         .logo-container img {
             height: 85px;
             width: auto;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.4s ease;
             display: block;
         }
 
-        .logo-container img:hover { transform: scale(1.05); }
+        .logo-container img:hover { transform: scale(1.03); }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--dark-grey);
+            color: var(--soft-grey);
             margin-left: 40px;
             font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
+            transition: color 0.3s ease;
         }
 
         .nav-links a:hover { color: var(--pink-premium); }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--pink-premium);
-            transition: width 0.3s ease;
-        }
-        .nav-links a:hover::after { width: 100%; }
 
-        /* --- Hero Section --- */
+        /* --- HERO SECTION --- */
         header {
-            min-height: 85vh;
+            min-height: 90vh; /* Más espacio para respirar */
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 0 10%;
-            background: radial-gradient(circle at 85% 15%, #fff0f6 0%, #ffffff 60%);
+            background: radial-gradient(circle at 90% 10%, #fff0f6 0%, #ffffff 50%);
         }
 
         header h2 { 
@@ -96,23 +83,24 @@
             font-size: 13px; 
             text-transform: uppercase; 
             letter-spacing: 4px; 
-            margin-bottom: 20px; 
+            margin-bottom: 25px; 
             font-weight: 700; 
         }
 
         header h1 { 
-            font-size: clamp(45px, 6vw, 72px); 
-            line-height: 1.05; 
+            font-size: clamp(40px, 6vw, 72px); 
+            line-height: 1.1; 
             margin-bottom: 30px; 
             font-weight: 800; 
             max-width: 900px; 
-            letter-spacing: -2px; 
+            letter-spacing: -1.5px; 
+            color: var(--dark-grey);
         }
 
         header p { 
             font-size: 22px; 
             color: var(--soft-grey); 
-            max-width: 600px; 
+            max-width: 650px; 
             margin-bottom: 50px; 
             font-weight: 300; 
         }
@@ -127,32 +115,35 @@
             font-weight: 600;
             font-size: 13px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             transition: all 0.4s ease;
             cursor: pointer;
+            border: 1px solid var(--dark-grey);
         }
 
         .btn-main:hover { 
             background-color: var(--pink-premium); 
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(212, 0, 109, 0.2);
+            border-color: var(--pink-premium);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(212, 0, 109, 0.15);
         }
 
-        /* --- Introducción --- */
+        /* --- INTRODUCCIÓN (CORRECCIÓN DE IMAGEN) --- */
         #introduccion { 
             padding: 160px 10%; 
             background-color: var(--white);
         }
 
         #introduccion p { 
-            font-size: clamp(24px, 3.5vw, 32px); 
+            font-size: clamp(24px, 3.5vw, 36px); 
             font-weight: 300; 
             color: var(--dark-grey); 
             max-width: 1100px; 
-            line-height: 1.4; 
+            line-height: 1.5; 
+            letter-spacing: -0.5px;
         }
 
-        /* --- Servicios --- */
+        /* --- SERVICIOS --- */
         #servicios { padding: 140px 10%; background-color: var(--silver); }
 
         .section-label {
@@ -161,28 +152,29 @@
             font-size: 12px;
             letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             display: block;
         }
 
         .grid-servicios { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
-            gap: 30px; 
+            gap: 40px; 
             margin-top: 60px;
         }
 
         .card { 
             background: var(--white); 
-            padding: 60px; 
+            padding: 60px 50px; 
             border-radius: 4px; 
-            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-            border: 1px solid transparent;
+            transition: all 0.4s ease;
+            border: 1px solid var(--border);
         }
 
         .card:hover { 
-            transform: translateY(-10px);
-            box-shadow: 0 40px 70px rgba(0,0,0,0.05);
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.03);
+            border-color: transparent;
         }
 
         .card-num { 
@@ -193,27 +185,28 @@
             display: block; 
         }
 
-        .card h3 { font-size: 26px; margin-bottom: 25px; letter-spacing: -0.5px; }
+        .card h3 { font-size: 24px; margin-bottom: 25px; letter-spacing: -0.5px; font-weight: 700; }
 
         .card ul { list-style: none; }
 
         .card ul li { 
-            margin-bottom: 18px; 
+            margin-bottom: 20px; 
             font-size: 16px; 
             color: var(--soft-grey); 
             padding-left: 20px; 
             border-left: 2px solid var(--border);
+            line-height: 1.6;
         }
 
-        /* --- Metodología --- */
+        /* --- CONSULTORÍA / DIFERENCIADORES --- */
         #diferenciadores { 
             padding: 160px 10%; 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
-            gap: 100px;
+            gap: 120px;
         }
 
-        .quote { font-size: 48px; font-weight: 800; line-height: 1.1; letter-spacing: -2px; }
+        .quote { font-size: 52px; font-weight: 800; line-height: 1.1; letter-spacing: -2px; }
         
         .diff-item { margin-bottom: 60px; }
         .diff-item h4 { 
@@ -222,12 +215,13 @@
             letter-spacing: 2px; 
             margin-bottom: 15px; 
             color: var(--pink-premium);
+            font-weight: 700;
         }
-        .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; }
+        .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; line-height: 1.7; }
 
-        /* --- Trust / Certificaciones --- */
+        /* --- CERTIFICACIONES --- */
         .trust-bar {
-            padding: 80px 10%;
+            padding: 100px 10%;
             border-top: 1px solid var(--border);
             text-align: center;
             background: var(--white);
@@ -236,7 +230,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 60px;
+            gap: 80px;
             margin-top: 50px;
             flex-wrap: wrap;
         }
@@ -244,19 +238,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: transform 0.3s ease;
-            cursor: default;
         }
         
-        .cert-item:hover { transform: translateY(-5px); }
-        
         .cert-item img {
-            height: 80px;
+            height: 70px;
             width: auto;
             margin-bottom: 20px;
             filter: grayscale(100%);
-            opacity: 0.6;
-            transition: all 0.4s ease;
+            opacity: 0.5;
+            transition: all 0.5s ease;
         }
         
         .cert-item:hover img { 
@@ -268,63 +258,68 @@
             font-weight: 700;
             font-size: 12px;
             letter-spacing: 2px;
-            color: var(--dark-grey);
+            color: var(--soft-grey);
             text-transform: uppercase;
-            opacity: 0.8;
         }
 
-        /* --- CTA --- */
+        /* --- CTA FINAL --- */
         #contacto { 
-            margin: 100px 5%;
-            padding: 100px; 
+            margin: 0 5% 100px 5%;
+            padding: 120px 50px; 
             background: var(--dark-grey); 
             color: var(--white); 
             text-align: center; 
-            border-radius: 4px;
+            border-radius: 8px; /* Ligeramente más redondeado para suavizar */
         }
 
-        /* --- WhatsApp Flotante --- */
+        #contacto h2 { font-size: 40px; margin-bottom: 25px; font-weight: 800; letter-spacing: -1px; }
+
+        /* --- WHATSAPP FLOTANTE --- */
         .whatsapp-btn {
             position: fixed;
             bottom: 40px;
             right: 40px;
             background-color: #25d366;
             color: white;
-            padding: 18px 30px;
-            border-radius: 4px;
+            padding: 16px 24px;
+            border-radius: 50px; /* Estilo píldora más moderno */
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 14px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.2);
             transition: all 0.3s ease;
         }
         
         .whatsapp-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.3);
         }
 
+        /* --- FOOTER --- */
         footer { 
-            padding: 80px 10%; 
+            padding: 60px 10%; 
             border-top: 1px solid var(--border); 
             display: flex; 
             justify-content: space-between; 
             color: var(--soft-grey);
             font-size: 14px;
+            background: var(--white);
         }
 
+        /* RESPONSIVE */
         @media (max-width: 900px) {
             nav { height: 90px; padding: 15px 5%; }
             .logo-container img { height: 60px; }
-            #diferenciadores { grid-template-columns: 1fr; gap: 50px; }
-            #contacto { margin: 20px; padding: 60px 30px; }
-            header { padding-top: 100px; }
+            .nav-links { display: none; } /* En móvil se ocultan los links para mantener limpieza */
+            #diferenciadores { grid-template-columns: 1fr; gap: 60px; padding: 100px 10%; }
+            #contacto { margin: 20px; padding: 80px 30px; }
+            header { padding-top: 100px; min-height: 80vh; }
+            .quote { font-size: 40px; }
             .cert-container { gap: 40px; }
-            .cert-item img { height: 60px; }
         }
     </style>
 </head>
@@ -346,7 +341,7 @@
             <h2>Infraestructura & Telecomunicaciones</h2>
             <h1>Diseñamos la columna vertebral de su negocio.</h1>
             <p>Consultoría estratégica en infraestructura de redes diseñada para maximizar la eficiencia operativa y rentabilizar su inversión tecnológica.</p>
-            <a href="#contacto" class="btn-main">Agendar Diagnóstico</a>
+            <a id="link-hero" href="#" class="btn-main" target="_blank">Agendar Diagnóstico</a>
         </div>
     </header>
 
@@ -401,15 +396,15 @@
         <div class="diff-content" data-aos="fade-left">
             <div class="diff-item">
                 <h4>Multisectorial</h4>
-                <p>Experiencia profunda en los sectores de hotelería de lujo e industria pesada.</p>
+                <p>Experiencia profunda en los sectores de hotelería de lujo e industria pesada, entendiendo sus tiempos críticos.</p>
             </div>
             <div class="diff-item">
                 <h4>Agnósticos</h4>
-                <p>Nuestra prioridad es el rendimiento, no una marca. Expertos en Huawei y Cisco.</p>
+                <p>Nuestra prioridad es el rendimiento, no vender una marca. Somos expertos certificados en entornos de Huawei y Cisco.</p>
             </div>
             <div class="diff-item">
-                <h4>Alcance</h4>
-                <p>Consultoría presencial en CDMX y Morelos. Gestión remota con alcance global.</p>
+                <h4>Cobertura Ejecutiva</h4>
+                <p>Consultoría presencial en CDMX y Morelos, respaldada por un esquema de gestión y troubleshooting remoto a nivel global.</p>
             </div>
         </div>
     </section>
@@ -429,62 +424,58 @@
     </div>
 
     <section id="contacto" data-aos="zoom-in">
-        <h2 style="margin-bottom: 20px;">Sesión de Diagnóstico Preliminar</h2>
+        <h2>Sesión de Diagnóstico Preliminar</h2>
         <p style="font-size: 20px; font-weight: 300; opacity: 0.8; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
-            Analicemos la salud de su red y detectemos cuellos de botella antes de que afecten su operación.
+            Analicemos la salud de su red corporativa y detectemos cuellos de botella antes de que afecten su operación.
         </p>
-        <a id="btn-diagnostico" href="#" class="btn-main" style="background: var(--pink-premium);">Solicitar Consultoría</a>
+        <a id="link-cta" href="#" class="btn-main" style="background: var(--pink-premium); border-color: var(--pink-premium);" target="_blank">Solicitar Consultoría</a>
     </section>
 
     <footer>
         <div>
-            <strong>JBDA 2026</strong><br>
+            <strong style="color: var(--dark-grey);">JBDA 2026</strong><br>
             Estrategia en Telecomunicaciones.
         </div>
         <div style="text-align: right;">
             Morelos • CDMX • Global<br>
-            <a href="#" style="color: var(--pink-premium); text-decoration: none;">LinkedIn</a>
+            <a id="link-linkedin" href="#" style="color: var(--pink-premium); text-decoration: none; font-weight: 600;" target="_blank">LinkedIn</a>
         </div>
     </footer>
 
-    <a id="btn-whatsapp-float" href="#" class="whatsapp-btn" target="_blank">
+    <a id="link-whatsapp-float" href="#" class="whatsapp-btn" target="_blank">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>
-        WhatsApp
+        Hablemos
     </a>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
-        // ==========================================
-        // CONFIGURACIÓN: CAMBIA EL NÚMERO AQUÍ
-        // ==========================================
-        const numeroWhatsApp = "525613388030";
-        // ==========================================
-        
-        // Inicializar Animaciones
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 100
-        });
+        const CONFIG_ENLACES = {
+            // 1. Tu número de WhatsApp con código de país (ej. 52 para México)
+            numeroWhatsApp: "525613388030",
+            
+            // 2. Mensaje por defecto para el botón flotante
+            mensajeWhatsApp: "Hola JBDA, solicito información de consultoría.",
+            
+            // 3. Enlace principal para agendar citas (Puedes poner tu Calendly, Google Meets o el mismo de WhatsApp)
+            enlaceAgenda: "https://wa.me/525613388030?text=Hola%20JBDA,%20quiero%20agendar%20un%20diagnóstico.",
+            
+            // 4. Tu enlace al perfil o página de LinkedIn
+            enlaceLinkedIn: "https://www.linkedin.com/"
+        };
 
-        // Lógica para actualizar los enlaces de WhatsApp automáticamente
-        document.addEventListener("DOMContentLoaded", function() {
-            // Mensajes predefinidos
-            const mensajeDiagnostico = "Hola JBDA, solicito un diagnóstico de red.";
-            const mensajeGeneral = "Hola JBDA, quisiera más información sobre sus servicios.";
+        // --- Lógica automática (No es necesario modificar esto) ---
+        document.addEventListener("DOMContentLoaded", () => {
+            // Inicializar Animaciones
+            AOS.init({ duration: 1000, once: true, offset: 100 });
 
-            // Generar enlaces
-            const linkDiagnostico = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeDiagnostico)}`;
-            const linkGeneral = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeGeneral)}`;
-
-            // Asignar al botón de Diagnóstico (Sección Contacto)
-            const btnDiag = document.getElementById('btn-diagnostico');
-            if(btnDiag) btnDiag.href = linkDiagnostico;
-
-            // Asignar al botón Flotante
-            const btnFloat = document.getElementById('btn-whatsapp-float');
-            if(btnFloat) btnFloat.href = linkGeneral;
+            // Asignar variables a los botones HTML
+            document.getElementById('link-hero').href = CONFIG_ENLACES.enlaceAgenda;
+            document.getElementById('link-cta').href = CONFIG_ENLACES.enlaceAgenda;
+            document.getElementById('link-linkedin').href = CONFIG_ENLACES.enlaceLinkedIn;
+            
+            const urlWhatsAppFlotante = `https://wa.me/${CONFIG_ENLACES.numeroWhatsApp}?text=${encodeURIComponent(CONFIG_ENLACES.mensajeWhatsApp)}`;
+            document.getElementById('link-whatsapp-float').href = urlWhatsAppFlotante;
         });
     </script>
 </body>
