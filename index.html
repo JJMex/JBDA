@@ -18,14 +18,14 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* --- PALETA DE COLORES HIGH-TICKET --- */
+        /* --- PALETA DE COLORES HIGH-TICKET (ROSA ULTRA-PREMIUM) --- */
         :root {
-            --white: #ffffff;
-            --silver: #f8f9fa; 
-            --dark-grey: #0f172a; 
-            --soft-grey: #64748b;
-            --pink-premium: #D4006D;
-            --border: #e2e8f0;
+            --white: #fdf2f8; /* Rosa casi blanco para fondo principal */
+            --silver: #fce7f3; /* Rosa pálido elegante para alternar secciones */
+            --dark-grey: #0f172a; /* Azul/Gris Noche corporativo */
+            --soft-grey: #475569; /* Gris oscuro para textos largos (alta legibilidad) */
+            --pink-premium: #D4006D; /* Tu rosa magenta de marca */
+            --border: #fbcfe8; /* Bordes con un toque rosado fino */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -47,7 +47,7 @@
             align-items: center;
             position: sticky;
             top: 0;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(253, 242, 248, 0.95); /* Adaptado al nuevo fondo */
             z-index: 1000;
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border);
@@ -88,7 +88,7 @@
             border: none;
             cursor: pointer;
             color: var(--dark-grey);
-            z-index: 1001; /* Siempre por encima del menú */
+            z-index: 1001;
         }
 
         .mobile-menu-btn svg {
@@ -105,7 +105,7 @@
             flex-direction: column;
             justify-content: center;
             padding: 0 10%;
-            background: radial-gradient(circle at 90% 10%, #fff0f6 0%, #ffffff 50%);
+            background: radial-gradient(circle at 90% 10%, #fce7f3 0%, var(--white) 60%);
         }
 
         header h2 { 
@@ -155,7 +155,7 @@
             background-color: var(--pink-premium); 
             border-color: var(--pink-premium);
             transform: translateY(-4px);
-            box-shadow: 0 15px 30px rgba(212, 0, 109, 0.15);
+            box-shadow: 0 15px 30px rgba(212, 0, 109, 0.2);
         }
 
         /* --- INTRODUCCIÓN --- */
@@ -203,7 +203,7 @@
 
         .card:hover { 
             transform: translateY(-8px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.04);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.05);
             border-color: transparent;
         }
 
@@ -215,7 +215,7 @@
             display: block; 
         }
 
-        .card h3 { font-size: 24px; margin-bottom: 25px; letter-spacing: -0.5px; font-weight: 700; }
+        .card h3 { font-size: 24px; margin-bottom: 25px; letter-spacing: -0.5px; font-weight: 700; color: var(--dark-grey); }
 
         .card ul { list-style: none; }
 
@@ -224,7 +224,7 @@
             font-size: 16px; 
             color: var(--soft-grey); 
             padding-left: 20px; 
-            border-left: 2px solid var(--border);
+            border-left: 2px solid var(--pink-premium); /* Acento sutil en viñetas */
             line-height: 1.6;
         }
 
@@ -273,7 +273,7 @@
             background-color: var(--silver);
         }
 
-        .quote { font-size: 52px; font-weight: 800; line-height: 1.1; letter-spacing: -2px; }
+        .quote { font-size: 52px; font-weight: 800; line-height: 1.1; letter-spacing: -2px; color: var(--dark-grey); }
         
         .diff-item { margin-bottom: 60px; }
         .diff-item h4 { 
@@ -326,13 +326,15 @@
         #contacto { 
             margin: 0 5% 60px 5%;
             padding: 120px 50px; 
-            background: var(--dark-grey); 
-            color: var(--white); 
+            background: var(--dark-grey); /* Fondo azul oscuro para cerrar con autoridad */
+            color: #ffffff; /* Texto blanco en esta sección oscura */
             text-align: center; 
             border-radius: 8px; 
         }
 
         #contacto h2 { font-size: 40px; margin-bottom: 25px; font-weight: 800; letter-spacing: -1px; }
+
+        #contacto p { color: #e2e8f0; } /* Gris claro sobre azul oscuro para legibilidad */
 
         /* --- FOOTER OPTIMIZADO --- */
         footer { 
@@ -362,7 +364,7 @@
         .social-link {
             display: flex;
             align-items: center;
-            margin-bottom: 12px; /* Separación uniforme */
+            margin-bottom: 12px;
             font-weight: 600;
             color: var(--dark-grey) !important;
             transition: color 0.3s ease;
@@ -389,10 +391,10 @@
             .nav-links {
                 position: fixed;
                 top: 0;
-                right: -100%; /* Oculto por la derecha */
+                right: -100%;
                 width: 100%;
                 height: 100vh;
-                background: rgba(255, 255, 255, 0.98);
+                background: rgba(253, 242, 248, 0.98); /* Mismo tono rosado ultra claro */
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -400,9 +402,7 @@
                 transition: right 0.4s ease-in-out;
                 z-index: 999;
             }
-            .nav-links.active {
-                right: 0; /* Menú visible */
-            }
+            .nav-links.active { right: 0; }
             .nav-links a {
                 margin: 20px 0;
                 margin-left: 0;
@@ -576,7 +576,7 @@
                 WhatsApp (+52 56 1338 8030)
             </a>
 
-            <a id="link-linkedin" href="#" target="_blank" class="social-link" aria-label="Visitar perfil de LinkedIn">
+            <a id="link-linkedin" href="#" target="_blank" class="social-link" aria-label="Visitar perfil de LinkedIn de la empresa">
                 <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                 </svg>
