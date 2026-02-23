@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Aviso de Privacidad | JBDA</title>
+    <meta name="description" content="Aviso de Privacidad de JBDA | Consultoría Estratégica en Redes. Conozca cómo protegemos y tratamos sus datos personales y corporativos.">
+    
+    <link rel="icon" href="https://raw.githubusercontent.com/JJMex/JBDA/main/Isotipo.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/JJMex/JBDA/main/Isotipo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- PALETA DE COLORES HIGH-TICKET --- */
+        :root {
+            --white: #fdf2f8; 
+            --silver: #fce7f3; 
+            --dark-grey: #0f172a; 
+            --soft-grey: #475569; 
+            --pink-premium: #D4006D; 
+            --border: #fbcfe8; 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { 
+            scroll-behavior: smooth; 
+            scrollbar-width: thin; 
+            scrollbar-color: rgba(212, 0, 109, 0.4) var(--white); 
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--white);
+            color: var(--dark-grey);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background-color: var(--pink-premium);
+            color: #ffffff;
+        }
+
+        /* --- SCROLLBAR CUSTOMIZADO --- */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--white); }
+        ::-webkit-scrollbar-thumb { background: rgba(212, 0, 109, 0.3); border-radius: 10px; border: 2px solid var(--white); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--pink-premium); }
+
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--pink-premium); outline-offset: 4px; border-radius: 4px; }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: rgba(253, 242, 248, 1);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            height: 110px;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        nav.nav-scrolled {
+            background: rgba(253, 242, 248, 0.4);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom: 1px solid rgba(212, 0, 109, 0.15);
+            box-shadow: 0 15px 35px -5px rgba(212, 0, 109, 0.15);
+        }
+
+        .logo-container img { height: 85px; width: auto; transition: transform 0.4s ease; display: block; }
+        .logo-container img:hover { transform: scale(1.03); }
+
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a {
+            text-decoration: none; color: var(--soft-grey); font-size: 13px; text-transform: uppercase;
+            letter-spacing: 1.5px; font-weight: 600; transition: color 0.3s ease; display: flex; align-items: center;
+        }
+        .nav-links a svg { margin-right: 8px; width: 16px; height: 16px; fill: currentColor; }
+        .nav-links a:hover { color: var(--pink-premium); }
+
+        /* --- CONTENIDO LEGAL (AVISO DE PRIVACIDAD) --- */
+        .legal-container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 120px 10% 160px 10%;
+        }
+
+        .legal-container h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 800; color: var(--dark-grey); margin-bottom: 10px; letter-spacing: -1px; }
+        .legal-container .update-date { font-size: 14px; color: var(--pink-premium); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 50px; }
+
+        .legal-container h2 { font-size: 20px; font-weight: 700; color: var(--dark-grey); margin-top: 50px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .legal-container h3 { font-size: 16px; font-weight: 700; color: var(--dark-grey); margin-top: 30px; margin-bottom: 15px; }
+        
+        .legal-container p { font-size: 16px; color: var(--soft-grey); margin-bottom: 20px; line-height: 1.8; }
+        .legal-container ul { margin-bottom: 25px; padding-left: 20px; }
+        .legal-container ul li { font-size: 16px; color: var(--soft-grey); margin-bottom: 10px; line-height: 1.8; }
+        .legal-container strong { color: var(--dark-grey); font-weight: 600; }
+
+        /* --- FOOTER --- */
+        footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-between; align-items: flex-start; color: var(--soft-grey); font-size: 14px; background: var(--white); flex-wrap: wrap; gap: 40px; border-top: 1px solid var(--border); }
+        .footer-col { flex: 1; min-width: 250px; }
+        .footer-col h5 { color: var(--dark-grey); font-size: 16px; font-weight: 700; margin-bottom: 15px; }
+        .footer-col p { color: var(--soft-grey); margin-bottom: 8px; line-height: 1.6; }
+
+        .social-link { display: flex; align-items: center; margin-bottom: 12px; font-weight: 600; color: var(--dark-grey) !important; transition: color 0.3s ease; text-decoration: none; }
+        .social-link:hover { color: var(--pink-premium) !important; }
+        .social-link svg { margin-right: 10px; fill: currentColor; flex-shrink: 0; }
+        
+        .legal-link { color: var(--soft-grey); text-decoration: underline; font-size: 12px; transition: color 0.3s ease; }
+        .legal-link:hover { color: var(--pink-premium); }
+
+        @media (max-width: 900px) {
+            nav { height: 90px; padding: 15px 5%; }
+            .logo-container img { height: 60px; }
+            .legal-container { padding: 80px 5% 100px 5%; }
+            footer { flex-direction: column; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="main-nav">
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo">
+            </a>
+        </div>
+        
+        <div class="nav-links">
+            <a href="index.html">
+                <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                Volver al Inicio
+            </a>
+        </div>
+    </nav>
+
+    <main class="legal-container">
+        <h1>Aviso de Privacidad</h1>
+        [cite_start]<span class="update-date">Última actualización: 23 de Febrero de 2026 [cite: 2]</span>
+
+        <p>En <strong>JBDA | [cite_start]Consultoría Estratégica en Redes</strong> (en adelante "JBDA" o el "Responsable"), valoramos y respetamos su privacidad[cite: 3]. [cite_start]El presente Aviso de Privacidad se emite en cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP), su Reglamento y demás normatividad aplicable en los Estados Unidos Mexicanos[cite: 4].</p>
+
+        <h2>1. Identidad y Domicilio del Responsable</h2>
+        [cite_start]<p>El Responsable del tratamiento de sus datos personales es <strong>José Juan Cruz Bahena</strong>, operando bajo el nombre comercial de JBDA[cite: 6]. [cite_start]Contamos con base de operaciones principales en la ciudad de <strong>Cuernavaca, Morelos, México</strong>, señalando para todos los efectos legales y de contacto derivados del presente aviso el siguiente correo electrónico: <strong>JBDA_Tech@icloud.com</strong>[cite: 7].</p>
+
+        <h2>2. Datos Personales que Recabamos</h2>
+        [cite_start]<p>Para llevar a cabo las finalidades descritas en el presente aviso, recabaremos las siguientes categorías de datos personales, ya sea a través de nuestro sitio web (jjmex.github.io/JBDA/), correo electrónico, WhatsApp, o en sesiones de diagnóstico presenciales y remotas[cite: 9]:</p>
+        <ul>
+            [cite_start]<li><strong>Datos de Identificación:</strong> Nombre completo, cargo o puesto que desempeña, y nombre de la empresa a la que representa[cite: 10].</li>
+            [cite_start]<li><strong>Datos de Contacto:</strong> Correo electrónico corporativo, número de teléfono fijo y/o móvil (WhatsApp), y perfiles profesionales (ej. LinkedIn)[cite: 11].</li>
+            [cite_start]<li><strong>Datos Técnicos y Operativos:</strong> Información general sobre la topología de red, infraestructura tecnológica y requerimientos de TI de su empresa, recabada exclusivamente con fines de diagnóstico y elaboración de propuestas de ingeniería[cite: 12].</li>
+        </ul>
+        [cite_start]<p><strong>JBDA NO recaba datos personales sensibles</strong> (tales como origen racial, estado de salud, creencias religiosas o afiliación política)[cite: 13]. [cite_start]Toda la información técnica compartida está sujeta a estricta confidencialidad profesional[cite: 14].</p>
+
+        <h2>3. Finalidades del Tratamiento de Datos</h2>
+        [cite_start]<p>Sus datos personales serán utilizados para las siguientes finalidades[cite: 16]:</p>
+        
+        <h3>A. Finalidades Primarias (Necesarias para la relación jurídica y de servicio):</h3>
+        <ul>
+            [cite_start]<li>Proveer los servicios de consultoría estratégica en infraestructura de redes, diagnóstico y reingeniería solicitados[cite: 18].</li>
+            [cite_start]<li>Elaborar, enviar y dar seguimiento a cotizaciones, propuestas técnicas y comerciales[cite: 19].</li>
+            [cite_start]<li>Mantener comunicación directa para la gestión de proyectos, soporte técnico y mantenimiento[cite: 20].</li>
+            [cite_start]<li>Dar cumplimiento a obligaciones fiscales y de facturación[cite: 21].</li>
+        </ul>
+
+        <h3>B. Finalidades Secundarias:</h3>
+        <ul>
+            [cite_start]<li>Envío de información relevante sobre tendencias en telecomunicaciones, optimización de CAPEX y ciberseguridad corporativa[cite: 23].</li>
+            [cite_start]<li>Prospección comercial y envío de correos electrónicos informativos (Cold Emailing / Newsletters) relacionados con nuestros servicios[cite: 24].</li>
+            [cite_start]<li>Evaluación de la calidad de nuestro servicio[cite: 25].</li>
+        </ul>
+        [cite_start]<p>En caso de que no desee que sus datos personales sean tratados para las finalidades secundarias, puede manifestar su negativa enviando un correo a <strong>JBDA_Tech@icloud.com</strong>[cite: 26].</p>
+
+        <h2>4. Transferencia de Datos Personales</h2>
+        [cite_start]<p>JBDA le informa que sus datos personales <strong>no serán vendidos, alquilados ni transferidos a terceros</strong> ajenos a la prestación de nuestros servicios, salvo en los casos expresamente previstos en el artículo 37 de la LFPDPPP (ej. requerimientos de autoridades competentes)[cite: 28].</p>
+        [cite_start]<p>Su información técnica y corporativa se mantiene bajo estrictos protocolos de confidencialidad y solo se comparte con el personal o proveedores de infraestructura estrictamente necesarios para la ejecución del servicio contratado[cite: 29].</p>
+
+        <h2>5. Derechos ARCO (Acceso, Rectificación, Cancelación y Oposición)</h2>
+        [cite_start]<p>Usted tiene derecho a conocer qué datos personales tenemos de usted, para qué los utilizamos y las condiciones del uso que les damos (Acceso)[cite: 31]. [cite_start]Asimismo, es su derecho solicitar la corrección de su información (Rectificación) [cite: 32][cite_start]; que la eliminemos de nuestros registros cuando considere que no está siendo utilizada adecuadamente (Cancelación) [cite: 33][cite_start]; así como oponerse al uso de sus datos para fines específicos (Oposición)[cite: 34].</p>
+        [cite_start]<p>Para el ejercicio de cualquiera de los derechos ARCO, usted deberá presentar la solicitud respectiva enviando un correo electrónico directamente al titular de los datos[cite: 35]:</p>
+        <p>
+            <strong>Ing. Jose Juan Cruz Bahena</strong><br>
+            [cite_start]✉️ JBDA_Tech@icloud.com [cite: 36]
+        </p>
+        [cite_start]<p>Su solicitud deberá incluir: nombre completo, correo electrónico de contacto, documento que acredite su identidad y la descripción clara del derecho que desea ejercer[cite: 37]. [cite_start]Recibirá respuesta en un plazo máximo de 20 días hábiles[cite: 38].</p>
+
+        <h2>6. Uso de Cookies y Tecnologías de Rastreo</h2>
+        [cite_start]<p>Le informamos que en nuestra página de internet utilizamos <em>cookies</em> y tecnologías similares a través de las cuales es posible monitorear su comportamiento como usuario de internet, con el objetivo de brindarle una mejor experiencia de navegación y evaluar el tráfico de nuestro sitio[cite: 40]. [cite_start]Los datos que obtenemos son anónimos y no se asocian con su identidad personal[cite: 41].</p>
+
+        <h2>7. Cambios al Aviso de Privacidad</h2>
+        [cite_start]<p>El presente aviso de privacidad puede sufrir modificaciones, cambios o actualizaciones derivadas de nuevos requerimientos legales, de nuestras propias necesidades por los servicios que ofrecemos, o de nuestras prácticas de privacidad[cite: 43].</p>
+        [cite_start]<p>Nos comprometemos a mantenerlo informado sobre los cambios que pueda sufrir el presente documento a través de nuestro sitio web oficial: <strong>jjmex.github.io/JBDA/</strong>[cite: 44].</p>
+
+    </main>
+
+    <footer>
+        <div class="footer-col">
+            <a href="index.html">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px;" loading="lazy">
+            </a>
+            <p><strong>JBDA 2026</strong><br>Consultoría Estratégica en<br>Infraestructura de Redes.</p>
+            <br>
+            <a href="privacidad.html" class="legal-link" aria-label="Aviso de Privacidad y Términos Legales">Aviso de Privacidad</a>
+        </div>
+        
+        <div class="footer-col">
+            <h5>Contacto Directo</h5>
+            <p style="margin-bottom: 15px;"><strong>Ing. Jose Juan Cruz Bahena</strong><br>Consultor Principal</p>
+            
+            <a href="mailto:JBDA_Tech@icloud.com" class="social-link" aria-label="Enviar correo electrónico a JBDA">
+                <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                JBDA_Tech@icloud.com
+            </a>
+            
+            <a href="https://wa.me/525613388030" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Contactar por WhatsApp">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>
+                WhatsApp
+            </a>
+
+            <a href="https://www.linkedin.com/company/jbdamx/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visitar perfil de LinkedIn de la empresa">
+                <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+                LinkedIn Corporativo
+            </a>
+        </div>
+
+        <div class="footer-col">
+            <h5>Cobertura Operativa</h5>
+            <p>Atención Presencial:<br>CDMX • Morelos</p>
+            <p>Soporte Remoto:<br>Alcance Global</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // SOMBRA DINÁMICA (EFECTO LIQUID GLASS)
+            const nav = document.getElementById('main-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('nav-scrolled');
+                } else {
+                    nav.classList.remove('nav-scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
