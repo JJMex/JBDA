@@ -35,12 +35,12 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        /* CORRECCIÓN UX: Navegación y soporte Firefox Scrollbar */
+        /* CORRECCIÓN UX */
         html { 
             scroll-behavior: smooth; 
             scroll-padding-top: 110px; 
-            scrollbar-width: thin; /* Para Firefox */
-            scrollbar-color: rgba(212, 0, 109, 0.4) var(--white); /* Para Firefox */
+            scrollbar-width: thin; 
+            scrollbar-color: rgba(212, 0, 109, 0.4) var(--white); 
         }
 
         body {
@@ -51,106 +51,46 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        ::selection {
-            background-color: var(--pink-premium);
-            color: #ffffff;
-        }
+        ::selection { background-color: var(--pink-premium); color: #ffffff; }
 
-        /* --- SCROLLBAR CUSTOMIZADO (Chrome, Edge, Safari) --- */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--white);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(212, 0, 109, 0.3); /* Rosa suave por defecto */
-            border-radius: 10px;
-            border: 2px solid var(--white); /* Crea un efecto de margen */
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--pink-premium); /* Rosa intenso al pasar el cursor */
-        }
+        /* --- SCROLLBAR CUSTOMIZADO --- */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--white); }
+        ::-webkit-scrollbar-thumb { background: rgba(212, 0, 109, 0.3); border-radius: 10px; border: 2px solid var(--white); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--pink-premium); }
 
-        a:focus-visible, button:focus-visible {
-            outline: 2px solid var(--pink-premium);
-            outline-offset: 4px;
-            border-radius: 4px;
-        }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--pink-premium); outline-offset: 4px; border-radius: 4px; }
 
-        /* --- NAVEGACIÓN (ESTADO INICIAL) --- */
+        /* --- NAVEGACIÓN --- */
         nav {
-            padding: 15px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            background: rgba(253, 242, 248, 1); /* Sólido al inicio */
-            z-index: 1000;
-            border-bottom: 1px solid var(--border);
-            height: 110px;
-            /* Transición súper suave para el efecto Liquid Glass */
+            padding: 15px 8%; display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; background: rgba(253, 242, 248, 1); z-index: 1000;
+            border-bottom: 1px solid var(--border); height: 110px;
             transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* --- EFECTO "LIQUID GLASS" ROSA (AL HACER SCROLL) --- */
         nav.nav-scrolled {
-            background: rgba(253, 242, 248, 0.4); /* Mayor transparencia */
-            backdrop-filter: blur(24px) saturate(180%); /* Desenfoque intenso */
-            -webkit-backdrop-filter: blur(24px) saturate(180%); /* Soporte obligatorio para Safari/iPhone */
-            border-bottom: 1px solid rgba(212, 0, 109, 0.15); /* Borde rosado sutil */
-            box-shadow: 0 15px 35px -5px rgba(212, 0, 109, 0.15); /* Brillo/Sombra rosa proyectada */
+            background: rgba(253, 242, 248, 0.4); backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom: 1px solid rgba(212, 0, 109, 0.15); box-shadow: 0 15px 35px -5px rgba(212, 0, 109, 0.15);
         }
 
-        .logo-container img {
-            height: 85px;
-            width: auto;
-            transition: transform 0.4s ease;
-            display: block;
-        }
-
+        .logo-container img { height: 85px; width: auto; transition: transform 0.4s ease; display: block; }
         .logo-container img:hover { transform: scale(1.03); }
 
         .nav-links { display: flex; align-items: center; }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--soft-grey);
-            margin-left: 40px;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
+        .nav-links a { text-decoration: none; color: var(--soft-grey); margin-left: 40px; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; transition: color 0.3s ease; }
         .nav-links a:hover { color: var(--pink-premium); }
 
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--dark-grey);
-            z-index: 1001;
-        }
-
+        .mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--dark-grey); z-index: 1001; }
         .mobile-menu-btn svg { width: 32px; height: 32px; fill: currentColor; transition: transform 0.3s ease; }
 
         /* --- HERO SECTION --- */
         header {
-            min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 10%;
+            min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%;
             background-color: var(--white);
-            background-image: 
-                radial-gradient(rgba(212, 0, 109, 0.15) 2px, transparent 2px), 
-                linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%);
-            background-size: 40px 40px, 100% 100%; 
-            background-position: center center, center top;
+            background-image: radial-gradient(rgba(212, 0, 109, 0.15) 2px, transparent 2px), linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%);
+            background-size: 40px 40px, 100% 100%; background-position: center center, center top;
         }
 
         header h2 { color: var(--pink-premium); font-size: 13px; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 25px; font-weight: 700; }
@@ -158,31 +98,47 @@
         header p { font-size: 22px; color: var(--soft-grey); max-width: 650px; margin-bottom: 50px; font-weight: 300; }
 
         .btn-main {
-            display: inline-block;
-            padding: 20px 45px;
-            background-color: var(--dark-grey);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            border: 1px solid var(--dark-grey);
+            display: inline-block; padding: 20px 45px; background-color: var(--dark-grey); color: var(--white);
+            text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 13px; text-transform: uppercase;
+            letter-spacing: 1.5px; transition: all 0.4s ease; cursor: pointer; border: 1px solid var(--dark-grey);
         }
 
-        .btn-main:hover { 
-            background-color: var(--pink-premium); 
-            border-color: var(--pink-premium);
-            transform: translateY(-4px);
-            box-shadow: 0 15px 30px rgba(212, 0, 109, 0.2);
-        }
+        .btn-main:hover { background-color: var(--pink-premium); border-color: var(--pink-premium); transform: translateY(-4px); box-shadow: 0 15px 30px rgba(212, 0, 109, 0.2); }
 
         /* --- SECCIONES --- */
-        #introduccion { padding: 160px 10%; background-color: var(--white); text-align: center; }
+        #introduccion { padding: 140px 10% 60px 10%; background-color: var(--white); text-align: center; }
         #introduccion p { font-size: clamp(24px, 3.5vw, 36px); font-weight: 300; color: var(--dark-grey); max-width: 850px; margin: 0 auto; line-height: 1.5; letter-spacing: -0.5px; }
+
+        /* --- NUEVA SECCIÓN: FILOSOFÍA CORPORATIVA --- */
+        #filosofia { 
+            padding: 40px 10% 120px 10%; 
+            background-color: var(--white); 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 80px; 
+            align-items: flex-start;
+        }
+        
+        .filosofia-box {
+            padding-left: 30px;
+            border-left: 3px solid var(--pink-premium);
+        }
+
+        .filosofia-box h3 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--pink-premium);
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .filosofia-box p {
+            font-size: 18px;
+            color: var(--soft-grey);
+            line-height: 1.7;
+            font-weight: 400;
+        }
 
         #servicios { padding: 140px 10%; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
 
@@ -220,13 +176,18 @@
         #contacto h2 { font-size: 40px; margin-bottom: 25px; font-weight: 800; letter-spacing: -1px; }
         #contacto p { color: #e2e8f0; }
 
-        footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-between; align-items: flex-start; color: var(--soft-grey); font-size: 14px; background: var(--white); }
+        footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-between; align-items: flex-start; color: var(--soft-grey); font-size: 14px; background: var(--white); flex-wrap: wrap; gap: 40px;}
+        .footer-col { flex: 1; min-width: 250px; }
         .footer-col h5 { color: var(--dark-grey); font-size: 16px; font-weight: 700; margin-bottom: 15px; }
         .footer-col p { color: var(--soft-grey); margin-bottom: 8px; line-height: 1.6; }
 
         .social-link { display: flex; align-items: center; margin-bottom: 12px; font-weight: 600; color: var(--dark-grey) !important; transition: color 0.3s ease; text-decoration: none; }
         .social-link:hover { color: var(--pink-premium) !important; }
         .social-link svg { margin-right: 10px; fill: currentColor; flex-shrink: 0; }
+        
+        /* Enlace Legal en el footer */
+        .legal-link { color: var(--soft-grey); text-decoration: underline; font-size: 12px; transition: color 0.3s ease; }
+        .legal-link:hover { color: var(--pink-premium); }
 
         /* --- RESPONSIVE DESIGN (MÓVILES) --- */
         @media (max-width: 900px) {
@@ -240,6 +201,8 @@
             }
             .nav-links.active { right: 0; }
             .nav-links a { margin: 20px 0; font-size: 20px; font-weight: 700; color: var(--dark-grey); }
+            
+            #filosofia { grid-template-columns: 1fr; gap: 50px; padding: 20px 10% 80px 10%; }
             #diferenciadores { grid-template-columns: 1fr; gap: 60px; padding: 100px 10%; }
             #contacto { margin: 20px; padding: 80px 30px; }
             header { padding-top: 100px; min-height: 80vh; }
@@ -283,6 +246,21 @@
                 En <span style="color: var(--pink-premium); font-weight: 800;">JBDA</span> 
                 fusionamos la <strong>precisión de ingeniería</strong> con una visión financiera de negocio.
             </p>
+        </section>
+
+        <section id="filosofia">
+            <div class="filosofia-box" data-aos="fade-right" data-aos-delay="100">
+                <h3>Misión</h3>
+                <p>
+                    Transformar la infraestructura tecnológica de las organizaciones en un activo estratégico, garantizando la máxima continuidad operativa y rentabilidad a través de ingeniería de redes de élite, arquitecturas precisas y gestión proactiva.
+                </p>
+            </div>
+            <div class="filosofia-box" data-aos="fade-left" data-aos-delay="200">
+                <h3>Visión</h3>
+                <p>
+                    Ser el estándar de excelencia en telecomunicaciones empresariales; el aliado definitivo al que los líderes de TI acuden cuando el rendimiento, la seguridad y la arquitectura estratégica de su red no son negociables.
+                </p>
+            </div>
         </section>
 
         <section id="servicios">
@@ -389,6 +367,8 @@
         <div class="footer-col">
             <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px;" loading="lazy">
             <p><strong>JBDA 2026</strong><br>Consultoría Estratégica en<br>Infraestructura de Redes.</p>
+            <br>
+            <a href="#" class="legal-link" aria-label="Aviso de Privacidad y Términos Legales">Aviso de Privacidad</a>
         </div>
         
         <div class="footer-col">
@@ -425,7 +405,6 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
-        // Todo el JavaScript debe ejecutarse una vez que el DOM esté listo
         document.addEventListener("DOMContentLoaded", () => {
             
             // --- 1. SCRIPT DE PROTECCIÓN ---
