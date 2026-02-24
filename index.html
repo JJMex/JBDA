@@ -54,7 +54,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* TIPOGRAFÍA SERIF PARA TÍTULOS (ESTILO FIRMA ÉLITE) */
+        /* TIPOGRAFÍA SERIF PARA TÍTULOS */
         h1, h2, .quote {
             font-family: 'Playfair Display', serif;
         }
@@ -100,6 +100,7 @@
             border-bottom: 1px solid rgba(212, 0, 109, 0.15); box-shadow: 0 15px 35px -5px rgba(212, 0, 109, 0.15);
         }
 
+        .logo-container a { display: block; text-decoration: none; }
         .logo-container img { height: 85px; width: auto; transition: transform 0.4s ease; display: block; }
         .logo-container img:hover { transform: scale(1.03); }
 
@@ -114,10 +115,8 @@
         header {
             min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%;
             background-color: var(--white); position: relative; overflow: hidden;
-            /* Degradado sutil de respaldo */
             background-image: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%);
         }
-        /* Canvas de nodos de red interactivos */
         #network-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         
         .hero-content { position: relative; z-index: 1; }
@@ -183,27 +182,31 @@
         .card ul { list-style: none; }
         .card ul li { margin-bottom: 20px; font-size: 16px; color: var(--soft-grey); padding-left: 20px; border-left: 2px solid var(--pink-premium); line-height: 1.6; }
 
-        /* --- NUEVO: IMPACTO "DARK MODE" --- */
+        /* --- IMPACTO "DARK MODE" (CON DESVANECIMIENTO SUAVE) --- */
         #impacto { 
             padding: 140px 10%; text-align: center; 
-            background-color: var(--dark-grey); /* Contraste dramático */
+            /* Se difumina de plata a oscuro en los primeros 140px, y de oscuro a blanco en los últimos 140px */
+            background: linear-gradient(to bottom, 
+                var(--silver) 0%, 
+                var(--dark-grey) 140px, 
+                var(--dark-grey) calc(100% - 140px), 
+                var(--white) 100%
+            );
             color: var(--white);
         }
-        /* Ajuste de colores para la sección oscura */
         #impacto h2 { color: var(--white); }
         .grid-impacto { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 60px; margin-top: 60px; }
         .impacto-item h3 { font-size: 72px; font-weight: 800; color: var(--pink-premium); line-height: 1; margin-bottom: 15px; letter-spacing: -2px; font-family: 'Inter', sans-serif; }
         .impacto-item h4 { font-size: 18px; color: var(--white); margin-bottom: 10px; font-weight: 700; }
         .impacto-item p { font-size: 15px; color: #cbd5e1; line-height: 1.6; font-weight: 300; }
 
-        /* Volvemos a blanco en la siguiente sección para el choque visual */
         #diferenciadores { padding: 160px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 120px; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
         .quote { font-size: 52px; font-weight: 800; line-height: 1.1; letter-spacing: -2px; color: var(--dark-grey); }
         .diff-item { margin-bottom: 60px; }
         .diff-item h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--pink-premium); font-weight: 700; }
         .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; line-height: 1.7; }
 
-        /* --- SECCIÓN: NOSOTROS (DIRECTIVOS) --- */
+        /* --- SECCIÓN: NOSOTROS --- */
         #nuestra-firma { padding: 140px 10%; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); }
         .manifesto { font-size: 22px; color: var(--soft-grey); font-weight: 300; max-width: 850px; margin-bottom: 60px; line-height: 1.6; border-left: 3px solid var(--pink-premium); padding-left: 30px; }
         
@@ -309,7 +312,9 @@
 
     <nav id="main-nav">
         <div class="logo-container">
-            <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo">
+            <a href="#" aria-label="Volver al inicio">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo">
+            </a>
         </div>
         
         <div class="nav-links" id="nav-links">
@@ -556,7 +561,7 @@
 
     <footer>
         <div class="footer-col">
-            <a href="index.html">
+            <a href="#" aria-label="Volver al inicio">
                 <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px;" loading="lazy">
             </a>
             <p><strong>JBDA 2026</strong><br>Consultoría Estratégica en<br>Infraestructura de Redes.</p>
@@ -577,7 +582,7 @@
             
             <a id="link-whatsapp-footer" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Contactar por WhatsApp">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>
-                WhatsApp (+52 56 1338 8030)
+                WhatsApp
             </a>
 
             <a id="link-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visitar perfil de LinkedIn de la empresa">
@@ -619,7 +624,7 @@
             // --- 0. PRELOADER (Carga de 0.9s) ---
             setTimeout(() => {
                 document.getElementById('preloader').classList.add('preloader-hidden');
-            }, 900); // 900ms = 0.9 segundos exactos
+            }, 900);
 
             // --- 0.5 ANIMACIÓN DE RED EN EL HERO (CANVAS) ---
             const canvas = document.getElementById('network-canvas');
@@ -630,14 +635,13 @@
                 width = canvas.width = window.innerWidth;
                 height = canvas.height = document.querySelector('header').offsetHeight;
                 particles = [];
-                // Menos nodos en móvil para rendimiento, más en escritorio
                 const particleCount = window.innerWidth < 768 ? 30 : 60;
                 
                 for (let i = 0; i < particleCount; i++) {
                     particles.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
-                        vx: (Math.random() - 0.5) * 0.4, // Velocidad de movimiento
+                        vx: (Math.random() - 0.5) * 0.4,
                         vy: (Math.random() - 0.5) * 0.4,
                         radius: Math.random() * 1.5 + 1
                     });
@@ -653,22 +657,18 @@
                     p.x += p.vx;
                     p.y += p.vy;
 
-                    // Rebote en los bordes
                     if (p.x < 0 || p.x > width) p.vx *= -1;
                     if (p.y < 0 || p.y > height) p.vy *= -1;
 
-                    // Dibujar el nodo
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(212, 0, 109, 0.3)'; // Nodos color rosa premium translúcido
+                    ctx.fillStyle = 'rgba(212, 0, 109, 0.3)';
                     ctx.fill();
 
-                    // Dibujar líneas conectivas
                     for (let j = i + 1; j < particles.length; j++) {
                         let p2 = particles[j];
                         let dist = Math.sqrt(Math.pow(p.x - p2.x, 2) + Math.pow(p.y - p2.y, 2));
                         
-                        // Si los nodos están cerca, trazar una línea
                         if (dist < 130) {
                             ctx.beginPath();
                             ctx.moveTo(p.x, p.y);
@@ -736,8 +736,8 @@
             const mensajeGeneral = "Hola JBDA, solicito información de consultoría.";
             const urlWhatsGeneral = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeGeneral)}`;
             
-            // Asignar links de footer
             document.getElementById('link-whatsapp-footer').href = urlWhatsGeneral;
+            document.getElementById('link-concierge-whatsapp').href = urlWhatsGeneral;
             document.getElementById('link-linkedin').href = "https://www.linkedin.com/company/jbdamx/";
 
             // Integración de Calendly
@@ -745,30 +745,23 @@
             const abrirCalendly = (e) => {
                 e.preventDefault();
                 Calendly.initPopupWidget({url: urlCalendly});
-                // Si el menú flotante está abierto, ciérralo
                 document.getElementById('concierge-menu').classList.remove('active');
                 return false;
             };
 
-            // Botones principales
             document.getElementById('link-hero').addEventListener('click', abrirCalendly);
             document.getElementById('link-cta').addEventListener('click', abrirCalendly);
+            document.getElementById('link-concierge-calendly').addEventListener('click', abrirCalendly);
 
             // --- 5. LÓGICA DEL BOTÓN FLOTANTE (CONCIERGE) ---
             const conciergeToggle = document.getElementById('concierge-toggle');
             const conciergeMenu = document.getElementById('concierge-menu');
-            
-            // Asignar links al menú flotante
-            document.getElementById('link-concierge-calendly').addEventListener('click', abrirCalendly);
-            document.getElementById('link-concierge-whatsapp').href = urlWhatsGeneral;
 
-            // Abrir/Cerrar menú
             conciergeToggle.addEventListener('click', (e) => {
-                e.stopPropagation(); // Evita que se cierre inmediatamente
+                e.stopPropagation();
                 conciergeMenu.classList.toggle('active');
             });
 
-            // Cerrar menú al hacer clic fuera de él
             document.addEventListener('click', (event) => {
                 if (!conciergeToggle.contains(event.target) && !conciergeMenu.contains(event.target)) {
                     conciergeMenu.classList.remove('active');
