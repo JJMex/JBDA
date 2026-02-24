@@ -18,7 +18,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -54,7 +54,29 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* TIPOGRAFÍA SERIF PARA TÍTULOS (ESTILO FIRMA ÉLITE) */
+        h1, h2, .quote {
+            font-family: 'Playfair Display', serif;
+        }
+
         ::selection { background-color: var(--pink-premium); color: #ffffff; }
+
+        /* --- PRELOADER MINIMALISTA --- */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background-color: var(--white); z-index: 99999;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .preload-logo {
+            width: 150px; height: auto;
+            animation: pulse-logo 0.9s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes pulse-logo {
+            0% { transform: scale(0.95); opacity: 0.7; filter: drop-shadow(0 0 10px rgba(212, 0, 109, 0.2)); }
+            100% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 25px rgba(212, 0, 109, 0.5)); }
+        }
+        .preloader-hidden { opacity: 0 !important; visibility: hidden !important; pointer-events: none; }
 
         /* --- SCROLLBAR CUSTOMIZADO --- */
         ::-webkit-scrollbar { width: 10px; }
@@ -88,15 +110,18 @@
         .mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--dark-grey); z-index: 1001; }
         .mobile-menu-btn svg { width: 32px; height: 32px; fill: currentColor; transition: transform 0.3s ease; }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO SECTION Y ANIMACIÓN DE RED --- */
         header {
             min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%;
-            background-color: var(--white);
-            background-image: radial-gradient(rgba(212, 0, 109, 0.15) 2px, transparent 2px), linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%);
-            background-size: 40px 40px, 100% 100%; background-position: center center, center top;
+            background-color: var(--white); position: relative; overflow: hidden;
+            /* Degradado sutil de respaldo */
+            background-image: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%);
         }
-
-        header h2 { color: var(--pink-premium); font-size: 13px; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 25px; font-weight: 700; }
+        /* Canvas de nodos de red interactivos */
+        #network-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        
+        .hero-content { position: relative; z-index: 1; }
+        header h2 { color: var(--pink-premium); font-size: 13px; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 25px; font-weight: 700; font-family: 'Inter', sans-serif;}
         header h1 { font-size: clamp(40px, 6vw, 72px); line-height: 1.1; margin-bottom: 30px; font-weight: 800; max-width: 900px; letter-spacing: -1.5px; color: var(--dark-grey); }
         header p { font-size: 22px; color: var(--soft-grey); max-width: 650px; margin-bottom: 50px; font-weight: 300; }
 
@@ -104,6 +129,7 @@
             display: inline-block; padding: 20px 45px; background-color: var(--dark-grey); color: var(--white);
             text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 13px; text-transform: uppercase;
             letter-spacing: 1.5px; transition: all 0.4s ease; cursor: pointer; border: 1px solid var(--dark-grey);
+            font-family: 'Inter', sans-serif;
         }
         .btn-main:hover { background-color: var(--pink-premium); border-color: var(--pink-premium); transform: translateY(-4px); box-shadow: 0 15px 30px rgba(212, 0, 109, 0.2); }
 
@@ -138,7 +164,7 @@
 
         /* --- SERVICIOS Y ICONOS --- */
         #servicios { padding: 140px 10%; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
-        .section-label { color: var(--pink-premium); font-weight: 800; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: block; }
+        .section-label { color: var(--pink-premium); font-weight: 800; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: block; font-family: 'Inter', sans-serif; }
 
         .grid-servicios { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; margin-top: 60px; }
         .card { background: var(--white); padding: 60px 50px; border-radius: 6px; transition: all 0.4s ease; border: 1px solid var(--border); position: relative; }
@@ -153,16 +179,24 @@
         .card:hover .icon-wrapper svg { stroke: #ffffff; }
         
         .card-num { font-size: 12px; font-weight: 800; color: var(--pink-premium); margin-bottom: 30px; display: block; position: absolute; top: 40px; right: 50px; opacity: 0.5; }
-        .card h3 { font-size: 24px; margin-bottom: 25px; letter-spacing: -0.5px; font-weight: 700; color: var(--dark-grey); }
+        .card h3 { font-size: 24px; margin-bottom: 25px; letter-spacing: -0.5px; font-weight: 700; color: var(--dark-grey); font-family: 'Inter', sans-serif;}
         .card ul { list-style: none; }
         .card ul li { margin-bottom: 20px; font-size: 16px; color: var(--soft-grey); padding-left: 20px; border-left: 2px solid var(--pink-premium); line-height: 1.6; }
 
-        #impacto { padding: 140px 10%; text-align: center; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); }
+        /* --- NUEVO: IMPACTO "DARK MODE" --- */
+        #impacto { 
+            padding: 140px 10%; text-align: center; 
+            background-color: var(--dark-grey); /* Contraste dramático */
+            color: var(--white);
+        }
+        /* Ajuste de colores para la sección oscura */
+        #impacto h2 { color: var(--white); }
         .grid-impacto { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 60px; margin-top: 60px; }
-        .impacto-item h3 { font-size: 72px; font-weight: 800; color: var(--pink-premium); line-height: 1; margin-bottom: 15px; letter-spacing: -2px; }
-        .impacto-item h4 { font-size: 18px; color: var(--dark-grey); margin-bottom: 10px; font-weight: 700; }
-        .impacto-item p { font-size: 15px; color: var(--soft-grey); line-height: 1.6; }
+        .impacto-item h3 { font-size: 72px; font-weight: 800; color: var(--pink-premium); line-height: 1; margin-bottom: 15px; letter-spacing: -2px; font-family: 'Inter', sans-serif; }
+        .impacto-item h4 { font-size: 18px; color: var(--white); margin-bottom: 10px; font-weight: 700; }
+        .impacto-item p { font-size: 15px; color: #cbd5e1; line-height: 1.6; font-weight: 300; }
 
+        /* Volvemos a blanco en la siguiente sección para el choque visual */
         #diferenciadores { padding: 160px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 120px; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
         .quote { font-size: 52px; font-weight: 800; line-height: 1.1; letter-spacing: -2px; color: var(--dark-grey); }
         .diff-item { margin-bottom: 60px; }
@@ -177,7 +211,7 @@
         .team-card { background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 50px 40px; transition: all 0.4s ease; }
         .team-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.05); border-color: var(--pink-premium); }
         .member-role { color: var(--pink-premium); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; margin-bottom: 15px; display: block; }
-        .member-name { font-size: 24px; color: var(--dark-grey); font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px; }
+        .member-name { font-size: 24px; color: var(--dark-grey); font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px; font-family: 'Inter', sans-serif;}
         .member-bio { font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
 
         /* --- TRUST BAR Y CERTIFICACIONES --- */
@@ -196,6 +230,7 @@
         summary { 
             padding: 25px 30px; font-size: 18px; font-weight: 700; color: var(--dark-grey); 
             cursor: pointer; list-style: none; position: relative; display: flex; justify-content: space-between; align-items: center; 
+            font-family: 'Inter', sans-serif;
         }
         summary::-webkit-details-marker { display: none; }
         summary::after { content: '+'; font-size: 24px; color: var(--pink-premium); transition: transform 0.3s ease; font-weight: 400; }
@@ -209,7 +244,7 @@
 
         footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-between; align-items: flex-start; color: var(--soft-grey); font-size: 14px; background: var(--white); flex-wrap: wrap; gap: 40px;}
         .footer-col { flex: 1; min-width: 250px; }
-        .footer-col h5 { color: var(--dark-grey); font-size: 16px; font-weight: 700; margin-bottom: 15px; }
+        .footer-col h5 { color: var(--dark-grey); font-size: 16px; font-weight: 700; margin-bottom: 15px; font-family: 'Inter', sans-serif;}
         .footer-col p { color: var(--soft-grey); margin-bottom: 8px; line-height: 1.6; }
 
         .social-link { display: flex; align-items: center; margin-bottom: 12px; font-weight: 600; color: var(--dark-grey) !important; transition: color 0.3s ease; text-decoration: none; }
@@ -237,7 +272,7 @@
         
         .concierge-item { 
             display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; 
-            color: var(--dark-grey); font-size: 14px; font-weight: 600; border-radius: 8px; transition: all 0.2s ease; 
+            color: var(--dark-grey); font-size: 14px; font-weight: 600; border-radius: 8px; transition: all 0.2s ease; font-family: 'Inter', sans-serif;
         }
         .concierge-item:hover { background: rgba(212, 0, 109, 0.08); color: var(--pink-premium); }
         .concierge-item svg { flex-shrink: 0; }
@@ -268,6 +303,10 @@
 </head>
 <body>
 
+    <div id="preloader">
+        <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="Cargando JBDA..." class="preload-logo">
+    </div>
+
     <nav id="main-nav">
         <div class="logo-container">
             <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo">
@@ -286,7 +325,9 @@
     </nav>
 
     <header>
-        <div data-aos="fade-up">
+        <canvas id="network-canvas"></canvas>
+        
+        <div class="hero-content" data-aos="fade-up">
             <h2>Infraestructura & Telecomunicaciones</h2>
             <h1>Diseñamos la columna vertebral de su negocio.</h1>
             <p>Consultoría estratégica en infraestructura de redes diseñada para maximizar la eficiencia operativa y rentabilizar su inversión tecnológica.</p>
@@ -336,7 +377,7 @@
 
         <section id="servicios">
             <span class="section-label" data-aos="fade-right">Capacidades</span>
-            <h2 style="font-size: 42px; font-weight: 800;" data-aos="fade-right">Ingeniería de Alto Nivel</h2>
+            <h2 data-aos="fade-right">Ingeniería de Alto Nivel</h2>
             
             <div class="grid-servicios">
                 <div class="card" data-aos="fade-up" data-aos-delay="100">
@@ -386,7 +427,7 @@
 
         <section id="impacto">
             <span class="section-label" data-aos="fade-up">Casos de Éxito</span>
-            <h2 style="font-size: 42px; font-weight: 800; color: var(--dark-grey);" data-aos="fade-up">Transformación de Infraestructura</h2>
+            <h2 data-aos="fade-up">Transformación de Infraestructura</h2>
             
             <div class="grid-impacto">
                 <div class="impacto-item" data-aos="zoom-in" data-aos-delay="100">
@@ -430,7 +471,7 @@
 
         <section id="nuestra-firma">
             <span class="section-label" data-aos="fade-up">El Equipo Directivo</span>
-            <h2 style="font-size: 42px; font-weight: 800; margin-bottom: 40px;" data-aos="fade-up">Ingeniería guiada por visión de negocio.</h2>
+            <h2 data-aos="fade-up">Ingeniería guiada por visión de negocio.</h2>
             
             <p class="manifesto" data-aos="fade-up">
                 Nuestra firma nació de una observación crítica: las corporaciones gastaban millones en hardware sobredimensionado, mientras sus redes seguían presentando fallas estructurales. En JBDA, aseguramos que cada inversión tecnológica se traduzca en rentabilidad, seguridad y flujo operativo sin interrupciones.
@@ -471,7 +512,7 @@
 
         <section id="faq">
             <span class="section-label" data-aos="fade-up" style="text-align: center;">Respuestas Clave</span>
-            <h2 style="font-size: 36px; font-weight: 800; text-align: center; margin-bottom: 50px;" data-aos="fade-up">Preguntas Frecuentes</h2>
+            <h2 style="text-align: center; margin-bottom: 50px;" data-aos="fade-up">Preguntas Frecuentes</h2>
             
             <div class="faq-container" data-aos="fade-up">
                 <details>
@@ -506,7 +547,7 @@
 
         <section id="contacto" data-aos="zoom-in">
             <h2>Sesión de Diagnóstico Preliminar</h2>
-            <p style="font-size: 20px; font-weight: 300; opacity: 0.8; margin-bottom: 40px; max-width: 850px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+            <p style="font-size: 20px; font-weight: 300; opacity: 0.8; margin-bottom: 40px; max-width: 850px; margin-left: auto; margin-right: auto; line-height: 1.6; font-family: 'Inter', sans-serif;">
                 Agende una <strong>evaluación ejecutiva de 30 minutos</strong> para analizar los desafíos actuales de su red y delinear soluciones de impacto inmediato. Para auditorías profundas y reingeniería de infraestructura, desarrollamos propuestas técnicas y comerciales a la medida de su operación.
             </p>
             <a id="link-cta" href="#" class="btn-main" style="background: var(--pink-premium); border-color: var(--pink-premium);" aria-label="Solicitar Consultoría por Calendly">Solicitar Consultoría</a>
@@ -575,6 +616,75 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             
+            // --- 0. PRELOADER (Carga de 0.9s) ---
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('preloader-hidden');
+            }, 900); // 900ms = 0.9 segundos exactos
+
+            // --- 0.5 ANIMACIÓN DE RED EN EL HERO (CANVAS) ---
+            const canvas = document.getElementById('network-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height, particles = [];
+
+            function initCanvas() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = document.querySelector('header').offsetHeight;
+                particles = [];
+                // Menos nodos en móvil para rendimiento, más en escritorio
+                const particleCount = window.innerWidth < 768 ? 30 : 60;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        vx: (Math.random() - 0.5) * 0.4, // Velocidad de movimiento
+                        vy: (Math.random() - 0.5) * 0.4,
+                        radius: Math.random() * 1.5 + 1
+                    });
+                }
+            }
+
+            function animateCanvas() {
+                requestAnimationFrame(animateCanvas);
+                ctx.clearRect(0, 0, width, height);
+                
+                for (let i = 0; i < particles.length; i++) {
+                    let p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    // Rebote en los bordes
+                    if (p.x < 0 || p.x > width) p.vx *= -1;
+                    if (p.y < 0 || p.y > height) p.vy *= -1;
+
+                    // Dibujar el nodo
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(212, 0, 109, 0.3)'; // Nodos color rosa premium translúcido
+                    ctx.fill();
+
+                    // Dibujar líneas conectivas
+                    for (let j = i + 1; j < particles.length; j++) {
+                        let p2 = particles[j];
+                        let dist = Math.sqrt(Math.pow(p.x - p2.x, 2) + Math.pow(p.y - p2.y, 2));
+                        
+                        // Si los nodos están cerca, trazar una línea
+                        if (dist < 130) {
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = `rgba(212, 0, 109, ${0.12 - dist/130 * 0.12})`; 
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            window.addEventListener('resize', initCanvas);
+            initCanvas();
+            animateCanvas();
+
             // --- 1. SCRIPT DE PROTECCIÓN ---
             document.addEventListener('contextmenu', event => event.preventDefault());
             document.addEventListener('keydown', event => {
