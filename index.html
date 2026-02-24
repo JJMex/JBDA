@@ -18,7 +18,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500;1,800&display=swap" rel="stylesheet">
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -54,8 +54,8 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* TIPOGRAFÍA SERIF PARA TÍTULOS */
-        h1, h2, .quote {
+        /* TIPOGRAFÍA SERIF PARA TÍTULOS (BRUTALISMO) */
+        h1, h2, .quote-massive {
             font-family: 'Playfair Display', serif;
         }
 
@@ -111,37 +111,42 @@
         .mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--dark-grey); z-index: 1001; }
         .mobile-menu-btn svg { width: 32px; height: 32px; fill: currentColor; transition: transform 0.3s ease; }
 
-        /* --- HERO SECTION Y ANIMACIÓN DE RED --- */
+        /* --- HERO SECTION Y ANIMACIÓN DE RED (ESTILO ASIMÉTRICO) --- */
         header {
-            min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%;
+            min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 8%;
             background-color: var(--white); position: relative; overflow: hidden;
             background-image: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%);
         }
         #network-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         
-        .hero-content { position: relative; z-index: 1; }
-        header h2 { color: var(--pink-premium); font-size: 13px; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 25px; font-weight: 700; font-family: 'Inter', sans-serif;}
-        header h1 { font-size: clamp(40px, 6vw, 72px); line-height: 1.1; margin-bottom: 30px; font-weight: 800; max-width: 900px; letter-spacing: -1.5px; color: var(--dark-grey); }
-        header p { font-size: 22px; color: var(--soft-grey); max-width: 650px; margin-bottom: 50px; font-weight: 300; }
+        .hero-content { position: relative; z-index: 1; max-width: 800px; /* Asimetría: Todo cargado a la izquierda */ }
+        header h2 { color: var(--pink-premium); font-size: 14px; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 30px; font-weight: 800; font-family: 'Inter', sans-serif;}
+        header h1 { 
+            font-size: clamp(45px, 7vw, 85px); /* Título más grande y agresivo */
+            line-height: 1.05; margin-bottom: 35px; font-weight: 800; 
+            letter-spacing: -2px; color: var(--dark-grey); 
+        }
+        header p { font-size: 22px; color: var(--soft-grey); max-width: 600px; margin-bottom: 50px; font-weight: 300; line-height: 1.6; }
 
         .btn-main {
-            display: inline-block; padding: 20px 45px; background-color: var(--dark-grey); color: var(--white);
+            display: inline-block; padding: 22px 48px; background-color: var(--dark-grey); color: var(--white);
             text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 13px; text-transform: uppercase;
             letter-spacing: 1.5px; transition: all 0.4s ease; cursor: pointer; border: 1px solid var(--dark-grey);
             font-family: 'Inter', sans-serif;
         }
         .btn-main:hover { background-color: var(--pink-premium); border-color: var(--pink-premium); transform: translateY(-4px); box-shadow: 0 15px 30px rgba(212, 0, 109, 0.2); }
 
-        /* --- SECCIONES GENERALES (MÁRGENES REDUCIDOS) --- */
+        /* --- SECCIONES GENERALES --- */
         #introduccion { padding: 90px 10% 60px 10%; background-color: var(--white); text-align: center; }
         #introduccion p { font-size: clamp(24px, 3.5vw, 36px); font-weight: 300; color: var(--dark-grey); max-width: 850px; margin: 0 auto; line-height: 1.5; letter-spacing: -0.5px; }
 
-        #filosofia { padding: 40px 10% 60px 10%; background-color: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: flex-start; }
+        /* Asimetría en la Filosofía */
+        #filosofia { padding: 40px 10% 60px 10%; background-color: var(--white); display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: flex-start; }
         .filosofia-box { padding-left: 30px; border-left: 3px solid var(--pink-premium); }
-        .filosofia-box h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: var(--pink-premium); margin-bottom: 20px; font-weight: 800; }
+        .filosofia-box h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: var(--pink-premium); margin-bottom: 20px; font-weight: 800; font-family: 'Inter', sans-serif; }
         .filosofia-box p { font-size: 18px; color: var(--soft-grey); line-height: 1.7; font-weight: 400; }
 
-        /* --- VENDOR TRUST BAR (CARRUSEL) --- */
+        /* --- VENDOR TRUST BAR --- */
         .marquee-wrapper { 
             overflow: hidden; background: var(--white); padding: 50px 0; 
             border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); 
@@ -152,22 +157,26 @@
         .marquee-wrapper::after { right: 0; background: linear-gradient(to left, var(--white), transparent); }
         
         .marquee-track { display: inline-block; animation: scroll-marquee 30s linear infinite; }
-        
-        .brand-logo { 
-            height: 45px; width: auto; margin: 0 50px; vertical-align: middle;
-            filter: grayscale(100%) opacity(0.4); transition: all 0.4s ease; 
-        }
+        .brand-logo { height: 45px; width: auto; margin: 0 50px; vertical-align: middle; filter: grayscale(100%) opacity(0.4); transition: all 0.4s ease; }
         .brand-logo:hover { filter: grayscale(0%) opacity(1); transform: scale(1.1); }
-
         @keyframes scroll-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* --- SERVICIOS --- */
-        #servicios { padding: 90px 10%; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
+        /* --- FRAMEWORK PROPIETARIO (Asimetría Visual) --- */
+        #servicios { padding: 120px 8%; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
         .section-label { color: var(--pink-premium); font-weight: 800; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: block; font-family: 'Inter', sans-serif; }
-
-        .grid-servicios { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; margin-top: 60px; }
-        .card { background: var(--white); padding: 60px 50px; border-radius: 6px; transition: all 0.4s ease; border: 1px solid var(--border); position: relative; }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.05); border-color: var(--pink-premium); }
+        
+        .grid-servicios { 
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; align-items: start;
+        }
+        .card { background: var(--white); padding: 60px 40px; border-radius: 6px; transition: all 0.4s ease; border: 1px solid var(--border); position: relative; }
+        
+        /* Escalera Asimétrica en Escritorio */
+        @media (min-width: 901px) {
+            .card:nth-child(2) { margin-top: 60px; }
+            .card:nth-child(3) { margin-top: 120px; }
+        }
+        
+        .card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.05); border-color: var(--pink-premium); z-index: 2; }
         
         .icon-wrapper { 
             width: 56px; height: 56px; background: rgba(212, 0, 109, 0.08); 
@@ -177,34 +186,36 @@
         .card:hover .icon-wrapper { background: var(--pink-premium); }
         .card:hover .icon-wrapper svg { stroke: #ffffff; }
         
-        .card-num { font-size: 12px; font-weight: 800; color: var(--pink-premium); margin-bottom: 30px; display: block; position: absolute; top: 40px; right: 50px; opacity: 0.5; }
-        .card h3 { font-size: 24px; margin-bottom: 25px; letter-spacing: -0.5px; font-weight: 700; color: var(--dark-grey); font-family: 'Inter', sans-serif;}
+        .card-num { font-size: 12px; font-weight: 800; color: var(--pink-premium); margin-bottom: 30px; display: block; position: absolute; top: 40px; right: 40px; opacity: 0.5; font-family: 'Inter', sans-serif;}
+        .card h3 { font-size: 22px; margin-bottom: 25px; letter-spacing: -0.5px; font-weight: 700; color: var(--dark-grey); font-family: 'Inter', sans-serif;}
         .card ul { list-style: none; }
-        .card ul li { margin-bottom: 20px; font-size: 16px; color: var(--soft-grey); padding-left: 20px; border-left: 2px solid var(--pink-premium); line-height: 1.6; }
+        .card ul li { margin-bottom: 20px; font-size: 15px; color: var(--soft-grey); padding-left: 20px; border-left: 2px solid var(--pink-premium); line-height: 1.6; }
 
         /* --- IMPACTO "DARK MODE" (TARJETA FLOTANTE ÉLITE) --- */
-        #impacto-container { background-color: var(--silver); padding: 20px 0; }
+        #impacto-container { background-color: var(--silver); padding: 40px 0; }
         #impacto { 
-            padding: 90px 8%; 
-            text-align: center; 
-            background-color: var(--dark-grey); 
-            color: var(--white);
-            margin: 0 4%; /* Márgenes laterales para el efecto tarjeta */
-            border-radius: 30px; /* Bordes redondeados elegantes */
-            box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15); /* Sombra de profundidad */
+            padding: 90px 8%; text-align: center; background-color: var(--dark-grey); color: var(--white);
+            margin: 0 4%; border-radius: 30px; box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15); 
         }
-        #impacto h2 { color: var(--white); }
+        #impacto h2 { color: var(--white); font-size: clamp(32px, 5vw, 48px); letter-spacing: -1px; }
         .grid-impacto { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 60px; margin-top: 60px; }
-        .impacto-item h3 { font-size: 72px; font-weight: 800; color: var(--pink-premium); line-height: 1; margin-bottom: 15px; letter-spacing: -2px; font-family: 'Inter', sans-serif; }
-        .impacto-item h4 { font-size: 18px; color: var(--white); margin-bottom: 10px; font-weight: 700; }
+        .impacto-item h3 { font-size: clamp(60px, 8vw, 85px); font-weight: 800; color: var(--pink-premium); line-height: 1; margin-bottom: 15px; letter-spacing: -3px; font-family: 'Inter', sans-serif; }
+        .impacto-item h4 { font-size: 18px; color: var(--white); margin-bottom: 10px; font-weight: 700; font-family: 'Inter', sans-serif;}
         .impacto-item p { font-size: 15px; color: #cbd5e1; line-height: 1.6; font-weight: 300; }
 
-        /* --- DIFERENCIADORES --- */
-        #diferenciadores { padding: 90px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 120px; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); }
-        .quote { font-size: 52px; font-weight: 800; line-height: 1.1; letter-spacing: -2px; color: var(--dark-grey); }
-        .diff-item { margin-bottom: 60px; }
-        .diff-item h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--pink-premium); font-weight: 700; }
-        .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; line-height: 1.7; }
+        /* --- BRUTALISMO CORPORATIVO (DIFERENCIADORES ASIMÉTRICOS) --- */
+        #diferenciadores { padding: 120px 8%; display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 80px; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); align-items: center; }
+        .quote-massive { 
+            font-size: clamp(50px, 7vw, 95px); /* TAMAÑO MASIVO */
+            font-weight: 800; line-height: 0.95; letter-spacing: -3px; color: var(--dark-grey); 
+        }
+        .quote-highlight { color: var(--pink-premium); font-style: italic; }
+        
+        .diff-content { border-left: 1px solid var(--border); padding-left: 50px; }
+        .diff-item { margin-bottom: 50px; }
+        .diff-item:last-child { margin-bottom: 0; }
+        .diff-item h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--pink-premium); font-weight: 700; font-family: 'Inter', sans-serif; }
+        .diff-item p { font-size: 17px; color: var(--soft-grey); font-weight: 300; line-height: 1.7; }
 
         /* --- SECCIÓN: NOSOTROS --- */
         #nuestra-firma { padding: 90px 10%; background: var(--white); }
@@ -213,7 +224,7 @@
         .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         .team-card { background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 50px 40px; transition: all 0.4s ease; }
         .team-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.05); border-color: var(--pink-premium); }
-        .member-role { color: var(--pink-premium); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; margin-bottom: 15px; display: block; }
+        .member-role { color: var(--pink-premium); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; margin-bottom: 15px; display: block; font-family: 'Inter', sans-serif;}
         .member-name { font-size: 24px; color: var(--dark-grey); font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px; font-family: 'Inter', sans-serif;}
         .member-bio { font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
 
@@ -223,7 +234,7 @@
         .cert-item { display: flex; flex-direction: column; align-items: center; }
         .cert-item img { height: 70px; width: auto; margin-bottom: 20px; filter: grayscale(100%); opacity: 0.5; transition: all 0.5s ease; }
         .cert-item:hover img { filter: grayscale(0%); opacity: 1; }
-        .cert-text { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--soft-grey); text-transform: uppercase; }
+        .cert-text { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--soft-grey); text-transform: uppercase; font-family: 'Inter', sans-serif; }
 
         /* --- SECCIÓN FAQ (ACORDEÓN) --- */
         #faq { padding: 90px 10% 60px 10%; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); }
@@ -281,7 +292,7 @@
         .concierge-item svg { flex-shrink: 0; }
 
         /* =========================================
-           RESPONSIVE DESIGN (MÓVILES - PADDING 60px) 
+           RESPONSIVE DESIGN (MÓVILES) 
            ========================================= */
         @media (max-width: 900px) {
             nav { height: 90px; padding: 15px 5%; }
@@ -296,17 +307,21 @@
             .nav-links a { margin: 20px 0; font-size: 20px; font-weight: 700; color: var(--dark-grey); }
             
             /* Ajuste de márgenes para móviles */
-            #introduccion, #servicios, #diferenciadores, #nuestra-firma, #faq { padding: 60px 5%; }
+            #introduccion, #nuestra-firma, #faq { padding: 60px 5%; }
+            #servicios { padding: 80px 5%; }
+            .grid-servicios { grid-template-columns: 1fr; gap: 30px; }
+            
             #filosofia { grid-template-columns: 1fr; gap: 40px; padding: 30px 5% 50px 5%; }
-            #diferenciadores { grid-template-columns: 1fr; gap: 60px; }
+            
+            /* Ajuste Brutalismo Móvil */
+            #diferenciadores { grid-template-columns: 1fr; gap: 50px; padding: 80px 5%; }
+            .diff-content { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 40px; }
+            
             .team-grid { grid-template-columns: 1fr; gap: 40px; }
             
-            /* Ajuste de la tarjeta flotante en móvil */
             #impacto { margin: 0 5%; border-radius: 20px; padding: 60px 5%; }
-
             #contacto { margin: 20px; padding: 60px 30px; }
             header { padding-top: 100px; min-height: 80vh; }
-            .quote { font-size: 32px; }
             .cert-container { gap: 40px; }
             .trust-bar { padding: 60px 5%; }
             footer { flex-direction: column; gap: 40px; }
@@ -314,7 +329,9 @@
         }
     </style>
 </head>
-<body id="inicio"> <div id="preloader">
+<body id="inicio">
+
+    <div id="preloader">
         <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="Cargando JBDA..." class="preload-logo">
     </div>
 
@@ -326,7 +343,7 @@
         </div>
         
         <div class="nav-links" id="nav-links">
-            <a href="#servicios" class="nav-item">Servicios</a>
+            <a href="#servicios" class="nav-item">Framework</a>
             <a href="#diferenciadores" class="nav-item">Consultoría</a>
             <a href="#nuestra-firma" class="nav-item">Nosotros</a>
             <a href="#contacto" class="nav-item">Contacto</a>
@@ -352,7 +369,7 @@
         <section id="introduccion" data-aos="fade-up">
             <p>
                 La red no es un accesorio; es el sistema circulatorio de la empresa moderna. 
-                En <span style="color: var(--pink-premium); font-weight: 800;">JBDA</span> 
+                En <span style="color: var(--pink-premium); font-weight: 800; font-family: 'Inter', sans-serif;">JBDA</span> 
                 fusionamos la <strong>precisión de ingeniería</strong> con una visión financiera de negocio.
             </p>
         </section>
@@ -389,50 +406,49 @@
         </div>
 
         <section id="servicios">
-            <span class="section-label" data-aos="fade-right">Capacidades</span>
-            <h2 data-aos="fade-right">Ingeniería de Alto Nivel</h2>
+            <span class="section-label" data-aos="fade-right">Metodología Registrada</span>
+            <h2 style="font-size: clamp(36px, 5vw, 52px);" data-aos="fade-right">JBDA Zero-Downtime Framework™</h2>
             
             <div class="grid-servicios">
                 <div class="card" data-aos="fade-up" data-aos-delay="100">
-                    <span class="card-num">01</span>
+                    <span class="card-num">Fase 01</span>
                     <div class="icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><line x1="10.5" y1="7.5" x2="6.5" y2="16.5"/><line x1="13.5" y1="7.5" x2="17.5" y2="16.5"/><line x1="7.5" y1="19" x2="16.5" y2="19"/>
                         </svg>
                     </div>
-                    <h3>Arquitectura Estratégica</h3>
+                    <h3>Auditoría y Arquitectura Estratégica</h3>
                     <ul>
                         <li><strong>Optimización de CAPEX:</strong> Evaluación de necesidades previas a la compra. Evitamos sobredimensionamientos.</li>
-                        <li><strong>Diseño Escalable:</strong> Planificación de redes LAN/WAN preparadas para el crecimiento.</li>
+                        <li><strong>Diseño Escalable:</strong> Planificación de redes LAN/WAN preparadas para el crecimiento corporativo.</li>
                     </ul>
                 </div>
                 
                 <div class="card" data-aos="fade-up" data-aos-delay="200">
-                    <span class="card-num">02</span>
+                    <span class="card-num">Fase 02</span>
                     <div class="icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>
                         </svg>
                     </div>
-                    <h3>Implementación Elite</h3>
+                    <h3>Despliegue y Blindaje de Infraestructura</h3>
                     <ul>
-                        <li><strong>Configuración Avanzada:</strong> Despliegue experto en entornos Huawei y Cisco.</li>
-                        <li><strong>Segmentación y Seguridad:</strong> Blindaje de dispositivos (Hardening), VLANs y políticas QoS.</li>
-                        <li><strong>Reingeniería:</strong> Recuperación de redes heredadas para eliminar latencia.</li>
+                        <li><strong>Configuración Avanzada:</strong> Despliegue experto en entornos críticos multivendor (Huawei, Cisco, Fortinet).</li>
+                        <li><strong>Segmentación y Seguridad:</strong> Blindaje de dispositivos (Hardening), creación de VLANs y políticas QoS estrictas.</li>
                     </ul>
                 </div>
                 
                 <div class="card" data-aos="fade-up" data-aos-delay="300">
-                    <span class="card-num">03</span>
+                    <span class="card-num">Fase 03</span>
                     <div class="icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                         </svg>
                     </div>
-                    <h3>Gestión Proactiva</h3>
+                    <h3>Analítica y Gestión Proactiva Continua</h3>
                     <ul>
-                        <li><strong>Visibilidad Total:</strong> Dashboards en tiempo real para el control de cada nodo en su red.</li>
-                        <li><strong>Mantenimiento Preventivo:</strong> Detección temprana de anomalías antes de que impacten la operación.</li>
+                        <li><strong>Visibilidad Total:</strong> Dashboards ejecutivos en tiempo real para el control de cada nodo en su red.</li>
+                        <li><strong>Mantenimiento Preventivo:</strong> Detección temprana y aislamiento de anomalías antes de que impacten la operación.</li>
                     </ul>
                 </div>
             </div>
@@ -464,29 +480,28 @@
         </div>
 
         <section id="diferenciadores">
-            <div class="quote" data-aos="fade-right">
-                "No vendemos cajas; <br>
-                <span style="color: var(--pink-premium)">integramos soluciones."</span>
+            <div data-aos="fade-right">
+                <h2 class="quote-massive">"No vendemos<br>cajas;<br><span class="quote-highlight">integramos<br>soluciones."</span></h2>
             </div>
             <div class="diff-content" data-aos="fade-left">
                 <div class="diff-item">
                     <h4>Experiencia Multisectorial</h4>
-                    <p>Trayectoria comprobada en Corporativo, Hotelería premium e Industria.</p>
+                    <p>Trayectoria comprobada en entornos de misión crítica: Corporativo, Hotelería premium e Industria pesada.</p>
                 </div>
                 <div class="diff-item">
                     <h4>Agnósticos a la Marca</h4>
-                    <p>Lealtad absoluta a su rendimiento y retorno de inversión, no a un fabricante específico.</p>
+                    <p>Lealtad absoluta a su rendimiento y retorno de inversión, no a las cuotas de un fabricante específico.</p>
                 </div>
                 <div class="diff-item">
                     <h4>Cobertura Híbrida</h4>
-                    <p>Presencia física en CDMX y Morelos, combinada con capacidades de gestión remota global.</p>
+                    <p>Presencia física ejecutiva en CDMX y Morelos, combinada con capacidades de gestión y reingeniería remota global.</p>
                 </div>
             </div>
         </section>
 
         <section id="nuestra-firma">
             <span class="section-label" data-aos="fade-up">El Equipo Directivo</span>
-            <h2 data-aos="fade-up">Ingeniería guiada por visión de negocio.</h2>
+            <h2 data-aos="fade-up" style="font-size: clamp(36px, 5vw, 48px); margin-bottom: 40px;">Ingeniería guiada por visión de negocio.</h2>
             
             <p class="manifesto" data-aos="fade-up">
                 Nuestra firma nació de una observación crítica: las corporaciones gastaban millones en hardware sobredimensionado, mientras sus redes seguían presentando fallas estructurales. En JBDA, aseguramos que cada inversión tecnológica se traduzca en rentabilidad, seguridad y flujo operativo sin interrupciones.
@@ -527,7 +542,7 @@
 
         <section id="faq">
             <span class="section-label" data-aos="fade-up" style="text-align: center;">Respuestas Clave</span>
-            <h2 style="text-align: center; margin-bottom: 50px;" data-aos="fade-up">Preguntas Frecuentes</h2>
+            <h2 style="text-align: center; margin-bottom: 50px; font-size: clamp(32px, 4vw, 42px);" data-aos="fade-up">Preguntas Frecuentes</h2>
             
             <div class="faq-container" data-aos="fade-up">
                 <details>
@@ -631,21 +646,34 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             
-            // --- 0. PRELOADER (Carga de 0.9s) ---
+            // --- 0. PRELOADER ---
             setTimeout(() => {
                 document.getElementById('preloader').classList.add('preloader-hidden');
             }, 900);
 
-            // --- 0.5 ANIMACIÓN DE RED EN EL HERO (CANVAS) ---
+            // --- 0.5 ANIMACIÓN DE RED INTERACTIVA (CANVAS) ---
             const canvas = document.getElementById('network-canvas');
             const ctx = canvas.getContext('2d');
             let width, height, particles = [];
+            
+            // Detección de mouse
+            let mouse = { x: null, y: null, radius: 150 };
+            
+            window.addEventListener('mousemove', function(event) {
+                mouse.x = event.x;
+                mouse.y = event.y;
+            });
+            // Sacar el mouse del área desactiva la interacción
+            window.addEventListener('mouseout', function() {
+                mouse.x = undefined;
+                mouse.y = undefined;
+            });
 
             function initCanvas() {
                 width = canvas.width = window.innerWidth;
                 height = canvas.height = document.querySelector('header').offsetHeight;
                 particles = [];
-                // Nodos densos (120 en escritorio, 60 en móvil)
+                // Mayor densidad solicitada
                 const particleCount = window.innerWidth < 768 ? 60 : 120;
                 
                 for (let i = 0; i < particleCount; i++) {
@@ -654,7 +682,6 @@
                         y: Math.random() * height,
                         vx: (Math.random() - 0.5) * 0.4,
                         vy: (Math.random() - 0.5) * 0.4,
-                        // Puntos más visibles (2 a 4.5 px)
                         radius: Math.random() * 2.5 + 2
                     });
                 }
@@ -666,6 +693,32 @@
                 
                 for (let i = 0; i < particles.length; i++) {
                     let p = particles[i];
+                    
+                    // Colisión interactiva con el mouse (Repulsión sutil)
+                    if(mouse.x != undefined && mouse.y != undefined) {
+                        let dx = mouse.x - p.x;
+                        let dy = mouse.y - p.y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < mouse.radius) {
+                            // Trazar línea hacia el mouse
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(mouse.x, mouse.y);
+                            ctx.strokeStyle = `rgba(212, 0, 109, ${0.2 - distance/mouse.radius * 0.2})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+
+                            // Efecto de empuje magnético
+                            const forceDirectionX = dx / distance;
+                            const forceDirectionY = dy / distance;
+                            const force = (mouse.radius - distance) / mouse.radius;
+                            // Multiplicador bajo para que no salgan volando rápido
+                            p.x -= forceDirectionX * force * 1.5;
+                            p.y -= forceDirectionY * force * 1.5;
+                        }
+                    }
+
                     p.x += p.vx;
                     p.y += p.vy;
 
@@ -674,20 +727,18 @@
 
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                    // Opacidad sutil para no estorbar la lectura
                     ctx.fillStyle = 'rgba(212, 0, 109, 0.2)';
                     ctx.fill();
 
+                    // Conexiones entre nodos
                     for (let j = i + 1; j < particles.length; j++) {
                         let p2 = particles[j];
                         let dist = Math.sqrt(Math.pow(p.x - p2.x, 2) + Math.pow(p.y - p2.y, 2));
                         
-                        // Mayor distancia de conexión (160px)
                         if (dist < 160) {
                             ctx.beginPath();
                             ctx.moveTo(p.x, p.y);
                             ctx.lineTo(p2.x, p2.y);
-                            // Líneas ligeramente más gruesas (0.8)
                             ctx.strokeStyle = `rgba(212, 0, 109, ${0.1 - dist/160 * 0.1})`; 
                             ctx.lineWidth = 0.8;
                             ctx.stroke();
@@ -710,7 +761,7 @@
                 }
             });
 
-            // --- 2. SOMBRA DINÁMICA (EFECTO LIQUID GLASS) ---
+            // --- 2. SOMBRA DINÁMICA ---
             const nav = document.getElementById('main-nav');
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 50) {
@@ -744,7 +795,7 @@
                 });
             });
 
-            // --- 4. INICIALIZACIÓN DE ENLACES (CALENDLY Y WHATSAPP) ---
+            // --- 4. INICIALIZACIÓN DE ENLACES ---
             AOS.init({ duration: 1000, once: true, offset: 100 });
 
             const numeroWhatsApp = "525613388030";
@@ -755,7 +806,6 @@
             document.getElementById('link-concierge-whatsapp').href = urlWhatsGeneral;
             document.getElementById('link-linkedin').href = "https://www.linkedin.com/company/jbdamx/";
 
-            // Integración de Calendly
             const urlCalendly = "https://calendly.com/jbda_tech/diagnostico";
             const abrirCalendly = (e) => {
                 e.preventDefault();
@@ -768,7 +818,7 @@
             document.getElementById('link-cta').addEventListener('click', abrirCalendly);
             document.getElementById('link-concierge-calendly').addEventListener('click', abrirCalendly);
 
-            // --- 5. LÓGICA DEL BOTÓN FLOTANTE (CONCIERGE) ---
+            // --- 5. LÓGICA DEL BOTÓN FLOTANTE ---
             const conciergeToggle = document.getElementById('concierge-toggle');
             const conciergeMenu = document.getElementById('concierge-menu');
 
