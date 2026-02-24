@@ -61,7 +61,7 @@
 
         ::selection { background-color: var(--pink-premium); color: #ffffff; }
 
-        /* --- PRELOADER MINIMALISTA --- */
+        /* --- PRELOADER MINIMALISTA (0.9s) --- */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             background-color: var(--white); z-index: 99999;
@@ -132,16 +132,16 @@
         }
         .btn-main:hover { background-color: var(--pink-premium); border-color: var(--pink-premium); transform: translateY(-4px); box-shadow: 0 15px 30px rgba(212, 0, 109, 0.2); }
 
-        /* --- SECCIONES GENERALES --- */
-        #introduccion { padding: 140px 10% 60px 10%; background-color: var(--white); text-align: center; }
+        /* --- SECCIONES GENERALES (MÁRGENES REDUCIDOS) --- */
+        #introduccion { padding: 90px 10% 60px 10%; background-color: var(--white); text-align: center; }
         #introduccion p { font-size: clamp(24px, 3.5vw, 36px); font-weight: 300; color: var(--dark-grey); max-width: 850px; margin: 0 auto; line-height: 1.5; letter-spacing: -0.5px; }
 
-        #filosofia { padding: 40px 10% 80px 10%; background-color: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: flex-start; }
+        #filosofia { padding: 40px 10% 60px 10%; background-color: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: flex-start; }
         .filosofia-box { padding-left: 30px; border-left: 3px solid var(--pink-premium); }
         .filosofia-box h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: var(--pink-premium); margin-bottom: 20px; font-weight: 800; }
         .filosofia-box p { font-size: 18px; color: var(--soft-grey); line-height: 1.7; font-weight: 400; }
 
-        /* --- VENDOR TRUST BAR (CARRUSEL DE IMÁGENES) --- */
+        /* --- VENDOR TRUST BAR (CARRUSEL) --- */
         .marquee-wrapper { 
             overflow: hidden; background: var(--white); padding: 50px 0; 
             border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); 
@@ -161,8 +161,8 @@
 
         @keyframes scroll-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* --- SERVICIOS Y ICONOS --- */
-        #servicios { padding: 140px 10%; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
+        /* --- SERVICIOS --- */
+        #servicios { padding: 90px 10%; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
         .section-label { color: var(--pink-premium); font-weight: 800; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: block; font-family: 'Inter', sans-serif; }
 
         .grid-servicios { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; margin-top: 60px; }
@@ -182,17 +182,16 @@
         .card ul { list-style: none; }
         .card ul li { margin-bottom: 20px; font-size: 16px; color: var(--soft-grey); padding-left: 20px; border-left: 2px solid var(--pink-premium); line-height: 1.6; }
 
-        /* --- IMPACTO "DARK MODE" (CON DESVANECIMIENTO SUAVE) --- */
+        /* --- IMPACTO "DARK MODE" (TARJETA FLOTANTE ÉLITE) --- */
+        #impacto-container { background-color: var(--silver); padding: 20px 0; }
         #impacto { 
-            padding: 140px 10%; text-align: center; 
-            /* Se difumina de plata a oscuro en los primeros 140px, y de oscuro a blanco en los últimos 140px */
-            background: linear-gradient(to bottom, 
-                var(--silver) 0%, 
-                var(--dark-grey) 140px, 
-                var(--dark-grey) calc(100% - 140px), 
-                var(--white) 100%
-            );
+            padding: 90px 8%; 
+            text-align: center; 
+            background-color: var(--dark-grey); 
             color: var(--white);
+            margin: 0 4%; /* Márgenes laterales para el efecto tarjeta */
+            border-radius: 30px; /* Bordes redondeados elegantes */
+            box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15); /* Sombra de profundidad */
         }
         #impacto h2 { color: var(--white); }
         .grid-impacto { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 60px; margin-top: 60px; }
@@ -200,14 +199,15 @@
         .impacto-item h4 { font-size: 18px; color: var(--white); margin-bottom: 10px; font-weight: 700; }
         .impacto-item p { font-size: 15px; color: #cbd5e1; line-height: 1.6; font-weight: 300; }
 
-        #diferenciadores { padding: 160px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 120px; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
+        /* --- DIFERENCIADORES --- */
+        #diferenciadores { padding: 90px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 120px; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); }
         .quote { font-size: 52px; font-weight: 800; line-height: 1.1; letter-spacing: -2px; color: var(--dark-grey); }
         .diff-item { margin-bottom: 60px; }
         .diff-item h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--pink-premium); font-weight: 700; }
         .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; line-height: 1.7; }
 
         /* --- SECCIÓN: NOSOTROS --- */
-        #nuestra-firma { padding: 140px 10%; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); }
+        #nuestra-firma { padding: 90px 10%; background: var(--white); }
         .manifesto { font-size: 22px; color: var(--soft-grey); font-weight: 300; max-width: 850px; margin-bottom: 60px; line-height: 1.6; border-left: 3px solid var(--pink-premium); padding-left: 30px; }
         
         .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -218,7 +218,7 @@
         .member-bio { font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
 
         /* --- TRUST BAR Y CERTIFICACIONES --- */
-        .trust-bar { padding: 100px 10%; text-align: center; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
+        .trust-bar { padding: 80px 10%; text-align: center; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
         .cert-container { display: flex; justify-content: center; align-items: center; gap: 80px; margin-top: 50px; flex-wrap: wrap; }
         .cert-item { display: flex; flex-direction: column; align-items: center; }
         .cert-item img { height: 70px; width: auto; margin-bottom: 20px; filter: grayscale(100%); opacity: 0.5; transition: all 0.5s ease; }
@@ -226,7 +226,7 @@
         .cert-text { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--soft-grey); text-transform: uppercase; }
 
         /* --- SECCIÓN FAQ (ACORDEÓN) --- */
-        #faq { padding: 120px 10% 80px 10%; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); }
+        #faq { padding: 90px 10% 60px 10%; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); }
         .faq-container { max-width: 850px; margin: 0 auto; margin-top: 40px; }
         details { background: var(--white); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 15px; overflow: hidden; transition: all 0.3s ease; }
         details[open] { border-color: var(--pink-premium); box-shadow: 0 10px 30px rgba(212,0,109,0.08); }
@@ -241,7 +241,7 @@
         .faq-content { padding: 0 30px 25px 30px; font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
 
         /* --- CONTACTO & FOOTER --- */
-        #contacto { margin: 0 5% 60px 5%; padding: 120px 50px; background: var(--dark-grey); color: #ffffff; text-align: center; border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        #contacto { margin: 0 5% 60px 5%; padding: 100px 50px; background: var(--dark-grey); color: #ffffff; text-align: center; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
         #contacto h2 { font-size: 40px; margin-bottom: 25px; font-weight: 800; letter-spacing: -1px; }
         #contacto p { color: #e2e8f0; }
 
@@ -280,6 +280,9 @@
         .concierge-item:hover { background: rgba(212, 0, 109, 0.08); color: var(--pink-premium); }
         .concierge-item svg { flex-shrink: 0; }
 
+        /* =========================================
+           RESPONSIVE DESIGN (MÓVILES - PADDING 60px) 
+           ========================================= */
         @media (max-width: 900px) {
             nav { height: 90px; padding: 15px 5%; }
             .logo-container img { height: 60px; }
@@ -292,27 +295,32 @@
             .nav-links.active { right: 0; }
             .nav-links a { margin: 20px 0; font-size: 20px; font-weight: 700; color: var(--dark-grey); }
             
-            #filosofia { grid-template-columns: 1fr; gap: 50px; padding: 20px 10% 60px 10%; }
-            #diferenciadores { grid-template-columns: 1fr; gap: 60px; padding: 100px 10%; }
+            /* Ajuste de márgenes para móviles */
+            #introduccion, #servicios, #diferenciadores, #nuestra-firma, #faq { padding: 60px 5%; }
+            #filosofia { grid-template-columns: 1fr; gap: 40px; padding: 30px 5% 50px 5%; }
+            #diferenciadores { grid-template-columns: 1fr; gap: 60px; }
             .team-grid { grid-template-columns: 1fr; gap: 40px; }
-            #contacto { margin: 20px; padding: 80px 30px; }
+            
+            /* Ajuste de la tarjeta flotante en móvil */
+            #impacto { margin: 0 5%; border-radius: 20px; padding: 60px 5%; }
+
+            #contacto { margin: 20px; padding: 60px 30px; }
             header { padding-top: 100px; min-height: 80vh; }
             .quote { font-size: 32px; }
             .cert-container { gap: 40px; }
+            .trust-bar { padding: 60px 5%; }
             footer { flex-direction: column; gap: 40px; }
             .floating-concierge { bottom: 20px; right: 20px; }
         }
     </style>
 </head>
-<body>
-
-    <div id="preloader">
+<body id="inicio"> <div id="preloader">
         <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="Cargando JBDA..." class="preload-logo">
     </div>
 
     <nav id="main-nav">
         <div class="logo-container">
-            <a href="#" aria-label="Volver al inicio">
+            <a href="#inicio" aria-label="Volver al inicio">
                 <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo">
             </a>
         </div>
@@ -430,28 +438,30 @@
             </div>
         </section>
 
-        <section id="impacto">
-            <span class="section-label" data-aos="fade-up">Casos de Éxito</span>
-            <h2 data-aos="fade-up">Transformación de Infraestructura</h2>
-            
-            <div class="grid-impacto">
-                <div class="impacto-item" data-aos="zoom-in" data-aos-delay="100">
-                    <h3>85%</h3>
-                    <h4>Reducción de Downtime</h4>
-                    <p>Minimización de caídas del sistema y tiempo de inactividad operativa.</p>
+        <div id="impacto-container">
+            <section id="impacto" data-aos="fade-up" data-aos-duration="1200">
+                <span class="section-label">Casos de Éxito</span>
+                <h2>Transformación de Infraestructura</h2>
+                
+                <div class="grid-impacto">
+                    <div class="impacto-item" data-aos="zoom-in" data-aos-delay="200">
+                        <h3>85%</h3>
+                        <h4>Reducción de Downtime</h4>
+                        <p>Minimización de caídas del sistema y tiempo de inactividad operativa.</p>
+                    </div>
+                    <div class="impacto-item" data-aos="zoom-in" data-aos-delay="400">
+                        <h3>40%</h3>
+                        <h4>Ahorro en CAPEX</h4>
+                        <p>Optimización estratégica de la inversión en hardware y equipamiento.</p>
+                    </div>
+                    <div class="impacto-item" data-aos="zoom-in" data-aos-delay="600">
+                        <h3>99.8%</h3>
+                        <h4>Disponibilidad de Red</h4>
+                        <p>Garantía de conectividad continua para operaciones críticas.</p>
+                    </div>
                 </div>
-                <div class="impacto-item" data-aos="zoom-in" data-aos-delay="200">
-                    <h3>40%</h3>
-                    <h4>Ahorro en CAPEX</h4>
-                    <p>Optimización estratégica de la inversión en hardware y equipamiento.</p>
-                </div>
-                <div class="impacto-item" data-aos="zoom-in" data-aos-delay="300">
-                    <h3>99.8%</h3>
-                    <h4>Disponibilidad de Red</h4>
-                    <p>Garantía de conectividad continua para operaciones críticas.</p>
-                </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
         <section id="diferenciadores">
             <div class="quote" data-aos="fade-right">
@@ -561,7 +571,7 @@
 
     <footer>
         <div class="footer-col">
-            <a href="#" aria-label="Volver al inicio">
+            <a href="#inicio" aria-label="Volver al inicio">
                 <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px;" loading="lazy">
             </a>
             <p><strong>JBDA 2026</strong><br>Consultoría Estratégica en<br>Infraestructura de Redes.</p>
@@ -635,7 +645,8 @@
                 width = canvas.width = window.innerWidth;
                 height = canvas.height = document.querySelector('header').offsetHeight;
                 particles = [];
-                const particleCount = window.innerWidth < 768 ? 30 : 60;
+                // Nodos densos (120 en escritorio, 60 en móvil)
+                const particleCount = window.innerWidth < 768 ? 60 : 120;
                 
                 for (let i = 0; i < particleCount; i++) {
                     particles.push({
@@ -643,7 +654,8 @@
                         y: Math.random() * height,
                         vx: (Math.random() - 0.5) * 0.4,
                         vy: (Math.random() - 0.5) * 0.4,
-                        radius: Math.random() * 1.5 + 1
+                        // Puntos más visibles (2 a 4.5 px)
+                        radius: Math.random() * 2.5 + 2
                     });
                 }
             }
@@ -662,19 +674,22 @@
 
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(212, 0, 109, 0.3)';
+                    // Opacidad sutil para no estorbar la lectura
+                    ctx.fillStyle = 'rgba(212, 0, 109, 0.2)';
                     ctx.fill();
 
                     for (let j = i + 1; j < particles.length; j++) {
                         let p2 = particles[j];
                         let dist = Math.sqrt(Math.pow(p.x - p2.x, 2) + Math.pow(p.y - p2.y, 2));
                         
-                        if (dist < 130) {
+                        // Mayor distancia de conexión (160px)
+                        if (dist < 160) {
                             ctx.beginPath();
                             ctx.moveTo(p.x, p.y);
                             ctx.lineTo(p2.x, p2.y);
-                            ctx.strokeStyle = `rgba(212, 0, 109, ${0.12 - dist/130 * 0.12})`; 
-                            ctx.lineWidth = 0.5;
+                            // Líneas ligeramente más gruesas (0.8)
+                            ctx.strokeStyle = `rgba(212, 0, 109, ${0.1 - dist/160 * 0.1})`; 
+                            ctx.lineWidth = 0.8;
                             ctx.stroke();
                         }
                     }
