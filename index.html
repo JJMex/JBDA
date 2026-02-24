@@ -116,7 +116,7 @@
         .filosofia-box h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: var(--pink-premium); margin-bottom: 20px; font-weight: 800; }
         .filosofia-box p { font-size: 18px; color: var(--soft-grey); line-height: 1.7; font-weight: 400; }
 
-        /* --- NUEVO: VENDOR TRUST BAR (CARRUSEL) --- */
+        /* --- VENDOR TRUST BAR (CARRUSEL) --- */
         .marquee-wrapper { 
             overflow: hidden; background: var(--white); padding: 50px 0; 
             border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); 
@@ -168,8 +168,8 @@
         .diff-item h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--pink-premium); font-weight: 700; }
         .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; line-height: 1.7; }
 
-        /* --- SECCIÓN: NOSOTROS (DIRECTIVOS) --- */
-        #nuestra-firma { padding: 140px 10%; background-color: var(--white); }
+        /* --- SECCIÓN: NOSOTROS (DIRECTIVOS) - FONDO CORREGIDO --- */
+        #nuestra-firma { padding: 140px 10%; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); }
         .manifesto { font-size: 22px; color: var(--soft-grey); font-weight: 300; max-width: 850px; margin-bottom: 60px; line-height: 1.6; border-left: 3px solid var(--pink-premium); padding-left: 30px; }
         
         .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -179,15 +179,16 @@
         .member-name { font-size: 24px; color: var(--dark-grey); font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px; }
         .member-bio { font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
 
-        .trust-bar { padding: 100px 10%; text-align: center; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); }
+        /* --- TRUST BAR Y CERTIFICACIONES - FONDO CORREGIDO --- */
+        .trust-bar { padding: 100px 10%; text-align: center; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
         .cert-container { display: flex; justify-content: center; align-items: center; gap: 80px; margin-top: 50px; flex-wrap: wrap; }
         .cert-item { display: flex; flex-direction: column; align-items: center; }
         .cert-item img { height: 70px; width: auto; margin-bottom: 20px; filter: grayscale(100%); opacity: 0.5; transition: all 0.5s ease; }
         .cert-item:hover img { filter: grayscale(0%); opacity: 1; }
         .cert-text { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--soft-grey); text-transform: uppercase; }
 
-        /* --- NUEVO: SECCIÓN FAQ (ACORDEÓN) --- */
-        #faq { padding: 120px 10% 80px 10%; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
+        /* --- SECCIÓN FAQ (ACORDEÓN) - FONDO CORREGIDO --- */
+        #faq { padding: 120px 10% 80px 10%; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); }
         .faq-container { max-width: 850px; margin: 0 auto; margin-top: 40px; }
         details { background: var(--white); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 15px; overflow: hidden; transition: all 0.3s ease; }
         details[open] { border-color: var(--pink-premium); box-shadow: 0 10px 30px rgba(212,0,109,0.08); }
@@ -422,7 +423,7 @@
 
                 <div class="team-card" data-aos="fade-up" data-aos-delay="200">
                     <span class="member-role">Socio Director & CTO</span>
-                    <h3 class="member-name">Ing. José Juan Cruz</h3>
+                    <h3 class="member-name">Ing. José Cruz</h3>
                     <p class="member-bio">
                         Experto en el diseño y blindaje de redes de misión crítica. Ha liderado equipos de ingeniería en auditorías complejas, reingeniería y despliegues multivendor garantizando arquitecturas a prueba de fallos. Su enfoque operativo asegura la máxima cobertura, calidad de servicio (QoS) y una disponibilidad del 99.8% en cada sitio, transformando infraestructuras vulnerables en redes de alto rendimiento.
                     </p>
