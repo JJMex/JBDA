@@ -7,6 +7,12 @@
     <title>JBDA | Consultoría Estratégica en Redes</title>
     <meta name="description" content="Diseñamos la columna vertebral de su negocio. Consultoría estratégica en redes y telecomunicaciones para optimizar CAPEX y asegurar disponibilidad.">
     
+    <meta property="og:title" content="JBDA | Consultoría Estratégica en Redes">
+    <meta property="og:description" content="Ingeniería de alto nivel. Evaluamos las necesidades de su red para optimizar la inversión tecnológica y reducir el downtime en un 85%.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png">
+    <meta property="og:url" content="https://jjmex.github.io/JBDA/">
+    <meta property="og:type" content="website">
+
     <link rel="icon" href="https://raw.githubusercontent.com/JJMex/JBDA/main/Isotipo.png" type="image/png">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/JJMex/JBDA/main/Isotipo.png">
 
@@ -20,6 +26,7 @@
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 
     <style>
+        /* --- PALETA DE COLORES --- */
         :root {
             --white: #fdf2f8; 
             --silver: #fce7f3; 
@@ -27,7 +34,6 @@
             --soft-grey: #475569; 
             --pink-premium: #D4006D; 
             --border: #fbcfe8; 
-            --glow-color: rgba(212, 0, 109, 0.15);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -46,347 +52,624 @@
             line-height: 1.8;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            position: relative;
-        }
-
-        /* --- TEXTURA DE PAPEL / GRAIN PREMIUM --- */
-        body::after {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("https://www.transparenttextures.com/patterns/p6.png"); /* Textura de papel real */
-            opacity: 0.12; pointer-events: none; z-index: 9999;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
 
         h1, h2, .quote-massive, .title-serif { font-family: 'Playfair Display', serif; }
+        ::selection { background-color: var(--pink-premium); color: #ffffff; }
 
-        /* --- EFECTO REVELADO DE TEXTO --- */
-        .reveal-char { display: inline-block; opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease; }
-        .reveal-char.active { opacity: 1; transform: translateY(0); }
+        /* --- TEXTURA TÁCTIL --- */
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+            opacity: 0.03; pointer-events: none; z-index: 99998; 
+        }
+
+        /* --- PLANO TOPOGRÁFICO --- */
+        .blueprint-grid {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+            background-size: 25vw 100%; pointer-events: none; z-index: 0;
+        }
+
+        /* --- PRELOADER --- */
+        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--white); z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+        .preload-logo { width: 150px; height: auto; animation: pulse-logo 0.9s infinite alternate cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes pulse-logo { 0% { transform: scale(0.95); opacity: 0.7; filter: drop-shadow(0 0 10px rgba(212, 0, 109, 0.2)); } 100% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 25px rgba(212, 0, 109, 0.5)); } }
+        .preloader-hidden { opacity: 0 !important; visibility: hidden !important; pointer-events: none; }
 
         /* --- CURSOR LED SWITCH --- */
         @media (pointer: fine) { body, a, button, .card, .team-card, summary { cursor: none !important; } }
-        .cursor-led { position: fixed; top: 0; left: 0; width: 10px; height: 10px; background-color: #10b981; border-radius: 2px; z-index: 10000; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 8px rgba(16, 185, 129, 0.8); transition: transform 0.1s ease-out; }
+        .cursor-led { position: fixed; top: 0; left: 0; width: 10px; height: 10px; background-color: #10b981; border-radius: 2px; z-index: 999999; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 8px rgba(16, 185, 129, 0.8), 0 0 15px rgba(16, 185, 129, 0.5); animation: led-breathe 2s infinite alternate; }
+        @keyframes led-breathe { 0% { opacity: 0.4; box-shadow: 0 0 4px rgba(16, 185, 129, 0.5); } 100% { opacity: 1; box-shadow: 0 0 12px rgba(16, 185, 129, 0.9); } }
         .cursor-led.tx-rx { animation: blink-txrx 0.15s infinite !important; background-color: #34d399; }
         @keyframes blink-txrx { 0%, 100% { opacity: 1; } 33% { opacity: 0; } 66% { opacity: 0.8; } }
+        @media (pointer: coarse) { .cursor-led { display: none !important; } }
 
         /* --- MODO TERMINAL MATRIX --- */
         body.terminal-mode { --white: #050505; --silver: #0a0a0a; --dark-grey: #00ff00; --soft-grey: #00cc00; --pink-premium: #00ff00; --border: #004400; }
-        body.terminal-mode::after { opacity: 0.05; } /* Menos grano en terminal */
-        body.terminal-mode, body.terminal-mode main, body.terminal-mode header, body.terminal-mode section, body.terminal-mode footer, body.terminal-mode nav, body.terminal-mode .card, body.terminal-mode .team-card, body.terminal-mode details, body.terminal-mode #contacto, body.terminal-mode #impacto, body.terminal-mode #nuestra-firma, body.terminal-mode #faq, body.terminal-mode #diferenciadores, body.terminal-mode #servicios, body.terminal-mode #manifiesto-global, body.terminal-mode .marquee-wrapper, body.terminal-mode .concierge-menu { background-color: #050505 !important; border-color: #004400 !important; }
-        body.terminal-mode * { color: #00ff00 !important; font-family: 'Courier New', Courier, monospace !important; text-shadow: 0 0 5px rgba(0, 255, 0, 0.5); }
+        body.terminal-mode .blueprint-grid { background-image: linear-gradient(to right, rgba(0, 255, 0, 0.05) 1px, transparent 1px); }
+        body.terminal-mode, body.terminal-mode main, body.terminal-mode header, body.terminal-mode section, body.terminal-mode footer, body.terminal-mode nav, body.terminal-mode .card, body.terminal-mode .team-card, body.terminal-mode details, body.terminal-mode #contacto, body.terminal-mode #impacto, body.terminal-mode #nuestra-firma, body.terminal-mode #faq, body.terminal-mode #diferenciadores, body.terminal-mode #servicios, body.terminal-mode #manifiesto-global, body.terminal-mode .marquee-wrapper, body.terminal-mode .concierge-menu { background-color: #050505 !important; background-image: none !important; border-color: #004400 !important; box-shadow: none !important; }
+        body.terminal-mode *, body.terminal-mode h1, body.terminal-mode h2, body.terminal-mode h3, body.terminal-mode h4, body.terminal-mode p, body.terminal-mode a, body.terminal-mode span, body.terminal-mode li { color: #00ff00 !important; font-family: 'Courier New', Courier, monospace !important; letter-spacing: 0 !important; border-radius: 0 !important; text-shadow: 0 0 5px rgba(0, 255, 0, 0.5); }
         body.terminal-mode .btn-main { background-color: #002200 !important; border: 1px solid #00ff00 !important; }
-        body.terminal-mode img { filter: sepia(100%) hue-rotate(90deg) brightness(80%) contrast(200%) !important; }
-
-        /* --- GLASS CARDS CON GLOW --- */
-        .card, .team-card {
-            position: relative; overflow: hidden; background: rgba(253, 242, 248, 0.7); backdrop-filter: blur(10px);
-        }
-        .card::before, .team-card::before {
-            content: ""; position: absolute; top: var(--y); left: var(--x); width: 400px; height: 400px;
-            background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
-            transform: translate(-50%, -50%); opacity: 0; transition: opacity 0.4s ease; pointer-events: none;
-        }
-        .card:hover::before, .team-card:hover::before { opacity: 1; }
-
-        /* --- SECCIONES Y FONDOS LÍQUIDOS --- */
-        section { position: relative; z-index: 1; background-attachment: fixed; }
-        #manifiesto-global { background: radial-gradient(circle at 50% 50%, var(--silver) 0%, var(--white) 100%); animation: fluidBg 20s infinite alternate; }
-        @keyframes fluidBg { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+        body.terminal-mode .brand-logo, body.terminal-mode img { filter: sepia(100%) hue-rotate(90deg) saturate(300%) brightness(80%) contrast(200%) !important; }
+        body.terminal-mode .icon-wrapper { background-color: rgba(0, 255, 0, 0.1) !important; }
+        body.terminal-mode svg { stroke: #00ff00; }
+        body.terminal-mode .diff-item { border-left-color: #00ff00 !important; }
+        body.terminal-mode .social-link svg, body.terminal-mode .mobile-menu-btn svg, body.terminal-mode .concierge-item svg { fill: #00ff00 !important; stroke: none !important; }
+        body.terminal-mode .icon-wrapper svg { fill: none !important; stroke: #00ff00 !important; }
+        body.terminal-mode::after { content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); z-index: 9999; background-size: 100% 2px, 3px 100%; pointer-events: none; opacity: 0.4; }
+        #terminal-toggle { cursor: pointer !important; opacity: 0.2; font-family: monospace; transition: opacity 0.3s; margin-left: 5px; }
+        #terminal-toggle:hover { opacity: 1; color: var(--pink-premium); }
 
         /* --- NAVEGACIÓN --- */
-        nav { padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: var(--white); z-index: 1000; border-bottom: 1px solid var(--border); height: 110px; }
-        nav.nav-scrolled { background: rgba(253, 242, 248, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(212, 0, 109, 0.1); }
-        .logo-container img { height: 85px; width: auto; transition: transform 0.4s ease; }
+        nav { padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(253, 242, 248, 1); z-index: 1000; border-bottom: 1px solid var(--border); height: 110px; transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        nav.nav-scrolled { background: rgba(253, 242, 248, 0.4); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border-bottom: 1px solid rgba(212, 0, 109, 0.15); box-shadow: 0 15px 35px -5px rgba(212, 0, 109, 0.15); }
+        .logo-container a { display: block; text-decoration: none; }
+        .logo-container img { height: 85px; width: auto; transition: transform 0.4s ease; display: block; }
+        .logo-container img:hover { transform: scale(1.03); }
+        .nav-links { display: flex; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--soft-grey); margin-left: 40px; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; transition: color 0.3s ease; }
         .nav-links a:hover { color: var(--pink-premium); }
-        .mobile-menu-btn { display: none; background: none; border: none; color: var(--dark-grey); }
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--dark-grey); z-index: 1001; }
+        .mobile-menu-btn svg { width: 32px; height: 32px; fill: currentColor; transition: transform 0.3s ease; }
 
-        /* --- HERO --- */
-        header { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--white) 0%, var(--silver) 100%); }
-        #network-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        /* --- HERO SECTION --- */
+        header { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; background-color: var(--white); position: relative; overflow: hidden; background-image: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
+        #network-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         .hero-content { position: relative; z-index: 1; max-width: 800px; }
-        header h1 { font-size: clamp(45px, 7vw, 85px); line-height: 1.05; margin-bottom: 35px; font-weight: 800; letter-spacing: -2px; }
-        .btn-main { display: inline-block; padding: 22px 48px; background-color: var(--dark-grey); color: var(--white); text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; transition: all 0.1s ease; }
-        .btn-main:hover { background-color: var(--pink-premium); transform: scale(1.02); }
+        header h2 { color: var(--pink-premium); font-size: 14px; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 30px; font-weight: 800; font-family: 'Inter', sans-serif;}
+        header h1 { font-size: clamp(45px, 7vw, 85px); line-height: 1.05; margin-bottom: 35px; font-weight: 800; letter-spacing: -2px; color: var(--dark-grey); }
+        header p { font-size: 22px; color: var(--soft-grey); max-width: 600px; margin-bottom: 50px; font-weight: 300; line-height: 1.6; }
+        .btn-main { display: inline-block; padding: 22px 48px; background-color: var(--dark-grey); color: var(--white); text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; border: 1px solid var(--dark-grey); font-family: 'Inter', sans-serif; transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.1s; }
+        .btn-main:hover { background-color: var(--pink-premium); border-color: var(--pink-premium); box-shadow: 0 15px 30px rgba(212, 0, 109, 0.2); }
 
-        /* --- METODOLOGÍA STICKY --- */
-        #servicios { padding: 140px 8%; display: flex; align-items: flex-start; gap: 100px; }
+        /* --- MANIFIESTO --- */
+        #manifiesto-global { padding: 120px 8%; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: center; background: var(--silver); position: relative; z-index: 1;}
+        .texto-manifiesto p { font-size: clamp(28px, 4vw, 42px); font-family: 'Playfair Display', serif; font-weight: 700; color: var(--dark-grey); line-height: 1.2; letter-spacing: -1px; margin-bottom: 20px;}
+        .texto-manifiesto p.sub { font-size: 20px; font-family: 'Inter', sans-serif; font-weight: 300; color: var(--soft-grey); line-height: 1.6; max-width: 600px; }
+        .cajas-filosofia { display: flex; flex-direction: column; gap: 40px; }
+        .filosofia-box { padding-left: 30px; border-left: 3px solid var(--pink-premium); }
+        .filosofia-box.asimetrica { margin-left: 40px; }
+        .filosofia-box h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: var(--pink-premium); margin-bottom: 15px; font-weight: 800; font-family: 'Inter', sans-serif; }
+        .filosofia-box p { font-size: 17px; color: var(--soft-grey); line-height: 1.7; font-weight: 400; }
+
+        /* --- VENDOR TRUST BAR --- */
+        .marquee-wrapper { overflow: hidden; background: var(--silver); padding: 50px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); white-space: nowrap; position: relative; z-index: 1;}
+        .marquee-wrapper::before, .marquee-wrapper::after { content: ""; position: absolute; top: 0; width: 15%; height: 100%; z-index: 2; pointer-events: none; }
+        .marquee-wrapper::before { left: 0; background: linear-gradient(to right, var(--silver), transparent); }
+        .marquee-wrapper::after { right: 0; background: linear-gradient(to left, var(--silver), transparent); }
+        .marquee-track { display: inline-block; animation: scroll-marquee 30s linear infinite; }
+        .brand-logo { height: 45px; width: auto; margin: 0 50px; vertical-align: middle; filter: grayscale(100%) opacity(0.4); transition: all 0.4s ease; }
+        .brand-logo:hover { filter: grayscale(0%) opacity(1); transform: scale(1.1); }
+        @keyframes scroll-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* --- METODOLOGÍA (LAYOUT STICKY) --- */
+        #servicios { padding: 140px 8%; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); display: flex; align-items: flex-start; gap: 100px; position: relative; z-index: 1; }
         .servicios-left { position: sticky; top: 160px; flex: 0 0 35%; }
         .servicios-right { flex: 1; display: flex; flex-direction: column; gap: 50px; }
+        .section-label { color: var(--pink-premium); font-weight: 800; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: block; font-family: 'Inter', sans-serif; }
+        .card { background: var(--white); padding: 60px 50px; border-radius: 12px; transition: all 0.4s ease; border: 1px solid var(--border); position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.02);}
+        .card:hover { transform: translateX(-10px); box-shadow: 20px 30px 60px rgba(0,0,0,0.06); border-color: var(--pink-premium); z-index: 2; }
+        .icon-wrapper { width: 56px; height: 56px; background: rgba(212, 0, 109, 0.08); border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; transition: all 0.4s ease; }
+        .card:hover .icon-wrapper { background: var(--pink-premium); }
+        .card:hover .icon-wrapper svg { stroke: #ffffff; }
+        .card-num { font-size: 12px; font-weight: 800; color: var(--pink-premium); margin-bottom: 30px; display: block; position: absolute; top: 40px; right: 40px; opacity: 0.5; font-family: 'Inter', sans-serif;}
+        .card h3 { font-size: 26px; margin-bottom: 20px; letter-spacing: -0.5px; font-weight: 700; color: var(--dark-grey); font-family: 'Inter', sans-serif;}
+        .card ul { list-style: none; }
+        .card ul li { margin-bottom: 15px; font-size: 16px; color: var(--soft-grey); padding-left: 20px; border-left: 2px solid var(--pink-premium); line-height: 1.6; }
 
         /* --- IMPACTO --- */
-        #impacto { padding: 90px 8%; background-color: var(--dark-grey); color: var(--white); margin: 0 4%; border-radius: 30px; display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: center; }
-        .impacto-texto h2 { color: var(--white); font-size: clamp(32px, 4vw, 48px); }
+        #impacto-container { background-color: var(--white); padding: 60px 0; position: relative; z-index: 1;}
+        #impacto { padding: 90px 8%; background-color: var(--dark-grey); color: var(--white); margin: 0 4%; border-radius: 30px; box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15); display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: center; }
+        .impacto-texto { text-align: left; }
+        .impacto-texto h2 { color: var(--white); font-size: clamp(32px, 4vw, 48px); letter-spacing: -1px; margin-top: 15px; line-height: 1.1; }
         .grid-impacto { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
-        .impacto-item h3 { font-size: clamp(50px, 6vw, 75px); color: var(--pink-premium); font-weight: 800; line-height: 1; }
+        .impacto-item:nth-child(3) { grid-column: span 2; }
+        .impacto-item h3 { font-size: clamp(50px, 6vw, 75px); font-weight: 800; color: var(--pink-premium); line-height: 1; margin-bottom: 10px; letter-spacing: -2px; font-family: 'Inter', sans-serif; }
+        .impacto-item h4 { font-size: 16px; color: var(--white); margin-bottom: 5px; font-weight: 700; font-family: 'Inter', sans-serif;}
+        .impacto-item p { font-size: 14px; color: #cbd5e1; line-height: 1.6; font-weight: 300; }
 
-        /* --- DIFERENCIADORES STICKY --- */
-        #diferenciadores { padding: 140px 8%; display: flex; align-items: flex-start; gap: 80px; }
-        .diff-left { position: sticky; top: 160px; flex: 0 0 45%; }
-        .diff-right { flex: 1; display: flex; flex-direction: column; gap: 80px; }
-        .quote-massive { font-size: clamp(45px, 6vw, 75px); line-height: 1.05; }
+        /* --- NUEVO: DIFERENCIADORES CON DISEÑO STICKY (SIMILAR A METODOLOGÍA) --- */
+        #diferenciadores { 
+            padding: 140px 8%; 
+            background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 80px; 
+            position: relative; z-index: 1; 
+        }
+        .diff-left {
+            position: sticky; 
+            top: 160px; 
+            flex: 0 0 45%; 
+        }
+        .diff-right {
+            flex: 1; 
+            display: flex; flex-direction: column; gap: 80px;
+            padding-bottom: 50px;
+        }
+        .quote-massive { 
+            font-size: clamp(45px, 6vw, 75px); font-family: 'Playfair Display', serif; font-weight: 800; 
+            line-height: 1.05; letter-spacing: -2px; color: var(--dark-grey); 
+        }
         .quote-highlight { color: var(--pink-premium); font-style: italic; }
+        
+        .diff-item { padding-left: 30px; border-left: 2px solid var(--pink-premium); transition: all 0.3s ease; }
+        .diff-item:hover { border-left-width: 6px; }
+        .diff-item h4 { font-size: 16px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--pink-premium); font-weight: 800; font-family: 'Inter', sans-serif; }
+        .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; line-height: 1.7; }
 
-        /* --- FOOTER --- */
-        footer { padding: 60px 10%; display: flex; justify-content: space-between; background: var(--white); border-top: 1px solid var(--border); }
-        #terminal-toggle { cursor: pointer !important; opacity: 0.3; font-weight: 800; margin-left: 10px; transition: opacity 0.3s; }
-        #terminal-toggle:hover { opacity: 1; color: var(--pink-premium); }
+        /* --- EL EQUIPO --- */
+        #nuestra-firma { padding: 120px 10%; background: var(--silver); position: relative; z-index: 1;}
+        .manifesto { font-size: 22px; color: var(--soft-grey); font-weight: 300; max-width: 850px; margin-bottom: 80px; line-height: 1.6; border-left: 3px solid var(--pink-premium); padding-left: 30px; }
+        .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;}
+        @media (min-width: 901px) { .team-card:nth-child(2) { margin-top: 80px; } }
+        .team-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 50px 40px; transition: all 0.4s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.02);}
+        .team-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.05); border-color: var(--pink-premium); }
+        .member-role { color: var(--pink-premium); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; margin-bottom: 15px; display: block; font-family: 'Inter', sans-serif;}
+        .member-name { font-size: 26px; color: var(--dark-grey); font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px; font-family: 'Inter', sans-serif;}
+        .member-bio { font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
+
+        /* --- TRUST BAR --- */
+        .trust-bar { padding: 80px 10%; text-align: center; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); position: relative; z-index: 1;}
+        .cert-container { display: flex; justify-content: center; align-items: center; gap: 80px; margin-top: 50px; flex-wrap: wrap; }
+        .cert-item { display: flex; flex-direction: column; align-items: center; }
+        .cert-item img { height: 70px; width: auto; margin-bottom: 20px; filter: grayscale(100%); opacity: 0.5; transition: all 0.5s ease; }
+        .cert-item:hover img { filter: grayscale(0%); opacity: 1; }
+        .cert-text { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--soft-grey); text-transform: uppercase; font-family: 'Inter', sans-serif; }
+
+        /* --- PREGUNTAS FRECUENTES --- */
+        #faq { padding: 90px 8% 60px 8%; background: var(--white); display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: start; position: relative; z-index: 1;}
+        .faq-texto { position: sticky; top: 160px; } 
+        .faq-texto h2 { font-size: clamp(36px, 4vw, 52px); margin-top: 15px; line-height: 1.1; }
+        .faq-container { width: 100%; }
+        details { background: var(--white); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 15px; overflow: hidden; transition: all 0.3s ease; }
+        details[open] { border-color: var(--pink-premium); box-shadow: 0 10px 30px rgba(212,0,109,0.08); }
+        summary { padding: 25px 30px; font-size: 18px; font-weight: 700; color: var(--dark-grey); transition: color 0.3s ease; list-style: none; position: relative; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; }
+        summary:hover { color: var(--pink-premium); }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; font-size: 24px; color: var(--pink-premium); transition: transform 0.3s ease; font-weight: 400; }
+        details[open] summary::after { content: '-'; transform: rotate(180deg); }
+        .faq-content { padding: 0 30px 25px 30px; font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
+
+        /* --- CONTACTO & FOOTER --- */
+        #contacto { margin: 0 5% 60px 5%; padding: 100px 50px; background: var(--dark-grey); color: var(--white); text-align: center; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); position: relative; z-index: 1;}
+        #contacto h2 { font-size: 40px; margin-bottom: 25px; font-weight: 800; letter-spacing: -1px; color: var(--white); }
+        #contacto p { color: #cbd5e1; }
+
+        footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-between; align-items: flex-start; color: var(--soft-grey); font-size: 14px; background: var(--white); flex-wrap: wrap; gap: 40px; position: relative; z-index: 1;}
+        .footer-col { flex: 1; min-width: 250px; }
+        .footer-col h5 { color: var(--dark-grey); font-size: 16px; font-weight: 700; margin-bottom: 15px; font-family: 'Inter', sans-serif;}
+        .footer-col p { color: var(--soft-grey); margin-bottom: 8px; line-height: 1.6; }
+
+        .social-link { display: flex; align-items: center; margin-bottom: 12px; font-weight: 600; color: var(--dark-grey) !important; transition: color 0.3s ease; text-decoration: none; }
+        .social-link:hover { color: var(--pink-premium) !important; }
+        .social-link svg { margin-right: 10px; fill: currentColor; flex-shrink: 0; }
+        
+        .legal-link { color: var(--soft-grey); text-decoration: underline; font-size: 12px; transition: color 0.3s ease; }
+        .legal-link:hover { color: var(--pink-premium); }
+
+        /* --- BOTÓN FLOTANTE MAGNÉTICO --- */
+        .floating-concierge { position: fixed; bottom: 30px; right: 30px; z-index: 1000; display: flex; flex-direction: column; align-items: flex-end; }
+        .concierge-toggle { width: 60px; height: 60px; border-radius: 50%; background-color: var(--dark-grey); color: var(--white); border: none; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(212, 0, 109, 0.3); transition: background-color 0.3s ease, transform 0.1s; }
+        .concierge-toggle:hover { background-color: var(--pink-premium); }
+        .concierge-menu { position: absolute; bottom: 75px; right: 0; background: rgba(253, 242, 248, 0.85); backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%); border: 1px solid rgba(212, 0, 109, 0.15); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 5px; width: 230px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .concierge-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .concierge-item { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--dark-grey); font-size: 14px; font-weight: 600; border-radius: 8px; transition: all 0.2s ease; font-family: 'Inter', sans-serif; }
+        .concierge-item:hover { background: rgba(212, 0, 109, 0.08); color: var(--pink-premium); }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
-            nav { padding: 15px 5%; height: 90px; }
-            .nav-links { display: none; }
-            #servicios, #diferenciadores { flex-direction: column; padding: 80px 5%; }
-            .servicios-left, .diff-left { position: relative; top: 0; margin-bottom: 40px; }
-            #impacto { grid-template-columns: 1fr; margin: 0 5%; }
+            nav { height: 90px; padding: 15px 5%; }
+            .logo-container img { height: 60px; }
+            .mobile-menu-btn { display: block; }
+            .nav-links { position: fixed; top: 0; right: -100%; width: 100%; height: 100vh; background: rgba(253, 242, 248, 0.98); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: right 0.4s ease-in-out; z-index: 999; }
+            .nav-links.active { right: 0; }
+            .nav-links a { margin: 20px 0; font-size: 20px; font-weight: 700; color: var(--dark-grey); }
+            
+            #manifiesto-global { grid-template-columns: 1fr; padding: 60px 5%; gap: 40px;}
+            .filosofia-box.asimetrica { margin-left: 0; }
+            
+            /* Anular Sticky en Móviles para Servicios */
+            #servicios { flex-direction: column; padding: 80px 5%; gap: 40px; }
+            .servicios-left { position: relative; top: 0; flex: 1; }
+            .servicios-right { gap: 30px; }
+
+            #impacto { grid-template-columns: 1fr; padding: 60px 5%; margin: 0 5%; border-radius: 20px; }
             .grid-impacto { grid-template-columns: 1fr; }
+            .impacto-item:nth-child(3) { grid-column: span 1; }
+            
+            /* Anular Sticky en Móviles para Diferenciadores */
+            #diferenciadores { flex-direction: column; padding: 80px 5%; gap: 50px; }
+            .diff-left { position: relative; top: 0; flex: 1; }
+            .diff-right { gap: 50px; padding-bottom: 0; }
+            .diff-item { padding-left: 20px; }
+            
+            #nuestra-firma { padding: 60px 5%; }
+            .team-grid { grid-template-columns: 1fr; gap: 40px; }
+            
+            #faq { grid-template-columns: 1fr; padding: 60px 5%; gap: 30px;}
+            .faq-texto { position: relative; top: 0; }
+
+            #contacto { margin: 20px; padding: 60px 30px; }
+            header { padding-top: 100px; min-height: 80vh; }
+            .cert-container { gap: 40px; }
+            .trust-bar { padding: 60px 5%; }
             footer { flex-direction: column; gap: 40px; }
+            .floating-concierge { bottom: 20px; right: 20px; }
         }
     </style>
 </head>
 <body id="inicio">
 
+    <div class="blueprint-grid"></div>
     <div class="cursor-led" id="cursor-led"></div>
-    <div id="preloader"><img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="Cargando..." class="preload-logo"></div>
+    <div id="preloader"><img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="Cargando JBDA..." class="preload-logo"></div>
 
     <nav id="main-nav">
-        <div class="logo-container"><a href="#inicio"><img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo"></a></div>
-        <div class="nav-links">
-            <a href="#servicios">Metodología</a>
-            <a href="#diferenciadores">Consultoría</a>
-            <a href="#nuestra-firma">Nosotros</a>
-            <a href="#contacto">Contacto</a>
+        <div class="logo-container"><a href="#inicio" aria-label="Volver al inicio"><img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo"></a></div>
+        <div class="nav-links" id="nav-links">
+            <a href="#servicios" class="nav-item">Metodología</a>
+            <a href="#diferenciadores" class="nav-item">Consultoría</a>
+            <a href="#nuestra-firma" class="nav-item">Nosotros</a>
+            <a href="#contacto" class="nav-item">Contacto</a>
         </div>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú de navegación"><svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg></button>
     </nav>
 
     <header>
         <canvas id="network-canvas"></canvas>
-        <div class="hero-content">
-            <h2 data-aos="fade-up">Infraestructura & Telecomunicaciones</h2>
-            <h1 class="reveal-text">Diseñamos la columna vertebral de su negocio.</h1>
-            <p data-aos="fade-up" data-aos-delay="400">Consultoría estratégica en infraestructura de redes diseñada para maximizar la eficiencia operativa y rentabilizar su inversión tecnológica.</p>
-            <a id="link-hero" href="#" class="btn-main" data-aos="fade-up" data-aos-delay="600">Agendar Diagnóstico</a>
+        <div class="hero-content" data-aos="fade-up">
+            <h2>Infraestructura & Telecomunicaciones</h2>
+            <h1>Diseñamos la columna vertebral de su negocio.</h1>
+            <p>Consultoría estratégica en infraestructura de redes diseñada para maximizar la eficiencia operativa y rentabilizar su inversión tecnológica.</p>
+            <a id="link-hero" href="#" class="btn-main magnetic-btn" aria-label="Agendar Diagnóstico">Agendar Diagnóstico</a>
         </div>
     </header>
 
     <main>
         <section id="manifiesto-global">
-            <div style="padding: 120px 8%; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: center;">
-                <div class="texto-manifiesto">
-                    <p class="reveal-text" style="font-size: clamp(28px, 4vw, 42px); font-family: 'Playfair Display', serif; font-weight: 700;">La red no es un accesorio; es el <span style="color: var(--pink-premium);">sistema circulatorio</span> de la empresa moderna.</p>
+            <div class="texto-manifiesto" data-aos="fade-right">
+                <p>La red no es un accesorio;<br> es el <span style="color: var(--pink-premium);">sistema circulatorio</span><br> de la empresa moderna.</p>
+                <p class="sub">En <strong>JBDA</strong> fusionamos la precisión de ingeniería de élite con una visión financiera de negocio orientada a resultados.</p>
+            </div>
+            <div class="cajas-filosofia">
+                <div class="filosofia-box" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Misión</h3>
+                    <p>Transformar la infraestructura tecnológica de las organizaciones en un activo estratégico, garantizando continuidad operativa y rentabilidad.</p>
                 </div>
-                <div class="cajas-filosofia">
-                    <div class="filosofia-box" data-aos="fade-left">
-                        <h3 style="color: var(--pink-premium); font-size: 13px; text-transform: uppercase; letter-spacing: 3px; font-weight: 800;">Misión</h3>
-                        <p>Transformar la infraestructura tecnológica de las organizaciones en un activo estratégico, garantizando continuidad operativa y rentabilidad.</p>
-                    </div>
+                <div class="filosofia-box asimetrica" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Visión</h3>
+                    <p>Ser el estándar de excelencia en telecomunicaciones; el aliado al que los líderes de TI acuden cuando el rendimiento no es negociable.</p>
                 </div>
             </div>
         </section>
 
+        <div class="marquee-wrapper" data-aos="fade-in">
+            <div class="marquee-track">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Huawei%20Logo.png" alt="Huawei" class="brand-logo">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Cisco%20Logo.png" alt="Cisco" class="brand-logo">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Fortinet%20Logo.png" alt="Fortinet" class="brand-logo">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Aruba%20Logo.png" alt="Aruba" class="brand-logo">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/3Com%20Logo.png" alt="3Com" class="brand-logo">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/H3C%20Logo.png" alt="H3C" class="brand-logo">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/ProxMox%20Logo.png" alt="Proxmox" class="brand-logo">
+                
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Huawei%20Logo.png" alt="Huawei" class="brand-logo">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Cisco%20Logo.png" alt="Cisco" class="brand-logo">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Fortinet%20Logo.png" alt="Fortinet" class="brand-logo">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Aruba%20Logo.png" alt="Aruba" class="brand-logo">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/3Com%20Logo.png" alt="3Com" class="brand-logo">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/H3C%20Logo.png" alt="H3C" class="brand-logo">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/ProxMox%20Logo.png" alt="Proxmox" class="brand-logo">
+            </div>
+        </div>
+
         <section id="servicios">
             <div class="servicios-left">
-                <span class="section-label">Metodología Operativa</span>
-                <h2 class="title-serif reveal-text" style="font-size: clamp(36px, 5vw, 52px);">Sistema de Reingeniería JBDA</h2>
+                <span class="section-label" data-aos="fade-right">Metodología Operativa</span>
+                <h2 class="title-serif" style="font-size: clamp(36px, 5vw, 52px);" data-aos="fade-right">Sistema de Reingeniería JBDA</h2>
             </div>
             <div class="servicios-right">
                 <div class="card" data-aos="fade-up">
                     <span class="card-num">Fase 01</span>
-                    <h3>Auditoría y Arquitectura</h3>
-                    <p>Evaluación de necesidades previas a la compra. Optimizamos su CAPEX evitando sobredimensionamientos de hardware redundante.</p>
+                    <div class="icon-wrapper"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><line x1="10.5" y1="7.5" x2="6.5" y2="16.5"/><line x1="13.5" y1="7.5" x2="17.5" y2="16.5"/><line x1="7.5" y1="19" x2="16.5" y2="19"/></svg></div>
+                    <h3>Auditoría y Arquitectura Estratégica</h3>
+                    <ul>
+                        <li><strong>Optimización de CAPEX:</strong> Evaluación de necesidades previas a la compra. Evitamos sobredimensionamientos.</li>
+                        <li><strong>Diseño Escalable:</strong> Planificación de redes LAN/WAN preparadas para el crecimiento corporativo.</li>
+                    </ul>
                 </div>
                 <div class="card" data-aos="fade-up">
                     <span class="card-num">Fase 02</span>
-                    <h3>Despliegue y Blindaje</h3>
-                    <p>Configuración experta en entornos Huawei, Cisco y Fortinet. Hardening de dispositivos y segmentación crítica de VLANs.</p>
+                    <div class="icon-wrapper"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
+                    <h3>Despliegue y Blindaje de Infraestructura</h3>
+                    <ul>
+                        <li><strong>Configuración Avanzada:</strong> Despliegue experto en entornos críticos multivendor (Huawei, Cisco, Fortinet).</li>
+                        <li><strong>Segmentación y Seguridad:</strong> Blindaje de dispositivos (Hardening), creación de VLANs y políticas QoS estrictas.</li>
+                    </ul>
                 </div>
                 <div class="card" data-aos="fade-up">
                     <span class="card-num">Fase 03</span>
-                    <h3>Gestión Proactiva</h3>
-                    <p>Dashboards en tiempo real. Identificamos anomalías antes de que impacten su flujo operativo.</p>
+                    <div class="icon-wrapper"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+                    <h3>Analítica y Gestión Proactiva Continua</h3>
+                    <ul>
+                        <li><strong>Visibilidad Total:</strong> Dashboards ejecutivos en tiempo real para el control de cada nodo en su red.</li>
+                        <li><strong>Mantenimiento Preventivo:</strong> Detección temprana y aislamiento de anomalías antes de que impacten la operación.</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <section id="impacto-container" style="background: var(--white); padding: 80px 0;">
-            <div id="impacto" data-aos="zoom-in">
+        <div id="impacto-container">
+            <section id="impacto" data-aos="fade-up" data-aos-duration="1200">
                 <div class="impacto-texto">
                     <span class="section-label" style="color: var(--pink-premium);">Capacidad de Impacto</span>
-                    <h2 class="title-serif">Historial Directivo</h2>
+                    <h2 class="title-serif">Historial<br>Directivo</h2>
                 </div>
                 <div class="grid-impacto">
-                    <div class="impacto-item"><h3>85%</h3><h4>Mitigación de Caídas</h4></div>
-                    <div class="impacto-item"><h3>40%</h3><h4>Optimización de CAPEX</h4></div>
-                    <div class="impacto-item" style="grid-column: span 2;"><h3>99.8%</h3><h4>Disponibilidad Estándar</h4></div>
+                    <div class="impacto-item">
+                        <h3>85%</h3>
+                        <h4>Mitigación de Caídas</h4>
+                        <p>Enfoque en reingeniería para reducir el downtime histórico.</p>
+                    </div>
+                    <div class="impacto-item">
+                        <h3>40%</h3>
+                        <h4>Optimización de CAPEX</h4>
+                        <p>Reducción de sobreinversiones tecnológicas.</p>
+                    </div>
+                    <div class="impacto-item">
+                        <h3>99.8%</h3>
+                        <h4>Disponibilidad Estándar</h4>
+                        <p>Nuestra métrica base para arquitecturas de misión crítica.</p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
         <section id="diferenciadores">
             <div class="diff-left">
-                <h2 class="quote-massive reveal-text">"No vendemos cajas;<br><span class="quote-highlight">integramos soluciones."</span></h2>
+                <h2 class="quote-massive" data-aos="fade-right">
+                    "No vendemos cajas;<br><span class="quote-highlight">integramos soluciones."</span>
+                </h2>
             </div>
+            
             <div class="diff-right">
-                <div class="diff-item" data-aos="fade-left">
+                <div class="diff-item" data-aos="fade-up">
                     <h4>Experiencia Multisectorial</h4>
-                    <p>Entornos de misión crítica: Corporativo, Hotelería premium e Industria pesada.</p>
+                    <p>Trayectoria comprobada en entornos de misión crítica: Corporativo, Hotelería premium e Industria pesada.</p>
                 </div>
-                <div class="diff-item" data-aos="fade-left" data-aos-delay="200">
+                <div class="diff-item" data-aos="fade-up">
                     <h4>Agnósticos a la Marca</h4>
-                    <p>Lealtad absoluta a su rendimiento y ROI, no a las cuotas de un fabricante específico.</p>
+                    <p>Lealtad absoluta a su rendimiento y retorno de inversión, no a las cuotas de un fabricante específico.</p>
+                </div>
+                <div class="diff-item" data-aos="fade-up">
+                    <h4>Cobertura Híbrida</h4>
+                    <p>Presencia física ejecutiva en CDMX y Morelos, combinada con gestión remota global.</p>
                 </div>
             </div>
         </section>
-        
-        <section id="contacto" style="margin: 80px 5%; padding: 100px 50px; background: var(--dark-grey); color: white; text-align: center; border-radius: 30px;" data-aos="fade-up">
-            <h2 class="title-serif" style="font-size: 40px; margin-bottom: 25px;">Agende un Diagnóstico Preliminar</h2>
-            <p style="font-size: 20px; font-weight: 300; opacity: 0.8; margin-bottom: 40px; max-width: 800px; margin-inline: auto;">Evaluamos los desafíos de su red para delinear soluciones de impacto inmediato.</p>
-            <a id="link-cta" href="#" class="btn-main" style="background: var(--pink-premium);">Solicitar Consultoría</a>
+
+        <section id="nuestra-firma">
+            <span class="section-label" data-aos="fade-up">El Equipo Directivo</span>
+            <h2 class="title-serif" data-aos="fade-up" style="font-size: clamp(36px, 5vw, 48px); margin-bottom: 40px;">Ingeniería guiada por visión de negocio.</h2>
+            <p class="manifesto" data-aos="fade-up">Nuestra firma nació de una observación crítica: las corporaciones gastaban millones en hardware sobredimensionado, mientras sus redes seguían presentando fallas estructurales. En JBDA, aseguramos que cada inversión tecnológica se traduzca en rentabilidad, seguridad y flujo operativo sin interrupciones.</p>
+
+            <div class="team-grid">
+                <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                    <span class="member-role">Socia Directora & CEO</span>
+                    <h3 class="member-name">Lic. Danyssha Gutiérrez</h3>
+                    <p class="member-bio">Con formación en Derecho y una aguda visión corporativa, Danyssha lidera la estrategia administrativa de JBDA. Su objetivo es claro: alinear la infraestructura tecnológica con los objetivos de negocio. Es especialista en optimización de presupuestos, asegurando que las organizaciones obtengan el máximo rendimiento del mercado sin sobreinversiones (CAPEX), garantizando rentabilidad y cumplimiento estratégico.</p>
+                </div>
+                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                    <span class="member-role">Socio Director & CTO</span>
+                    <h3 class="member-name">Ing. José Cruz</h3>
+                    <p class="member-bio">Experto en el diseño y blindaje de redes de misión crítica. Ha liderado equipos de ingeniería en auditorías complejas, reingeniería y despliegues multivendor garantizando arquitecturas a prueba de fallos. Su enfoque operativo asegura la máxima cobertura, calidad de servicio (QoS) y una disponibilidad del 99.8% en cada sitio, transformando infraestructuras vulnerables en redes de alto rendimiento.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="trust-bar">
+            <span class="section-label">Certificaciones Oficiales</span>
+            <div class="cert-container">
+                <div class="cert-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/HCIA.png" alt="Huawei Certified HCIA" loading="lazy">
+                    <span class="cert-text">HCIA Datacom</span>
+                </div>
+                <div class="cert-item" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/CCNA.png" alt="Cisco Certified CCNA" loading="lazy">
+                    <span class="cert-text">CCNA Datacom</span>
+                </div>
+            </div>
+        </div>
+
+        <section id="faq">
+            <div class="faq-texto" data-aos="fade-right">
+                <span class="section-label">Respuestas Clave</span>
+                <h2 class="title-serif">Preguntas<br>Frecuentes</h2>
+            </div>
+            <div class="faq-container" data-aos="fade-left">
+                <details>
+                    <summary>¿La evaluación de red requiere detener nuestra operación?</summary>
+                    <div class="faq-content">No. Nuestros diagnósticos y auditorías iniciales se realizan mediante métodos pasivos y de solo lectura. Su operación, usuarios y sistemas críticos no experimentarán ninguna interrupción durante el levantamiento de información.</div>
+                </details>
+                <details>
+                    <summary>Contamos con hardware de distintas marcas, ¿pueden integrarlo?</summary>
+                    <div class="faq-content">Absolutamente. Somos agnósticos a la marca y especialistas en entornos multivendor (Cisco, Huawei, Fortinet, Aruba, etc.). Nuestro enfoque es optimizar el rendimiento del hardware que usted ya posee antes de sugerir nuevas inversiones (CAPEX).</div>
+                </details>
+                <details>
+                    <summary>¿En qué se diferencian de nuestro ISP o equipo de soporte interno?</summary>
+                    <div class="faq-content">Su equipo interno y su Proveedor de Internet mantienen la operación diaria (Helpdesk). Nosotros actuamos como consultores estratégicos de Nivel 3. Entramos para resolver cuellos de botella complejos, diseñar reingenierías de red, segmentar por seguridad (VLANs/Hardening) y dejar una infraestructura sólida que su equipo interno pueda administrar fácilmente.</div>
+                </details>
+                <details>
+                    <summary>Nuestra empresa no está en CDMX o Morelos, ¿tienen cobertura?</summary>
+                    <div class="faq-content">Sí. Aunque nuestra base presencial principal está en CDMX y Morelos, diseñamos arquitecturas, configuraciones remotas complejas (VPN, SD-WAN, Proxmox) y gestionamos proyectos a nivel nacional e internacional para el sector corporativo, industrial y hotelero.</div>
+                </details>
+            </div>
+        </section>
+
+        <section id="contacto" data-aos="zoom-in">
+            <h2>Sesión de Diagnóstico Preliminar</h2>
+            <p style="font-size: 20px; font-weight: 300; opacity: 0.8; margin-bottom: 40px; max-width: 850px; margin-left: auto; margin-right: auto; line-height: 1.6; font-family: 'Inter', sans-serif;">
+                Agende una <strong>evaluación ejecutiva de 30 minutos</strong> para analizar los desafíos actuales de su red y delinear soluciones de impacto inmediato. Para auditorías profundas y reingeniería de infraestructura, desarrollamos propuestas técnicas y comerciales a la medida de su operación.
+            </p>
+            <a id="link-cta" href="#" class="btn-main magnetic-btn" style="background: var(--pink-premium); border-color: var(--pink-premium);" aria-label="Solicitar Consultoría por Calendly">Solicitar Consultoría</a>
         </section>
     </main>
 
     <footer>
-        <div style="width: 100%; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px;">
-            <div>
-                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA" style="height: 40px; margin-bottom: 20px;">
-                <p><strong>JBDA 2026</strong> <span id="terminal-toggle" title="Modo Ingeniero">>_</span></p>
-            </div>
-            <div>
-                <p><strong>Contacto:</strong> JBDA_Tech@icloud.com</p>
-                <p>CDMX • Morelos • Global</p>
-            </div>
+        <div class="footer-col">
+            <a href="#inicio" aria-label="Volver al inicio"><img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px;" loading="lazy"></a>
+            <p><strong>JBDA 2026</strong> <span id="terminal-toggle" title="Modo Ingeniero">>_</span><br>Consultoría Estratégica en<br>Infraestructura de Redes.</p><br>
+            <a href="privacidad.html" class="legal-link" aria-label="Aviso de Privacidad y Términos Legales">Aviso de Privacidad</a>
+        </div>
+        <div class="footer-col">
+            <h5>Contacto Directo</h5>
+            <p style="margin-bottom: 15px;"><strong>Ing. Jose Juan Cruz Bahena</strong><br>Consultor Principal</p>
+            <a href="mailto:JBDA_Tech@icloud.com" class="social-link" aria-label="Enviar correo electrónico a JBDA"><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>JBDA_Tech@icloud.com</a>
+            <a id="link-whatsapp-footer" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Contactar por WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>WhatsApp</a>
+            <a id="link-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visitar perfil de LinkedIn de la empresa"><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>LinkedIn Corporativo</a>
+        </div>
+        <div class="footer-col">
+            <h5>Cobertura Operativa</h5>
+            <p>Atención Presencial:<br>CDMX • Morelos</p>
+            <p>Soporte Remoto:<br>Alcance Global</p>
         </div>
     </footer>
 
+    <div class="floating-concierge">
+        <div class="concierge-menu" id="concierge-menu">
+            <a href="#" class="concierge-item" id="link-concierge-calendly">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                <span>Agendar Diagnóstico</span>
+            </a>
+            <a href="#" class="concierge-item" id="link-concierge-whatsapp" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>
+                <span>Mensaje Directo</span>
+            </a>
+        </div>
+        <button class="concierge-toggle magnetic-btn" id="concierge-toggle" aria-label="Opciones de contacto">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </button>
+    </div>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            AOS.init({ duration: 1000, once: true });
-            setTimeout(() => document.getElementById('preloader').classList.add('preloader-hidden'), 900);
+            
+            setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); }, 900);
 
-            // --- 1. REVELADO DE TEXTO CARÁCTER POR CARÁCTER ---
-            const revealTexts = document.querySelectorAll('.reveal-text');
-            revealTexts.forEach(text => {
-                const content = text.innerText;
-                text.innerHTML = '';
-                content.split('').forEach((char, i) => {
-                    const span = document.createElement('span');
-                    span.textContent = char === ' ' ? '\u00A0' : char;
-                    span.className = 'reveal-char';
-                    span.style.transitionDelay = `${i * 0.02}s`;
-                    text.appendChild(span);
-                });
-            });
-
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.querySelectorAll('.reveal-char').forEach(c => c.classList.add('active'));
-                    }
-                });
-            }, { threshold: 0.5 });
-            revealTexts.forEach(t => observer.observe(t));
-
-            // --- 2. GLOW DINÁMICO EN TARJETAS ---
-            const handleGlow = (e) => {
-                const card = e.currentTarget;
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--x', `${x}px`);
-                card.style.setProperty('--y', `${y}px`);
-            };
-            document.querySelectorAll('.card, .team-card').forEach(c => c.addEventListener('mousemove', handleGlow));
-
-            // --- 3. CURSOR Y MODO TERMINAL ---
             const cursorLed = document.getElementById('cursor-led');
-            window.addEventListener('mousemove', e => {
-                cursorLed.style.left = `${e.clientX}px`;
-                cursorLed.style.top = `${e.clientY}px`;
+            window.addEventListener('mousemove', (e) => {
+                cursorLed.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
             });
-            document.querySelectorAll('a, button, .card').forEach(el => {
+            const interactives = document.querySelectorAll('a, button, .card, .team-card, summary');
+            interactives.forEach(el => {
                 el.addEventListener('mouseenter', () => cursorLed.classList.add('tx-rx'));
                 el.addEventListener('mouseleave', () => cursorLed.classList.remove('tx-rx'));
             });
-            document.getElementById('terminal-toggle').addEventListener('click', () => document.body.classList.toggle('terminal-mode'));
 
-            // --- 4. CANVAS CON INERCIA (SPRING PHYSICS) ---
-            const canvas = document.getElementById('network-canvas');
-            const ctx = canvas.getContext('2d');
-            let particles = [];
-            let mouse = { x: null, y: null };
-
-            window.addEventListener('mousemove', e => {
-                const rect = canvas.getBoundingClientRect();
-                mouse.x = e.clientX - rect.left;
-                mouse.y = e.clientY - rect.top;
+            const magneticBtns = document.querySelectorAll('.magnetic-btn');
+            magneticBtns.forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const h = rect.width / 2; const v = rect.height / 2;
+                    const x = e.clientX - rect.left - h; const y = e.clientY - rect.top - v;
+                    btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+                });
+                btn.addEventListener('mouseleave', () => { btn.style.transform = `translate(0px, 0px)`; });
             });
 
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.baseX = this.x;
-                    this.baseY = this.y;
-                    this.vx = (Math.random() - 0.5) * 0.5;
-                    this.vy = (Math.random() - 0.5) * 0.5;
-                    this.radius = 2.5;
-                }
-                update() {
-                    let dx = mouse.x - this.x;
-                    let dy = mouse.y - this.y;
-                    let distance = Math.sqrt(dx*dx + dy*dy);
-                    let force = (150 - distance) / 150;
+            const terminalToggle = document.getElementById('terminal-toggle');
+            terminalToggle.addEventListener('click', () => { document.body.classList.toggle('terminal-mode'); });
 
-                    if (distance < 150) {
-                        this.x -= (dx / distance) * force * 5;
-                        this.y -= (dy / distance) * force * 5;
-                    } else {
-                        // Spring back effect (Inercia)
-                        this.x += (this.baseX - this.x) * 0.02;
-                        this.y += (this.baseY - this.y) * 0.02;
-                    }
-                    this.baseX += this.vx;
-                    this.baseY += this.vy;
-                    if (this.baseX < 0 || this.baseX > canvas.width) this.vx *= -1;
-                    if (this.baseY < 0 || this.baseY > canvas.height) this.vy *= -1;
-                }
-                draw() {
-                    ctx.fillStyle = 'rgba(212, 0, 109, 0.3)';
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            }
-
-            function init() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                particles = Array.from({length: 100}, () => new Particle());
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                particles.forEach(p => {
-                    p.update();
-                    p.draw();
-                    particles.forEach(p2 => {
-                        let d = Math.sqrt((p.x-p2.x)**2 + (p.y-p2.y)**2);
-                        if (d < 120) {
-                            ctx.strokeStyle = `rgba(212, 0, 109, ${0.1 - d/120 * 0.1})`;
-                            ctx.lineWidth = 0.5;
-                            ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
-                        }
-                    });
-                });
-                requestAnimationFrame(animate);
-            }
-            init(); animate();
+            const canvas = document.getElementById('network-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height, particles = [];
+            let mouse = { x: null, y: null, radius: 150 };
             
-            // --- CALENDLY ---
+            window.addEventListener('mousemove', function(event) {
+                const rect = canvas.getBoundingClientRect();
+                mouse.x = event.clientX - rect.left; mouse.y = event.clientY - rect.top;
+            });
+            window.addEventListener('mouseout', function() { mouse.x = undefined; mouse.y = undefined; });
+
+            function initCanvas() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = document.querySelector('header').offsetHeight;
+                particles = [];
+                const particleCount = window.innerWidth < 768 ? 60 : 120;
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x: Math.random() * width, y: Math.random() * height,
+                        vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
+                        radius: Math.random() * 2.5 + 2
+                    });
+                }
+            }
+
+            function animateCanvas() {
+                requestAnimationFrame(animateCanvas);
+                ctx.clearRect(0, 0, width, height);
+                for (let i = 0; i < particles.length; i++) {
+                    let p = particles[i];
+                    if(mouse.x != undefined && mouse.y != undefined) {
+                        let dx = mouse.x - p.x; let dy = mouse.y - p.y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < mouse.radius) {
+                            ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y);
+                            ctx.strokeStyle = `rgba(212, 0, 109, ${0.2 - distance/mouse.radius * 0.2})`; ctx.lineWidth = 1; ctx.stroke();
+                            const forceDirectionX = dx / distance; const forceDirectionY = dy / distance;
+                            const force = (mouse.radius - distance) / mouse.radius;
+                            p.x -= forceDirectionX * force * 1.5; p.y -= forceDirectionY * force * 1.5;
+                        }
+                    }
+                    p.x += p.vx; p.y += p.vy;
+                    if (p.x < 0 || p.x > width) p.vx *= -1; if (p.y < 0 || p.y > height) p.vy *= -1;
+                    ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fillStyle = 'rgba(212, 0, 109, 0.2)'; ctx.fill();
+                    for (let j = i + 1; j < particles.length; j++) {
+                        let p2 = particles[j]; let dist = Math.sqrt(Math.pow(p.x - p2.x, 2) + Math.pow(p.y - p2.y, 2));
+                        if (dist < 160) {
+                            ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = `rgba(212, 0, 109, ${0.1 - dist/160 * 0.1})`; ctx.lineWidth = 0.8; ctx.stroke();
+                        }
+                    }
+                }
+            }
+            window.addEventListener('resize', initCanvas); initCanvas(); animateCanvas();
+
+            document.addEventListener('contextmenu', event => event.preventDefault());
+            document.addEventListener('keydown', event => { if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || (event.ctrlKey && event.keyCode === 85)) { event.preventDefault(); } });
+
+            const nav = document.getElementById('main-nav');
+            window.addEventListener('scroll', () => { if (window.scrollY > 50) { nav.classList.add('nav-scrolled'); } else { nav.classList.remove('nav-scrolled'); } });
+
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const navLinks = document.getElementById('nav-links');
+            const navItems = document.querySelectorAll('.nav-item');
+            let menuOpen = false;
+            menuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active'); menuOpen = !menuOpen;
+                if(menuOpen) { menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>'; } else { menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>'; }
+            });
+            navItems.forEach(item => {
+                item.addEventListener('click', () => { navLinks.classList.remove('active'); menuOpen = false; menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>'; });
+            });
+
+            AOS.init({ duration: 1000, once: true, offset: 100 });
+            const numeroWhatsApp = "525613388030"; const mensajeGeneral = "Hola JBDA, solicito información de consultoría."; const urlWhatsGeneral = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeGeneral)}`;
+            document.getElementById('link-whatsapp-footer').href = urlWhatsGeneral; document.getElementById('link-concierge-whatsapp').href = urlWhatsGeneral; document.getElementById('link-linkedin').href = "https://www.linkedin.com/company/jbdamx/";
+
             const urlCalendly = "https://calendly.com/jbda_tech/diagnostico";
-            const abrirCalendly = (e) => { e.preventDefault(); Calendly.initPopupWidget({url: urlCalendly}); return false; };
-            document.getElementById('link-hero').onclick = abrirCalendly;
-            document.getElementById('link-cta').onclick = abrirCalendly;
+            const abrirCalendly = (e) => { e.preventDefault(); Calendly.initPopupWidget({url: urlCalendly}); document.getElementById('concierge-menu').classList.remove('active'); return false; };
+            document.getElementById('link-hero').addEventListener('click', abrirCalendly); document.getElementById('link-cta').addEventListener('click', abrirCalendly); document.getElementById('link-concierge-calendly').addEventListener('click', abrirCalendly);
+
+            const conciergeToggle = document.getElementById('concierge-toggle'); const conciergeMenu = document.getElementById('concierge-menu');
+            conciergeToggle.addEventListener('click', (e) => { e.stopPropagation(); conciergeMenu.classList.toggle('active'); });
+            document.addEventListener('click', (event) => { if (!conciergeToggle.contains(event.target) && !conciergeMenu.contains(event.target)) { conciergeMenu.classList.remove('active'); } });
         });
     </script>
 </body>
