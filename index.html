@@ -655,14 +655,16 @@
             window.addEventListener('mousemove', (e) => {
                 cursorX = e.clientX;
                 cursorY = e.clientY;
-                cursorDot.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+                // CORRECCIÓN: Encadenamos translate(-50%, -50%) para forzar el centro geométrico
+                cursorDot.style.transform = `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
             });
 
             function animateCursor() {
                 // Lerp (Interpolación lineal) para movimiento suave
                 outlineX += (cursorX - outlineX) * 0.15;
                 outlineY += (cursorY - outlineY) * 0.15;
-                cursorOutline.style.transform = `translate(${outlineX}px, ${outlineY}px)`;
+                // CORRECCIÓN: Encadenamos translate(-50%, -50%) para forzar el centro geométrico
+                cursorOutline.style.transform = `translate(${outlineX}px, ${outlineY}px) translate(-50%, -50%)`;
                 requestAnimationFrame(animateCursor);
             }
             animateCursor();
