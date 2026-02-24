@@ -105,25 +105,53 @@
             text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 13px; text-transform: uppercase;
             letter-spacing: 1.5px; transition: all 0.4s ease; cursor: pointer; border: 1px solid var(--dark-grey);
         }
-
         .btn-main:hover { background-color: var(--pink-premium); border-color: var(--pink-premium); transform: translateY(-4px); box-shadow: 0 15px 30px rgba(212, 0, 109, 0.2); }
 
         /* --- SECCIONES GENERALES --- */
         #introduccion { padding: 140px 10% 60px 10%; background-color: var(--white); text-align: center; }
         #introduccion p { font-size: clamp(24px, 3.5vw, 36px); font-weight: 300; color: var(--dark-grey); max-width: 850px; margin: 0 auto; line-height: 1.5; letter-spacing: -0.5px; }
 
-        #filosofia { padding: 40px 10% 120px 10%; background-color: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: flex-start; }
+        #filosofia { padding: 40px 10% 80px 10%; background-color: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: flex-start; }
         .filosofia-box { padding-left: 30px; border-left: 3px solid var(--pink-premium); }
         .filosofia-box h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: var(--pink-premium); margin-bottom: 20px; font-weight: 800; }
         .filosofia-box p { font-size: 18px; color: var(--soft-grey); line-height: 1.7; font-weight: 400; }
 
+        /* --- NUEVO: VENDOR TRUST BAR (CARRUSEL) --- */
+        .marquee-wrapper { 
+            overflow: hidden; background: var(--white); padding: 50px 0; 
+            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); 
+            white-space: nowrap; position: relative; 
+        }
+        .marquee-wrapper::before, .marquee-wrapper::after { content: ""; position: absolute; top: 0; width: 15%; height: 100%; z-index: 2; pointer-events: none; }
+        .marquee-wrapper::before { left: 0; background: linear-gradient(to right, var(--white), transparent); }
+        .marquee-wrapper::after { right: 0; background: linear-gradient(to left, var(--white), transparent); }
+        
+        .marquee-track { display: inline-block; animation: scroll-marquee 25s linear infinite; }
+        .brand-font { 
+            display: inline-block; padding: 0 40px; font-size: 26px; font-weight: 800; 
+            color: var(--soft-grey); opacity: 0.3; letter-spacing: 1px; transition: all 0.3s ease; 
+        }
+        .brand-font:hover { opacity: 0.9; color: var(--pink-premium); transform: scale(1.05); }
+
+        @keyframes scroll-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* --- SERVICIOS Y NUEVOS ICONOS --- */
         #servicios { padding: 140px 10%; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
         .section-label { color: var(--pink-premium); font-weight: 800; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: block; }
 
         .grid-servicios { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; margin-top: 60px; }
-        .card { background: var(--white); padding: 60px 50px; border-radius: 6px; transition: all 0.4s ease; border: 1px solid var(--border); }
+        .card { background: var(--white); padding: 60px 50px; border-radius: 6px; transition: all 0.4s ease; border: 1px solid var(--border); position: relative; }
         .card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.05); border-color: var(--pink-premium); }
-        .card-num { font-size: 12px; font-weight: 800; color: var(--pink-premium); margin-bottom: 30px; display: block; }
+        
+        .icon-wrapper { 
+            width: 56px; height: 56px; background: rgba(212, 0, 109, 0.08); 
+            border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; 
+            transition: all 0.4s ease;
+        }
+        .card:hover .icon-wrapper { background: var(--pink-premium); }
+        .card:hover .icon-wrapper svg { stroke: #ffffff; }
+        
+        .card-num { font-size: 12px; font-weight: 800; color: var(--pink-premium); margin-bottom: 30px; display: block; position: absolute; top: 40px; right: 50px; opacity: 0.5; }
         .card h3 { font-size: 24px; margin-bottom: 25px; letter-spacing: -0.5px; font-weight: 700; color: var(--dark-grey); }
         .card ul { list-style: none; }
         .card ul li { margin-bottom: 20px; font-size: 16px; color: var(--soft-grey); padding-left: 20px; border-left: 2px solid var(--pink-premium); line-height: 1.6; }
@@ -140,20 +168,17 @@
         .diff-item h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--pink-premium); font-weight: 700; }
         .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; line-height: 1.7; }
 
-        /* --- NUEVA SECCIÓN: NUESTRA FIRMA (DIRECTIVOS) --- */
+        /* --- SECCIÓN: NOSOTROS (DIRECTIVOS) --- */
         #nuestra-firma { padding: 140px 10%; background-color: var(--white); }
         .manifesto { font-size: 22px; color: var(--soft-grey); font-weight: 300; max-width: 850px; margin-bottom: 60px; line-height: 1.6; border-left: 3px solid var(--pink-premium); padding-left: 30px; }
         
         .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        
         .team-card { background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 50px 40px; transition: all 0.4s ease; }
         .team-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.05); border-color: var(--pink-premium); }
-        
         .member-role { color: var(--pink-premium); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; margin-bottom: 15px; display: block; }
         .member-name { font-size: 24px; color: var(--dark-grey); font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px; }
         .member-bio { font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
 
-        /* --- TRUST BAR Y CONTACTO --- */
         .trust-bar { padding: 100px 10%; text-align: center; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); }
         .cert-container { display: flex; justify-content: center; align-items: center; gap: 80px; margin-top: 50px; flex-wrap: wrap; }
         .cert-item { display: flex; flex-direction: column; align-items: center; }
@@ -161,6 +186,21 @@
         .cert-item:hover img { filter: grayscale(0%); opacity: 1; }
         .cert-text { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--soft-grey); text-transform: uppercase; }
 
+        /* --- NUEVO: SECCIÓN FAQ (ACORDEÓN) --- */
+        #faq { padding: 120px 10% 80px 10%; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
+        .faq-container { max-width: 850px; margin: 0 auto; margin-top: 40px; }
+        details { background: var(--white); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 15px; overflow: hidden; transition: all 0.3s ease; }
+        details[open] { border-color: var(--pink-premium); box-shadow: 0 10px 30px rgba(212,0,109,0.08); }
+        summary { 
+            padding: 25px 30px; font-size: 18px; font-weight: 700; color: var(--dark-grey); 
+            cursor: pointer; list-style: none; position: relative; display: flex; justify-content: space-between; align-items: center; 
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; font-size: 24px; color: var(--pink-premium); transition: transform 0.3s ease; font-weight: 400; }
+        details[open] summary::after { content: '-'; transform: rotate(180deg); }
+        .faq-content { padding: 0 30px 25px 30px; font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
+
+        /* --- CONTACTO & FOOTER --- */
         #contacto { margin: 0 5% 60px 5%; padding: 120px 50px; background: var(--dark-grey); color: #ffffff; text-align: center; border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
         #contacto h2 { font-size: 40px; margin-bottom: 25px; font-weight: 800; letter-spacing: -1px; }
         #contacto p { color: #e2e8f0; }
@@ -177,7 +217,6 @@
         .legal-link { color: var(--soft-grey); text-decoration: underline; font-size: 12px; transition: color 0.3s ease; }
         .legal-link:hover { color: var(--pink-premium); }
 
-        /* --- RESPONSIVE DESIGN (MÓVILES) --- */
         @media (max-width: 900px) {
             nav { height: 90px; padding: 15px 5%; }
             .logo-container img { height: 60px; }
@@ -190,7 +229,7 @@
             .nav-links.active { right: 0; }
             .nav-links a { margin: 20px 0; font-size: 20px; font-weight: 700; color: var(--dark-grey); }
             
-            #filosofia { grid-template-columns: 1fr; gap: 50px; padding: 20px 10% 80px 10%; }
+            #filosofia { grid-template-columns: 1fr; gap: 50px; padding: 20px 10% 60px 10%; }
             #diferenciadores { grid-template-columns: 1fr; gap: 60px; padding: 100px 10%; }
             .team-grid { grid-template-columns: 1fr; gap: 40px; }
             #contacto { margin: 20px; padding: 80px 30px; }
@@ -241,13 +280,34 @@
         <section id="filosofia">
             <div class="filosofia-box" data-aos="fade-right" data-aos-delay="100">
                 <h3>Misión</h3>
-                <p>Transformar la infraestructura tecnológica de las organizaciones en un activo estratégico, garantizando la máxima continuity operativa y rentabilidad a través de ingeniería de redes de élite, arquitecturas precisas y gestión proactiva.</p>
+                <p>Transformar la infraestructura tecnológica de las organizaciones en un activo estratégico, garantizando la máxima continuidad operativa y rentabilidad a través de ingeniería de redes de élite, arquitecturas precisas y gestión proactiva.</p>
             </div>
             <div class="filosofia-box" data-aos="fade-left" data-aos-delay="200">
                 <h3>Visión</h3>
                 <p>Ser el estándar de excelencia en telecomunicaciones empresariales; el aliado definitivo al que los líderes de TI acuden cuando el rendimiento, la seguridad y la arquitectura estratégica de su red no son negociables.</p>
             </div>
         </section>
+
+        <div class="marquee-wrapper" data-aos="fade-in">
+            <div class="marquee-track">
+                <span class="brand-font">HUAWEI</span>
+                <span class="brand-font">CISCO</span>
+                <span class="brand-font">FORTINET</span>
+                <span class="brand-font" style="text-transform: lowercase;">aruba</span>
+                <span class="brand-font">3Com</span>
+                <span class="brand-font">H3C</span>
+                <span class="brand-font" style="text-transform: lowercase;">hp</span>
+                <span class="brand-font">PROXMOX</span>
+                <span class="brand-font">HUAWEI</span>
+                <span class="brand-font">CISCO</span>
+                <span class="brand-font">FORTINET</span>
+                <span class="brand-font" style="text-transform: lowercase;">aruba</span>
+                <span class="brand-font">3Com</span>
+                <span class="brand-font">H3C</span>
+                <span class="brand-font" style="text-transform: lowercase;">hp</span>
+                <span class="brand-font">PROXMOX</span>
+            </div>
+        </div>
 
         <section id="servicios">
             <span class="section-label" data-aos="fade-right">Capacidades</span>
@@ -256,14 +316,25 @@
             <div class="grid-servicios">
                 <div class="card" data-aos="fade-up" data-aos-delay="100">
                     <span class="card-num">01</span>
+                    <div class="icon-wrapper">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><line x1="10.5" y1="7.5" x2="6.5" y2="16.5"/><line x1="13.5" y1="7.5" x2="17.5" y2="16.5"/><line x1="7.5" y1="19" x2="16.5" y2="19"/>
+                        </svg>
+                    </div>
                     <h3>Arquitectura Estratégica</h3>
                     <ul>
                         <li><strong>Optimización de CAPEX:</strong> Evaluación de necesidades previas a la compra. Evitamos sobredimensionamientos.</li>
                         <li><strong>Diseño Escalable:</strong> Planificación de redes LAN/WAN preparadas para el crecimiento.</li>
                     </ul>
                 </div>
+                
                 <div class="card" data-aos="fade-up" data-aos-delay="200">
                     <span class="card-num">02</span>
+                    <div class="icon-wrapper">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>
+                        </svg>
+                    </div>
                     <h3>Implementación Elite</h3>
                     <ul>
                         <li><strong>Configuración Avanzada:</strong> Despliegue experto en entornos Huawei y Cisco.</li>
@@ -271,8 +342,14 @@
                         <li><strong>Reingeniería:</strong> Recuperación de redes heredadas para eliminar latencia.</li>
                     </ul>
                 </div>
+                
                 <div class="card" data-aos="fade-up" data-aos-delay="300">
                     <span class="card-num">03</span>
+                    <div class="icon-wrapper">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </div>
                     <h3>Gestión Proactiva</h3>
                     <ul>
                         <li><strong>Visibilidad Total:</strong> Dashboards en tiempo real para el control de cada nodo en su red.</li>
@@ -367,6 +444,41 @@
             </div>
         </div>
 
+        <section id="faq">
+            <span class="section-label" data-aos="fade-up" style="text-align: center;">Respuestas Clave</span>
+            <h2 style="font-size: 36px; font-weight: 800; text-align: center; margin-bottom: 50px;" data-aos="fade-up">Preguntas Frecuentes</h2>
+            
+            <div class="faq-container" data-aos="fade-up">
+                <details>
+                    <summary>¿La evaluación o auditoría de red requiere detener nuestra operación?</summary>
+                    <div class="faq-content">
+                        No. Nuestros diagnósticos y auditorías iniciales se realizan mediante métodos pasivos y de solo lectura. Su operación, usuarios y sistemas críticos no experimentarán ninguna interrupción durante el levantamiento de información.
+                    </div>
+                </details>
+                
+                <details>
+                    <summary>Contamos con hardware de distintas marcas, ¿pueden integrarlo?</summary>
+                    <div class="faq-content">
+                        Absolutamente. Somos agnósticos a la marca y especialistas en entornos multivendor (Cisco, Huawei, Fortinet, Aruba, etc.). Nuestro enfoque es optimizar el rendimiento del hardware que usted ya posee antes de sugerir nuevas inversiones (CAPEX).
+                    </div>
+                </details>
+
+                <details>
+                    <summary>¿En qué se diferencian de nuestro ISP o equipo de soporte interno?</summary>
+                    <div class="faq-content">
+                        Su equipo interno y su Proveedor de Internet mantienen la operación diaria (Helpdesk). Nosotros actuamos como consultores estratégicos de Nivel 3. Entramos para resolver cuellos de botella complejos, diseñar reingenierías de red, segmentar por seguridad (VLANs/Hardening) y dejar una infraestructura sólida que su equipo interno pueda administrar fácilmente.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Nuestra empresa no está en CDMX o Morelos, ¿tienen cobertura?</summary>
+                    <div class="faq-content">
+                        Sí. Aunque nuestra base presencial principal está en CDMX y Morelos, diseñamos arquitecturas, configuraciones remotas complejas (VPN, SD-WAN, Proxmox) y gestionamos proyectos a nivel nacional e internacional para el sector corporativo, industrial y hotelero.
+                    </div>
+                </details>
+            </div>
+        </section>
+
         <section id="contacto" data-aos="zoom-in">
             <h2>Sesión de Diagnóstico Preliminar</h2>
             <p style="font-size: 20px; font-weight: 300; opacity: 0.8; margin-bottom: 40px; max-width: 850px; margin-left: auto; margin-right: auto; line-height: 1.6;">
@@ -399,7 +511,7 @@
             
             <a id="link-whatsapp-footer" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Contactar por WhatsApp">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>
-                WhatsApp
+                WhatsApp (+52 56 1338 8030)
             </a>
 
             <a id="link-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visitar perfil de LinkedIn de la empresa">
@@ -469,7 +581,6 @@
             // --- 4. INICIALIZACIÓN DE ENLACES (CALENDLY Y WHATSAPP) ---
             AOS.init({ duration: 1000, once: true, offset: 100 });
 
-            // Configuración de WhatsApp para el Footer
             const numeroWhatsApp = "525613388030";
             const mensajeGeneral = "Hola JBDA, solicito información de consultoría.";
             const urlWhatsGeneral = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeGeneral)}`;
@@ -486,7 +597,6 @@
                 return false;
             };
 
-            // Asignar el popup a los botones de llamada a la acción
             document.getElementById('link-hero').addEventListener('click', abrirCalendly);
             document.getElementById('link-cta').addEventListener('click', abrirCalendly);
         });
