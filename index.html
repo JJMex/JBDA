@@ -58,21 +58,18 @@
         h1, h2, .quote-massive, .title-serif { font-family: 'Playfair Display', serif; }
         ::selection { background-color: var(--pink-premium); color: #ffffff; }
 
-        /* --- 1. TEXTURA TÁCTIL (FILM GRAIN) --- */
+        /* --- TEXTURA TÁCTIL --- */
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            /* SVG Ruido Fractal ultra ligero */
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-            opacity: 0.03; /* Apenas perceptible subconscientemente */
-            pointer-events: none; z-index: 99998; 
+            opacity: 0.03; pointer-events: none; z-index: 99998; 
         }
 
-        /* --- 2. PLANO TOPOGRÁFICO (BLUEPRINT LINES) --- */
+        /* --- PLANO TOPOGRÁFICO --- */
         .blueprint-grid {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background-image: linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
-            background-size: 25vw 100%; /* Divide la pantalla en 4 columnas arquitectónicas */
-            pointer-events: none; z-index: 0;
+            background-size: 25vw 100%; pointer-events: none; z-index: 0;
         }
 
         /* --- PRELOADER --- */
@@ -98,6 +95,7 @@
         body.terminal-mode .brand-logo, body.terminal-mode img { filter: sepia(100%) hue-rotate(90deg) saturate(300%) brightness(80%) contrast(200%) !important; }
         body.terminal-mode .icon-wrapper { background-color: rgba(0, 255, 0, 0.1) !important; }
         body.terminal-mode svg { stroke: #00ff00; }
+        body.terminal-mode .diff-item { border-left-color: #00ff00 !important; }
         body.terminal-mode .social-link svg, body.terminal-mode .mobile-menu-btn svg, body.terminal-mode .concierge-item svg { fill: #00ff00 !important; stroke: none !important; }
         body.terminal-mode .icon-wrapper svg { fill: none !important; stroke: #00ff00 !important; }
         body.terminal-mode::after { content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); z-index: 9999; background-size: 100% 2px, 3px 100%; pointer-events: none; opacity: 0.4; }
@@ -146,7 +144,7 @@
         .brand-logo:hover { filter: grayscale(0%) opacity(1); transform: scale(1.1); }
         @keyframes scroll-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* --- 3. METODOLOGÍA (LAYOUT STICKY) --- */
+        /* --- METODOLOGÍA (LAYOUT STICKY) --- */
         #servicios { padding: 140px 8%; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); display: flex; align-items: flex-start; gap: 100px; position: relative; z-index: 1; }
         .servicios-left { position: sticky; top: 160px; flex: 0 0 35%; }
         .servicios-right { flex: 1; display: flex; flex-direction: column; gap: 50px; }
@@ -172,27 +170,35 @@
         .impacto-item h4 { font-size: 16px; color: var(--white); margin-bottom: 5px; font-weight: 700; font-family: 'Inter', sans-serif;}
         .impacto-item p { font-size: 14px; color: #cbd5e1; line-height: 1.6; font-weight: 300; }
 
-        /* --- 5. MARQUEE DINÁMICO (CORRECCIÓN CSS) --- */
-        #marquee-quote-sec {
-            padding: 120px 0 80px 0; overflow: hidden; background: var(--white); position: relative; z-index: 1;
+        /* --- NUEVO: DIFERENCIADORES CON DISEÑO STICKY (SIMILAR A METODOLOGÍA) --- */
+        #diferenciadores { 
+            padding: 140px 8%; 
+            background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 80px; 
+            position: relative; z-index: 1; 
         }
-        .scroll-marquee-wrapper {
-            width: 100vw; overflow: hidden; display: flex; align-items: center;
+        .diff-left {
+            position: sticky; 
+            top: 160px; 
+            flex: 0 0 45%; 
         }
-        .quote-massive-dynamic { 
-            font-size: clamp(60px, 10vw, 150px); font-family: 'Playfair Display', serif; font-weight: 800; 
-            line-height: 1; letter-spacing: -4px; color: var(--dark-grey); 
-            /* REGLAS MAESTRAS PARA EVITAR EL SALTO DE LÍNEA */
-            white-space: nowrap; 
-            flex-shrink: 0;
-            will-change: transform; 
+        .diff-right {
+            flex: 1; 
+            display: flex; flex-direction: column; gap: 80px;
+            padding-bottom: 50px;
+        }
+        .quote-massive { 
+            font-size: clamp(45px, 6vw, 75px); font-family: 'Playfair Display', serif; font-weight: 800; 
+            line-height: 1.05; letter-spacing: -2px; color: var(--dark-grey); 
         }
         .quote-highlight { color: var(--pink-premium); font-style: italic; }
         
-        .diff-content-wrapper { padding: 40px 10% 120px 10%; background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); position: relative; z-index: 1;}
-        .diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; }
-        .diff-item h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--pink-premium); font-weight: 700; font-family: 'Inter', sans-serif; }
-        .diff-item p { font-size: 17px; color: var(--soft-grey); font-weight: 300; line-height: 1.7; }
+        .diff-item { padding-left: 30px; border-left: 2px solid var(--pink-premium); transition: all 0.3s ease; }
+        .diff-item:hover { border-left-width: 6px; }
+        .diff-item h4 { font-size: 16px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--pink-premium); font-weight: 800; font-family: 'Inter', sans-serif; }
+        .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; line-height: 1.7; }
 
         /* --- EL EQUIPO --- */
         #nuestra-firma { padding: 120px 10%; background: var(--silver); position: relative; z-index: 1;}
@@ -265,6 +271,7 @@
             #manifiesto-global { grid-template-columns: 1fr; padding: 60px 5%; gap: 40px;}
             .filosofia-box.asimetrica { margin-left: 0; }
             
+            /* Anular Sticky en Móviles para Servicios */
             #servicios { flex-direction: column; padding: 80px 5%; gap: 40px; }
             .servicios-left { position: relative; top: 0; flex: 1; }
             .servicios-right { gap: 30px; }
@@ -273,9 +280,11 @@
             .grid-impacto { grid-template-columns: 1fr; }
             .impacto-item:nth-child(3) { grid-column: span 1; }
             
-            #marquee-quote-sec { padding: 60px 0; }
-            .diff-content-wrapper { padding: 20px 5% 80px 5%; }
-            .diff-grid { grid-template-columns: 1fr; gap: 40px;}
+            /* Anular Sticky en Móviles para Diferenciadores */
+            #diferenciadores { flex-direction: column; padding: 80px 5%; gap: 50px; }
+            .diff-left { position: relative; top: 0; flex: 1; }
+            .diff-right { gap: 50px; padding-bottom: 0; }
+            .diff-item { padding-left: 20px; }
             
             #nuestra-firma { padding: 60px 5%; }
             .team-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -302,7 +311,7 @@
         <div class="logo-container"><a href="#inicio" aria-label="Volver al inicio"><img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo"></a></div>
         <div class="nav-links" id="nav-links">
             <a href="#servicios" class="nav-item">Metodología</a>
-            <a href="#marquee-quote-sec" class="nav-item">Consultoría</a>
+            <a href="#diferenciadores" class="nav-item">Consultoría</a>
             <a href="#nuestra-firma" class="nav-item">Nosotros</a>
             <a href="#contacto" class="nav-item">Contacto</a>
         </div>
@@ -346,6 +355,7 @@
                 <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/3Com%20Logo.png" alt="3Com" class="brand-logo">
                 <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/H3C%20Logo.png" alt="H3C" class="brand-logo">
                 <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/ProxMox%20Logo.png" alt="Proxmox" class="brand-logo">
+                
                 <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Huawei%20Logo.png" alt="Huawei" class="brand-logo">
                 <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Cisco%20Logo.png" alt="Cisco" class="brand-logo">
                 <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Fortinet%20Logo.png" alt="Fortinet" class="brand-logo">
@@ -418,30 +428,28 @@
             </section>
         </div>
 
-        <section id="marquee-quote-sec">
-            <div class="scroll-marquee-wrapper">
-                <h2 id="massive-quote" class="quote-massive-dynamic">
-                    "NO VENDEMOS CAJAS; <span class="quote-highlight">INTEGRAMOS SOLUCIONES."</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "NO VENDEMOS CAJAS; <span class="quote-highlight">INTEGRAMOS SOLUCIONES."</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "NO VENDEMOS CAJAS; <span class="quote-highlight">INTEGRAMOS SOLUCIONES."</span>
+        <section id="diferenciadores">
+            <div class="diff-left">
+                <h2 class="quote-massive" data-aos="fade-right">
+                    "No vendemos cajas;<br><span class="quote-highlight">integramos soluciones."</span>
                 </h2>
             </div>
-        </section>
-
-        <div class="diff-content-wrapper">
-            <div class="diff-grid" data-aos="fade-up">
-                <div class="diff-item">
+            
+            <div class="diff-right">
+                <div class="diff-item" data-aos="fade-up">
                     <h4>Experiencia Multisectorial</h4>
                     <p>Trayectoria comprobada en entornos de misión crítica: Corporativo, Hotelería premium e Industria pesada.</p>
                 </div>
-                <div class="diff-item">
+                <div class="diff-item" data-aos="fade-up">
                     <h4>Agnósticos a la Marca</h4>
                     <p>Lealtad absoluta a su rendimiento y retorno de inversión, no a las cuotas de un fabricante específico.</p>
                 </div>
-                <div class="diff-item">
+                <div class="diff-item" data-aos="fade-up">
                     <h4>Cobertura Híbrida</h4>
                     <p>Presencia física ejecutiva en CDMX y Morelos, combinada con gestión remota global.</p>
                 </div>
             </div>
-        </div>
+        </section>
 
         <section id="nuestra-firma">
             <span class="section-label" data-aos="fade-up">El Equipo Directivo</span>
@@ -521,7 +529,8 @@
             <p style="margin-bottom: 15px;"><strong>Ing. Jose Juan Cruz Bahena</strong><br>Consultor Principal</p>
             <a href="mailto:JBDA_Tech@icloud.com" class="social-link" aria-label="Enviar correo electrónico a JBDA"><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>JBDA_Tech@icloud.com</a>
             <a id="link-whatsapp-footer" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Contactar por WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>WhatsApp</a>
-            <a id="link-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visitar perfil de LinkedIn de la empresa"><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>LinkedIn Corporativo</a>
+            <a id="link-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visitar perfil de LinkedIn de la empresa"><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>LinkedIn Corporativo</a>
         </div>
         <div class="footer-col">
             <h5>Cobertura Operativa</h5>
@@ -576,18 +585,6 @@
 
             const terminalToggle = document.getElementById('terminal-toggle');
             terminalToggle.addEventListener('click', () => { document.body.classList.toggle('terminal-mode'); });
-
-            // --- ANIMACIÓN DEL TEXTO GIGANTE CORREGIDA ---
-            const quoteSec = document.getElementById('marquee-quote-sec');
-            const massiveQuote = document.getElementById('massive-quote');
-            window.addEventListener('scroll', () => {
-                const rect = quoteSec.getBoundingClientRect();
-                if(rect.top < window.innerHeight && rect.bottom > 0) {
-                    const scrollProgress = window.innerHeight - rect.top;
-                    const speed = window.innerWidth > 900 ? 0.35 : 0.15; // Más lento en móvil
-                    massiveQuote.style.transform = `translateX(${-scrollProgress * speed}px)`;
-                }
-            });
 
             const canvas = document.getElementById('network-canvas');
             const ctx = canvas.getContext('2d');
