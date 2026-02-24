@@ -80,25 +80,24 @@
 
         /* --- CURSOR: INDICADOR DE TRÁFICO (LED SWITCH) --- */
         @media (pointer: fine) {
-            body, a, button, .card, details, summary { cursor: none !important; }
+            body, a, button, .card, .team-card, details, summary { cursor: none !important; }
         }
         .cursor-led {
             position: fixed;
             top: 0; left: 0;
             width: 10px; height: 10px;
-            background-color: #10b981; /* Verde LED de hardware */
-            border-radius: 2px; /* Cuadrado con bordes muy ligeros */
+            background-color: #10b981; 
+            border-radius: 2px; 
             z-index: 999999;
             pointer-events: none;
             transform: translate(-50%, -50%);
             box-shadow: 0 0 8px rgba(16, 185, 129, 0.8), 0 0 15px rgba(16, 185, 129, 0.5);
-            animation: led-breathe 2s infinite alternate; /* Respiración de LINK UP */
+            animation: led-breathe 2s infinite alternate; 
         }
         @keyframes led-breathe {
             0% { opacity: 0.4; box-shadow: 0 0 4px rgba(16, 185, 129, 0.5); }
             100% { opacity: 1; box-shadow: 0 0 12px rgba(16, 185, 129, 0.9); }
         }
-        /* Estado activo: TX/RX parpadeo rápido */
         .cursor-led.tx-rx {
             animation: blink-txrx 0.15s infinite !important;
             background-color: #34d399;
@@ -112,7 +111,17 @@
             .cursor-led { display: none !important; }
         }
 
-        /* --- MODO TERMINAL (CORRECCIÓN ABSOLUTA DE COLORES) --- */
+        /* --- MODO TERMINAL (CORRECCIÓN ABSOLUTA) --- */
+        body.terminal-mode {
+            /* Forzamos las variables globales a colores de consola */
+            --white: #050505;
+            --silver: #0a0a0a;
+            --dark-grey: #00ff00;
+            --soft-grey: #00cc00;
+            --pink-premium: #00ff00;
+            --border: #004400;
+        }
+        
         body.terminal-mode, 
         body.terminal-mode main, 
         body.terminal-mode header, 
@@ -120,6 +129,7 @@
         body.terminal-mode footer, 
         body.terminal-mode nav, 
         body.terminal-mode .card, 
+        body.terminal-mode .team-card, /* AÑADIDO: Tarjetas de los socios */
         body.terminal-mode details, 
         body.terminal-mode #contacto, 
         body.terminal-mode #impacto, 
@@ -135,6 +145,7 @@
             border-color: #004400 !important;
             box-shadow: none !important;
         }
+
         body.terminal-mode *, 
         body.terminal-mode h1, 
         body.terminal-mode h2, 
@@ -150,10 +161,31 @@
             border-radius: 0 !important;
             text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
         }
+
         body.terminal-mode .btn-main { background-color: #002200 !important; border: 1px solid #00ff00 !important; }
-        body.terminal-mode .brand-logo, body.terminal-mode img, body.terminal-mode svg {
+        
+        /* Filtro fotográfico SOLO para logos, NO para SVGs (iconos) */
+        body.terminal-mode .brand-logo, body.terminal-mode img {
             filter: sepia(100%) hue-rotate(90deg) saturate(300%) brightness(80%) contrast(200%) !important;
         }
+
+        /* CORRECCIÓN: Iconos SVG adaptados al modo consola */
+        body.terminal-mode .icon-wrapper {
+            background-color: rgba(0, 255, 0, 0.1) !important;
+        }
+        body.terminal-mode svg { stroke: #00ff00; }
+        
+        body.terminal-mode .social-link svg, 
+        body.terminal-mode .mobile-menu-btn svg, 
+        body.terminal-mode .concierge-item svg {
+            fill: #00ff00 !important;
+            stroke: none !important;
+        }
+        body.terminal-mode .icon-wrapper svg {
+            fill: none !important;
+            stroke: #00ff00 !important;
+        }
+
         /* Overlay CRT Scanlines */
         body.terminal-mode::after {
             content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
@@ -683,12 +715,11 @@
             const cursorLed = document.getElementById('cursor-led');
 
             window.addEventListener('mousemove', (e) => {
-                // Posicionamiento exacto y sin retraso
                 cursorLed.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
             });
 
-            // Detectar hover para activar parpadeo TX/RX
-            const interactives = document.querySelectorAll('a, button, .card, summary');
+            // Detectar hover para activar parpadeo TX/RX (Incluye tarjetas)
+            const interactives = document.querySelectorAll('a, button, .card, .team-card, summary');
             interactives.forEach(el => {
                 el.addEventListener('mouseenter', () => cursorLed.classList.add('tx-rx'));
                 el.addEventListener('mouseleave', () => cursorLed.classList.remove('tx-rx'));
