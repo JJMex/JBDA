@@ -9,12 +9,12 @@
     
     <meta property="og:title" content="JBDA | Consultoría Estratégica en Redes">
     <meta property="og:description" content="Ingeniería de alto nivel. Evaluamos las necesidades de su red para optimizar la inversión tecnológica y reducir el downtime en un 85%.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png">
+    <meta property="og:image" content="assets/JBDA.png">
     <meta property="og:url" content="https://jjmex.github.io/JBDA/">
     <meta property="og:type" content="website">
 
-    <link rel="icon" href="https://raw.githubusercontent.com/JJMex/JBDA/main/Isotipo.png" type="image/png">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/JJMex/JBDA/main/Isotipo.png">
+    <link rel="icon" href="assets/Isotipo.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/Isotipo.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -154,21 +154,8 @@
         header h2 { color: var(--pink-premium); font-size: 14px; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 30px; font-weight: 800; font-family: 'Inter', sans-serif;}
         header h1 { font-size: clamp(45px, 7vw, 85px); line-height: 1.05; margin-bottom: 35px; font-weight: 800; letter-spacing: -2px; color: var(--dark-grey); }
         header p { font-size: 22px; color: var(--soft-grey); max-width: 600px; margin-bottom: 50px; font-weight: 300; line-height: 1.6; }
-        
-        /* --- NUEVO: BOTÓN ONDA MAGNÉTICA --- */
-        .btn-main { 
-            display: inline-block; padding: 22px 48px; background-color: var(--dark-grey); color: var(--white); 
-            text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 13px; text-transform: uppercase; 
-            letter-spacing: 1.5px; border: 1px solid var(--dark-grey); font-family: 'Inter', sans-serif; 
-            position: relative; overflow: hidden; z-index: 1; transition: box-shadow 0.4s ease, transform 0.1s, border-color 0.4s ease;
-        }
-        .btn-main::before {
-            content: ''; position: absolute; top: var(--y, 50%); left: var(--x, 50%); width: 0; height: 0;
-            background-color: var(--pink-premium); border-radius: 50%; transform: translate(-50%, -50%);
-            transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1), height 0.5s cubic-bezier(0.25, 1, 0.5, 1); z-index: -1;
-        }
-        .btn-main:hover::before { width: 400px; height: 400px; }
-        .btn-main:hover { color: var(--white); box-shadow: 0 15px 30px rgba(212, 0, 109, 0.3); border-color: var(--pink-premium); }
+        .btn-main { display: inline-block; padding: 22px 48px; background-color: var(--dark-grey); color: var(--white); text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; border: 1px solid var(--dark-grey); font-family: 'Inter', sans-serif; transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.1s; }
+        .btn-main:hover { background-color: var(--pink-premium); border-color: var(--pink-premium); box-shadow: 0 15px 30px rgba(212, 0, 109, 0.2); }
 
         /* --- ECOSISTEMA MULTIVENDOR --- */
         #ecosistema { padding: 20px 8% 60px 8%; text-align: center; }
@@ -196,24 +183,19 @@
         .filosofia-box h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: var(--pink-premium); margin-bottom: 15px; font-weight: 800; font-family: 'Inter', sans-serif; }
         .filosofia-box p { font-size: 17px; color: var(--soft-grey); line-height: 1.7; font-weight: 400; }
 
-        /* --- NUEVO: SCROLL-FOCUS DINÁMICO EN TARJETAS --- */
-        /* Estado por defecto: Apagadas un poco */
+        /* --- ELEVACIÓN ORGÁNICA UNIFICADA --- */
         .card, .team-card, details {
             background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(251, 207, 232, 0.6); border-radius: 12px; position: relative;
-            opacity: 0.5; transform: scale(0.96); /* Estado inactivo */
-            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease, opacity 0.6s ease;
-            will-change: transform, opacity;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease !important;
+            will-change: transform;
         }
-        /* Estado Focus (Cuando está en el centro de la pantalla vía JS) */
-        .card.scroll-focused, .team-card.scroll-focused, details.scroll-focused {
-            opacity: 1; transform: scale(1);
-        }
-        /* Elevación Premium (Gana a todo lo demás si pasas el ratón) */
         .card:hover, .team-card:hover, details:hover {
-            opacity: 1 !important; transform: translateY(-8px) scale(1.02) !important;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.08) !important; border-color: var(--pink-premium) !important; z-index: 2;
+            transform: translateY(-8px) scale(1.02) !important;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.08) !important;
+            border-color: var(--pink-premium) !important;
+            z-index: 2;
         }
 
         /* --- ANIMACIÓN ÍCONOS AUTODIBUJABLES --- */
@@ -222,7 +204,7 @@
         .card:hover .icon-wrapper svg { stroke: #ffffff; }
 
         .icon-wrapper svg * { stroke-dasharray: 1; stroke-dashoffset: 1; }
-        .card.scroll-focused .icon-wrapper svg * { animation: drawSvg 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; animation-delay: 0.2s; }
+        .card.aos-animate .icon-wrapper svg * { animation: drawSvg 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; animation-delay: 0.4s; }
         @keyframes drawSvg { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 
         /* --- METODOLOGÍA (LAYOUT STICKY) --- */
@@ -236,15 +218,14 @@
         .card ul { list-style: none; }
         .card ul li { margin-bottom: 15px; font-size: 16px; color: var(--soft-grey); padding-left: 20px; border-left: 2px solid var(--pink-premium); line-height: 1.6; }
 
-        /* --- IMPACTO (MOTOR DE DATOS) --- */
+        /* --- IMPACTO --- */
         #impacto-container { padding: 40px 0; }
         #impacto { padding: 90px 8%; background-color: var(--dark-grey) !important; color: var(--white); margin: 0 4%; border-radius: 30px; box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15); display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: center; }
         .impacto-texto { text-align: left; }
         .impacto-texto h2 { color: var(--white); font-size: clamp(32px, 4vw, 48px); letter-spacing: -1px; margin-top: 15px; line-height: 1.1; }
         .grid-impacto { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
         .impacto-item:nth-child(3) { grid-column: span 2; }
-        /* Títulos de contadores */
-        .impacto-item h3 { font-size: clamp(50px, 6vw, 75px); font-weight: 800; color: var(--pink-premium); line-height: 1; margin-bottom: 10px; letter-spacing: -2px; font-family: 'Inter', sans-serif; display: flex; align-items: baseline; gap: 2px; }
+        .impacto-item h3 { font-size: clamp(50px, 6vw, 75px); font-weight: 800; color: var(--pink-premium); line-height: 1; margin-bottom: 10px; letter-spacing: -2px; font-family: 'Inter', sans-serif; }
         .impacto-item h4 { font-size: 16px; color: var(--white); margin-bottom: 5px; font-weight: 700; font-family: 'Inter', sans-serif;}
         .impacto-item p { font-size: 14px; color: #cbd5e1; line-height: 1.6; font-weight: 300; }
 
@@ -361,10 +342,11 @@
 
     <div class="blueprint-grid"></div>
     <div class="cursor-led" id="cursor-led"></div>
-    <div id="preloader"><img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="Cargando JBDA..." class="preload-logo"></div>
+    
+    <div id="preloader"><img src="assets/JBDA.png" alt="Cargando JBDA..." class="preload-logo"></div>
 
     <nav id="main-nav">
-        <div class="logo-container"><a href="#inicio" aria-label="Volver al inicio"><img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo"></a></div>
+        <div class="logo-container"><a href="#inicio" aria-label="Volver al inicio"><img src="assets/JBDA.png" alt="JBDA Logo"></a></div>
         <div class="nav-links" id="nav-links">
             <a href="#servicios" class="nav-item">Metodología</a>
             <a href="#diferenciadores" class="nav-item">Consultoría</a>
@@ -378,7 +360,7 @@
         <canvas id="network-canvas"></canvas>
         <div class="hero-content" data-aos="fade-up">
             <h2>Infraestructura & Telecomunicaciones</h2>
-            <h1>Diseñamos la <span class="editorial-italic">columna vertebral</span> de su negocio.</h1>
+            <h1>Diseñamos la columna vertebral de su negocio.</h1>
             <p>Consultoría estratégica en infraestructura de redes diseñada para maximizar la eficiencia operativa y rentabilizar su inversión tecnológica.</p>
             <a id="link-hero" href="#" class="btn-main magnetic-btn" aria-label="Agendar Diagnóstico">Agendar Diagnóstico</a>
         </div>
@@ -391,21 +373,21 @@
                 <p style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--dark-grey); margin-bottom: 20px;">Capacidad de integración y experiencia operativa.</p>
                 <div class="marquee-wrapper">
                     <div class="marquee-track">
-                        <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Huawei%20Logo.png" alt="Huawei" class="brand-logo">
-                        <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Cisco%20Logo.png" alt="Cisco" class="brand-logo">
-                        <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Fortinet%20Logo.png" alt="Fortinet" class="brand-logo">
-                        <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Aruba%20Logo.png" alt="Aruba" class="brand-logo">
-                        <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/3Com%20Logo.png" alt="3Com" class="brand-logo">
-                        <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/H3C%20Logo.png" alt="H3C" class="brand-logo">
-                        <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/ProxMox%20Logo.png" alt="Proxmox" class="brand-logo">
+                        <img src="assets/Huawei.png" alt="Huawei" class="brand-logo">
+                        <img src="assets/Cisco.png" alt="Cisco" class="brand-logo">
+                        <img src="assets/Fortinet.png" alt="Fortinet" class="brand-logo">
+                        <img src="assets/Aruba.png" alt="Aruba" class="brand-logo">
+                        <img src="assets/3Com.png" alt="3Com" class="brand-logo">
+                        <img src="assets/H3C.png" alt="H3C" class="brand-logo">
+                        <img src="assets/ProxMox.png" alt="Proxmox" class="brand-logo">
                         
-                        <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Huawei%20Logo.png" alt="Huawei" class="brand-logo">
-                        <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Cisco%20Logo.png" alt="Cisco" class="brand-logo">
-                        <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Fortinet%20Logo.png" alt="Fortinet" class="brand-logo">
-                        <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Aruba%20Logo.png" alt="Aruba" class="brand-logo">
-                        <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/3Com%20Logo.png" alt="3Com" class="brand-logo">
-                        <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/H3C%20Logo.png" alt="H3C" class="brand-logo">
-                        <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/ProxMox%20Logo.png" alt="Proxmox" class="brand-logo">
+                        <img src="assets/Huawei.png" alt="Huawei" class="brand-logo">
+                        <img src="assets/Cisco.png" alt="Cisco" class="brand-logo">
+                        <img src="assets/Fortinet.png" alt="Fortinet" class="brand-logo">
+                        <img src="assets/Aruba.png" alt="Aruba" class="brand-logo">
+                        <img src="assets/3Com.png" alt="3Com" class="brand-logo">
+                        <img src="assets/H3C.png" alt="H3C" class="brand-logo">
+                        <img src="assets/ProxMox.png" alt="Proxmox" class="brand-logo">
                     </div>
                 </div>
             </div>
@@ -413,7 +395,7 @@
 
         <section id="manifiesto-global">
             <div class="texto-manifiesto" data-aos="fade-right">
-                <p>La red no es un accesorio;<br> es el <span class="editorial-italic" style="color: var(--pink-premium);">sistema circulatorio</span><br> de la empresa moderna.</p>
+                <p>La red no es un accesorio;<br> es el <span style="color: var(--pink-premium);">sistema circulatorio</span><br> de la empresa moderna.</p>
                 <p class="sub">En <strong>JBDA</strong> fusionamos la precisión de ingeniería de élite con una visión financiera de negocio orientada a resultados.</p>
             </div>
             <div class="cajas-filosofia">
@@ -434,7 +416,7 @@
                 <h2 class="title-serif" style="font-size: clamp(36px, 5vw, 52px);" data-aos="fade-right">Sistema de Reingeniería JBDA</h2>
             </div>
             <div class="servicios-right">
-                <div class="card">
+                <div class="card" data-aos="fade-up">
                     <span class="card-num">Fase 01</span>
                     <div class="icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -452,7 +434,7 @@
                         <li><strong>Diseño Escalable:</strong> Planificación de redes LAN/WAN preparadas para el crecimiento corporativo.</li>
                     </ul>
                 </div>
-                <div class="card">
+                <div class="card" data-aos="fade-up">
                     <span class="card-num">Fase 02</span>
                     <div class="icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -468,7 +450,7 @@
                         <li><strong>Segmentación y Seguridad:</strong> Blindaje de dispositivos (Hardening), creación de VLANs y políticas QoS estrictas.</li>
                     </ul>
                 </div>
-                <div class="card">
+                <div class="card" data-aos="fade-up">
                     <span class="card-num">Fase 03</span>
                     <div class="icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -492,17 +474,17 @@
                 </div>
                 <div class="grid-impacto">
                     <div class="impacto-item">
-                        <h3 class="counter-display"><span class="counter-val" data-target="85">0</span>%</h3>
+                        <h3>85%</h3>
                         <h4>Mitigación de Caídas</h4>
                         <p>Enfoque en reingeniería para reducir el downtime histórico.</p>
                     </div>
                     <div class="impacto-item">
-                        <h3 class="counter-display"><span class="counter-val" data-target="40">0</span>%</h3>
+                        <h3>40%</h3>
                         <h4>Optimización de CAPEX</h4>
                         <p>Reducción de sobreinversiones tecnológicas.</p>
                     </div>
                     <div class="impacto-item">
-                        <h3 class="counter-display"><span class="counter-val" data-target="99.8" data-decimal="true">0.0</span>%</h3>
+                        <h3>99.8%</h3>
                         <h4>Disponibilidad Estándar</h4>
                         <p>Nuestra métrica base para arquitecturas de misión crítica.</p>
                     </div>
@@ -542,7 +524,7 @@
             </p>
 
             <div class="team-grid">
-                <div class="team-card">
+                <div class="team-card" data-aos="fade-up" data-aos-delay="100">
                     <span class="member-role">Socia Directora & CEO</span>
                     <h3 class="member-name">Lic. Danyssha Gutiérrez</h3>
                     <p class="member-bio">
@@ -550,7 +532,7 @@
                     </p>
                 </div>
 
-                <div class="team-card">
+                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
                     <span class="member-role">Socio Director & CTO</span>
                     <h3 class="member-name">Ing. José Cruz</h3>
                     <p class="member-bio">
@@ -566,7 +548,7 @@
                 <h2 class="title-serif">Preguntas<br>Frecuentes</h2>
             </div>
             
-            <div class="faq-container">
+            <div class="faq-container" data-aos="fade-left">
                 <details>
                     <summary>¿La evaluación de red requiere detener nuestra operación?</summary>
                     <div class="faq-content">
@@ -610,7 +592,7 @@
         <footer>
             <div class="footer-col">
                 <a href="#inicio" aria-label="Volver al inicio">
-                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px; filter: brightness(0) invert(1);" loading="lazy">
+                    <img src="assets/JBDA.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px; filter: brightness(0) invert(1);" loading="lazy">
                 </a>
                 <p><strong>JBDA 2026</strong> <span id="terminal-toggle" title="Modo Ingeniero">>_</span><br>Consultoría Estratégica en<br>Infraestructura de Redes.</p>
                 <br>
@@ -678,26 +660,20 @@
             window.addEventListener('mousemove', (e) => {
                 cursorLed.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
             });
-            const interactives = document.querySelectorAll('a, button, summary, .brand-logo');
+            const interactives = document.querySelectorAll('a, button, .card, .team-card, summary');
             interactives.forEach(el => {
                 el.addEventListener('mouseenter', () => cursorLed.classList.add('tx-rx'));
                 el.addEventListener('mouseleave', () => cursorLed.classList.remove('tx-rx'));
             });
 
-            // --- 2. LÓGICA DE BOTONES MAGNÉTICOS & RIPPLE LÍQUIDO ---
+            // --- 2. LÓGICA DE BOTONES MAGNÉTICOS ---
             const magneticBtns = document.querySelectorAll('.magnetic-btn');
             magneticBtns.forEach(btn => {
                 btn.addEventListener('mousemove', (e) => {
                     const rect = btn.getBoundingClientRect();
-                    // Translación magnética
                     const h = rect.width / 2; const v = rect.height / 2;
-                    const xTranslate = e.clientX - rect.left - h; const yTranslate = e.clientY - rect.top - v;
-                    btn.style.transform = `translate(${xTranslate * 0.3}px, ${yTranslate * 0.3}px)`;
-                    
-                    // Origen del Ripple (Onda)
-                    const xRipple = e.clientX - rect.left; const yRipple = e.clientY - rect.top;
-                    btn.style.setProperty('--x', `${xRipple}px`);
-                    btn.style.setProperty('--y', `${yRipple}px`);
+                    const x = e.clientX - rect.left - h; const y = e.clientY - rect.top - v;
+                    btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
                 });
                 btn.addEventListener('mouseleave', () => { btn.style.transform = `translate(0px, 0px)`; });
             });
@@ -706,46 +682,7 @@
             const terminalToggle = document.getElementById('terminal-toggle');
             terminalToggle.addEventListener('click', () => { document.body.classList.toggle('terminal-mode'); });
 
-            // --- 4. MOTOR DE DATOS: CONTADORES DINÁMICOS ---
-            const counters = document.querySelectorAll('.counter-val');
-            let observerCounters = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if(entry.isIntersecting) {
-                        const target = parseFloat(entry.target.getAttribute('data-target'));
-                        const isDecimal = entry.target.getAttribute('data-decimal') === 'true';
-                        const duration = 1500; // 1.5 segundos
-                        const step = target / (duration / 16);
-                        let current = 0;
-                        const updateCounter = () => {
-                            current += step;
-                            if(current < target) {
-                                entry.target.innerText = isDecimal ? current.toFixed(1) : Math.ceil(current);
-                                requestAnimationFrame(updateCounter);
-                            } else {
-                                entry.target.innerText = target;
-                            }
-                        };
-                        updateCounter();
-                        observerCounters.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-            counters.forEach(c => observerCounters.observe(c));
-
-            // --- 5. SCROLL-FOCUS DINÁMICO (TARJETAS) ---
-            const focusCards = document.querySelectorAll('.card, .team-card, details');
-            let observerFocus = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if(entry.isIntersecting) {
-                        entry.target.classList.add('scroll-focused');
-                    } else {
-                        entry.target.classList.remove('scroll-focused');
-                    }
-                });
-            }, { rootMargin: "-30% 0px -30% 0px" }); // Se enciende solo cuando llega al centro (30% de margen arriba y abajo)
-            focusCards.forEach(c => observerFocus.observe(c));
-
-            // --- 6. ANIMACIÓN DE RED INTERACTIVA (CON FÍSICA DE RESORTE/INERCIA) ---
+            // --- 4. ANIMACIÓN DE RED INTERACTIVA (CON FÍSICA DE RESORTE/INERCIA) ---
             const canvas = document.getElementById('network-canvas');
             const ctx = canvas.getContext('2d');
             let width, height, particles = [];
@@ -848,24 +785,22 @@
             }
             window.addEventListener('resize', initCanvas); initCanvas(); animateCanvas();
 
-            // --- 7. SCRIPT DE PROTECCIÓN ---
+            // --- 5. SCRIPT DE PROTECCIÓN ---
             document.addEventListener('contextmenu', event => event.preventDefault());
             document.addEventListener('keydown', event => { if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || (event.ctrlKey && event.keyCode === 85)) { event.preventDefault(); } });
 
-            // --- 8. BARRA DE PROGRESO Y SOMBRA DINÁMICA ---
+            // --- 6. BARRA DE PROGRESO Y SOMBRA DINÁMICA ---
             const nav = document.getElementById('main-nav');
             const progressBar = document.getElementById('scroll-progress');
             window.addEventListener('scroll', () => { 
-                // Navegación
                 if (window.scrollY > 50) { nav.classList.add('nav-scrolled'); } else { nav.classList.remove('nav-scrolled'); } 
-                // Barra de progreso quirúrgica
                 const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
                 const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 const scrolled = (winScroll / height) * 100;
                 progressBar.style.width = scrolled + "%";
             });
 
-            // --- 9. LÓGICA DEL MENÚ MÓVIL ---
+            // --- 7. LÓGICA DEL MENÚ MÓVIL ---
             const menuBtn = document.getElementById('mobile-menu-btn');
             const navLinks = document.getElementById('nav-links');
             const navItems = document.querySelectorAll('.nav-item');
@@ -880,7 +815,7 @@
                 item.addEventListener('click', () => { navLinks.classList.remove('active'); menuOpen = false; menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>'; });
             });
 
-            // --- 10. INICIALIZACIÓN DE ENLACES Y AOS ---
+            // --- 8. INICIALIZACIÓN DE ENLACES Y AOS ---
             AOS.init({ duration: 1000, once: true, offset: 100 });
 
             const numeroWhatsApp = "525613388030"; const mensajeGeneral = "Hola JBDA, solicito información de consultoría."; const urlWhatsGeneral = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeGeneral)}`;
@@ -891,7 +826,7 @@
             const abrirCalendly = (e) => { e.preventDefault(); Calendly.initPopupWidget({url: urlCalendly}); document.getElementById('concierge-menu').classList.remove('active'); return false; };
             document.getElementById('link-hero').addEventListener('click', abrirCalendly); document.getElementById('link-cta').addEventListener('click', abrirCalendly); document.getElementById('link-concierge-calendly').addEventListener('click', abrirCalendly);
 
-            // --- 11. LÓGICA DEL BOTÓN FLOTANTE ---
+            // --- 9. LÓGICA DEL BOTÓN FLOTANTE ---
             const conciergeToggle = document.getElementById('concierge-toggle'); const conciergeMenu = document.getElementById('concierge-menu');
             conciergeToggle.addEventListener('click', (e) => { e.stopPropagation(); conciergeMenu.classList.toggle('active'); });
             document.addEventListener('click', (event) => { if (!conciergeToggle.contains(event.target) && !conciergeMenu.contains(event.target)) { conciergeMenu.classList.remove('active'); } });
