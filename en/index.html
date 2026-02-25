@@ -198,21 +198,41 @@
                 
                 <div class="stress-ui">
                     <div class="slider-container">
-                        <label>User Volume / Server Requests</label>
+                        <label>Network Traffic Volume</label>
                         <input type="range" id="traffic-slider" min="0" max="100" value="0" aria-label="Traffic Simulator">
-                        <span id="traffic-value">Low (Normal)</span>
+                        
+                        <div class="metrics-dashboard">
+                            <div class="metric-item">
+                                <span class="metric-label">Concurrent Users</span>
+                                <span id="metric-users" class="metric-value">150</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Requests (RPS)</span>
+                                <span id="metric-rps" class="metric-value">300</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Status</span>
+                                <span id="metric-status" class="metric-value status-green">Stable</span>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="graphs">
                         <div class="graph-box traditional">
                             <h4>Traditional Network</h4>
                             <div class="bar-container"><div class="bar trad" id="bar-trad"></div></div>
-                            <span class="status" id="status-trad">Latency: 15ms (Stable)</span>
+                            <div class="hardware-metrics">
+                                <span class="status status-green" id="status-trad">Latency: 15ms</span>
+                                <span class="cpu-load status-green" id="cpu-trad">CPU: 15%</span>
+                            </div>
                         </div>
                         <div class="graph-box jbda">
                             <h4>JBDA Hardened Architecture</h4>
                             <div class="bar-container"><div class="bar jbda" id="bar-jbda"></div></div>
-                            <span class="status" id="status-jbda" style="color: var(--pink-premium);">Latency: 12ms (Stable, 99.8% QoS)</span>
+                            <div class="hardware-metrics">
+                                <span class="status" id="status-jbda" style="color: var(--pink-premium);">Latency: 12ms</span>
+                                <span class="cpu-load" id="cpu-jbda" style="color: var(--pink-premium);">CPU: 12% (Active Balancing)</span>
+                            </div>
                         </div>
                     </div>
                 </div>
