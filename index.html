@@ -53,9 +53,8 @@
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
             
-            /* Gradiente animado que sustituye los colores planos de las secciones */
-            background: linear-gradient(-45deg, var(--white), var(--silver), #fff0f5, var(--silver));
-            background-size: 400% 400%;
+            background: linear-gradient(270deg, var(--white), var(--silver), #fff0f5, var(--white));
+            background-size: 600% 600%;
             animation: fluidBg 25s ease infinite;
             transition: color 0.5s ease;
         }
@@ -93,7 +92,7 @@
         /* --- MODO TERMINAL MATRIX --- */
         body.terminal-mode { background: #050505 !important; animation: none !important; --dark-grey: #00ff00; --soft-grey: #00cc00; --pink-premium: #00ff00; --border: #004400; }
         body.terminal-mode header, body.terminal-mode section, body.terminal-mode footer, body.terminal-mode nav, body.terminal-mode #contacto, body.terminal-mode #impacto, body.terminal-mode .concierge-menu { background-color: transparent !important; background-image: none !important; box-shadow: none !important; border: none !important;}
-        body.terminal-mode .card, body.terminal-mode .team-card, body.terminal-mode details { background: #050505 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border-color: #004400 !important; }
+        body.terminal-mode .card, body.terminal-mode .team-card, body.terminal-mode details { background: #050505 !important; border-color: #004400 !important; }
         body.terminal-mode *, body.terminal-mode h1, body.terminal-mode h2, body.terminal-mode h3, body.terminal-mode h4, body.terminal-mode p, body.terminal-mode a, body.terminal-mode span, body.terminal-mode li { color: #00ff00 !important; font-family: 'Courier New', Courier, monospace !important; letter-spacing: 0 !important; border-radius: 0 !important; text-shadow: 0 0 5px rgba(0, 255, 0, 0.5); }
         body.terminal-mode .btn-main { background-color: #002200 !important; border: 1px solid #00ff00 !important; }
         body.terminal-mode .brand-logo, body.terminal-mode img { filter: sepia(100%) hue-rotate(90deg) saturate(300%) brightness(80%) contrast(200%) !important; }
@@ -101,32 +100,29 @@
         body.terminal-mode svg { stroke: #00ff00; }
         body.terminal-mode .diff-item { border-left-color: #00ff00 !important; }
         body.terminal-mode .social-link svg, body.terminal-mode .mobile-menu-btn svg, body.terminal-mode .concierge-item svg { fill: #00ff00 !important; stroke: none !important; }
-        body.terminal-mode .icon-wrapper svg { fill: none !important; stroke: #00ff00 !important; }
+        body.terminal-mode .icon-wrapper svg { fill: none !important; stroke: #00ff00 !important; animation: none !important; stroke-dasharray: none !important; stroke-dashoffset: 0 !important;}
         body.terminal-mode::after { content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); z-index: 9999; background-size: 100% 2px, 3px 100%; pointer-events: none; opacity: 0.4; }
         #terminal-toggle { cursor: pointer !important; opacity: 0.2; font-family: monospace; transition: opacity 0.3s; margin-left: 5px; }
         #terminal-toggle:hover { opacity: 1; color: var(--pink-premium); }
 
-        /* --- NAVEGACIÓN ÉLITE --- */
-        nav { padding: 0 8%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: transparent; z-index: 1000; border-bottom: 1px solid transparent; height: 110px; transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        /* Efecto al hacer Scroll: Se reduce altura y difumina el fondo */
-        nav.nav-scrolled { height: 80px; background: rgba(253, 242, 248, 0.6); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border-bottom: 1px solid rgba(212, 0, 109, 0.1); box-shadow: 0 15px 35px -5px rgba(212, 0, 109, 0.15); }
-        
+        /* --- NAVEGACIÓN --- */
+        nav { padding: 0 8%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: transparent; z-index: 1000; height: 110px; transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); border-bottom: 1px solid transparent; }
+        nav.nav-scrolled { height: 80px; background: rgba(253, 242, 248, 0.7); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border-bottom: 1px solid rgba(212, 0, 109, 0.1); box-shadow: 0 15px 35px -5px rgba(212, 0, 109, 0.15); }
         .logo-container a { display: block; text-decoration: none; }
         .logo-container img { height: 85px; width: auto; transition: all 0.5s ease; display: block; }
-        nav.nav-scrolled .logo-container img { height: 55px; } /* Ajuste de logo al bajar */
+        nav.nav-scrolled .logo-container img { height: 55px; } 
         .logo-container img:hover { transform: scale(1.03); }
         
         .nav-links { display: flex; align-items: center; gap: 40px; }
-        /* Animación de línea en enlaces */
         .nav-links a { text-decoration: none; color: var(--soft-grey); font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; position: relative; padding: 5px 0; transition: color 0.3s ease; }
         .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background-color: var(--pink-premium); transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
         .nav-links a:hover { color: var(--dark-grey); }
         .nav-links a:hover::after { width: 100%; }
-        
+
         .mobile-menu-btn { display: none; background: none; border: none; color: var(--dark-grey); z-index: 1001; }
         .mobile-menu-btn svg { width: 32px; height: 32px; fill: currentColor; transition: transform 0.3s ease; }
 
-        /* --- SECCIONES TRANSPARENTES (Para que fluya el fondo líquido) --- */
+        /* --- SECCIONES TRANSPARENTES (Para que fluya el lienzo) --- */
         header, section, footer { position: relative; z-index: 1; background-color: transparent !important; background-image: none !important; }
 
         /* --- HERO SECTION --- */
@@ -149,41 +145,57 @@
         .filosofia-box h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: var(--pink-premium); margin-bottom: 15px; font-weight: 800; font-family: 'Inter', sans-serif; }
         .filosofia-box p { font-size: 17px; color: var(--soft-grey); line-height: 1.7; font-weight: 400; }
 
-        /* --- NUEVO: ECOSISTEMA MULTIVENDOR --- */
+        /* --- ECOSISTEMA MULTIVENDOR --- */
         #ecosistema { padding: 40px 8% 80px 8%; text-align: center; }
-        .marquee-wrapper { 
-            overflow: hidden; padding: 40px 0; white-space: nowrap; position: relative; width: 100%;
-            /* Máscara CSS: Difumina los logos en los bordes para una inmersión líquida */
-            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-        }
+        .marquee-wrapper { overflow: hidden; padding: 40px 0; white-space: nowrap; position: relative; width: 100%; border-top: 1px solid rgba(212, 0, 109, 0.15); border-bottom: 1px solid rgba(212, 0, 109, 0.15); -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent); mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent); }
         .marquee-track { display: inline-block; animation: scroll-marquee 35s linear infinite; }
         .brand-logo { height: 45px; width: auto; margin: 0 60px; vertical-align: middle; filter: grayscale(100%) opacity(0.4); transition: all 0.4s ease; }
         .brand-logo:hover { filter: grayscale(0%) opacity(1); transform: scale(1.1); }
         @keyframes scroll-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* --- GLASSMORPHISM PARA TARJETAS --- */
-        /* Al ser transparente el fondo, las tarjetas ocupan un efecto de cristal para verse premium y no chocar con el gradiente */
-        .card, .team-card { 
-            background: rgba(253, 242, 248, 0.4); 
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px); 
-            border: 1px solid rgba(251, 207, 232, 0.5); 
-            padding: 60px 50px; 
-            border-radius: 12px; 
-            transition: all 0.4s ease; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+        /* --- ELEVACIÓN ORGÁNICA UNIFICADA --- */
+        /* Aplicamos la animación de "flotar" y crecer a todas las tarjetas por igual */
+        .card, .team-card, details {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease !important;
+            will-change: transform;
         }
-        .card:hover, .team-card:hover { transform: translateX(-10px); box-shadow: 20px 30px 60px rgba(0,0,0,0.06); border-color: var(--pink-premium); z-index: 2; }
+        .card:hover, .team-card:hover, details:hover {
+            transform: translateY(-8px) scale(1.02) !important;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.08) !important;
+            border-color: var(--pink-premium) !important;
+            z-index: 2;
+        }
+
+        /* --- ANIMACIÓN ÍCONOS AUTODIBUJABLES --- */
+        .icon-wrapper { width: 56px; height: 56px; background: rgba(212, 0, 109, 0.08); border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; transition: all 0.4s ease; }
+        .card:hover .icon-wrapper { background: var(--pink-premium); }
+        .card:hover .icon-wrapper svg { stroke: #ffffff; }
+
+        /* Configuración base del SVG (oculto al inicio) */
+        .icon-wrapper svg * {
+            stroke-dasharray: 1;
+            stroke-dashoffset: 1;
+        }
+        /* Cuando AOS activa la tarjeta al hacer scroll, el ícono se dibuja */
+        .card.aos-animate .icon-wrapper svg * {
+            animation: drawSvg 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 0.4s; /* Espera a que la tarjeta suba antes de dibujarse */
+        }
+        @keyframes drawSvg {
+            from { stroke-dashoffset: 1; }
+            to { stroke-dashoffset: 0; }
+        }
 
         /* --- METODOLOGÍA (LAYOUT STICKY) --- */
         #servicios { padding: 40px 8% 140px 8%; display: flex; align-items: flex-start; gap: 100px; }
         .servicios-left { position: sticky; top: 160px; flex: 0 0 35%; }
         .servicios-right { flex: 1; display: flex; flex-direction: column; gap: 50px; }
         .section-label { color: var(--pink-premium); font-weight: 800; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: block; font-family: 'Inter', sans-serif; }
-        .icon-wrapper { width: 56px; height: 56px; background: rgba(212, 0, 109, 0.08); border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; transition: all 0.4s ease; }
-        .card:hover .icon-wrapper { background: var(--pink-premium); }
-        .card:hover .icon-wrapper svg { stroke: #ffffff; }
+        .card { padding: 60px 50px; }
         .card-num { font-size: 12px; font-weight: 800; color: var(--pink-premium); margin-bottom: 30px; display: block; position: absolute; top: 40px; right: 40px; opacity: 0.5; font-family: 'Inter', sans-serif;}
         .card h3 { font-size: 26px; margin-bottom: 20px; letter-spacing: -0.5px; font-weight: 700; color: var(--dark-grey); font-family: 'Inter', sans-serif;}
         .card ul { list-style: none; }
@@ -191,7 +203,6 @@
 
         /* --- IMPACTO --- */
         #impacto-container { padding: 40px 0; }
-        /* A esta caja sí le dejamos el gris oscuro fuerte porque es una pieza focal de impacto */
         #impacto { padding: 90px 8%; background-color: var(--dark-grey) !important; color: var(--white); margin: 0 4%; border-radius: 30px; box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15); display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: center; }
         .impacto-texto { text-align: left; }
         .impacto-texto h2 { color: var(--white); font-size: clamp(32px, 4vw, 48px); letter-spacing: -1px; margin-top: 15px; line-height: 1.1; }
@@ -204,7 +215,7 @@
         /* --- DIFERENCIADORES STICKY --- */
         #diferenciadores { padding: 140px 8% 60px 8%; display: flex; align-items: flex-start; gap: 80px; }
         .diff-left { position: sticky; top: 160px; flex: 0 0 45%; }
-        .diff-right { flex: 1; display: flex; flex-direction: column; gap: 80px; }
+        .diff-right { flex: 1; display: flex; flex-direction: column; gap: 80px; padding-bottom: 50px; }
         .quote-massive { font-size: clamp(45px, 6vw, 75px); font-family: 'Playfair Display', serif; font-weight: 800; line-height: 1.05; letter-spacing: -2px; color: var(--dark-grey); }
         .quote-highlight { color: var(--pink-premium); font-style: italic; }
         .diff-item { padding-left: 30px; border-left: 2px solid var(--pink-premium); transition: all 0.3s ease; }
@@ -218,7 +229,6 @@
         .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;}
         @media (min-width: 901px) { .team-card:nth-child(2) { margin-top: 80px; } }
         .team-card { padding: 50px 40px; }
-        .team-card:hover { transform: translateY(-8px); }
         .member-role { color: var(--pink-premium); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; margin-bottom: 15px; display: block; font-family: 'Inter', sans-serif;}
         .member-name { font-size: 26px; color: var(--dark-grey); font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px; font-family: 'Inter', sans-serif;}
         .member-bio { font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
@@ -228,10 +238,9 @@
         .faq-texto { position: sticky; top: 160px; } 
         .faq-texto h2 { font-size: clamp(36px, 4vw, 52px); margin-top: 15px; line-height: 1.1; }
         .faq-container { width: 100%; }
-        /* Glassmorphism para FAQ */
-        details { background: rgba(253, 242, 248, 0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(251, 207, 232, 0.6); border-radius: 8px; margin-bottom: 15px; overflow: hidden; transition: all 0.3s ease; }
-        details[open] { border-color: var(--pink-premium); box-shadow: 0 10px 30px rgba(212,0,109,0.08); background: var(--white); }
-        summary { padding: 25px 30px; font-size: 18px; font-weight: 700; color: var(--dark-grey); transition: color 0.3s ease; list-style: none; position: relative; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; }
+        details { border-radius: 8px; margin-bottom: 15px; overflow: hidden; }
+        details[open] { border-color: var(--pink-premium) !important; box-shadow: 0 15px 30px rgba(212,0,109,0.08) !important; background: var(--white); }
+        summary { padding: 25px 30px; font-size: 18px; font-weight: 700; color: var(--dark-grey); transition: color 0.3s ease; list-style: none; position: relative; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; cursor: none !important;}
         summary:hover { color: var(--pink-premium); }
         summary::-webkit-details-marker { display: none; }
         summary::after { content: '+'; font-size: 24px; color: var(--pink-premium); transition: transform 0.3s ease; font-weight: 400; }
@@ -278,7 +287,6 @@
             
             #ecosistema { padding: 40px 5%; }
 
-            /* Anular Sticky en Móviles para Servicios */
             #servicios { flex-direction: column; padding: 60px 5%; gap: 40px; }
             .servicios-left { position: relative; top: 0; flex: 1; }
             .servicios-right { gap: 30px; }
@@ -287,7 +295,6 @@
             .grid-impacto { grid-template-columns: 1fr; }
             .impacto-item:nth-child(3) { grid-column: span 1; }
             
-            /* Anular Sticky en Móviles para Diferenciadores */
             #diferenciadores { flex-direction: column; padding: 80px 5% 40px 5%; gap: 50px; }
             .diff-left { position: relative; top: 0; flex: 1; }
             .diff-right { gap: 50px; padding-bottom: 0; }
@@ -384,7 +391,16 @@
             <div class="servicios-right">
                 <div class="card" data-aos="fade-up">
                     <span class="card-num">Fase 01</span>
-                    <div class="icon-wrapper"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><line x1="10.5" y1="7.5" x2="6.5" y2="16.5"/><line x1="13.5" y1="7.5" x2="17.5" y2="16.5"/><line x1="7.5" y1="19" x2="16.5" y2="19"/></svg></div>
+                    <div class="icon-wrapper">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle pathLength="1" cx="12" cy="5" r="3"/>
+                            <circle pathLength="1" cx="5" cy="19" r="3"/>
+                            <circle pathLength="1" cx="19" cy="19" r="3"/>
+                            <line pathLength="1" x1="10.5" y1="7.5" x2="6.5" y2="16.5"/>
+                            <line pathLength="1" x1="13.5" y1="7.5" x2="17.5" y2="16.5"/>
+                            <line pathLength="1" x1="7.5" y1="19" x2="16.5" y2="19"/>
+                        </svg>
+                    </div>
                     <h3>Auditoría y Arquitectura Estratégica</h3>
                     <ul>
                         <li><strong>Optimización de CAPEX:</strong> Evaluación de necesidades previas a la compra. Evitamos sobredimensionamientos.</li>
@@ -393,7 +409,14 @@
                 </div>
                 <div class="card" data-aos="fade-up">
                     <span class="card-num">Fase 02</span>
-                    <div class="icon-wrapper"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
+                    <div class="icon-wrapper">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect pathLength="1" x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                            <rect pathLength="1" x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                            <line pathLength="1" x1="6" y1="6" x2="6.01" y2="6"/>
+                            <line pathLength="1" x1="6" y1="18" x2="6.01" y2="18"/>
+                        </svg>
+                    </div>
                     <h3>Despliegue y Blindaje de Infraestructura</h3>
                     <ul>
                         <li><strong>Configuración Avanzada:</strong> Despliegue experto en entornos críticos multivendor (Huawei, Cisco, Fortinet).</li>
@@ -402,7 +425,11 @@
                 </div>
                 <div class="card" data-aos="fade-up">
                     <span class="card-num">Fase 03</span>
-                    <div class="icon-wrapper"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+                    <div class="icon-wrapper">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline pathLength="1" points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </div>
                     <h3>Analítica y Gestión Proactiva Continua</h3>
                     <ul>
                         <li><strong>Visibilidad Total:</strong> Dashboards ejecutivos en tiempo real para el control de cada nodo en su red.</li>
@@ -599,7 +626,7 @@
             // --- 0. PRELOADER ---
             setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); }, 900);
 
-            // --- LÓGICA DE CURSOR LED (SWITCH TX/RX) ---
+            // --- 1. LÓGICA DE CURSOR LED (SWITCH TX/RX) ---
             const cursorLed = document.getElementById('cursor-led');
             window.addEventListener('mousemove', (e) => {
                 cursorLed.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
@@ -610,7 +637,7 @@
                 el.addEventListener('mouseleave', () => cursorLed.classList.remove('tx-rx'));
             });
 
-            // --- LÓGICA DE BOTONES MAGNÉTICOS ---
+            // --- 2. LÓGICA DE BOTONES MAGNÉTICOS ---
             const magneticBtns = document.querySelectorAll('.magnetic-btn');
             magneticBtns.forEach(btn => {
                 btn.addEventListener('mousemove', (e) => {
@@ -622,11 +649,11 @@
                 btn.addEventListener('mouseleave', () => { btn.style.transform = `translate(0px, 0px)`; });
             });
 
-            // --- MODO TERMINAL (EASTER EGG) ---
+            // --- 3. MODO TERMINAL (EASTER EGG) ---
             const terminalToggle = document.getElementById('terminal-toggle');
             terminalToggle.addEventListener('click', () => { document.body.classList.toggle('terminal-mode'); });
 
-            // --- ANIMACIÓN DE RED INTERACTIVA (CON FÍSICA DE RESORTE/INERCIA) ---
+            // --- 4. ANIMACIÓN DE RED INTERACTIVA (CON FÍSICA DE RESORTE/INERCIA) ---
             const canvas = document.getElementById('network-canvas');
             const ctx = canvas.getContext('2d');
             let width, height, particles = [];
@@ -652,8 +679,8 @@
                 update() {
                     // Movimiento orgánico sutil de la base
                     this.wanderAngle += 0.01;
-                    this.baseX += Math.cos(this.wanderAngle) * 0.3;
-                    this.baseY += Math.sin(this.wanderAngle) * 0.3;
+                    this.baseX += Math.cos(this.wanderAngle) * 0.2;
+                    this.baseY += Math.sin(this.wanderAngle) * 0.2;
 
                     // Mantener bases dentro de la pantalla
                     if (this.baseX < 0 || this.baseX > width) this.baseX = Math.random() * width;
@@ -703,7 +730,6 @@
                 height = canvas.height = document.querySelector('header').offsetHeight;
                 particles = [];
                 const particleCount = window.innerWidth < 768 ? 60 : 120;
-                
                 for (let i = 0; i < particleCount; i++) {
                     particles.push(new Particle());
                 }
@@ -736,15 +762,15 @@
             }
             window.addEventListener('resize', initCanvas); initCanvas(); animateCanvas();
 
-            // --- SCRIPT DE PROTECCIÓN ---
+            // --- 5. SCRIPT DE PROTECCIÓN ---
             document.addEventListener('contextmenu', event => event.preventDefault());
             document.addEventListener('keydown', event => { if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || (event.ctrlKey && event.keyCode === 85)) { event.preventDefault(); } });
 
-            // --- SOMBRA DINÁMICA ---
+            // --- 6. SOMBRA DINÁMICA ---
             const nav = document.getElementById('main-nav');
             window.addEventListener('scroll', () => { if (window.scrollY > 50) { nav.classList.add('nav-scrolled'); } else { nav.classList.remove('nav-scrolled'); } });
 
-            // --- LÓGICA DEL MENÚ MÓVIL ---
+            // --- 7. LÓGICA DEL MENÚ MÓVIL ---
             const menuBtn = document.getElementById('mobile-menu-btn');
             const navLinks = document.getElementById('nav-links');
             const navItems = document.querySelectorAll('.nav-item');
@@ -759,7 +785,7 @@
                 item.addEventListener('click', () => { navLinks.classList.remove('active'); menuOpen = false; menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>'; });
             });
 
-            // --- INICIALIZACIÓN DE ENLACES ---
+            // --- 8. INICIALIZACIÓN DE ENLACES ---
             AOS.init({ duration: 1000, once: true, offset: 100 });
 
             const numeroWhatsApp = "525613388030"; const mensajeGeneral = "Hola JBDA, solicito información de consultoría."; const urlWhatsGeneral = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeGeneral)}`;
@@ -770,7 +796,7 @@
             const abrirCalendly = (e) => { e.preventDefault(); Calendly.initPopupWidget({url: urlCalendly}); document.getElementById('concierge-menu').classList.remove('active'); return false; };
             document.getElementById('link-hero').addEventListener('click', abrirCalendly); document.getElementById('link-cta').addEventListener('click', abrirCalendly); document.getElementById('link-concierge-calendly').addEventListener('click', abrirCalendly);
 
-            // --- LÓGICA DEL BOTÓN FLOTANTE ---
+            // --- 9. LÓGICA DEL BOTÓN FLOTANTE ---
             const conciergeToggle = document.getElementById('concierge-toggle'); const conciergeMenu = document.getElementById('concierge-menu');
             conciergeToggle.addEventListener('click', (e) => { e.stopPropagation(); conciergeMenu.classList.toggle('active'); });
             document.addEventListener('click', (event) => { if (!conciergeToggle.contains(event.target) && !conciergeMenu.contains(event.target)) { conciergeMenu.classList.remove('active'); } });
