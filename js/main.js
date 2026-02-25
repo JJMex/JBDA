@@ -4,15 +4,15 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => { 
         const preloader = document.getElementById('preloader');
         if(preloader) preloader.classList.add('preloader-hidden'); 
-    }, 900);
+    }, 400);
 
-    // --- 1. LÓGICA DE CURSOR LED (SWITCH TX/RX) ---
+    // --- 1. LÓGICA DE CURSOR LED ---
     const cursorLed = document.getElementById('cursor-led');
     if (cursorLed) {
         window.addEventListener('mousemove', (e) => {
             cursorLed.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
         });
-        const interactives = document.querySelectorAll('a, button, summary, .brand-logo, .card, .team-card');
+        const interactives = document.querySelectorAll('a, button, summary');
         interactives.forEach(el => {
             el.addEventListener('mouseenter', () => cursorLed.classList.add('tx-rx'));
             el.addEventListener('mouseleave', () => cursorLed.classList.remove('tx-rx'));
@@ -34,17 +34,45 @@ document.addEventListener("DOMContentLoaded", () => {
             document.body.classList.toggle('dark-theme');
             if (document.body.classList.contains('dark-theme')) {
                 localStorage.setItem('jbda_theme', 'dark');
-                if(moonIcon) moonIcon.style.display = 'none'; 
-                if(sunIcon) sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none'; sunIcon.style.display = 'block';
             } else {
                 localStorage.setItem('jbda_theme', 'light');
-                if(moonIcon) moonIcon.style.display = 'block'; 
-                if(sunIcon) sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block'; sunIcon.style.display = 'none';
             }
         });
     }
 
-    // --- 3. BOTONES MAGNÉTICOS & RIPPLE ---
+    // --- 3. MOTOR BILINGÜE CON MEMORIA ---
+    const langToggleBtn = document.getElementById('lang-toggle-btn');
+    const langTextElements = document.querySelectorAll('.lang-text');
+    
+    function setLanguage(lang) {
+        langTextElements.forEach(el => {
+            if (lang === 'en') {
+                el.innerHTML = el.getAttribute('data-en');
+            } else {
+                el.innerHTML = el.getAttribute('data-es');
+            }
+        });
+        if(langToggleBtn) {
+            langToggleBtn.innerText = lang === 'en' ? 'ES' : 'EN';
+        }
+        // Ajustar el script de Calendly dependiendo del idioma
+        const calendlyUrl = lang === 'en' ? "https://calendly.com/jbda_tech/diagnostico" : "https://calendly.com/jbda_tech/diagnostico"; // Aquí puedes poner el link en inglés si lo tienes en Calendly
+    }
+
+    let currentLang = localStorage.getItem('jbda_lang') || 'es';
+    setLanguage(currentLang);
+
+    if (langToggleBtn) {
+        langToggleBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            localStorage.setItem('jbda_lang', currentLang);
+            setLanguage(currentLang);
+        });
+    }
+
+    // --- 4. BOTONES MAGNÉTICOS & RIPPLE ---
     const magneticBtns = document.querySelectorAll('.magnetic-btn');
     magneticBtns.forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
@@ -59,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.addEventListener('mouseleave', () => { btn.style.transform = `translate(0px, 0px)`; });
     });
 
-    // --- 4. MOTOR DE DATOS: CONTADORES DINÁMICOS ---
+    // --- 5. MOTOR DE DATOS: CONTADORES DINÁMICOS ---
     const counters = document.querySelectorAll('.counter-val');
     if(counters.length > 0) {
         let observerCounters = new IntersectionObserver(entries => {
@@ -87,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
         counters.forEach(c => observerCounters.observe(c));
     }
 
-    // --- 5. SCROLL-FOCUS DINÁMICO SEGURO ---
+    // --- 6. SCROLL-FOCUS DINÁMICO SEGURO ---
     setTimeout(() => {
         const focusCards = document.querySelectorAll('.card, .team-card, details');
         if(focusCards.length > 0) {
@@ -108,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, 1200);
 
-    // --- 6. ANIMACIÓN DE RED INTERACTIVA (CON SENSOR DE LUZ) ---
+    // --- 7. ANIMACIÓN DE RED INTERACTIVA ---
     const canvas = document.getElementById('network-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
@@ -200,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('resize', initCanvas); initCanvas(); animateCanvas();
     }
 
-    // --- 7. BARRA DE PROGRESO Y SOMBRA DINÁMICA ---
+    // --- 8. BARRA DE PROGRESO Y SOMBRA DINÁMICA ---
     const nav = document.getElementById('main-nav');
     const progressBar = document.getElementById('scroll-progress');
     window.addEventListener('scroll', () => { 
@@ -215,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 8. LÓGICA DEL MENÚ MÓVIL ---
+    // --- 9. LÓGICA DEL MENÚ MÓVIL ---
     const menuBtn = document.getElementById('mobile-menu-btn');
     const navLinks = document.getElementById('nav-links');
     const navItems = document.querySelectorAll('.nav-item');
@@ -228,13 +256,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         navItems.forEach(item => {
-            if(item.id !== 'dark-mode-toggle') {
+            if(item.id !== 'dark-mode-toggle' && item.id !== 'lang-toggle-btn') {
                 item.addEventListener('click', () => { navLinks.classList.remove('active'); menuOpen = false; menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>'; });
             }
         });
     }
 
-    // --- 9. INICIALIZACIÓN DE ENLACES Y AOS ---
+    // --- 10. INICIALIZACIÓN DE ENLACES Y AOS ---
     if (typeof AOS !== 'undefined') { AOS.init({ duration: 1000, once: true, offset: 100 }); }
 
     const numeroWhatsApp = "525613388030"; const mensajeGeneral = "Hola JBDA, solicito información de consultoría."; const urlWhatsGeneral = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeGeneral)}`;
@@ -250,18 +278,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if(document.getElementById('link-cta')) document.getElementById('link-cta').addEventListener('click', abrirCalendly); 
     if(document.getElementById('link-concierge-calendly')) document.getElementById('link-concierge-calendly').addEventListener('click', abrirCalendly);
 
-    // --- 10. LÓGICA DEL BOTÓN FLOTANTE ---
+    // --- 11. LÓGICA DEL BOTÓN FLOTANTE ---
     const conciergeToggle = document.getElementById('concierge-toggle'); const conciergeMenu = document.getElementById('concierge-menu');
     if(conciergeToggle && conciergeMenu) {
         conciergeToggle.addEventListener('click', (e) => { e.stopPropagation(); conciergeMenu.classList.toggle('active'); });
         document.addEventListener('click', (event) => { if (!conciergeToggle.contains(event.target) && !conciergeMenu.contains(event.target)) { conciergeMenu.classList.remove('active'); } });
     }
 
-    // --- 11. MODO TERMINAL (EASTER EGG) ---
+    // --- 12. MODO TERMINAL ---
     const terminalToggle = document.getElementById('terminal-toggle');
     if(terminalToggle) { terminalToggle.addEventListener('click', () => { document.body.classList.toggle('terminal-mode'); }); }
 
-    // --- 12. SCRIPT DE PROTECCIÓN ---
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.addEventListener('keydown', event => { if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || (event.ctrlKey && event.keyCode === 85)) { event.preventDefault(); } });
 });
