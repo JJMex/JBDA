@@ -44,14 +44,14 @@ h1, h2, .quote-massive, .title-serif { font-family: 'Playfair Display', serif; }
 /* EFECTO SCRAMBLE */
 .dud { color: var(--soft-grey); opacity: 0.5; font-family: 'Courier New', Courier, monospace; letter-spacing: 2px;}
 
+/* --- ORBES DE LUZ (BLINDADOS EN ROSA Y PLATA) --- */
 .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--pink-premium); width: 0%; z-index: 100000; pointer-events: none; transition: width 0.1s ease-out; }
 .orbs-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: 0; pointer-events: none; }
 .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.7; animation: floatOrbs 20s infinite alternate ease-in-out; mix-blend-mode: multiply; transition: background 0.5s ease, opacity 0.5s ease; }
 
-/* FIX: ORBES EN TONOS ROSA, PLATA Y BLANCO */
-.orb-1 { width: 450px; height: 450px; background: rgba(212, 0, 109, 0.15); top: 10%; left: 10%; } /* Rosa Premium */
-.orb-2 { width: 550px; height: 550px; background: rgba(226, 232, 240, 0.6); top: 50%; right: 5%; animation-delay: -5s; } /* Plata Brillante */
-.orb-3 { width: 400px; height: 400px; background: rgba(251, 207, 232, 0.5); bottom: -10%; left: 30%; animation-delay: -10s; } /* Rosa Suave/Blanco */
+.orb-1 { width: 450px; height: 450px; background: rgba(212, 0, 109, 0.15) !important; top: 10%; left: 10%; } /* Rosa Premium */
+.orb-2 { width: 550px; height: 550px; background: rgba(226, 232, 240, 0.6) !important; top: 50%; right: 5%; animation-delay: -5s; } /* Plata Brillante */
+.orb-3 { width: 400px; height: 400px; background: rgba(251, 207, 232, 0.5) !important; bottom: -10%; left: 30%; animation-delay: -10s; } /* Rosa Suave/Blanco */
 @keyframes floatOrbs { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(120px, 80px) scale(1.2); } }
 
 .editorial-italic { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500; }
@@ -140,14 +140,11 @@ header p { font-size: 22px; color: var(--soft-grey); max-width: 600px; margin-bo
 
 #servicios { padding: 40px 8% 140px 8%; display: flex; align-items: flex-start; gap: 100px; }
 .servicios-left { position: sticky; top: 160px; flex: 0 0 35%; }
-
-/* FÍSICA DE TARJETAS (SCROLL STACKING) */
 .servicios-right { flex: 1; display: flex; flex-direction: column; gap: 40px; padding-bottom: 80px; }
 .servicios-right .card { position: sticky; box-shadow: 0 -10px 40px rgba(0,0,0,0.04); }
 .servicios-right .card:nth-child(1) { top: 140px; }
 .servicios-right .card:nth-child(2) { top: 160px; }
 .servicios-right .card:nth-child(3) { top: 180px; }
-
 .section-label { color: var(--pink-premium); font-weight: 800; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: block; font-family: 'Inter', sans-serif; }
 .card { padding: 60px 50px; }
 .card-num { font-size: 12px; font-weight: 800; color: var(--pink-premium); margin-bottom: 30px; display: block; position: absolute; top: 40px; right: 40px; opacity: 0.5; font-family: 'Inter', sans-serif;}
@@ -303,17 +300,14 @@ body#privacidad-page .mobile-menu-btn { display: none !important; }
 }
 
 /* ==============================================================
-   CAPA DE MODO OSCURO (CON LINTERNA ARQUITECTÓNICA PLATA)
+   CAPA DE MODO OSCURO (CON ORBES BLINDADOS)
    ============================================================== */
 body.dark-theme { --white: #0f172a; --silver: #1e293b; --dark-grey: #f8fafc; --soft-grey: #94a3b8; --pink-premium: #f472b6; --border: #334155; --bg-liquid-3: #020617; }
-
-/* FIX LINTERNA: En modo oscuro, el blueprint será plateado (silver) en lugar de verde */
 body.dark-theme .blueprint-grid { background-image: linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px); }
 
-/* FIX ORBES EN MODO OSCURO: Tonos Rosa y Plata para no hacer charcos azules/verdes */
-body.dark-theme .orb-1 { background: rgba(212, 0, 109, 0.25); } /* Rosa profundo */
-body.dark-theme .orb-2 { background: rgba(148, 163, 184, 0.15); } /* Plata oscuro */
-body.dark-theme .orb-3 { background: rgba(244, 114, 182, 0.15); } /* Rosa suave */
+body.dark-theme .orb-1 { background: rgba(212, 0, 109, 0.25) !important; } /* Rosa oscuro */
+body.dark-theme .orb-2 { background: rgba(148, 163, 184, 0.15) !important; } /* Plata oscuro */
+body.dark-theme .orb-3 { background: rgba(244, 114, 182, 0.15) !important; } /* Rosa suave */
 
 body.dark-theme #page-transition-overlay { background: rgba(15, 23, 42, 0.2); }
 body.dark-theme nav.nav-scrolled { background: rgba(15, 23, 42, 0.5); border-bottom-color: rgba(244, 114, 182, 0.2); }
