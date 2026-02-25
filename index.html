@@ -42,17 +42,28 @@
             scroll-behavior: smooth; 
             scroll-padding-top: 110px; 
             scrollbar-width: thin; 
-            scrollbar-color: rgba(212, 0, 109, 0.4) var(--white); 
+            scrollbar-color: rgba(212, 0, 109, 0.4) transparent; 
         }
 
+        /* --- LIENZO INFINITO: FONDO LÍQUIDO GLOBAL --- */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--white);
             color: var(--dark-grey);
             line-height: 1.8;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            transition: background-color 0.5s ease, color 0.5s ease;
+            
+            /* Gradiente animado que sustituye los colores planos de las secciones */
+            background: linear-gradient(-45deg, var(--white), var(--silver), #fff0f5, var(--silver));
+            background-size: 400% 400%;
+            animation: fluidBg 25s ease infinite;
+            transition: color 0.5s ease;
+        }
+
+        @keyframes fluidBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         h1, h2, .quote-massive, .title-serif { font-family: 'Playfair Display', serif; }
@@ -63,13 +74,6 @@
             content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
             opacity: 0.03; pointer-events: none; z-index: 99998; 
-        }
-
-        /* --- PLANO TOPOGRÁFICO --- */
-        .blueprint-grid {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
-            background-size: 25vw 100%; pointer-events: none; z-index: 0;
         }
 
         /* --- PRELOADER --- */
@@ -87,9 +91,9 @@
         @media (pointer: coarse) { .cursor-led { display: none !important; } }
 
         /* --- MODO TERMINAL MATRIX --- */
-        body.terminal-mode { --white: #050505; --silver: #0a0a0a; --dark-grey: #00ff00; --soft-grey: #00cc00; --pink-premium: #00ff00; --border: #004400; }
-        body.terminal-mode .blueprint-grid { background-image: linear-gradient(to right, rgba(0, 255, 0, 0.05) 1px, transparent 1px); }
-        body.terminal-mode, body.terminal-mode main, body.terminal-mode header, body.terminal-mode section, body.terminal-mode footer, body.terminal-mode nav, body.terminal-mode .card, body.terminal-mode .team-card, body.terminal-mode details, body.terminal-mode #contacto, body.terminal-mode #impacto, body.terminal-mode #nuestra-firma, body.terminal-mode #faq, body.terminal-mode #diferenciadores, body.terminal-mode #servicios, body.terminal-mode #manifiesto-global, body.terminal-mode .marquee-wrapper, body.terminal-mode .concierge-menu { background-color: #050505 !important; background-image: none !important; border-color: #004400 !important; box-shadow: none !important; }
+        body.terminal-mode { background: #050505 !important; animation: none !important; --dark-grey: #00ff00; --soft-grey: #00cc00; --pink-premium: #00ff00; --border: #004400; }
+        body.terminal-mode header, body.terminal-mode section, body.terminal-mode footer, body.terminal-mode nav, body.terminal-mode #contacto, body.terminal-mode #impacto, body.terminal-mode .concierge-menu { background-color: transparent !important; background-image: none !important; box-shadow: none !important; border: none !important;}
+        body.terminal-mode .card, body.terminal-mode .team-card, body.terminal-mode details { background: #050505 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border-color: #004400 !important; }
         body.terminal-mode *, body.terminal-mode h1, body.terminal-mode h2, body.terminal-mode h3, body.terminal-mode h4, body.terminal-mode p, body.terminal-mode a, body.terminal-mode span, body.terminal-mode li { color: #00ff00 !important; font-family: 'Courier New', Courier, monospace !important; letter-spacing: 0 !important; border-radius: 0 !important; text-shadow: 0 0 5px rgba(0, 255, 0, 0.5); }
         body.terminal-mode .btn-main { background-color: #002200 !important; border: 1px solid #00ff00 !important; }
         body.terminal-mode .brand-logo, body.terminal-mode img { filter: sepia(100%) hue-rotate(90deg) saturate(300%) brightness(80%) contrast(200%) !important; }
@@ -102,20 +106,31 @@
         #terminal-toggle { cursor: pointer !important; opacity: 0.2; font-family: monospace; transition: opacity 0.3s; margin-left: 5px; }
         #terminal-toggle:hover { opacity: 1; color: var(--pink-premium); }
 
-        /* --- NAVEGACIÓN --- */
-        nav { padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(253, 242, 248, 1); z-index: 1000; border-bottom: 1px solid var(--border); height: 110px; transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        nav.nav-scrolled { background: rgba(253, 242, 248, 0.4); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border-bottom: 1px solid rgba(212, 0, 109, 0.15); box-shadow: 0 15px 35px -5px rgba(212, 0, 109, 0.15); }
+        /* --- NAVEGACIÓN ÉLITE --- */
+        nav { padding: 0 8%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: transparent; z-index: 1000; border-bottom: 1px solid transparent; height: 110px; transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        /* Efecto al hacer Scroll: Se reduce altura y difumina el fondo */
+        nav.nav-scrolled { height: 80px; background: rgba(253, 242, 248, 0.6); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border-bottom: 1px solid rgba(212, 0, 109, 0.1); box-shadow: 0 15px 35px -5px rgba(212, 0, 109, 0.15); }
+        
         .logo-container a { display: block; text-decoration: none; }
-        .logo-container img { height: 85px; width: auto; transition: transform 0.4s ease; display: block; }
+        .logo-container img { height: 85px; width: auto; transition: all 0.5s ease; display: block; }
+        nav.nav-scrolled .logo-container img { height: 55px; } /* Ajuste de logo al bajar */
         .logo-container img:hover { transform: scale(1.03); }
-        .nav-links { display: flex; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--soft-grey); margin-left: 40px; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; transition: color 0.3s ease; }
-        .nav-links a:hover { color: var(--pink-premium); }
+        
+        .nav-links { display: flex; align-items: center; gap: 40px; }
+        /* Animación de línea en enlaces */
+        .nav-links a { text-decoration: none; color: var(--soft-grey); font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; position: relative; padding: 5px 0; transition: color 0.3s ease; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background-color: var(--pink-premium); transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .nav-links a:hover { color: var(--dark-grey); }
+        .nav-links a:hover::after { width: 100%; }
+        
         .mobile-menu-btn { display: none; background: none; border: none; color: var(--dark-grey); z-index: 1001; }
         .mobile-menu-btn svg { width: 32px; height: 32px; fill: currentColor; transition: transform 0.3s ease; }
 
+        /* --- SECCIONES TRANSPARENTES (Para que fluya el fondo líquido) --- */
+        header, section, footer { position: relative; z-index: 1; background-color: transparent !important; background-image: none !important; }
+
         /* --- HERO SECTION --- */
-        header { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; background-color: var(--white); position: relative; overflow: hidden; background-image: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); }
+        header { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; overflow: hidden; }
         #network-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         .hero-content { position: relative; z-index: 1; max-width: 800px; }
         header h2 { color: var(--pink-premium); font-size: 14px; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 30px; font-weight: 800; font-family: 'Inter', sans-serif;}
@@ -125,7 +140,7 @@
         .btn-main:hover { background-color: var(--pink-premium); border-color: var(--pink-premium); box-shadow: 0 15px 30px rgba(212, 0, 109, 0.2); }
 
         /* --- MANIFIESTO --- */
-        #manifiesto-global { padding: 120px 8%; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: center; background: var(--silver); position: relative; z-index: 1;}
+        #manifiesto-global { padding: 120px 8% 80px 8%; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: center; }
         .texto-manifiesto p { font-size: clamp(28px, 4vw, 42px); font-family: 'Playfair Display', serif; font-weight: 700; color: var(--dark-grey); line-height: 1.2; letter-spacing: -1px; margin-bottom: 20px;}
         .texto-manifiesto p.sub { font-size: 20px; font-family: 'Inter', sans-serif; font-weight: 300; color: var(--soft-grey); line-height: 1.6; max-width: 600px; }
         .cajas-filosofia { display: flex; flex-direction: column; gap: 40px; }
@@ -134,23 +149,38 @@
         .filosofia-box h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: var(--pink-premium); margin-bottom: 15px; font-weight: 800; font-family: 'Inter', sans-serif; }
         .filosofia-box p { font-size: 17px; color: var(--soft-grey); line-height: 1.7; font-weight: 400; }
 
-        /* --- VENDOR TRUST BAR --- */
-        .marquee-wrapper { overflow: hidden; background: var(--silver); padding: 50px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); white-space: nowrap; position: relative; z-index: 1;}
-        .marquee-wrapper::before, .marquee-wrapper::after { content: ""; position: absolute; top: 0; width: 15%; height: 100%; z-index: 2; pointer-events: none; }
-        .marquee-wrapper::before { left: 0; background: linear-gradient(to right, var(--silver), transparent); }
-        .marquee-wrapper::after { right: 0; background: linear-gradient(to left, var(--silver), transparent); }
-        .marquee-track { display: inline-block; animation: scroll-marquee 30s linear infinite; }
-        .brand-logo { height: 45px; width: auto; margin: 0 50px; vertical-align: middle; filter: grayscale(100%) opacity(0.4); transition: all 0.4s ease; }
+        /* --- NUEVO: ECOSISTEMA MULTIVENDOR --- */
+        #ecosistema { padding: 40px 8% 80px 8%; text-align: center; }
+        .marquee-wrapper { 
+            overflow: hidden; padding: 40px 0; white-space: nowrap; position: relative; width: 100%;
+            /* Máscara CSS: Difumina los logos en los bordes para una inmersión líquida */
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+        .marquee-track { display: inline-block; animation: scroll-marquee 35s linear infinite; }
+        .brand-logo { height: 45px; width: auto; margin: 0 60px; vertical-align: middle; filter: grayscale(100%) opacity(0.4); transition: all 0.4s ease; }
         .brand-logo:hover { filter: grayscale(0%) opacity(1); transform: scale(1.1); }
         @keyframes scroll-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
+        /* --- GLASSMORPHISM PARA TARJETAS --- */
+        /* Al ser transparente el fondo, las tarjetas ocupan un efecto de cristal para verse premium y no chocar con el gradiente */
+        .card, .team-card { 
+            background: rgba(253, 242, 248, 0.4); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px); 
+            border: 1px solid rgba(251, 207, 232, 0.5); 
+            padding: 60px 50px; 
+            border-radius: 12px; 
+            transition: all 0.4s ease; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+        }
+        .card:hover, .team-card:hover { transform: translateX(-10px); box-shadow: 20px 30px 60px rgba(0,0,0,0.06); border-color: var(--pink-premium); z-index: 2; }
+
         /* --- METODOLOGÍA (LAYOUT STICKY) --- */
-        #servicios { padding: 140px 8%; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); display: flex; align-items: flex-start; gap: 100px; position: relative; z-index: 1; }
+        #servicios { padding: 40px 8% 140px 8%; display: flex; align-items: flex-start; gap: 100px; }
         .servicios-left { position: sticky; top: 160px; flex: 0 0 35%; }
         .servicios-right { flex: 1; display: flex; flex-direction: column; gap: 50px; }
         .section-label { color: var(--pink-premium); font-weight: 800; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: block; font-family: 'Inter', sans-serif; }
-        .card { background: var(--white); padding: 60px 50px; border-radius: 12px; transition: all 0.4s ease; border: 1px solid var(--border); position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.02);}
-        .card:hover { transform: translateX(-10px); box-shadow: 20px 30px 60px rgba(0,0,0,0.06); border-color: var(--pink-premium); z-index: 2; }
         .icon-wrapper { width: 56px; height: 56px; background: rgba(212, 0, 109, 0.08); border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; transition: all 0.4s ease; }
         .card:hover .icon-wrapper { background: var(--pink-premium); }
         .card:hover .icon-wrapper svg { stroke: #ffffff; }
@@ -160,8 +190,9 @@
         .card ul li { margin-bottom: 15px; font-size: 16px; color: var(--soft-grey); padding-left: 20px; border-left: 2px solid var(--pink-premium); line-height: 1.6; }
 
         /* --- IMPACTO --- */
-        #impacto-container { background-color: var(--white); padding: 60px 0; position: relative; z-index: 1;}
-        #impacto { padding: 90px 8%; background-color: var(--dark-grey); color: var(--white); margin: 0 4%; border-radius: 30px; box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15); display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: center; }
+        #impacto-container { padding: 40px 0; }
+        /* A esta caja sí le dejamos el gris oscuro fuerte porque es una pieza focal de impacto */
+        #impacto { padding: 90px 8%; background-color: var(--dark-grey) !important; color: var(--white); margin: 0 4%; border-radius: 30px; box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15); display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: center; }
         .impacto-texto { text-align: left; }
         .impacto-texto h2 { color: var(--white); font-size: clamp(32px, 4vw, 48px); letter-spacing: -1px; margin-top: 15px; line-height: 1.1; }
         .grid-impacto { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
@@ -170,62 +201,36 @@
         .impacto-item h4 { font-size: 16px; color: var(--white); margin-bottom: 5px; font-weight: 700; font-family: 'Inter', sans-serif;}
         .impacto-item p { font-size: 14px; color: #cbd5e1; line-height: 1.6; font-weight: 300; }
 
-        /* --- NUEVO: DIFERENCIADORES CON DISEÑO STICKY (SIMILAR A METODOLOGÍA) --- */
-        #diferenciadores { 
-            padding: 140px 8%; 
-            background: linear-gradient(to bottom, var(--white) 0%, var(--silver) 100%); 
-            display: flex; 
-            align-items: flex-start; 
-            gap: 80px; 
-            position: relative; z-index: 1; 
-        }
-        .diff-left {
-            position: sticky; 
-            top: 160px; 
-            flex: 0 0 45%; 
-        }
-        .diff-right {
-            flex: 1; 
-            display: flex; flex-direction: column; gap: 80px;
-            padding-bottom: 50px;
-        }
-        .quote-massive { 
-            font-size: clamp(45px, 6vw, 75px); font-family: 'Playfair Display', serif; font-weight: 800; 
-            line-height: 1.05; letter-spacing: -2px; color: var(--dark-grey); 
-        }
+        /* --- DIFERENCIADORES STICKY --- */
+        #diferenciadores { padding: 140px 8% 60px 8%; display: flex; align-items: flex-start; gap: 80px; }
+        .diff-left { position: sticky; top: 160px; flex: 0 0 45%; }
+        .diff-right { flex: 1; display: flex; flex-direction: column; gap: 80px; }
+        .quote-massive { font-size: clamp(45px, 6vw, 75px); font-family: 'Playfair Display', serif; font-weight: 800; line-height: 1.05; letter-spacing: -2px; color: var(--dark-grey); }
         .quote-highlight { color: var(--pink-premium); font-style: italic; }
-        
         .diff-item { padding-left: 30px; border-left: 2px solid var(--pink-premium); transition: all 0.3s ease; }
         .diff-item:hover { border-left-width: 6px; }
         .diff-item h4 { font-size: 16px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--pink-premium); font-weight: 800; font-family: 'Inter', sans-serif; }
         .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; line-height: 1.7; }
 
         /* --- EL EQUIPO --- */
-        #nuestra-firma { padding: 120px 10%; background: var(--silver); position: relative; z-index: 1;}
+        #nuestra-firma { padding: 120px 10%; }
         .manifesto { font-size: 22px; color: var(--soft-grey); font-weight: 300; max-width: 850px; margin-bottom: 80px; line-height: 1.6; border-left: 3px solid var(--pink-premium); padding-left: 30px; }
         .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;}
         @media (min-width: 901px) { .team-card:nth-child(2) { margin-top: 80px; } }
-        .team-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 50px 40px; transition: all 0.4s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.02);}
-        .team-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.05); border-color: var(--pink-premium); }
+        .team-card { padding: 50px 40px; }
+        .team-card:hover { transform: translateY(-8px); }
         .member-role { color: var(--pink-premium); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; margin-bottom: 15px; display: block; font-family: 'Inter', sans-serif;}
         .member-name { font-size: 26px; color: var(--dark-grey); font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px; font-family: 'Inter', sans-serif;}
         .member-bio { font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
 
-        /* --- TRUST BAR --- */
-        .trust-bar { padding: 80px 10%; text-align: center; background: linear-gradient(to bottom, var(--silver) 0%, var(--white) 100%); position: relative; z-index: 1;}
-        .cert-container { display: flex; justify-content: center; align-items: center; gap: 80px; margin-top: 50px; flex-wrap: wrap; }
-        .cert-item { display: flex; flex-direction: column; align-items: center; }
-        .cert-item img { height: 70px; width: auto; margin-bottom: 20px; filter: grayscale(100%); opacity: 0.5; transition: all 0.5s ease; }
-        .cert-item:hover img { filter: grayscale(0%); opacity: 1; }
-        .cert-text { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--soft-grey); text-transform: uppercase; font-family: 'Inter', sans-serif; }
-
         /* --- PREGUNTAS FRECUENTES --- */
-        #faq { padding: 90px 8% 60px 8%; background: var(--white); display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: start; position: relative; z-index: 1;}
+        #faq { padding: 90px 8% 120px 8%; display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: start; }
         .faq-texto { position: sticky; top: 160px; } 
         .faq-texto h2 { font-size: clamp(36px, 4vw, 52px); margin-top: 15px; line-height: 1.1; }
         .faq-container { width: 100%; }
-        details { background: var(--white); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 15px; overflow: hidden; transition: all 0.3s ease; }
-        details[open] { border-color: var(--pink-premium); box-shadow: 0 10px 30px rgba(212,0,109,0.08); }
+        /* Glassmorphism para FAQ */
+        details { background: rgba(253, 242, 248, 0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(251, 207, 232, 0.6); border-radius: 8px; margin-bottom: 15px; overflow: hidden; transition: all 0.3s ease; }
+        details[open] { border-color: var(--pink-premium); box-shadow: 0 10px 30px rgba(212,0,109,0.08); background: var(--white); }
         summary { padding: 25px 30px; font-size: 18px; font-weight: 700; color: var(--dark-grey); transition: color 0.3s ease; list-style: none; position: relative; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; }
         summary:hover { color: var(--pink-premium); }
         summary::-webkit-details-marker { display: none; }
@@ -234,11 +239,11 @@
         .faq-content { padding: 0 30px 25px 30px; font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
 
         /* --- CONTACTO & FOOTER --- */
-        #contacto { margin: 0 5% 60px 5%; padding: 100px 50px; background: var(--dark-grey); color: var(--white); text-align: center; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); position: relative; z-index: 1;}
+        #contacto { margin: 0 5% 60px 5%; padding: 100px 50px; background: var(--dark-grey) !important; color: var(--white); text-align: center; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); position: relative; z-index: 1;}
         #contacto h2 { font-size: 40px; margin-bottom: 25px; font-weight: 800; letter-spacing: -1px; color: var(--white); }
         #contacto p { color: #cbd5e1; }
 
-        footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-between; align-items: flex-start; color: var(--soft-grey); font-size: 14px; background: var(--white); flex-wrap: wrap; gap: 40px; position: relative; z-index: 1;}
+        footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-between; align-items: flex-start; color: var(--soft-grey); font-size: 14px; border: none !important; }
         .footer-col { flex: 1; min-width: 250px; }
         .footer-col h5 { color: var(--dark-grey); font-size: 16px; font-weight: 700; margin-bottom: 15px; font-family: 'Inter', sans-serif;}
         .footer-col p { color: var(--soft-grey); margin-bottom: 8px; line-height: 1.6; }
@@ -271,8 +276,10 @@
             #manifiesto-global { grid-template-columns: 1fr; padding: 60px 5%; gap: 40px;}
             .filosofia-box.asimetrica { margin-left: 0; }
             
+            #ecosistema { padding: 40px 5%; }
+
             /* Anular Sticky en Móviles para Servicios */
-            #servicios { flex-direction: column; padding: 80px 5%; gap: 40px; }
+            #servicios { flex-direction: column; padding: 60px 5%; gap: 40px; }
             .servicios-left { position: relative; top: 0; flex: 1; }
             .servicios-right { gap: 30px; }
 
@@ -281,7 +288,7 @@
             .impacto-item:nth-child(3) { grid-column: span 1; }
             
             /* Anular Sticky en Móviles para Diferenciadores */
-            #diferenciadores { flex-direction: column; padding: 80px 5%; gap: 50px; }
+            #diferenciadores { flex-direction: column; padding: 80px 5% 40px 5%; gap: 50px; }
             .diff-left { position: relative; top: 0; flex: 1; }
             .diff-right { gap: 50px; padding-bottom: 0; }
             .diff-item { padding-left: 20px; }
@@ -294,8 +301,6 @@
 
             #contacto { margin: 20px; padding: 60px 30px; }
             header { padding-top: 100px; min-height: 80vh; }
-            .cert-container { gap: 40px; }
-            .trust-bar { padding: 60px 5%; }
             footer { flex-direction: column; gap: 40px; }
             .floating-concierge { bottom: 20px; right: 20px; }
         }
@@ -346,25 +351,30 @@
             </div>
         </section>
 
-        <div class="marquee-wrapper" data-aos="fade-in">
-            <div class="marquee-track">
-                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Huawei%20Logo.png" alt="Huawei" class="brand-logo">
-                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Cisco%20Logo.png" alt="Cisco" class="brand-logo">
-                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Fortinet%20Logo.png" alt="Fortinet" class="brand-logo">
-                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Aruba%20Logo.png" alt="Aruba" class="brand-logo">
-                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/3Com%20Logo.png" alt="3Com" class="brand-logo">
-                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/H3C%20Logo.png" alt="H3C" class="brand-logo">
-                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/ProxMox%20Logo.png" alt="Proxmox" class="brand-logo">
-                
-                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Huawei%20Logo.png" alt="Huawei" class="brand-logo">
-                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Cisco%20Logo.png" alt="Cisco" class="brand-logo">
-                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Fortinet%20Logo.png" alt="Fortinet" class="brand-logo">
-                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Aruba%20Logo.png" alt="Aruba" class="brand-logo">
-                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/3Com%20Logo.png" alt="3Com" class="brand-logo">
-                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/H3C%20Logo.png" alt="H3C" class="brand-logo">
-                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/ProxMox%20Logo.png" alt="Proxmox" class="brand-logo">
+        <section id="ecosistema">
+            <span class="section-label" data-aos="fade-up" style="display: block; margin-bottom: 20px;">Ecosistema Multivendor</span>
+            <h2 class="title-serif" data-aos="fade-up" style="font-size: clamp(28px, 4vw, 42px); margin-bottom: 30px; max-width: 900px; margin-left: auto; margin-right: auto; line-height: 1.2;">Capacidad de integración y experiencia operativa en las arquitecturas líderes a nivel global.</h2>
+            
+            <div class="marquee-wrapper" data-aos="fade-in">
+                <div class="marquee-track">
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Huawei%20Logo.png" alt="Huawei" class="brand-logo">
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Cisco%20Logo.png" alt="Cisco" class="brand-logo">
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Fortinet%20Logo.png" alt="Fortinet" class="brand-logo">
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Aruba%20Logo.png" alt="Aruba" class="brand-logo">
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/3Com%20Logo.png" alt="3Com" class="brand-logo">
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/H3C%20Logo.png" alt="H3C" class="brand-logo">
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/ProxMox%20Logo.png" alt="Proxmox" class="brand-logo">
+                    
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Huawei%20Logo.png" alt="Huawei" class="brand-logo">
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Cisco%20Logo.png" alt="Cisco" class="brand-logo">
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Fortinet%20Logo.png" alt="Fortinet" class="brand-logo">
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Aruba%20Logo.png" alt="Aruba" class="brand-logo">
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/3Com%20Logo.png" alt="3Com" class="brand-logo">
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/H3C%20Logo.png" alt="H3C" class="brand-logo">
+                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/ProxMox%20Logo.png" alt="Proxmox" class="brand-logo">
+                </div>
             </div>
-        </div>
+        </section>
 
         <section id="servicios">
             <div class="servicios-left">
@@ -454,57 +464,63 @@
         <section id="nuestra-firma">
             <span class="section-label" data-aos="fade-up">El Equipo Directivo</span>
             <h2 class="title-serif" data-aos="fade-up" style="font-size: clamp(36px, 5vw, 48px); margin-bottom: 40px;">Ingeniería guiada por visión de negocio.</h2>
-            <p class="manifesto" data-aos="fade-up">Nuestra firma nació de una observación crítica: las corporaciones gastaban millones en hardware sobredimensionado, mientras sus redes seguían presentando fallas estructurales. En JBDA, aseguramos que cada inversión tecnológica se traduzca en rentabilidad, seguridad y flujo operativo sin interrupciones.</p>
+            
+            <p class="manifesto" data-aos="fade-up">
+                Nuestra firma nació de una observación crítica: las corporaciones gastaban millones en hardware sobredimensionado, mientras sus redes seguían presentando fallas estructurales. En JBDA, aseguramos que cada inversión tecnológica se traduzca en rentabilidad, seguridad y flujo operativo sin interrupciones.
+            </p>
 
             <div class="team-grid">
                 <div class="team-card" data-aos="fade-up" data-aos-delay="100">
                     <span class="member-role">Socia Directora & CEO</span>
                     <h3 class="member-name">Lic. Danyssha Gutiérrez</h3>
-                    <p class="member-bio">Con formación en Derecho y una aguda visión corporativa, Danyssha lidera la estrategia administrativa de JBDA. Su objetivo es claro: alinear la infraestructura tecnológica con los objetivos de negocio. Es especialista en optimización de presupuestos, asegurando que las organizaciones obtengan el máximo rendimiento del mercado sin sobreinversiones (CAPEX), garantizando rentabilidad y cumplimiento estratégico.</p>
+                    <p class="member-bio">
+                        Con formación en Derecho y una aguda visión corporativa, Danyssha lidera la estrategia administrativa de JBDA. Su objetivo es claro: alinear la infraestructura tecnológica con los objetivos de negocio. Es especialista en optimización de presupuestos, asegurando que las organizaciones obtengan el máximo rendimiento del mercado sin sobreinversiones (CAPEX), garantizando rentabilidad y cumplimiento estratégico.
+                    </p>
                 </div>
+
                 <div class="team-card" data-aos="fade-up" data-aos-delay="200">
                     <span class="member-role">Socio Director & CTO</span>
                     <h3 class="member-name">Ing. José Cruz</h3>
-                    <p class="member-bio">Experto en el diseño y blindaje de redes de misión crítica. Ha liderado equipos de ingeniería en auditorías complejas, reingeniería y despliegues multivendor garantizando arquitecturas a prueba de fallos. Su enfoque operativo asegura la máxima cobertura, calidad de servicio (QoS) y una disponibilidad del 99.8% en cada sitio, transformando infraestructuras vulnerables en redes de alto rendimiento.</p>
+                    <p class="member-bio">
+                        Experto en el diseño y blindaje de redes de misión crítica. Ha liderado equipos de ingeniería en auditorías complejas, reingeniería y despliegues multivendor garantizando arquitecturas a prueba de fallos. Su enfoque operativo asegura la máxima cobertura, calidad de servicio (QoS) y una disponibilidad del 99.8% en cada sitio, transformando infraestructuras vulnerables en redes de alto rendimiento.
+                    </p>
                 </div>
             </div>
         </section>
-
-        <div class="trust-bar">
-            <span class="section-label">Certificaciones Oficiales</span>
-            <div class="cert-container">
-                <div class="cert-item" data-aos="zoom-in" data-aos-delay="100">
-                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/HCIA.png" alt="Huawei Certified HCIA" loading="lazy">
-                    <span class="cert-text">HCIA Datacom</span>
-                </div>
-                <div class="cert-item" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/CCNA.png" alt="Cisco Certified CCNA" loading="lazy">
-                    <span class="cert-text">CCNA Datacom</span>
-                </div>
-            </div>
-        </div>
 
         <section id="faq">
             <div class="faq-texto" data-aos="fade-right">
                 <span class="section-label">Respuestas Clave</span>
                 <h2 class="title-serif">Preguntas<br>Frecuentes</h2>
             </div>
+            
             <div class="faq-container" data-aos="fade-left">
                 <details>
                     <summary>¿La evaluación de red requiere detener nuestra operación?</summary>
-                    <div class="faq-content">No. Nuestros diagnósticos y auditorías iniciales se realizan mediante métodos pasivos y de solo lectura. Su operación, usuarios y sistemas críticos no experimentarán ninguna interrupción durante el levantamiento de información.</div>
+                    <div class="faq-content">
+                        No. Nuestros diagnósticos y auditorías iniciales se realizan mediante métodos pasivos y de solo lectura. Su operación, usuarios y sistemas críticos no experimentarán ninguna interrupción durante el levantamiento de información.
+                    </div>
                 </details>
+                
                 <details>
                     <summary>Contamos con hardware de distintas marcas, ¿pueden integrarlo?</summary>
-                    <div class="faq-content">Absolutamente. Somos agnósticos a la marca y especialistas en entornos multivendor (Cisco, Huawei, Fortinet, Aruba, etc.). Nuestro enfoque es optimizar el rendimiento del hardware que usted ya posee antes de sugerir nuevas inversiones (CAPEX).</div>
+                    <div class="faq-content">
+                        Absolutamente. Somos agnósticos a la marca y especialistas en entornos multivendor (Cisco, Huawei, Fortinet, Aruba, etc.). Nuestro enfoque es optimizar el rendimiento del hardware que usted ya posee antes de sugerir nuevas inversiones (CAPEX).
+                    </div>
                 </details>
+
                 <details>
                     <summary>¿En qué se diferencian de nuestro ISP o equipo de soporte interno?</summary>
-                    <div class="faq-content">Su equipo interno y su Proveedor de Internet mantienen la operación diaria (Helpdesk). Nosotros actuamos como consultores estratégicos de Nivel 3. Entramos para resolver cuellos de botella complejos, diseñar reingenierías de red, segmentar por seguridad (VLANs/Hardening) y dejar una infraestructura sólida que su equipo interno pueda administrar fácilmente.</div>
+                    <div class="faq-content">
+                        Su equipo interno y su Proveedor de Internet mantienen la operación diaria (Helpdesk). Nosotros actuamos como consultores estratégicos de Nivel 3. Entramos para resolver cuellos de botella complejos, diseñar reingenierías de red, segmentar por seguridad (VLANs/Hardening) y dejar una infraestructura sólida que su equipo interno pueda administrar fácilmente.
+                    </div>
                 </details>
+
                 <details>
                     <summary>Nuestra empresa no está en CDMX o Morelos, ¿tienen cobertura?</summary>
-                    <div class="faq-content">Sí. Aunque nuestra base presencial principal está en CDMX y Morelos, diseñamos arquitecturas, configuraciones remotas complejas (VPN, SD-WAN, Proxmox) y gestionamos proyectos a nivel nacional e internacional para el sector corporativo, industrial y hotelero.</div>
+                    <div class="faq-content">
+                        Sí. Aunque nuestra base presencial principal está en CDMX y Morelos, diseñamos arquitecturas, configuraciones remotas complejas (VPN, SD-WAN, Proxmox) y gestionamos proyectos a nivel nacional e internacional para el sector corporativo, industrial y hotelero.
+                    </div>
                 </details>
             </div>
         </section>
@@ -520,18 +536,38 @@
 
     <footer>
         <div class="footer-col">
-            <a href="#inicio" aria-label="Volver al inicio"><img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px;" loading="lazy"></a>
-            <p><strong>JBDA 2026</strong> <span id="terminal-toggle" title="Modo Ingeniero">>_</span><br>Consultoría Estratégica en<br>Infraestructura de Redes.</p><br>
+            <a href="#inicio" aria-label="Volver al inicio">
+                <img src="https://raw.githubusercontent.com/JJMex/JBDA/main/Logo%20sin%20fondo.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px;" loading="lazy">
+            </a>
+            <p><strong>JBDA 2026</strong> <span id="terminal-toggle" title="Modo Ingeniero">>_</span><br>Consultoría Estratégica en<br>Infraestructura de Redes.</p>
+            <br>
             <a href="privacidad.html" class="legal-link" aria-label="Aviso de Privacidad y Términos Legales">Aviso de Privacidad</a>
         </div>
+        
         <div class="footer-col">
             <h5>Contacto Directo</h5>
             <p style="margin-bottom: 15px;"><strong>Ing. Jose Juan Cruz Bahena</strong><br>Consultor Principal</p>
-            <a href="mailto:JBDA_Tech@icloud.com" class="social-link" aria-label="Enviar correo electrónico a JBDA"><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>JBDA_Tech@icloud.com</a>
-            <a id="link-whatsapp-footer" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Contactar por WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>WhatsApp</a>
-            <a id="link-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visitar perfil de LinkedIn de la empresa"><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                </svg>LinkedIn Corporativo</a>
+            
+            <a href="mailto:JBDA_Tech@icloud.com" class="social-link" aria-label="Enviar correo electrónico a JBDA">
+                <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                JBDA_Tech@icloud.com
+            </a>
+            
+            <a id="link-whatsapp-footer" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Contactar por WhatsApp">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>
+                WhatsApp
+            </a>
+
+            <a id="link-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visitar perfil de LinkedIn de la empresa">
+                <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+                LinkedIn Corporativo
+            </a>
         </div>
+
         <div class="footer-col">
             <h5>Cobertura Operativa</h5>
             <p>Atención Presencial:<br>CDMX • Morelos</p>
@@ -560,8 +596,10 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             
+            // --- 0. PRELOADER ---
             setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); }, 900);
 
+            // --- LÓGICA DE CURSOR LED (SWITCH TX/RX) ---
             const cursorLed = document.getElementById('cursor-led');
             window.addEventListener('mousemove', (e) => {
                 cursorLed.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
@@ -572,6 +610,7 @@
                 el.addEventListener('mouseleave', () => cursorLed.classList.remove('tx-rx'));
             });
 
+            // --- LÓGICA DE BOTONES MAGNÉTICOS ---
             const magneticBtns = document.querySelectorAll('.magnetic-btn');
             magneticBtns.forEach(btn => {
                 btn.addEventListener('mousemove', (e) => {
@@ -583,9 +622,11 @@
                 btn.addEventListener('mouseleave', () => { btn.style.transform = `translate(0px, 0px)`; });
             });
 
+            // --- MODO TERMINAL (EASTER EGG) ---
             const terminalToggle = document.getElementById('terminal-toggle');
             terminalToggle.addEventListener('click', () => { document.body.classList.toggle('terminal-mode'); });
 
+            // --- ANIMACIÓN DE RED INTERACTIVA (CON FÍSICA DE RESORTE/INERCIA) ---
             const canvas = document.getElementById('network-canvas');
             const ctx = canvas.getContext('2d');
             let width, height, particles = [];
@@ -597,76 +638,139 @@
             });
             window.addEventListener('mouseout', function() { mouse.x = undefined; mouse.y = undefined; });
 
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.baseX = this.x;
+                    this.baseY = this.y;
+                    this.wanderAngle = Math.random() * Math.PI * 2;
+                    this.vx = 0;
+                    this.vy = 0;
+                    this.radius = Math.random() * 2.5 + 2;
+                }
+                update() {
+                    // Movimiento orgánico sutil de la base
+                    this.wanderAngle += 0.01;
+                    this.baseX += Math.cos(this.wanderAngle) * 0.3;
+                    this.baseY += Math.sin(this.wanderAngle) * 0.3;
+
+                    // Mantener bases dentro de la pantalla
+                    if (this.baseX < 0 || this.baseX > width) this.baseX = Math.random() * width;
+                    if (this.baseY < 0 || this.baseY > height) this.baseY = Math.random() * height;
+                    
+                    // Interacción con el ratón
+                    if(mouse.x != undefined && mouse.y != undefined) {
+                        let dx = mouse.x - this.x; 
+                        let dy = mouse.y - this.y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < mouse.radius) {
+                            ctx.beginPath(); ctx.moveTo(this.x, this.y); ctx.lineTo(mouse.x, mouse.y);
+                            ctx.strokeStyle = `rgba(212, 0, 109, ${0.2 - distance/mouse.radius * 0.2})`; 
+                            ctx.lineWidth = 1; ctx.stroke();
+                            
+                            // Efecto estela: Inyectar velocidad en lugar de mover directamente
+                            const forceDirectionX = dx / distance; 
+                            const forceDirectionY = dy / distance;
+                            const force = (mouse.radius - distance) / mouse.radius;
+                            this.vx -= forceDirectionX * force * 1.5;
+                            this.vy -= forceDirectionY * force * 1.5;
+                        }
+                    }
+
+                    // Física de Inercia / Muelle
+                    let spring = 0.05;
+                    let friction = 0.85;
+                    this.vx += (this.baseX - this.x) * spring;
+                    this.vy += (this.baseY - this.y) * spring;
+                    this.vx *= friction;
+                    this.vy *= friction;
+                    
+                    this.x += this.vx;
+                    this.y += this.vy;
+                }
+                draw() {
+                    ctx.fillStyle = 'rgba(212, 0, 109, 0.2)';
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
             function initCanvas() {
                 width = canvas.width = window.innerWidth;
                 height = canvas.height = document.querySelector('header').offsetHeight;
                 particles = [];
                 const particleCount = window.innerWidth < 768 ? 60 : 120;
+                
                 for (let i = 0; i < particleCount; i++) {
-                    particles.push({
-                        x: Math.random() * width, y: Math.random() * height,
-                        vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
-                        radius: Math.random() * 2.5 + 2
-                    });
+                    particles.push(new Particle());
                 }
             }
 
             function animateCanvas() {
                 requestAnimationFrame(animateCanvas);
                 ctx.clearRect(0, 0, width, height);
+                
                 for (let i = 0; i < particles.length; i++) {
                     let p = particles[i];
-                    if(mouse.x != undefined && mouse.y != undefined) {
-                        let dx = mouse.x - p.x; let dy = mouse.y - p.y;
-                        let distance = Math.sqrt(dx * dx + dy * dy);
-                        if (distance < mouse.radius) {
-                            ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y);
-                            ctx.strokeStyle = `rgba(212, 0, 109, ${0.2 - distance/mouse.radius * 0.2})`; ctx.lineWidth = 1; ctx.stroke();
-                            const forceDirectionX = dx / distance; const forceDirectionY = dy / distance;
-                            const force = (mouse.radius - distance) / mouse.radius;
-                            p.x -= forceDirectionX * force * 1.5; p.y -= forceDirectionY * force * 1.5;
-                        }
-                    }
-                    p.x += p.vx; p.y += p.vy;
-                    if (p.x < 0 || p.x > width) p.vx *= -1; if (p.y < 0 || p.y > height) p.vy *= -1;
-                    ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fillStyle = 'rgba(212, 0, 109, 0.2)'; ctx.fill();
+                    p.update();
+                    p.draw();
+
+                    // Conexiones
                     for (let j = i + 1; j < particles.length; j++) {
-                        let p2 = particles[j]; let dist = Math.sqrt(Math.pow(p.x - p2.x, 2) + Math.pow(p.y - p2.y, 2));
+                        let p2 = particles[j]; 
+                        let dist = Math.sqrt(Math.pow(p.x - p2.x, 2) + Math.pow(p.y - p2.y, 2));
+                        
                         if (dist < 160) {
-                            ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
-                            ctx.strokeStyle = `rgba(212, 0, 109, ${0.1 - dist/160 * 0.1})`; ctx.lineWidth = 0.8; ctx.stroke();
+                            ctx.beginPath(); 
+                            ctx.moveTo(p.x, p.y); 
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = `rgba(212, 0, 109, ${0.1 - dist/160 * 0.1})`; 
+                            ctx.lineWidth = 0.8; 
+                            ctx.stroke();
                         }
                     }
                 }
             }
             window.addEventListener('resize', initCanvas); initCanvas(); animateCanvas();
 
+            // --- SCRIPT DE PROTECCIÓN ---
             document.addEventListener('contextmenu', event => event.preventDefault());
             document.addEventListener('keydown', event => { if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || (event.ctrlKey && event.keyCode === 85)) { event.preventDefault(); } });
 
+            // --- SOMBRA DINÁMICA ---
             const nav = document.getElementById('main-nav');
             window.addEventListener('scroll', () => { if (window.scrollY > 50) { nav.classList.add('nav-scrolled'); } else { nav.classList.remove('nav-scrolled'); } });
 
+            // --- LÓGICA DEL MENÚ MÓVIL ---
             const menuBtn = document.getElementById('mobile-menu-btn');
             const navLinks = document.getElementById('nav-links');
             const navItems = document.querySelectorAll('.nav-item');
             let menuOpen = false;
+
             menuBtn.addEventListener('click', () => {
                 navLinks.classList.toggle('active'); menuOpen = !menuOpen;
                 if(menuOpen) { menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>'; } else { menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>'; }
             });
+
             navItems.forEach(item => {
                 item.addEventListener('click', () => { navLinks.classList.remove('active'); menuOpen = false; menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>'; });
             });
 
+            // --- INICIALIZACIÓN DE ENLACES ---
             AOS.init({ duration: 1000, once: true, offset: 100 });
+
             const numeroWhatsApp = "525613388030"; const mensajeGeneral = "Hola JBDA, solicito información de consultoría."; const urlWhatsGeneral = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeGeneral)}`;
+            
             document.getElementById('link-whatsapp-footer').href = urlWhatsGeneral; document.getElementById('link-concierge-whatsapp').href = urlWhatsGeneral; document.getElementById('link-linkedin').href = "https://www.linkedin.com/company/jbdamx/";
 
             const urlCalendly = "https://calendly.com/jbda_tech/diagnostico";
             const abrirCalendly = (e) => { e.preventDefault(); Calendly.initPopupWidget({url: urlCalendly}); document.getElementById('concierge-menu').classList.remove('active'); return false; };
             document.getElementById('link-hero').addEventListener('click', abrirCalendly); document.getElementById('link-cta').addEventListener('click', abrirCalendly); document.getElementById('link-concierge-calendly').addEventListener('click', abrirCalendly);
 
+            // --- LÓGICA DEL BOTÓN FLOTANTE ---
             const conciergeToggle = document.getElementById('concierge-toggle'); const conciergeMenu = document.getElementById('concierge-menu');
             conciergeToggle.addEventListener('click', (e) => { e.stopPropagation(); conciergeMenu.classList.toggle('active'); });
             document.addEventListener('click', (event) => { if (!conciergeToggle.contains(event.target) && !conciergeMenu.contains(event.target)) { conciergeMenu.classList.remove('active'); } });
