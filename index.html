@@ -68,7 +68,21 @@
         h1, h2, .quote-massive, .title-serif { font-family: 'Playfair Display', serif; }
         ::selection { background-color: var(--pink-premium); color: #ffffff; }
 
-        /* --- NUEVO: GRANO CINEMATOGRÁFICO ANIMADO --- */
+        /* --- INDICADOR DE PROGRESO --- */
+        .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--pink-premium); width: 0%; z-index: 100000; pointer-events: none; transition: width 0.1s ease-out; }
+
+        /* --- ORBES DE AURA (PROFUNDIDAD) --- */
+        .orbs-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: 0; pointer-events: none; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.7; animation: floatOrbs 20s infinite alternate ease-in-out; mix-blend-mode: multiply; }
+        .orb-1 { width: 450px; height: 450px; background: rgba(212, 0, 109, 0.3); top: 10%; left: 10%; }
+        .orb-2 { width: 550px; height: 550px; background: rgba(16, 185, 129, 0.2); top: 50%; right: 5%; animation-delay: -5s; }
+        .orb-3 { width: 400px; height: 400px; background: rgba(71, 85, 105, 0.2); bottom: -10%; left: 30%; animation-delay: -10s; }
+        @keyframes floatOrbs { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(120px, 80px) scale(1.2); } }
+
+        /* --- ESTILO EDITORIAL ITÁLICO --- */
+        .editorial-italic { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500; }
+
+        /* --- MEJORA 1: GRANO CINEMATOGRÁFICO ANIMADO --- */
         body::before {
             content: ""; position: fixed; top: -10vh; left: -10vw; width: 120vw; height: 120vh;
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
@@ -98,6 +112,8 @@
 
         /* --- MODO TERMINAL MATRIX --- */
         body.terminal-mode { background: #050505 !important; animation: none !important; --dark-grey: #00ff00; --soft-grey: #00cc00; --pink-premium: #00ff00; --border: #004400; }
+        body.terminal-mode .scroll-progress { background: #00ff00 !important; }
+        body.terminal-mode .orbs-container { display: none !important; }
         body.terminal-mode header, body.terminal-mode section, body.terminal-mode nav, body.terminal-mode .concierge-menu { background-color: transparent !important; background-image: none !important; box-shadow: none !important; border: none !important;}
         body.terminal-mode .card, body.terminal-mode .team-card, body.terminal-mode details, body.terminal-mode .glass-track { background: #050505 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border-color: #004400 !important; }
         body.terminal-mode *, body.terminal-mode h1, body.terminal-mode h2, body.terminal-mode h3, body.terminal-mode h4, body.terminal-mode p, body.terminal-mode a, body.terminal-mode span, body.terminal-mode li { color: #00ff00 !important; font-family: 'Courier New', Courier, monospace !important; letter-spacing: 0 !important; border-radius: 0 !important; text-shadow: 0 0 5px rgba(0, 255, 0, 0.5); font-style: normal !important;}
@@ -113,7 +129,7 @@
         #terminal-toggle { cursor: pointer !important; opacity: 0.2; font-family: monospace; transition: opacity 0.3s; margin-left: 5px; }
         #terminal-toggle:hover { opacity: 1; color: var(--pink-premium); }
 
-        /* --- NAVEGACIÓN --- */
+        /* --- NAVEGACIÓN ÉLITE --- */
         nav { padding: 0 8%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: transparent; z-index: 1000; height: 110px; transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); border-bottom: 1px solid transparent; }
         nav.nav-scrolled { height: 80px; background: rgba(253, 242, 248, 0.7); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border-bottom: 1px solid rgba(212, 0, 109, 0.1); box-shadow: 0 15px 35px -5px rgba(212, 0, 109, 0.15); }
         .logo-container a { display: block; text-decoration: none; }
@@ -139,7 +155,7 @@
         header h1 { font-size: clamp(45px, 7vw, 85px); line-height: 1.05; margin-bottom: 35px; font-weight: 800; letter-spacing: -2px; color: var(--dark-grey); }
         header p { font-size: 22px; color: var(--soft-grey); max-width: 600px; margin-bottom: 50px; font-weight: 300; line-height: 1.6; }
         
-        /* --- NUEVO: BOTÓN ONDA MAGNÉTICA --- */
+        /* --- MEJORA 2: BOTÓN ONDA MAGNÉTICA --- */
         .btn-main { 
             display: inline-block; padding: 22px 48px; background-color: var(--dark-grey); color: var(--white); 
             text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 13px; text-transform: uppercase; 
@@ -154,6 +170,22 @@
         .btn-main:hover::before { width: 400px; height: 400px; }
         .btn-main:hover { color: var(--white); box-shadow: 0 15px 30px rgba(212, 0, 109, 0.3); border-color: var(--pink-premium); background-color: transparent; }
 
+        /* --- ECOSISTEMA MULTIVENDOR --- */
+        #ecosistema { padding: 20px 8% 60px 8%; text-align: center; }
+        .glass-track {
+            background: rgba(253, 242, 248, 0.3); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(251, 207, 232, 0.6); border-bottom: 1px solid rgba(251, 207, 232, 0.6);
+            border-radius: 20px; padding: 30px 0; margin: 0 auto;
+        }
+        .marquee-wrapper { overflow: hidden; white-space: nowrap; position: relative; width: 100%; -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent); mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent); }
+        .marquee-track { display: inline-block; animation: scroll-marquee 35s linear infinite; }
+        .brand-logo { height: 40px; width: auto; margin: 0 50px; vertical-align: middle; filter: grayscale(100%) opacity(0.4); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        
+        .marquee-wrapper:hover .marquee-track { animation-play-state: paused; }
+        .marquee-wrapper:hover .brand-logo { opacity: 0.15; filter: grayscale(100%); }
+        .marquee-wrapper .brand-logo:hover { opacity: 1 !important; filter: grayscale(0%) !important; transform: scale(1.15); z-index: 10; position: relative; }
+        @keyframes scroll-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
         /* --- MANIFIESTO --- */
         #manifiesto-global { padding: 80px 8% 80px 8%; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: center; }
         .texto-manifiesto p { font-size: clamp(28px, 4vw, 42px); font-family: 'Playfair Display', serif; font-weight: 700; color: var(--dark-grey); line-height: 1.2; letter-spacing: -1px; margin-bottom: 20px;}
@@ -164,34 +196,36 @@
         .filosofia-box h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: var(--pink-premium); margin-bottom: 15px; font-weight: 800; font-family: 'Inter', sans-serif; }
         .filosofia-box p { font-size: 17px; color: var(--soft-grey); line-height: 1.7; font-weight: 400; }
 
-        /* --- NUEVO: SCROLL FOCUS EN TARJETAS (Aislado de AOS) --- */
+        /* --- MEJORA 4: SCROLL-FOCUS DINÁMICO EN TARJETAS (Aislado de AOS) --- */
         .card, .team-card, details {
             background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(251, 207, 232, 0.6); border-radius: 12px; position: relative;
-            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.5s ease, opacity 0.5s ease, filter 0.5s ease !important;
-            will-change: transform, opacity;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease, filter 0.5s ease, opacity 0.5s ease !important;
+            will-change: transform, opacity, filter;
         }
         .scroll-dimmed {
-            opacity: 0.4 !important;
-            filter: grayscale(40%) !important;
-            transform: scale(0.96) !important;
+            filter: grayscale(50%) opacity(60%) !important;
         }
         .scroll-focused {
-            opacity: 1 !important;
-            filter: grayscale(0%) !important;
-            transform: scale(1.02) !important;
-            border-color: var(--pink-premium) !important;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.06) !important;
+            filter: grayscale(0%) opacity(100%) !important;
         }
         .card:hover, .team-card:hover, details:hover {
-            opacity: 1 !important;
-            filter: grayscale(0%) !important;
             transform: translateY(-8px) scale(1.02) !important;
             box-shadow: 0 25px 50px rgba(0,0,0,0.08) !important;
             border-color: var(--pink-premium) !important;
+            filter: grayscale(0%) opacity(100%) !important;
             z-index: 2;
         }
+
+        /* --- ANIMACIÓN ÍCONOS AUTODIBUJABLES --- */
+        .icon-wrapper { width: 56px; height: 56px; background: rgba(212, 0, 109, 0.08); border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; transition: all 0.4s ease; }
+        .card:hover .icon-wrapper { background: var(--pink-premium); }
+        .card:hover .icon-wrapper svg { stroke: #ffffff; }
+
+        .icon-wrapper svg * { stroke-dasharray: 1; stroke-dashoffset: 1; }
+        .card.aos-animate .icon-wrapper svg * { animation: drawSvg 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; animation-delay: 0.4s; }
+        @keyframes drawSvg { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 
         /* --- METODOLOGÍA --- */
         #servicios { padding: 40px 8% 140px 8%; display: flex; align-items: flex-start; gap: 100px; }
@@ -199,23 +233,21 @@
         .servicios-right { flex: 1; display: flex; flex-direction: column; gap: 50px; }
         .section-label { color: var(--pink-premium); font-weight: 800; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: block; font-family: 'Inter', sans-serif; }
         .card { padding: 60px 50px; }
-        .icon-wrapper { width: 56px; height: 56px; background: rgba(212, 0, 109, 0.08); border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; transition: all 0.4s ease; }
-        .card:hover .icon-wrapper { background: var(--pink-premium); }
-        .card:hover .icon-wrapper svg { stroke: #ffffff; }
         .card-num { font-size: 12px; font-weight: 800; color: var(--pink-premium); margin-bottom: 30px; display: block; position: absolute; top: 40px; right: 40px; opacity: 0.5; font-family: 'Inter', sans-serif;}
         .card h3 { font-size: 26px; margin-bottom: 20px; letter-spacing: -0.5px; font-weight: 700; color: var(--dark-grey); font-family: 'Inter', sans-serif;}
         .card ul { list-style: none; }
         .card ul li { margin-bottom: 15px; font-size: 16px; color: var(--soft-grey); padding-left: 20px; border-left: 2px solid var(--pink-premium); line-height: 1.6; }
 
-        /* --- IMPACTO (MOTOR DE DATOS) --- */
+        /* --- IMPACTO --- */
         #impacto-container { padding: 40px 0; }
         #impacto { padding: 90px 8%; background-color: var(--dark-grey) !important; color: var(--white); margin: 0 4%; border-radius: 30px; box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15); display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: center; }
         .impacto-texto { text-align: left; }
         .impacto-texto h2 { color: var(--white); font-size: clamp(32px, 4vw, 48px); letter-spacing: -1px; margin-top: 15px; line-height: 1.1; }
         .grid-impacto { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
         .impacto-item:nth-child(3) { grid-column: span 2; }
-        /* Actualización para contadores dinámicos */
-        .impacto-item h3 { font-size: clamp(50px, 6vw, 75px); font-weight: 800; color: var(--pink-premium); line-height: 1; margin-bottom: 10px; letter-spacing: -2px; font-family: 'Inter', sans-serif; display: flex; align-items: baseline; gap: 2px;}
+        
+        /* Modificación para Contadores en Vivo */
+        .impacto-item h3 { font-size: clamp(50px, 6vw, 75px); font-weight: 800; color: var(--pink-premium); line-height: 1; margin-bottom: 10px; letter-spacing: -2px; font-family: 'Inter', sans-serif; display: flex; align-items: baseline; gap: 2px; }
         .impacto-item h4 { font-size: 16px; color: var(--white); margin-bottom: 5px; font-weight: 700; font-family: 'Inter', sans-serif;}
         .impacto-item p { font-size: 14px; color: #cbd5e1; line-height: 1.6; font-weight: 300; }
 
@@ -253,6 +285,21 @@
         summary::after { content: '+'; font-size: 24px; color: var(--pink-premium); transition: transform 0.3s ease; font-weight: 400; }
         details[open] summary::after { content: '-'; transform: rotate(180deg); }
         .faq-content { padding: 0 30px 25px 30px; font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
+
+        /* --- MEGA FOOTER DE DESTINO --- */
+        .mega-footer-dark { background-color: var(--dark-grey); color: var(--white); position: relative; z-index: 2; padding-top: 80px; border-top-left-radius: 40px; border-top-right-radius: 40px; margin-top: 80px; }
+        #contacto { background: transparent !important; color: var(--white); text-align: center; box-shadow: none !important; margin: 0; padding: 60px 5%; border-radius: 0; }
+        #contacto h2 { font-size: 40px; margin-bottom: 25px; font-weight: 800; letter-spacing: -1px; color: var(--white); }
+        #contacto p { color: #cbd5e1; }
+        footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-between; align-items: flex-start; color: #cbd5e1; font-size: 14px; border: none !important; background: transparent !important;}
+        .footer-col { flex: 1; min-width: 250px; }
+        .footer-col h5 { color: var(--white); font-size: 16px; font-weight: 700; margin-bottom: 15px; font-family: 'Inter', sans-serif;}
+        .footer-col p { margin-bottom: 8px; line-height: 1.6; }
+        .social-link { display: flex; align-items: center; margin-bottom: 12px; font-weight: 600; color: var(--white) !important; transition: color 0.3s ease; text-decoration: none; }
+        .social-link:hover { color: var(--pink-premium) !important; }
+        .social-link svg { margin-right: 10px; fill: currentColor; flex-shrink: 0; }
+        .legal-link { color: #cbd5e1; text-decoration: underline; font-size: 12px; transition: color 0.3s ease; }
+        .legal-link:hover { color: var(--pink-premium); }
 
         /* --- BOTÓN FLOTANTE MAGNÉTICO --- */
         .floating-concierge { position: fixed; bottom: 30px; right: 30px; z-index: 1000; display: flex; flex-direction: column; align-items: flex-end; }
@@ -297,7 +344,8 @@
             #faq { grid-template-columns: 1fr; padding: 60px 5%; gap: 30px;}
             .faq-texto { position: relative; top: 0; }
 
-            #contacto { margin: 20px; padding: 40px 30px; }
+            .mega-footer-dark { margin-top: 40px; border-top-left-radius: 20px; border-top-right-radius: 20px; padding-top: 40px;}
+            #contacto { margin: 0; padding: 40px 5%; }
             header { padding-top: 100px; min-height: 80vh; }
             footer { flex-direction: column; gap: 40px; }
             .floating-concierge { bottom: 20px; right: 20px; }
@@ -305,6 +353,8 @@
     </style>
 </head>
 <body id="inicio">
+
+    <div class="scroll-progress" id="scroll-progress"></div>
 
     <div class="orbs-container">
         <div class="orb orb-1"></div>
@@ -314,7 +364,6 @@
 
     <div class="blueprint-grid"></div>
     <div class="cursor-led" id="cursor-led"></div>
-    
     <div id="preloader"><img src="assets/JBDA.png" alt="Cargando JBDA..." class="preload-logo"></div>
 
     <nav id="main-nav">
@@ -339,6 +388,32 @@
     </header>
 
     <main>
+        <section id="ecosistema" data-aos="fade-up">
+            <div class="glass-track">
+                <span style="font-size: 12px; text-transform: uppercase; letter-spacing: 3px; color: var(--pink-premium); font-weight: 800; margin-bottom: 10px; display: block;">Ecosistema Multivendor</span>
+                <p style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--dark-grey); margin-bottom: 20px;">Capacidad de integración y experiencia operativa.</p>
+                <div class="marquee-wrapper">
+                    <div class="marquee-track">
+                        <img src="assets/Huawei.png" alt="Huawei" class="brand-logo">
+                        <img src="assets/Cisco.png" alt="Cisco" class="brand-logo">
+                        <img src="assets/Fortinet.png" alt="Fortinet" class="brand-logo">
+                        <img src="assets/Aruba.png" alt="Aruba" class="brand-logo">
+                        <img src="assets/3Com.png" alt="3Com" class="brand-logo">
+                        <img src="assets/H3C.png" alt="H3C" class="brand-logo">
+                        <img src="assets/ProxMox.png" alt="Proxmox" class="brand-logo">
+                        
+                        <img src="assets/Huawei.png" alt="Huawei" class="brand-logo">
+                        <img src="assets/Cisco.png" alt="Cisco" class="brand-logo">
+                        <img src="assets/Fortinet.png" alt="Fortinet" class="brand-logo">
+                        <img src="assets/Aruba.png" alt="Aruba" class="brand-logo">
+                        <img src="assets/3Com.png" alt="3Com" class="brand-logo">
+                        <img src="assets/H3C.png" alt="H3C" class="brand-logo">
+                        <img src="assets/ProxMox.png" alt="Proxmox" class="brand-logo">
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="manifiesto-global">
             <div class="texto-manifiesto" data-aos="fade-right">
                 <p>La red no es un accesorio;<br> es el <span style="color: var(--pink-premium);">sistema circulatorio</span><br> de la empresa moderna.</p>
@@ -366,12 +441,12 @@
                     <span class="card-num">Fase 01</span>
                     <div class="icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="5" r="3"/>
-                            <circle cx="5" cy="19" r="3"/>
-                            <circle cx="19" cy="19" r="3"/>
-                            <line x1="10.5" y1="7.5" x2="6.5" y2="16.5"/>
-                            <line x1="13.5" y1="7.5" x2="17.5" y2="16.5"/>
-                            <line x1="7.5" y1="19" x2="16.5" y2="19"/>
+                            <circle pathLength="1" cx="12" cy="5" r="3"/>
+                            <circle pathLength="1" cx="5" cy="19" r="3"/>
+                            <circle pathLength="1" cx="19" cy="19" r="3"/>
+                            <line pathLength="1" x1="10.5" y1="7.5" x2="6.5" y2="16.5"/>
+                            <line pathLength="1" x1="13.5" y1="7.5" x2="17.5" y2="16.5"/>
+                            <line pathLength="1" x1="7.5" y1="19" x2="16.5" y2="19"/>
                         </svg>
                     </div>
                     <h3>Auditoría y Arquitectura Estratégica</h3>
@@ -384,10 +459,10 @@
                     <span class="card-num">Fase 02</span>
                     <div class="icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
-                            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
-                            <line x1="6" y1="6" x2="6.01" y2="6"/>
-                            <line x1="6" y1="18" x2="6.01" y2="18"/>
+                            <rect pathLength="1" x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                            <rect pathLength="1" x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                            <line pathLength="1" x1="6" y1="6" x2="6.01" y2="6"/>
+                            <line pathLength="1" x1="6" y1="18" x2="6.01" y2="18"/>
                         </svg>
                     </div>
                     <h3>Despliegue y Blindaje de Infraestructura</h3>
@@ -400,7 +475,7 @@
                     <span class="card-num">Fase 03</span>
                     <div class="icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            <polyline pathLength="1" points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                         </svg>
                     </div>
                     <h3>Analítica y Gestión Proactiva Continua</h3>
@@ -524,56 +599,58 @@
                 </details>
             </div>
         </section>
+    </main>
 
-        <section id="contacto" data-aos="zoom-in">
+    <div id="mega-footer" class="mega-footer-dark">
+        <section id="contacto" data-aos="fade-up">
             <h2>Sesión de Diagnóstico Preliminar</h2>
             <p style="font-size: 20px; font-weight: 300; opacity: 0.8; margin-bottom: 40px; max-width: 850px; margin-left: auto; margin-right: auto; line-height: 1.6; font-family: 'Inter', sans-serif;">
                 Agende una <strong>evaluación ejecutiva de 30 minutos</strong> para analizar los desafíos actuales de su red y delinear soluciones de impacto inmediato. Para auditorías profundas y reingeniería de infraestructura, desarrollamos propuestas técnicas y comerciales a la medida de su operación.
             </p>
-            <a id="link-cta" href="#" class="btn-main magnetic-btn" style="background: var(--pink-premium); border-color: var(--pink-premium);" aria-label="Solicitar Consultoría por Calendly">Solicitar Consultoría</a>
+            <a id="link-cta" href="#" class="btn-main magnetic-btn" aria-label="Solicitar Consultoría por Calendly">Solicitar Consultoría</a>
         </section>
-    </main>
 
-    <footer>
-        <div class="footer-col">
-            <a href="#inicio" aria-label="Volver al inicio">
-                <img src="assets/JBDA.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px;" loading="lazy">
-            </a>
-            <p><strong>JBDA 2026</strong> <span id="terminal-toggle" title="Modo Ingeniero">>_</span><br>Consultoría Estratégica en<br>Infraestructura de Redes.</p>
-            <br>
-            <a href="privacidad.html" class="legal-link" aria-label="Aviso de Privacidad y Términos Legales">Aviso de Privacidad</a>
-        </div>
-        
-        <div class="footer-col">
-            <h5>Contacto Directo</h5>
-            <p style="margin-bottom: 15px;"><strong>Ing. Jose Juan Cruz Bahena</strong><br>Consultor Principal</p>
+        <footer>
+            <div class="footer-col">
+                <a href="#inicio" aria-label="Volver al inicio">
+                    <img src="assets/JBDA.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px; filter: brightness(0) invert(1);" loading="lazy">
+                </a>
+                <p><strong>JBDA 2026</strong> <span id="terminal-toggle" title="Modo Ingeniero">>_</span><br>Consultoría Estratégica en<br>Infraestructura de Redes.</p>
+                <br>
+                <a href="privacidad.html" class="legal-link" aria-label="Aviso de Privacidad y Términos Legales">Aviso de Privacidad</a>
+            </div>
             
-            <a href="mailto:JBDA_Tech@icloud.com" class="social-link" aria-label="Enviar correo electrónico a JBDA">
-                <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                </svg>
-                JBDA_Tech@icloud.com
-            </a>
-            
-            <a id="link-whatsapp-footer" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Contactar por WhatsApp">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>
-                WhatsApp
-            </a>
+            <div class="footer-col">
+                <h5>Contacto Directo</h5>
+                <p style="margin-bottom: 15px;"><strong>Ing. Jose Juan Cruz Bahena</strong><br>Consultor Principal</p>
+                
+                <a href="mailto:JBDA_Tech@icloud.com" class="social-link" aria-label="Enviar correo electrónico a JBDA">
+                    <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    JBDA_Tech@icloud.com
+                </a>
+                
+                <a id="link-whatsapp-footer" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Contactar por WhatsApp">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>
+                    WhatsApp
+                </a>
 
-            <a id="link-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visitar perfil de LinkedIn de la empresa">
-                <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                </svg>
-                LinkedIn Corporativo
-            </a>
-        </div>
+                <a id="link-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visitar perfil de LinkedIn de la empresa">
+                    <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                    LinkedIn Corporativo
+                </a>
+            </div>
 
-        <div class="footer-col">
-            <h5>Cobertura Operativa</h5>
-            <p>Atención Presencial:<br>CDMX • Morelos</p>
-            <p>Soporte Remoto:<br>Alcance Global</p>
-        </div>
-    </footer>
+            <div class="footer-col">
+                <h5>Cobertura Operativa</h5>
+                <p>Atención Presencial:<br>CDMX • Morelos</p>
+                <p>Soporte Remoto:<br>Alcance Global</p>
+            </div>
+        </footer>
+    </div>
 
     <div class="floating-concierge">
         <div class="concierge-menu" id="concierge-menu">
@@ -615,7 +692,7 @@
                 });
             }
 
-            // --- LÓGICA DE BOTONES MAGNÉTICOS & RIPPLE LÍQUIDO ---
+            // --- MEJORA 2: BOTONES MAGNÉTICOS & RIPPLE LÍQUIDO ---
             const magneticBtns = document.querySelectorAll('.magnetic-btn');
             magneticBtns.forEach(btn => {
                 btn.addEventListener('mousemove', (e) => {
@@ -637,7 +714,7 @@
                 terminalToggle.addEventListener('click', () => { document.body.classList.toggle('terminal-mode'); });
             }
 
-            // --- MOTOR DE DATOS: CONTADORES DINÁMICOS ---
+            // --- MEJORA 3: MOTOR DE DATOS (CONTADORES DINÁMICOS) ---
             const counters = document.querySelectorAll('.counter-val');
             if(counters.length > 0) {
                 let observerCounters = new IntersectionObserver(entries => {
@@ -665,29 +742,29 @@
                 counters.forEach(c => observerCounters.observe(c));
             }
 
-            // --- SCROLL-FOCUS DINÁMICO SEGURO (Aislado de AOS) ---
-            const focusCards = document.querySelectorAll('.card, .team-card, details');
-            if(focusCards.length > 0) {
-                let observerFocus = new IntersectionObserver(entries => {
-                    entries.forEach(entry => {
-                        // Solo aplica si el elemento ya fue mostrado por AOS (previene choque visual)
-                        if (entry.target.classList.contains('aos-animate') || !entry.target.hasAttribute('data-aos')) {
-                            if(entry.isIntersecting) {
-                                entry.target.classList.add('scroll-focused');
-                                entry.target.classList.remove('scroll-dimmed');
-                            } else {
-                                entry.target.classList.remove('scroll-focused');
-                                entry.target.classList.add('scroll-dimmed');
+            // --- MEJORA 4: SCROLL-FOCUS DINÁMICO (SEGURO CONTRA AOS) ---
+            setTimeout(() => {
+                const focusCards = document.querySelectorAll('.card, .team-card, details');
+                if(focusCards.length > 0) {
+                    let observerFocus = new IntersectionObserver(entries => {
+                        entries.forEach(entry => {
+                            // Validamos que AOS ya haya cargado el elemento antes de atenuarlo
+                            if (entry.target.classList.contains('aos-animate') || !entry.target.hasAttribute('data-aos')) {
+                                if(entry.isIntersecting) {
+                                    entry.target.classList.add('scroll-focused');
+                                    entry.target.classList.remove('scroll-dimmed');
+                                } else {
+                                    entry.target.classList.remove('scroll-focused');
+                                    entry.target.classList.add('scroll-dimmed');
+                                }
                             }
-                        }
-                    });
-                }, { rootMargin: "-25% 0px -25% 0px" }); 
-                
-                // Le damos tiempo a AOS para arrancar primero
-                setTimeout(() => { focusCards.forEach(c => observerFocus.observe(c)); }, 1000);
-            }
+                        });
+                    }, { rootMargin: "-25% 0px -25% 0px" }); 
+                    focusCards.forEach(c => observerFocus.observe(c));
+                }
+            }, 1200); // 1.2 Segundos de margen para que AOS no choque
 
-            // --- ANIMACIÓN DE RED INTERACTIVA (CON FÍSICA DE RESORTE) ---
+            // --- ANIMACIÓN DE RED INTERACTIVA ---
             const canvas = document.getElementById('network-canvas');
             if (canvas) {
                 const ctx = canvas.getContext('2d');
