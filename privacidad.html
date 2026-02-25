@@ -6,14 +6,11 @@
     <title>Aviso de Privacidad | JBDA</title>
     <meta name="description" content="Aviso de Privacidad de JBDA | Consultoría Estratégica en Redes. Conozca cómo protegemos y tratamos sus datos personales y corporativos.">
     <meta property="og:image" content="assets/JBDA.png">
-    
     <link rel="icon" href="assets/Isotipo.png" type="image/png">
     <link rel="apple-touch-icon" href="assets/Isotipo.png">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500;1,800&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -28,8 +25,11 @@
             <a href="index.html"><img src="assets/JBDA.png" alt="JBDA Logo"></a>
         </div>
         <div class="nav-links">
-            <a href="index.html"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg> Volver al Inicio</a>
-            <button id="dark-mode-toggle" class="nav-item" aria-label="Alternar Modo Oscuro" style="background: none; border: none; cursor: none; margin-left: 20px; display: flex; align-items: center; justify-content: center; color: var(--soft-grey); transition: color 0.3s ease;">
+            <a href="index.html" class="lang-text" data-es="Volver al Inicio" data-en="Back to Home"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg> Volver al Inicio</a>
+            
+            <button id="lang-toggle-btn" class="nav-item" aria-label="Cambiar Idioma" style="background: none; border: none; font-size: 14px; font-weight: 800; margin-left: 20px; font-family: 'Inter', sans-serif;">EN</button>
+            
+            <button id="dark-mode-toggle" class="nav-item" aria-label="Alternar Modo Oscuro" style="background: none; border: none; cursor: none; margin-left: 10px; display: flex; align-items: center; justify-content: center; color: var(--soft-grey); transition: color 0.3s ease;">
                 <svg id="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 <svg id="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
             </button>
@@ -37,71 +37,71 @@
     </nav>
 
     <main class="legal-container">
-        <h1 class="title-serif">Aviso de Privacidad</h1>
-        <span class="update-date">Última actualización: 23 de Febrero de 2026</span>
-        <p>En <strong>JBDA | Consultoría Estratégica en Redes</strong> (en adelante "JBDA" o el "Responsable"), valoramos y respetamos su privacidad. El presente Aviso de Privacidad se emite en cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP), su Reglamento y demás normatividad aplicable en los Estados Unidos Mexicanos.</p>
-        <h2>1. Identidad y Domicilio del Responsable</h2>
-        <p>El Responsable del tratamiento de sus datos personales es <strong>José Juan Cruz Bahena</strong>, operando bajo el nombre comercial de JBDA. Contamos con base de operaciones principales en la ciudad de <strong>Cuernavaca, Morelos, México</strong>, señalando para todos los efectos legales y de contacto derivados del presente aviso el siguiente correo electrónico: <strong>JBDA_Tech@icloud.com</strong>.</p>
-        <h2>2. Datos Personales que Recabamos</h2>
-        <p>Para llevar a cabo las finalidades descritas en el presente aviso, recabaremos las siguientes categorías de datos personales, ya sea a través de nuestro sitio web (jjmex.github.io/JBDA/), correo electrónico, WhatsApp, o en sesiones de diagnóstico presenciales y remotas:</p>
+        <h1 class="title-serif lang-text" data-es="Aviso de Privacidad" data-en="Privacy Policy">Aviso de Privacidad</h1>
+        <span class="update-date lang-text" data-es="Última actualización: 25 de Febrero de 2026" data-en="Last updated: February 25, 2026">Última actualización: 25 de Febrero de 2026</span>
+        
+        <p class="lang-text" data-es="En <strong>JBDA | Consultoría Estratégica en Redes</strong> (en adelante 'JBDA' o el 'Responsable'), valoramos y respetamos su privacidad. El presente Aviso de Privacidad se emite en cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP), su Reglamento y demás normatividad aplicable en los Estados Unidos Mexicanos." data-en="At <strong>JBDA | Strategic Network Consulting</strong> (hereinafter 'JBDA' or the 'Controller'), we value and respect your privacy. This Privacy Policy is issued in compliance with the Federal Law on Protection of Personal Data Held by Private Parties (LFPDPPP), its Regulations, and other applicable laws in the United Mexican States.">En <strong>JBDA | Consultoría Estratégica en Redes</strong> (en adelante "JBDA" o el "Responsable"), valoramos y respetamos su privacidad. El presente Aviso de Privacidad se emite en cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP), su Reglamento y demás normatividad aplicable en los Estados Unidos Mexicanos.</p>
+        
+        <h2 class="lang-text" data-es="1. Identidad y Domicilio del Responsable" data-en="1. Identity and Address of the Controller">1. Identidad y Domicilio del Responsable</h2>
+        <p class="lang-text" data-es="El Responsable del tratamiento de sus datos personales es <strong>José Juan Cruz Bahena</strong>, operando bajo el nombre comercial de JBDA. Contamos con base de operaciones principales en la ciudad de <strong>Cuernavaca, Morelos, México</strong>, señalando para todos los efectos legales y de contacto derivados del presente aviso el siguiente correo electrónico: <strong>JBDA_Tech@icloud.com</strong>." data-en="The Controller responsible for the processing of your personal data is <strong>José Juan Cruz Bahena</strong>, operating under the trade name JBDA. Our main operations base is located in the city of <strong>Cuernavaca, Morelos, Mexico</strong>. For all legal and contact purposes arising from this notice, we establish the following email: <strong>JBDA_Tech@icloud.com</strong>.">El Responsable del tratamiento de sus datos personales es <strong>José Juan Cruz Bahena</strong>, operando bajo el nombre comercial de JBDA. Contamos con base de operaciones principales en la ciudad de <strong>Cuernavaca, Morelos, México</strong>, señalando para todos los efectos legales y de contacto derivados del presente aviso el siguiente correo electrónico: <strong>JBDA_Tech@icloud.com</strong>.</p>
+        
+        <h2 class="lang-text" data-es="2. Datos Personales que Recabamos" data-en="2. Personal Data We Collect">2. Datos Personales que Recabamos</h2>
+        <p class="lang-text" data-es="Para llevar a cabo las finalidades descritas en el presente aviso, recabaremos las siguientes categorías de datos personales, ya sea a través de nuestro sitio web, correo electrónico, WhatsApp, o en sesiones de diagnóstico:" data-en="To carry out the purposes described in this notice, we will collect the following categories of personal data, whether through our website, email, WhatsApp, or in diagnostic sessions:">Para llevar a cabo las finalidades descritas en el presente aviso, recabaremos las siguientes categorías de datos personales, ya sea a través de nuestro sitio web, correo electrónico, WhatsApp, o en sesiones de diagnóstico:</p>
         <ul>
-            <li><strong>Datos de Identificación:</strong> Nombre completo, cargo o puesto que desempeña, y nombre de la empresa a la que representa.</li>
-            <li><strong>Datos de Contacto:</strong> Correo electrónico corporativo, número de teléfono fijo y/o móvil (WhatsApp), y perfiles profesionales (ej. LinkedIn).</li>
-            <li><strong>Datos Técnicos y Operativos:</strong> Información general sobre la topología de red, infraestructura tecnológica y requerimientos de TI de su empresa, recabada exclusivamente con fines de diagnóstico y elaboración de propuestas de ingeniería.</li>
+            <li class="lang-text" data-es="<strong>Datos de Identificación:</strong> Nombre completo, cargo o puesto que desempeña, y nombre de la empresa a la que representa." data-en="<strong>Identification Data:</strong> Full name, job title or position, and the name of the company you represent."><strong>Datos de Identificación:</strong> Nombre completo, cargo o puesto que desempeña, y nombre de la empresa a la que representa.</li>
+            <li class="lang-text" data-es="<strong>Datos de Contacto:</strong> Correo electrónico corporativo, número de teléfono y perfiles profesionales." data-en="<strong>Contact Data:</strong> Corporate email, phone number, and professional profiles."><strong>Datos de Contacto:</strong> Correo electrónico corporativo, número de teléfono y perfiles profesionales.</li>
+            <li class="lang-text" data-es="<strong>Datos Técnicos y Operativos:</strong> Información general sobre la topología de red e infraestructura tecnológica de su empresa, recabada exclusivamente con fines de diagnóstico." data-en="<strong>Technical and Operational Data:</strong> General information about your company's network topology and IT infrastructure, collected exclusively for diagnostic purposes."><strong>Datos Técnicos y Operativos:</strong> Información general sobre la topología de red e infraestructura tecnológica de su empresa, recabada exclusivamente con fines de diagnóstico.</li>
         </ul>
-        <p><strong>JBDA NO recaba datos personales sensibles</strong> (tales como origen racial, estado de salud, creencias religiosas o afiliación política). Toda la información técnica compartida está sujeta a estricta confidencialidad profesional.</p>
-        <h2>3. Finalidades del Tratamiento de Datos</h2>
-        <p>Sus datos personales serán utilizados para las siguientes finalidades:</p>
-        <h3>A. Finalidades Primarias (Necesarias para la relación jurídica y de servicio):</h3>
+        <p class="lang-text" data-es="<strong>JBDA NO recaba datos personales sensibles.</strong> Toda la información técnica compartida está sujeta a estricta confidencialidad profesional." data-en="<strong>JBDA DOES NOT collect sensitive personal data.</strong> All shared technical information is subject to strict professional confidentiality."><strong>JBDA NO recaba datos personales sensibles.</strong> Toda la información técnica compartida está sujeta a estricta confidencialidad profesional.</p>
+        
+        <h2 class="lang-text" data-es="3. Finalidades del Tratamiento de Datos" data-en="3. Purposes of Data Processing">3. Finalidades del Tratamiento de Datos</h2>
+        <h3 class="lang-text" data-es="A. Finalidades Primarias:" data-en="A. Primary Purposes:">A. Finalidades Primarias:</h3>
         <ul>
-            <li>Proveer los servicios de consultoría estratégica en infraestructura de redes, diagnóstico y reingeniería solicitados.</li>
-            <li>Elaborar, enviar y dar seguimiento a cotizaciones, propuestas técnicas y comerciales.</li>
-            <li>Mantener comunicación directa para la gestión de proyectos, soporte técnico y mantenimiento.</li>
-            <li>Dar cumplimiento a obligaciones fiscales y de facturación.</li>
+            <li class="lang-text" data-es="Proveer los servicios de consultoría estratégica y reingeniería solicitados." data-en="To provide the requested strategic consulting and reengineering services.">Proveer los servicios de consultoría estratégica y reingeniería solicitados.</li>
+            <li class="lang-text" data-es="Elaborar, enviar y dar seguimiento a propuestas técnicas y comerciales." data-en="To prepare, send, and follow up on technical and commercial proposals.">Elaborar, enviar y dar seguimiento a propuestas técnicas y comerciales.</li>
+            <li class="lang-text" data-es="Mantener comunicación directa para la gestión de proyectos y soporte." data-en="To maintain direct communication for project management and support.">Mantener comunicación directa para la gestión de proyectos y soporte.</li>
         </ul>
-        <h3>B. Finalidades Secundarias:</h3>
+        <h3 class="lang-text" data-es="B. Finalidades Secundarias:" data-en="B. Secondary Purposes:">B. Finalidades Secundarias:</h3>
         <ul>
-            <li>Envío de información relevante sobre tendencias en telecomunicaciones, optimización de CAPEX y ciberseguridad corporativa.</li>
-            <li>Prospección comercial y envío de correos electrónicos informativos (Cold Emailing / Newsletters) relacionados con nuestros servicios.</li>
-            <li>Evaluación de la calidad de nuestro servicio.</li>
+            <li class="lang-text" data-es="Envío de información relevante sobre telecomunicaciones y optimización de CAPEX." data-en="Sending relevant information regarding telecommunications and CAPEX optimization.">Envío de información relevante sobre telecomunicaciones y optimización de CAPEX.</li>
+            <li class="lang-text" data-es="Prospección comercial." data-en="Commercial prospection.">Prospección comercial.</li>
         </ul>
-        <p>En caso de que no desee que sus datos personales sean tratados para las finalidades secundarias, puede manifestar su negativa enviando un correo a <strong>JBDA_Tech@icloud.com</strong>.</p>
-        <h2>4. Transferencia de Datos Personales</h2>
-        <p>JBDA le informa que sus datos personales <strong>no serán vendidos, alquilados ni transferidos a terceros</strong> ajenos a la prestación de nuestros servicios, salvo en los casos expresamente previstos en el artículo 37 de la LFPDPPP (ej. requerimientos de autoridades competentes).</p>
-        <p>Su información técnica y corporativa se mantiene bajo estrictos protocolos de confidencialidad y solo se comparte con el personal o proveedores de infraestructura estrictamente necesarios para la ejecución del servicio contratado.</p>
-        <h2>5. Derechos ARCO (Acceso, Rectificación, Cancelación y Oposición)</h2>
-        <p>Usted tiene derecho a conocer qué datos personales tenemos de usted, para qué los utilizamos y las condiciones del uso que les damos (Acceso). Asimismo, es su derecho solicitar la corrección de su información (Rectificación); que la eliminemos de nuestros registros cuando considere que no está siendo utilizada adecuadamente (Cancelación); así como oponerse al uso de sus datos para fines específicos (Oposición).</p>
-        <p>Para el ejercicio de cualquiera de los derechos ARCO, usted deberá presentar la solicitud respectiva enviando un correo electrónico directamente al titular de los datos:</p>
-        <p><strong>Ing. Jose Juan Cruz Bahena</strong><br>✉️ JBDA_Tech@icloud.com</p>
-        <p>Su solicitud deberá incluir: nombre completo, correo electrónico de contacto, documento que acredite su identidad y la descripción clara del derecho que desea ejercer. Recibirá respuesta en un plazo máximo de 20 días hábiles.</p>
-        <h2>6. Uso de Cookies y Tecnologías de Rastreo</h2>
-        <p>Le informamos que en nuestra página de internet utilizamos <em>cookies</em> y tecnologías similares a través de las cuales es posible monitorear su comportamiento como usuario de internet, con el objetivo de brindarle una mejor experiencia de navegación y evaluar el tráfico de nuestro sitio. Los datos que obtenemos son anónimos y no se asocian con su identidad personal.</p>
-        <h2>7. Cambios al Aviso de Privacidad</h2>
-        <p>El presente aviso de privacidad puede sufrir modificaciones, cambios o actualizaciones derivadas de nuevos requerimientos legales, de nuestras propias necesidades por los servicios que ofrecemos, o de nuestras prácticas de privacidad.</p>
-        <p>Nos comprometemos a mantenerlo informado sobre los cambios que pueda sufrir el presente documento a través de nuestro sitio web oficial: <strong>jjmex.github.io/JBDA/</strong>.</p>
+        
+        <h2 class="lang-text" data-es="4. Transferencia de Datos Personales" data-en="4. Data Transfer">4. Transferencia de Datos Personales</h2>
+        <p class="lang-text" data-es="JBDA le informa que sus datos personales <strong>no serán vendidos, alquilados ni transferidos a terceros</strong> ajenos a la prestación de nuestros servicios, salvo en los casos expresamente previstos por la ley." data-en="JBDA informs you that your personal data <strong>will not be sold, rented, or transferred to third parties</strong> outside the provision of our services, except in cases expressly provided by law.">JBDA le informa que sus datos personales <strong>no serán vendidos, alquilados ni transferidos a terceros</strong> ajenos a la prestación de nuestros servicios, salvo en los casos expresamente previstos por la ley.</p>
+        
+        <h2 class="lang-text" data-es="5. Derechos ARCO" data-en="5. ARCO Rights">5. Derechos ARCO</h2>
+        <p class="lang-text" data-es="Usted tiene derecho a conocer qué datos personales tenemos de usted (Acceso), solicitar la corrección de su información (Rectificación), que la eliminemos (Cancelación), así como oponerse al uso de sus datos (Oposición). Para ejercerlos, envíe un correo a <strong>JBDA_Tech@icloud.com</strong>." data-en="You have the right to know what personal data we have about you (Access), request the correction of your information (Rectification), request its deletion (Cancellation), as well as object to the use of your data (Opposition). To exercise these rights, send an email to <strong>JBDA_Tech@icloud.com</strong>.">Usted tiene derecho a conocer qué datos personales tenemos de usted (Acceso), solicitar la corrección de su información (Rectificación), que la eliminemos (Cancelación), así como oponerse al uso de sus datos (Oposición). Para ejercerlos, envíe un correo a <strong>JBDA_Tech@icloud.com</strong>.</p>
+        
+        <h2 class="lang-text" data-es="6. Uso de Cookies" data-en="6. Use of Cookies">6. Uso de Cookies</h2>
+        <p class="lang-text" data-es="En nuestra página web utilizamos cookies para monitorear el comportamiento de navegación y evaluar el tráfico. Los datos obtenidos son anónimos." data-en="On our website, we use cookies to monitor browsing behavior and evaluate traffic. The data obtained is anonymous.">En nuestra página web utilizamos cookies para monitorear el comportamiento de navegación y evaluar el tráfico. Los datos obtenidos son anónimos.</p>
+        
+        <h2 class="lang-text" data-es="7. Cambios al Aviso de Privacidad" data-en="7. Changes to the Privacy Policy">7. Cambios al Aviso de Privacidad</h2>
+        <p class="lang-text" data-es="El presente aviso puede sufrir modificaciones. Nos comprometemos a mantenerlo informado a través de nuestro sitio web oficial." data-en="This notice may undergo modifications. We are committed to keeping you informed through our official website.">El presente aviso puede sufrir modificaciones. Nos comprometemos a mantenerlo informado a través de nuestro sitio web oficial.</p>
     </main>
 
     <div class="mega-footer-dark">
         <footer>
             <div class="footer-col">
                 <a href="index.html" aria-label="Volver al inicio"><img src="assets/JBDA.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px; filter: brightness(0) invert(1);" loading="lazy"></a>
-                <p><strong>JBDA 2026</strong> <span id="terminal-toggle" title="Modo Ingeniero">>_</span><br>Consultoría Estratégica en<br>Infraestructura de Redes.</p><br>
-                <a href="privacidad.html" class="legal-link" aria-label="Aviso de Privacidad y Términos Legales">Aviso de Privacidad</a>
+                <p><strong>JBDA 2026</strong> <span id="terminal-toggle" title="Modo Ingeniero">>_</span><br><span class="lang-text" data-es="Consultoría Estratégica en<br>Infraestructura de Redes." data-en="Strategic Consulting in<br>Network Infrastructure.">Consultoría Estratégica en<br>Infraestructura de Redes.</span></p><br>
+                <a href="privacidad.html" class="legal-link lang-text" data-es="Aviso de Privacidad" data-en="Privacy Policy" aria-label="Aviso de Privacidad y Términos Legales">Aviso de Privacidad</a>
             </div>
             <div class="footer-col">
-                <h5>Contacto Directo</h5>
-                <p style="margin-bottom: 15px;"><strong>Ing. Jose Juan Cruz Bahena</strong><br>Consultor Principal</p>
+                <h5 class="lang-text" data-es="Contacto Directo" data-en="Direct Contact">Contacto Directo</h5>
+                <p style="margin-bottom: 15px;"><strong>Ing. Jose Juan Cruz Bahena</strong><br><span class="lang-text" data-es="Consultor Principal" data-en="Principal Consultant">Consultor Principal</span></p>
                 <a href="mailto:JBDA_Tech@icloud.com" class="social-link" aria-label="Enviar correo electrónico a JBDA"><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>JBDA_Tech@icloud.com</a>
                 <a id="link-whatsapp-footer" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Contactar por WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>WhatsApp</a>
                 <a id="link-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visitar perfil de LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>LinkedIn Corporativo</a>
             </div>
             <div class="footer-col">
-                <h5>Cobertura Operativa</h5><p>Atención Presencial:<br>CDMX • Morelos</p><p>Soporte Remoto:<br>Alcance Global</p>
+                <h5 class="lang-text" data-es="Cobertura Operativa" data-en="Operational Coverage">Cobertura Operativa</h5>
+                <p class="lang-text" data-es="Atención Presencial:<br>CDMX • Morelos" data-en="On-site Support:<br>CDMX • Morelos">Atención Presencial:<br>CDMX • Morelos</p>
+                <p class="lang-text" data-es="Soporte Remoto:<br>Alcance Global" data-en="Remote Support:<br>Global Reach">Soporte Remoto:<br>Alcance Global</p>
             </div>
         </footer>
     </div>
 
-    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
     <script src="js/main.js"></script>
 </body>
 </html>
