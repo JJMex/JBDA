@@ -1,10 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // --- 0. PRELOADER ---
-    setTimeout(() => { 
-        const preloader = document.getElementById('preloader');
-        if(preloader) preloader.classList.add('preloader-hidden'); 
-    }, 400);
+    // --- 0. PRELOADER Y CRISTAL LÍQUIDO CON MEMORIA ---
+    const overlay = document.getElementById('page-transition-overlay');
+    const preloader = document.getElementById('preloader');
+    
+    // El Cristal Líquido se "desempaña" cuando el DOM está listo
+    window.addEventListener('pageshow', () => {
+        if(overlay) overlay.classList.add('hidden');
+    });
+
+    // El preloader (Logo cargando) solo aparece la PRIMERA vez que entras a la página
+    if (preloader) {
+        if (sessionStorage.getItem('jbda_preloader_shown')) {
+            // Si ya estabas navegando, apágalo al instante (Cero flashazos)
+            preloader.style.display = 'none';
+        } else {
+            // Si eres visitante nuevo, muestra la carga y guárdalo en la memoria
+            setTimeout(() => { 
+                preloader.classList.add('preloader-hidden'); 
+                sessionStorage.setItem('jbda_preloader_shown', 'true');
+            }, 900);
+        }
+    }
 
     // --- 1. LÓGICA DE CURSOR LED ---
     const cursorLed = document.getElementById('cursor-led');
@@ -48,17 +65,13 @@ document.addEventListener("DOMContentLoaded", () => {
     
     function setLanguage(lang) {
         langTextElements.forEach(el => {
-            if (lang === 'en') {
-                el.innerHTML = el.getAttribute('data-en');
-            } else {
-                el.innerHTML = el.getAttribute('data-es');
+            if (lang === 'en' && el.hasAttribute('data-en')) { 
+                el.innerHTML = el.getAttribute('data-en'); 
+            } else if (el.hasAttribute('data-es')) { 
+                el.innerHTML = el.getAttribute('data-es'); 
             }
         });
-        if(langToggleBtn) {
-            langToggleBtn.innerText = lang === 'en' ? 'ES' : 'EN';
-        }
-        // Ajustar el script de Calendly dependiendo del idioma
-        const calendlyUrl = lang === 'en' ? "https://calendly.com/jbda_tech/diagnostico" : "https://calendly.com/jbda_tech/diagnostico"; // Aquí puedes poner el link en inglés si lo tienes en Calendly
+        if(langToggleBtn) { langToggleBtn.innerText = lang === 'en' ? 'ES' : 'EN'; }
     }
 
     let currentLang = localStorage.getItem('jbda_lang') || 'es';
@@ -72,7 +85,50 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 4. BOTONES MAGNÉTICOS & RIPPLE ---
+    // --- 4. MOTOR LENIS (SCROLL INERCIAL DE ALTA GAMA) ---
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+        mouseMultiplier: 1,
+        smoothTouch: false,
+        touchMultiplier: 2,
+        infinite: false,
+    });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    // --- 5. TRANSICIONES DE PÁGINA (CRISTAL EMPAÑADO) ---
+    document.querySelectorAll('a').forEach(anchor => {
+        if(anchor.href && !anchor.target && !anchor.id.includes('calendly')) {
+            // Si el link es en la misma página (Ej: #servicios)
+            if (anchor.getAttribute('href').startsWith('#')) {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    lenis.scrollTo(this.getAttribute('href')); 
+                });
+            } 
+            // Si el link va a Privacidad u otra página nuestra
+            else if (anchor.href.includes(window.location.hostname) || anchor.href.includes('file://')) {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = this.href;
+                    if(overlay) {
+                        // Vuelve a empañar el cristal
+                        overlay.classList.remove('hidden'); 
+                        // Espera medio segundo y lanza la página
+                        setTimeout(() => { window.location.href = target; }, 500); 
+                    } else {
+                        window.location.href = target;
+                    }
+                });
+            }
+        }
+    });
+
+    // --- 6. BOTONES MAGNÉTICOS & RIPPLE ---
     const magneticBtns = document.querySelectorAll('.magnetic-btn');
     magneticBtns.forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
@@ -80,14 +136,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const h = rect.width / 2; const v = rect.height / 2;
             const xTranslate = e.clientX - rect.left - h; const yTranslate = e.clientY - rect.top - v;
             btn.style.transform = `translate(${xTranslate * 0.3}px, ${yTranslate * 0.3}px)`;
-            
             const xRipple = e.clientX - rect.left; const yRipple = e.clientY - rect.top;
             btn.style.setProperty('--x', `${xRipple}px`); btn.style.setProperty('--y', `${yRipple}px`);
         });
         btn.addEventListener('mouseleave', () => { btn.style.transform = `translate(0px, 0px)`; });
     });
 
-    // --- 5. MOTOR DE DATOS: CONTADORES DINÁMICOS ---
+    // --- 7. MOTOR DE DATOS: CONTADORES DINÁMICOS ---
     const counters = document.querySelectorAll('.counter-val');
     if(counters.length > 0) {
         let observerCounters = new IntersectionObserver(entries => {
@@ -115,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
         counters.forEach(c => observerCounters.observe(c));
     }
 
-    // --- 6. SCROLL-FOCUS DINÁMICO SEGURO ---
+    // --- 8. SCROLL-FOCUS DINÁMICO ---
     setTimeout(() => {
         const focusCards = document.querySelectorAll('.card, .team-card, details');
         if(focusCards.length > 0) {
@@ -136,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, 1200);
 
-    // --- 7. ANIMACIÓN DE RED INTERACTIVA ---
+    // --- 9. ANIMACIÓN DE RED INTERACTIVA ---
     const canvas = document.getElementById('network-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
@@ -169,14 +224,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                     if (distance < mouse.radius) {
                         ctx.beginPath(); ctx.moveTo(this.x, this.y); ctx.lineTo(mouse.x, mouse.y);
-                        
                         const isDark = document.body.classList.contains('dark-theme');
-                        ctx.strokeStyle = isDark 
-                            ? `rgba(244, 114, 182, ${0.4 - distance/mouse.radius * 0.4})` 
-                            : `rgba(212, 0, 109, ${0.2 - distance/mouse.radius * 0.2})`; 
-                        
+                        ctx.strokeStyle = isDark ? `rgba(244, 114, 182, ${0.4 - distance/mouse.radius * 0.4})` : `rgba(212, 0, 109, ${0.2 - distance/mouse.radius * 0.2})`; 
                         ctx.lineWidth = 1; ctx.stroke();
-                        
                         const forceDirectionX = dx / distance; const forceDirectionY = dy / distance;
                         const force = (mouse.radius - distance) / mouse.radius;
                         this.vx -= forceDirectionX * force * 1.5; this.vy -= forceDirectionY * force * 1.5;
@@ -217,9 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (dist < 160) {
                         ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
                         const isDark = document.body.classList.contains('dark-theme');
-                        ctx.strokeStyle = isDark 
-                            ? `rgba(244, 114, 182, ${0.25 - dist/160 * 0.25})` 
-                            : `rgba(212, 0, 109, ${0.1 - dist/160 * 0.1})`; 
+                        ctx.strokeStyle = isDark ? `rgba(244, 114, 182, ${0.25 - dist/160 * 0.25})` : `rgba(212, 0, 109, ${0.1 - dist/160 * 0.1})`; 
                         ctx.lineWidth = 0.8; ctx.stroke();
                     }
                 }
@@ -228,7 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('resize', initCanvas); initCanvas(); animateCanvas();
     }
 
-    // --- 8. BARRA DE PROGRESO Y SOMBRA DINÁMICA ---
+    // --- 10. BARRA DE PROGRESO Y SOMBRA DINÁMICA ---
     const nav = document.getElementById('main-nav');
     const progressBar = document.getElementById('scroll-progress');
     window.addEventListener('scroll', () => { 
@@ -243,7 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 9. LÓGICA DEL MENÚ MÓVIL ---
+    // --- 11. LÓGICA DEL MENÚ MÓVIL ---
     const menuBtn = document.getElementById('mobile-menu-btn');
     const navLinks = document.getElementById('nav-links');
     const navItems = document.querySelectorAll('.nav-item');
@@ -262,7 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 10. INICIALIZACIÓN DE ENLACES Y AOS ---
+    // --- 12. INICIALIZACIÓN DE ENLACES Y AOS ---
     if (typeof AOS !== 'undefined') { AOS.init({ duration: 1000, once: true, offset: 100 }); }
 
     const numeroWhatsApp = "525613388030"; const mensajeGeneral = "Hola JBDA, solicito información de consultoría."; const urlWhatsGeneral = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeGeneral)}`;
@@ -278,17 +326,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if(document.getElementById('link-cta')) document.getElementById('link-cta').addEventListener('click', abrirCalendly); 
     if(document.getElementById('link-concierge-calendly')) document.getElementById('link-concierge-calendly').addEventListener('click', abrirCalendly);
 
-    // --- 11. LÓGICA DEL BOTÓN FLOTANTE ---
+    // --- 13. LÓGICA DEL BOTÓN FLOTANTE ---
     const conciergeToggle = document.getElementById('concierge-toggle'); const conciergeMenu = document.getElementById('concierge-menu');
     if(conciergeToggle && conciergeMenu) {
         conciergeToggle.addEventListener('click', (e) => { e.stopPropagation(); conciergeMenu.classList.toggle('active'); });
         document.addEventListener('click', (event) => { if (!conciergeToggle.contains(event.target) && !conciergeMenu.contains(event.target)) { conciergeMenu.classList.remove('active'); } });
     }
 
-    // --- 12. MODO TERMINAL ---
-    const terminalToggle = document.getElementById('terminal-toggle');
-    if(terminalToggle) { terminalToggle.addEventListener('click', () => { document.body.classList.toggle('terminal-mode'); }); }
-
+    // --- 14. SCRIPT DE PROTECCIÓN ---
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.addEventListener('keydown', event => { if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || (event.ctrlKey && event.keyCode === 85)) { event.preventDefault(); } });
 });
