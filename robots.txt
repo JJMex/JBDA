@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Le indicamos a Google dónde está nuestro mapa
+Sitemap: https://jjmex.github.io/JBDA/sitemap.xml
