@@ -17,18 +17,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- 1. LÓGICA DE CURSOR LED ---
+    // --- 1. NUEVO: LINTERNA VOLUMÉTRICA & CURSOR LED ---
     const cursorLed = document.getElementById('cursor-led');
-    if (cursorLed) {
-        window.addEventListener('mousemove', (e) => {
-            cursorLed.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-        });
-        const interactives = document.querySelectorAll('a, button, summary, input[type=range], #terminal-toggle');
-        interactives.forEach(el => {
-            el.addEventListener('mouseenter', () => cursorLed.classList.add('tx-rx'));
-            el.addEventListener('mouseleave', () => cursorLed.classList.remove('tx-rx'));
-        });
-    }
+    window.addEventListener('mousemove', (e) => {
+        // Mueve el LED
+        if (cursorLed) cursorLed.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+        // Mueve la Linterna (Blueprint Grid)
+        document.documentElement.style.setProperty('--mouse-x', e.clientX + 'px');
+        document.documentElement.style.setProperty('--mouse-y', e.clientY + 'px');
+    });
+    
+    const interactives = document.querySelectorAll('a, button, summary, input[type=range], #terminal-toggle');
+    interactives.forEach(el => {
+        el.addEventListener('mouseenter', () => { if(cursorLed) cursorLed.classList.add('tx-rx'); });
+        el.addEventListener('mouseleave', () => { if(cursorLed) cursorLed.classList.remove('tx-rx'); });
+    });
 
     // --- 2. LENIS SCROLL (FÍSICA INERCIAL) ---
     let lenis;
@@ -51,27 +54,20 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 4. TRANSICIONES DE PÁGINA Y SCROLL MENÚ (REPARADO Y FUNCIONAL) ---
+    // --- 4. TRANSICIONES DE PÁGINA Y SCROLL ---
     document.querySelectorAll('a').forEach(anchor => {
         if(anchor.href && !anchor.target && !anchor.id.includes('calendly')) {
             anchor.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
-                
-                // Si el link es un # (ancla en la misma página) -> Hacer Scroll
                 if (targetUrl && targetUrl.startsWith('#')) {
                     e.preventDefault();
-                    
-                    // Cerrar el menú si estamos en el celular
                     if(menuOpen && menuBtn) {
                         navLinks.classList.remove('active'); menuOpen = false;
                         menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>';
                     }
-
-                    // Ir a la sección
                     if (typeof lenis !== 'undefined') { lenis.scrollTo(targetUrl); } 
                     else { document.querySelector(targetUrl).scrollIntoView({behavior: 'smooth'}); }
                 } 
-                // Si el link va a Privacidad o cambia de idioma -> Bajar Cristal
                 else if (this.hostname === window.location.hostname || targetUrl.startsWith('.') || targetUrl.startsWith('/')) {
                     e.preventDefault();
                     if(overlay) {
@@ -85,7 +81,71 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 5. MODO OSCURO NATIVO CON MEMORIA ---
+    // --- 5. NUEVO: MOTOR DATA SCRAMBLE (DECODIFICADOR) ---
+    class TextScramble {
+        constructor(el) {
+            this.el = el;
+            this.chars = '!<>-_\\/[]{}—=+*^?#_010101';
+            this.update = this.update.bind(this);
+        }
+        setText(newText) {
+            const oldText = this.el.innerText;
+            const length = Math.max(oldText.length, newText.length);
+            const promise = new Promise((resolve) => this.resolve = resolve);
+            this.queue = [];
+            for (let i = 0; i < length; i++) {
+                const from = oldText[i] || ''; const to = newText[i] || '';
+                const start = Math.floor(Math.random() * 40);
+                const end = start + Math.floor(Math.random() * 40);
+                this.queue.push({ from, to, start, end });
+            }
+            cancelAnimationFrame(this.frameRequest);
+            this.frame = 0;
+            this.update();
+            return promise;
+        }
+        update() {
+            let output = ''; let complete = 0;
+            for (let i = 0, n = this.queue.length; i < n; i++) {
+                let { from, to, start, end, char } = this.queue[i];
+                if (this.frame >= end) {
+                    complete++; output += to;
+                } else if (this.frame >= start) {
+                    if (!char || Math.random() < 0.28) { char = this.randomChar(); this.queue[i].char = char; }
+                    output += `<span class="dud">${char}</span>`;
+                } else {
+                    output += from;
+                }
+            }
+            this.el.innerHTML = output;
+            if (complete === this.queue.length) { this.resolve(); } else {
+                this.frameRequest = requestAnimationFrame(this.update); this.frame++;
+            }
+        }
+        randomChar() { return this.chars[Math.floor(Math.random() * this.chars.length)]; }
+    }
+
+    // Iniciar el Decodificador cuando el texto entra en pantalla
+    const scrambles = document.querySelectorAll('.scramble-text');
+    const scrambleObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting && !entry.target.scrambled) {
+                const fx = new TextScramble(entry.target);
+                const original = entry.target.getAttribute('data-original') || entry.target.innerText;
+                entry.target.setAttribute('data-original', original);
+                fx.setText(original);
+                entry.target.scrambled = true; // Solo lo hace 1 vez
+            }
+        });
+    }, {threshold: 0.1});
+    
+    scrambles.forEach(el => {
+        el.setAttribute('data-original', el.innerText);
+        el.innerHTML = '&nbsp;'; // Oculta temporalmente para el impacto
+        scrambleObserver.observe(el);
+    });
+
+    // --- 6. MODO OSCURO NATIVO ---
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const moonIcon = document.getElementById('moon-icon');
     const sunIcon = document.getElementById('sun-icon');
@@ -110,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 6. SIMULADOR DE ESTRÉS (GAMIFICACIÓN B2B) ---
+    // --- 7. SIMULADOR DE ESTRÉS ---
     const slider = document.getElementById('traffic-slider');
     const metricUsers = document.getElementById('metric-users');
     const metricRps = document.getElementById('metric-rps');
@@ -148,7 +208,6 @@ document.addEventListener("DOMContentLoaded", () => {
             let tradWidth = 5 + (val * 1.5);
             if(tradWidth > 100) tradWidth = 100;
             barTrad.style.width = `${tradWidth}%`;
-            
             let cpuT = Math.min(100, Math.floor(15 + (val * 0.95)));
             
             if(val > 75) {
@@ -187,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 7. BOTONES MAGNÉTICOS ---
+    // --- 8. BOTONES MAGNÉTICOS ---
     const magneticBtns = document.querySelectorAll('.magnetic-btn');
     magneticBtns.forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
@@ -201,7 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.addEventListener('mouseleave', () => { btn.style.transform = `translate(0px, 0px)`; });
     });
 
-    // --- 8. CONTADORES DINÁMICOS ---
+    // --- 9. CONTADORES DINÁMICOS ---
     const counters = document.querySelectorAll('.counter-val');
     if(counters.length > 0) {
         let observerCounters = new IntersectionObserver(entries => {
@@ -227,7 +286,7 @@ document.addEventListener("DOMContentLoaded", () => {
         counters.forEach(c => observerCounters.observe(c));
     }
 
-    // --- 9. SCROLL-FOCUS SEGURO ---
+    // --- 10. SCROLL-FOCUS ---
     setTimeout(() => {
         const focusCards = document.querySelectorAll('.card, .team-card, details');
         if(focusCards.length > 0) {
@@ -246,7 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, 1200);
 
-    // --- 10. ANIMACIÓN DE RED INTERACTIVA (CON APAGADO INTELIGENTE) ---
+    // --- 11. ANIMACIÓN DE RED INTERACTIVA ---
     const canvas = document.getElementById('network-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
@@ -261,7 +320,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         window.addEventListener('mouseout', function() { mouse.x = undefined; mouse.y = undefined; });
 
-        // SENSOR DE INTERSECCIÓN (APAGA LA RED SI LA CABECERA NO SE VE)
         const header = document.querySelector('header');
         if (header) {
             const observer = new IntersectionObserver((entries) => {
@@ -345,7 +403,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('resize', initCanvas); initCanvas(); animateCanvas();
     }
 
-    // --- 11. SOMBRA DE NAVBAR ---
+    // --- 12. SOMBRA DE NAVBAR ---
     const nav = document.getElementById('main-nav');
     const progressBar = document.getElementById('scroll-progress');
     window.addEventListener('scroll', () => { 
@@ -360,7 +418,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (typeof AOS !== 'undefined') { AOS.init({ duration: 1000, once: true, offset: 100 }); }
 
-    // --- 12. ENLACES Y CALENDLY ---
+    // --- 13. ENLACES Y CALENDLY ---
     const numeroWhatsApp = "525613388030"; const mensajeGeneral = "Hola JBDA, solicito información de consultoría."; const urlWhatsGeneral = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeGeneral)}`;
     if(document.getElementById('link-whatsapp-footer')) document.getElementById('link-whatsapp-footer').href = urlWhatsGeneral; 
     if(document.getElementById('link-concierge-whatsapp')) document.getElementById('link-concierge-whatsapp').href = urlWhatsGeneral; 
@@ -372,23 +430,21 @@ document.addEventListener("DOMContentLoaded", () => {
     if(document.getElementById('link-cta')) document.getElementById('link-cta').addEventListener('click', abrirCalendly); 
     if(document.getElementById('link-concierge-calendly')) document.getElementById('link-concierge-calendly').addEventListener('click', abrirCalendly);
 
-    // --- 13. BOTÓN FLOTANTE ---
+    // --- 14. BOTÓN FLOTANTE ---
     const conciergeToggle = document.getElementById('concierge-toggle'); const conciergeMenu = document.getElementById('concierge-menu');
     if(conciergeToggle && conciergeMenu) {
         conciergeToggle.addEventListener('click', (e) => { e.stopPropagation(); conciergeMenu.classList.toggle('active'); });
         document.addEventListener('click', (event) => { if (!conciergeToggle.contains(event.target) && !conciergeMenu.contains(event.target)) { conciergeMenu.classList.remove('active'); } });
     }
 
-    // --- 14. MODO TERMINAL (EASTER EGG - BLINDADO) ---
+    // --- 15. MODO TERMINAL ---
     const terminalToggle = document.getElementById('terminal-toggle');
     if(terminalToggle) { 
         terminalToggle.addEventListener('click', (e) => { 
-            e.stopPropagation(); // Evita que otros clicks cancelen el evento
-            document.body.classList.toggle('terminal-mode'); 
+            e.stopPropagation(); document.body.classList.toggle('terminal-mode'); 
         }); 
     }
 
-    // --- 15. PROTECCIÓN ---
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.addEventListener('keydown', event => { if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || (event.ctrlKey && event.keyCode === 85)) { event.preventDefault(); } });
 });
