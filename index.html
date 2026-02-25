@@ -71,7 +71,7 @@
         /* --- INDICADOR DE PROGRESO --- */
         .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--pink-premium); width: 0%; z-index: 100000; pointer-events: none; transition: width 0.1s ease-out; }
 
-        /* --- ORBES DE AURA (Corregidos para verse a través del cristal) --- */
+        /* --- ORBES DE AURA (PROFUNDIDAD) --- */
         .orbs-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: 0; pointer-events: none; }
         .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.7; animation: floatOrbs 20s infinite alternate ease-in-out; mix-blend-mode: multiply; }
         .orb-1 { width: 450px; height: 450px; background: rgba(212, 0, 109, 0.3); top: 10%; left: 10%; }
@@ -79,11 +79,21 @@
         .orb-3 { width: 400px; height: 400px; background: rgba(71, 85, 105, 0.2); bottom: -10%; left: 30%; animation-delay: -10s; }
         @keyframes floatOrbs { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(120px, 80px) scale(1.2); } }
 
-        /* --- TEXTURA TÁCTIL --- */
+        /* --- ESTILO EDITORIAL ITÁLICO --- */
+        .editorial-italic { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500; }
+
+        /* --- NUEVO: GRANO CINEMATOGRÁFICO ANIMADO --- */
         body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            content: ""; position: fixed; top: -10vh; left: -10vw; width: 120vw; height: 120vh;
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-            opacity: 0.03; pointer-events: none; z-index: 99998; 
+            opacity: 0.04; pointer-events: none; z-index: 99998; 
+            animation: cinematicGrain 0.6s steps(2) infinite;
+        }
+        @keyframes cinematicGrain {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-1%, 1%); }
+            50% { transform: translate(1%, -1%); }
+            75% { transform: translate(1%, 1%); }
         }
 
         /* --- PRELOADER --- */
@@ -93,7 +103,7 @@
         .preloader-hidden { opacity: 0 !important; visibility: hidden !important; pointer-events: none; }
 
         /* --- CURSOR LED SWITCH --- */
-        @media (pointer: fine) { body, a, button, .card, .team-card, summary, .brand-logo { cursor: none !important; } }
+        @media (pointer: fine) { body, a, button, summary, .brand-logo { cursor: none !important; } }
         .cursor-led { position: fixed; top: 0; left: 0; width: 10px; height: 10px; background-color: #10b981; border-radius: 2px; z-index: 999999; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 8px rgba(16, 185, 129, 0.8), 0 0 15px rgba(16, 185, 129, 0.5); animation: led-breathe 2s infinite alternate; }
         @keyframes led-breathe { 0% { opacity: 0.4; box-shadow: 0 0 4px rgba(16, 185, 129, 0.5); } 100% { opacity: 1; box-shadow: 0 0 12px rgba(16, 185, 129, 0.9); } }
         .cursor-led.tx-rx { animation: blink-txrx 0.15s infinite !important; background-color: #34d399; }
@@ -106,7 +116,7 @@
         body.terminal-mode .orbs-container { display: none !important; }
         body.terminal-mode header, body.terminal-mode section, body.terminal-mode nav, body.terminal-mode .concierge-menu { background-color: transparent !important; background-image: none !important; box-shadow: none !important; border: none !important;}
         body.terminal-mode .card, body.terminal-mode .team-card, body.terminal-mode details, body.terminal-mode .glass-track { background: #050505 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border-color: #004400 !important; }
-        body.terminal-mode *, body.terminal-mode h1, body.terminal-mode h2, body.terminal-mode h3, body.terminal-mode h4, body.terminal-mode p, body.terminal-mode a, body.terminal-mode span, body.terminal-mode li { color: #00ff00 !important; font-family: 'Courier New', Courier, monospace !important; letter-spacing: 0 !important; border-radius: 0 !important; text-shadow: 0 0 5px rgba(0, 255, 0, 0.5); }
+        body.terminal-mode *, body.terminal-mode h1, body.terminal-mode h2, body.terminal-mode h3, body.terminal-mode h4, body.terminal-mode p, body.terminal-mode a, body.terminal-mode span, body.terminal-mode li { color: #00ff00 !important; font-family: 'Courier New', Courier, monospace !important; letter-spacing: 0 !important; border-radius: 0 !important; text-shadow: 0 0 5px rgba(0, 255, 0, 0.5); font-style: normal !important;}
         body.terminal-mode .mega-footer-dark { background-color: #050505 !important; border-top: 1px solid #00ff00 !important; }
         body.terminal-mode .btn-main { background-color: #002200 !important; border: 1px solid #00ff00 !important; }
         body.terminal-mode .brand-logo, body.terminal-mode img { filter: sepia(100%) hue-rotate(90deg) saturate(300%) brightness(80%) contrast(200%) !important; }
@@ -119,7 +129,7 @@
         #terminal-toggle { cursor: pointer !important; opacity: 0.2; font-family: monospace; transition: opacity 0.3s; margin-left: 5px; }
         #terminal-toggle:hover { opacity: 1; color: var(--pink-premium); }
 
-        /* --- NAVEGACIÓN --- */
+        /* --- NAVEGACIÓN ÉLITE --- */
         nav { padding: 0 8%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: transparent; z-index: 1000; height: 110px; transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); border-bottom: 1px solid transparent; }
         nav.nav-scrolled { height: 80px; background: rgba(253, 242, 248, 0.7); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border-bottom: 1px solid rgba(212, 0, 109, 0.1); box-shadow: 0 15px 35px -5px rgba(212, 0, 109, 0.15); }
         .logo-container a { display: block; text-decoration: none; }
@@ -134,7 +144,7 @@
         .mobile-menu-btn { display: none; background: none; border: none; color: var(--dark-grey); z-index: 1001; }
         .mobile-menu-btn svg { width: 32px; height: 32px; fill: currentColor; transition: transform 0.3s ease; }
 
-        /* --- SECCIONES TRANSPARENTES (Para mostrar el fondo y orbes) --- */
+        /* --- SECCIONES TRANSPARENTES --- */
         header, section { position: relative; z-index: 1; background-color: transparent !important; background-image: none !important; }
 
         /* --- HERO SECTION --- */
@@ -142,23 +152,30 @@
         #network-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         .hero-content { position: relative; z-index: 1; max-width: 800px; }
         header h2 { color: var(--pink-premium); font-size: 14px; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 30px; font-weight: 800; font-family: 'Inter', sans-serif;}
-        /* TÍTULO ORIGINAL RESTAURADO */
         header h1 { font-size: clamp(45px, 7vw, 85px); line-height: 1.05; margin-bottom: 35px; font-weight: 800; letter-spacing: -2px; color: var(--dark-grey); }
         header p { font-size: 22px; color: var(--soft-grey); max-width: 600px; margin-bottom: 50px; font-weight: 300; line-height: 1.6; }
-        .btn-main { display: inline-block; padding: 22px 48px; background-color: var(--dark-grey); color: var(--white); text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; border: 1px solid var(--dark-grey); font-family: 'Inter', sans-serif; transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.1s; }
-        .btn-main:hover { background-color: var(--pink-premium); border-color: var(--pink-premium); box-shadow: 0 15px 30px rgba(212, 0, 109, 0.2); }
+        
+        /* --- NUEVO: BOTÓN ONDA MAGNÉTICA --- */
+        .btn-main { 
+            display: inline-block; padding: 22px 48px; background-color: var(--dark-grey); color: var(--white); 
+            text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 13px; text-transform: uppercase; 
+            letter-spacing: 1.5px; border: 1px solid var(--dark-grey); font-family: 'Inter', sans-serif; 
+            position: relative; overflow: hidden; z-index: 1; transition: box-shadow 0.4s ease, transform 0.1s, border-color 0.4s ease;
+        }
+        .btn-main::before {
+            content: ''; position: absolute; top: var(--y, 50%); left: var(--x, 50%); width: 0; height: 0;
+            background-color: var(--pink-premium); border-radius: 50%; transform: translate(-50%, -50%);
+            transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1), height 0.5s cubic-bezier(0.25, 1, 0.5, 1); z-index: -1;
+        }
+        .btn-main:hover::before { width: 400px; height: 400px; }
+        .btn-main:hover { color: var(--white); box-shadow: 0 15px 30px rgba(212, 0, 109, 0.3); border-color: var(--pink-premium); }
 
-        /* --- ECOSISTEMA MULTIVENDOR (Riel Integrado) --- */
+        /* --- ECOSISTEMA MULTIVENDOR --- */
         #ecosistema { padding: 20px 8% 60px 8%; text-align: center; }
         .glass-track {
-            background: rgba(253, 242, 248, 0.3);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-top: 1px solid rgba(251, 207, 232, 0.6);
-            border-bottom: 1px solid rgba(251, 207, 232, 0.6);
-            border-radius: 20px;
-            padding: 30px 0;
-            margin: 0 auto;
+            background: rgba(253, 242, 248, 0.3); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(251, 207, 232, 0.6); border-bottom: 1px solid rgba(251, 207, 232, 0.6);
+            border-radius: 20px; padding: 30px 0; margin: 0 auto;
         }
         .marquee-wrapper { overflow: hidden; white-space: nowrap; position: relative; width: 100%; -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent); mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent); }
         .marquee-track { display: inline-block; animation: scroll-marquee 35s linear infinite; }
@@ -171,7 +188,6 @@
 
         /* --- MANIFIESTO --- */
         #manifiesto-global { padding: 80px 8% 80px 8%; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: center; }
-        /* TEXTO ORIGINAL RESTAURADO */
         .texto-manifiesto p { font-size: clamp(28px, 4vw, 42px); font-family: 'Playfair Display', serif; font-weight: 700; color: var(--dark-grey); line-height: 1.2; letter-spacing: -1px; margin-bottom: 20px;}
         .texto-manifiesto p.sub { font-size: 20px; font-family: 'Inter', sans-serif; font-weight: 300; color: var(--soft-grey); line-height: 1.6; max-width: 600px; }
         .cajas-filosofia { display: flex; flex-direction: column; gap: 40px; }
@@ -180,22 +196,24 @@
         .filosofia-box h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: var(--pink-premium); margin-bottom: 15px; font-weight: 800; font-family: 'Inter', sans-serif; }
         .filosofia-box p { font-size: 17px; color: var(--soft-grey); line-height: 1.7; font-weight: 400; }
 
-        /* --- ELEVACIÓN ORGÁNICA UNIFICADA --- */
+        /* --- NUEVO: SCROLL-FOCUS DINÁMICO EN TARJETAS --- */
+        /* Estado por defecto: Apagadas un poco */
         .card, .team-card, details {
             background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(251, 207, 232, 0.6);
-            border-radius: 12px;
-            position: relative;
-            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease !important;
-            will-change: transform;
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(251, 207, 232, 0.6); border-radius: 12px; position: relative;
+            opacity: 0.5; transform: scale(0.96); /* Estado inactivo */
+            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease, opacity 0.6s ease;
+            will-change: transform, opacity;
         }
+        /* Estado Focus (Cuando está en el centro de la pantalla vía JS) */
+        .card.scroll-focused, .team-card.scroll-focused, details.scroll-focused {
+            opacity: 1; transform: scale(1);
+        }
+        /* Elevación Premium (Gana a todo lo demás si pasas el ratón) */
         .card:hover, .team-card:hover, details:hover {
-            transform: translateY(-8px) scale(1.02) !important;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.08) !important;
-            border-color: var(--pink-premium) !important;
-            z-index: 2;
+            opacity: 1 !important; transform: translateY(-8px) scale(1.02) !important;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.08) !important; border-color: var(--pink-premium) !important; z-index: 2;
         }
 
         /* --- ANIMACIÓN ÍCONOS AUTODIBUJABLES --- */
@@ -204,11 +222,10 @@
         .card:hover .icon-wrapper svg { stroke: #ffffff; }
 
         .icon-wrapper svg * { stroke-dasharray: 1; stroke-dashoffset: 1; }
-        /* Animación enlazada a AOS para que se vea justo al hacer scroll */
-        .card.aos-animate .icon-wrapper svg * { animation: drawSvg 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; animation-delay: 0.4s; }
+        .card.scroll-focused .icon-wrapper svg * { animation: drawSvg 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; animation-delay: 0.2s; }
         @keyframes drawSvg { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 
-        /* --- METODOLOGÍA --- */
+        /* --- METODOLOGÍA (LAYOUT STICKY) --- */
         #servicios { padding: 40px 8% 140px 8%; display: flex; align-items: flex-start; gap: 100px; }
         .servicios-left { position: sticky; top: 160px; flex: 0 0 35%; }
         .servicios-right { flex: 1; display: flex; flex-direction: column; gap: 50px; }
@@ -219,18 +236,19 @@
         .card ul { list-style: none; }
         .card ul li { margin-bottom: 15px; font-size: 16px; color: var(--soft-grey); padding-left: 20px; border-left: 2px solid var(--pink-premium); line-height: 1.6; }
 
-        /* --- IMPACTO --- */
-        #impacto-container { padding: 40px 0; position: relative; z-index: 1;}
+        /* --- IMPACTO (MOTOR DE DATOS) --- */
+        #impacto-container { padding: 40px 0; }
         #impacto { padding: 90px 8%; background-color: var(--dark-grey) !important; color: var(--white); margin: 0 4%; border-radius: 30px; box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15); display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: center; }
         .impacto-texto { text-align: left; }
         .impacto-texto h2 { color: var(--white); font-size: clamp(32px, 4vw, 48px); letter-spacing: -1px; margin-top: 15px; line-height: 1.1; }
         .grid-impacto { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
         .impacto-item:nth-child(3) { grid-column: span 2; }
-        .impacto-item h3 { font-size: clamp(50px, 6vw, 75px); font-weight: 800; color: var(--pink-premium); line-height: 1; margin-bottom: 10px; letter-spacing: -2px; font-family: 'Inter', sans-serif; }
+        /* Títulos de contadores */
+        .impacto-item h3 { font-size: clamp(50px, 6vw, 75px); font-weight: 800; color: var(--pink-premium); line-height: 1; margin-bottom: 10px; letter-spacing: -2px; font-family: 'Inter', sans-serif; display: flex; align-items: baseline; gap: 2px; }
         .impacto-item h4 { font-size: 16px; color: var(--white); margin-bottom: 5px; font-weight: 700; font-family: 'Inter', sans-serif;}
         .impacto-item p { font-size: 14px; color: #cbd5e1; line-height: 1.6; font-weight: 300; }
 
-        /* --- DIFERENCIADORES --- */
+        /* --- DIFERENCIADORES STICKY --- */
         #diferenciadores { padding: 140px 8% 60px 8%; display: flex; align-items: flex-start; gap: 80px; }
         .diff-left { position: sticky; top: 160px; flex: 0 0 45%; }
         .diff-right { flex: 1; display: flex; flex-direction: column; gap: 80px; padding-bottom: 50px; }
@@ -302,7 +320,7 @@
             .filosofia-box.asimetrica { margin-left: 0; }
             
             #ecosistema { padding: 40px 5%; }
-            .glass-track { border-radius: 0; }
+            .glass-track { border-radius: 0; } 
 
             #servicios { flex-direction: column; padding: 60px 5%; gap: 40px; }
             .servicios-left { position: relative; top: 0; flex: 1; }
@@ -360,7 +378,7 @@
         <canvas id="network-canvas"></canvas>
         <div class="hero-content" data-aos="fade-up">
             <h2>Infraestructura & Telecomunicaciones</h2>
-            <h1>Diseñamos la columna vertebral de su negocio.</h1>
+            <h1>Diseñamos la <span class="editorial-italic">columna vertebral</span> de su negocio.</h1>
             <p>Consultoría estratégica en infraestructura de redes diseñada para maximizar la eficiencia operativa y rentabilizar su inversión tecnológica.</p>
             <a id="link-hero" href="#" class="btn-main magnetic-btn" aria-label="Agendar Diagnóstico">Agendar Diagnóstico</a>
         </div>
@@ -395,7 +413,7 @@
 
         <section id="manifiesto-global">
             <div class="texto-manifiesto" data-aos="fade-right">
-                <p>La red no es un accesorio;<br> es el <span style="color: var(--pink-premium);">sistema circulatorio</span><br> de la empresa moderna.</p>
+                <p>La red no es un accesorio;<br> es el <span class="editorial-italic" style="color: var(--pink-premium);">sistema circulatorio</span><br> de la empresa moderna.</p>
                 <p class="sub">En <strong>JBDA</strong> fusionamos la precisión de ingeniería de élite con una visión financiera de negocio orientada a resultados.</p>
             </div>
             <div class="cajas-filosofia">
@@ -416,7 +434,7 @@
                 <h2 class="title-serif" style="font-size: clamp(36px, 5vw, 52px);" data-aos="fade-right">Sistema de Reingeniería JBDA</h2>
             </div>
             <div class="servicios-right">
-                <div class="card" data-aos="fade-up">
+                <div class="card">
                     <span class="card-num">Fase 01</span>
                     <div class="icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -434,7 +452,7 @@
                         <li><strong>Diseño Escalable:</strong> Planificación de redes LAN/WAN preparadas para el crecimiento corporativo.</li>
                     </ul>
                 </div>
-                <div class="card" data-aos="fade-up">
+                <div class="card">
                     <span class="card-num">Fase 02</span>
                     <div class="icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -450,7 +468,7 @@
                         <li><strong>Segmentación y Seguridad:</strong> Blindaje de dispositivos (Hardening), creación de VLANs y políticas QoS estrictas.</li>
                     </ul>
                 </div>
-                <div class="card" data-aos="fade-up">
+                <div class="card">
                     <span class="card-num">Fase 03</span>
                     <div class="icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -474,17 +492,17 @@
                 </div>
                 <div class="grid-impacto">
                     <div class="impacto-item">
-                        <h3>85%</h3>
+                        <h3 class="counter-display"><span class="counter-val" data-target="85">0</span>%</h3>
                         <h4>Mitigación de Caídas</h4>
                         <p>Enfoque en reingeniería para reducir el downtime histórico.</p>
                     </div>
                     <div class="impacto-item">
-                        <h3>40%</h3>
+                        <h3 class="counter-display"><span class="counter-val" data-target="40">0</span>%</h3>
                         <h4>Optimización de CAPEX</h4>
                         <p>Reducción de sobreinversiones tecnológicas.</p>
                     </div>
                     <div class="impacto-item">
-                        <h3>99.8%</h3>
+                        <h3 class="counter-display"><span class="counter-val" data-target="99.8" data-decimal="true">0.0</span>%</h3>
                         <h4>Disponibilidad Estándar</h4>
                         <p>Nuestra métrica base para arquitecturas de misión crítica.</p>
                     </div>
@@ -524,7 +542,7 @@
             </p>
 
             <div class="team-grid">
-                <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="team-card">
                     <span class="member-role">Socia Directora & CEO</span>
                     <h3 class="member-name">Lic. Danyssha Gutiérrez</h3>
                     <p class="member-bio">
@@ -532,7 +550,7 @@
                     </p>
                 </div>
 
-                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="team-card">
                     <span class="member-role">Socio Director & CTO</span>
                     <h3 class="member-name">Ing. José Cruz</h3>
                     <p class="member-bio">
@@ -548,7 +566,7 @@
                 <h2 class="title-serif">Preguntas<br>Frecuentes</h2>
             </div>
             
-            <div class="faq-container" data-aos="fade-left">
+            <div class="faq-container">
                 <details>
                     <summary>¿La evaluación de red requiere detener nuestra operación?</summary>
                     <div class="faq-content">
@@ -586,7 +604,7 @@
             <p style="font-size: 20px; font-weight: 300; opacity: 0.8; margin-bottom: 40px; max-width: 850px; margin-left: auto; margin-right: auto; line-height: 1.6; font-family: 'Inter', sans-serif;">
                 Agende una <strong>evaluación ejecutiva de 30 minutos</strong> para analizar los desafíos actuales de su red y delinear soluciones de impacto inmediato. Para auditorías profundas y reingeniería de infraestructura, desarrollamos propuestas técnicas y comerciales a la medida de su operación.
             </p>
-            <a id="link-cta" href="#" class="btn-main magnetic-btn" style="background: var(--pink-premium); border-color: var(--pink-premium);" aria-label="Solicitar Consultoría por Calendly">Solicitar Consultoría</a>
+            <a id="link-cta" href="#" class="btn-main magnetic-btn" aria-label="Solicitar Consultoría por Calendly">Solicitar Consultoría</a>
         </section>
 
         <footer>
@@ -660,20 +678,26 @@
             window.addEventListener('mousemove', (e) => {
                 cursorLed.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
             });
-            const interactives = document.querySelectorAll('a, button, .card, .team-card, summary, .brand-logo');
+            const interactives = document.querySelectorAll('a, button, summary, .brand-logo');
             interactives.forEach(el => {
                 el.addEventListener('mouseenter', () => cursorLed.classList.add('tx-rx'));
                 el.addEventListener('mouseleave', () => cursorLed.classList.remove('tx-rx'));
             });
 
-            // --- 2. LÓGICA DE BOTONES MAGNÉTICOS ---
+            // --- 2. LÓGICA DE BOTONES MAGNÉTICOS & RIPPLE LÍQUIDO ---
             const magneticBtns = document.querySelectorAll('.magnetic-btn');
             magneticBtns.forEach(btn => {
                 btn.addEventListener('mousemove', (e) => {
                     const rect = btn.getBoundingClientRect();
+                    // Translación magnética
                     const h = rect.width / 2; const v = rect.height / 2;
-                    const x = e.clientX - rect.left - h; const y = e.clientY - rect.top - v;
-                    btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+                    const xTranslate = e.clientX - rect.left - h; const yTranslate = e.clientY - rect.top - v;
+                    btn.style.transform = `translate(${xTranslate * 0.3}px, ${yTranslate * 0.3}px)`;
+                    
+                    // Origen del Ripple (Onda)
+                    const xRipple = e.clientX - rect.left; const yRipple = e.clientY - rect.top;
+                    btn.style.setProperty('--x', `${xRipple}px`);
+                    btn.style.setProperty('--y', `${yRipple}px`);
                 });
                 btn.addEventListener('mouseleave', () => { btn.style.transform = `translate(0px, 0px)`; });
             });
@@ -682,7 +706,46 @@
             const terminalToggle = document.getElementById('terminal-toggle');
             terminalToggle.addEventListener('click', () => { document.body.classList.toggle('terminal-mode'); });
 
-            // --- 4. ANIMACIÓN DE RED INTERACTIVA (CON FÍSICA DE RESORTE/INERCIA) ---
+            // --- 4. MOTOR DE DATOS: CONTADORES DINÁMICOS ---
+            const counters = document.querySelectorAll('.counter-val');
+            let observerCounters = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        const target = parseFloat(entry.target.getAttribute('data-target'));
+                        const isDecimal = entry.target.getAttribute('data-decimal') === 'true';
+                        const duration = 1500; // 1.5 segundos
+                        const step = target / (duration / 16);
+                        let current = 0;
+                        const updateCounter = () => {
+                            current += step;
+                            if(current < target) {
+                                entry.target.innerText = isDecimal ? current.toFixed(1) : Math.ceil(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                entry.target.innerText = target;
+                            }
+                        };
+                        updateCounter();
+                        observerCounters.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            counters.forEach(c => observerCounters.observe(c));
+
+            // --- 5. SCROLL-FOCUS DINÁMICO (TARJETAS) ---
+            const focusCards = document.querySelectorAll('.card, .team-card, details');
+            let observerFocus = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('scroll-focused');
+                    } else {
+                        entry.target.classList.remove('scroll-focused');
+                    }
+                });
+            }, { rootMargin: "-30% 0px -30% 0px" }); // Se enciende solo cuando llega al centro (30% de margen arriba y abajo)
+            focusCards.forEach(c => observerFocus.observe(c));
+
+            // --- 6. ANIMACIÓN DE RED INTERACTIVA (CON FÍSICA DE RESORTE/INERCIA) ---
             const canvas = document.getElementById('network-canvas');
             const ctx = canvas.getContext('2d');
             let width, height, particles = [];
@@ -785,24 +848,24 @@
             }
             window.addEventListener('resize', initCanvas); initCanvas(); animateCanvas();
 
-            // --- 5. SCRIPT DE PROTECCIÓN ---
+            // --- 7. SCRIPT DE PROTECCIÓN ---
             document.addEventListener('contextmenu', event => event.preventDefault());
             document.addEventListener('keydown', event => { if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || (event.ctrlKey && event.keyCode === 85)) { event.preventDefault(); } });
 
-            // --- 6. BARRA DE PROGRESO Y SOMBRA DINÁMICA ---
+            // --- 8. BARRA DE PROGRESO Y SOMBRA DINÁMICA ---
             const nav = document.getElementById('main-nav');
             const progressBar = document.getElementById('scroll-progress');
             window.addEventListener('scroll', () => { 
                 // Navegación
                 if (window.scrollY > 50) { nav.classList.add('nav-scrolled'); } else { nav.classList.remove('nav-scrolled'); } 
-                // Barra de progreso
+                // Barra de progreso quirúrgica
                 const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
                 const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 const scrolled = (winScroll / height) * 100;
                 progressBar.style.width = scrolled + "%";
             });
 
-            // --- 7. LÓGICA DEL MENÚ MÓVIL ---
+            // --- 9. LÓGICA DEL MENÚ MÓVIL ---
             const menuBtn = document.getElementById('mobile-menu-btn');
             const navLinks = document.getElementById('nav-links');
             const navItems = document.querySelectorAll('.nav-item');
@@ -817,7 +880,7 @@
                 item.addEventListener('click', () => { navLinks.classList.remove('active'); menuOpen = false; menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>'; });
             });
 
-            // --- 8. INICIALIZACIÓN DE ENLACES Y AOS ---
+            // --- 10. INICIALIZACIÓN DE ENLACES Y AOS ---
             AOS.init({ duration: 1000, once: true, offset: 100 });
 
             const numeroWhatsApp = "525613388030"; const mensajeGeneral = "Hola JBDA, solicito información de consultoría."; const urlWhatsGeneral = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeGeneral)}`;
@@ -828,7 +891,7 @@
             const abrirCalendly = (e) => { e.preventDefault(); Calendly.initPopupWidget({url: urlCalendly}); document.getElementById('concierge-menu').classList.remove('active'); return false; };
             document.getElementById('link-hero').addEventListener('click', abrirCalendly); document.getElementById('link-cta').addEventListener('click', abrirCalendly); document.getElementById('link-concierge-calendly').addEventListener('click', abrirCalendly);
 
-            // --- 9. LÓGICA DEL BOTÓN FLOTANTE ---
+            // --- 11. LÓGICA DEL BOTÓN FLOTANTE ---
             const conciergeToggle = document.getElementById('concierge-toggle'); const conciergeMenu = document.getElementById('concierge-menu');
             conciergeToggle.addEventListener('click', (e) => { e.stopPropagation(); conciergeMenu.classList.toggle('active'); });
             document.addEventListener('click', (event) => { if (!conciergeToggle.contains(event.target) && !conciergeMenu.contains(event.target)) { conciergeMenu.classList.remove('active'); } });
