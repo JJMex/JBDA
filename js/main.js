@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('mousemove', (e) => {
             cursorLed.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
         });
-        const interactives = document.querySelectorAll('a, button, summary, input[type=range]');
+        const interactives = document.querySelectorAll('a, button, summary, input[type=range], #terminal-toggle');
         interactives.forEach(el => {
             el.addEventListener('mouseenter', () => cursorLed.classList.add('tx-rx'));
             el.addEventListener('mouseleave', () => cursorLed.classList.remove('tx-rx'));
@@ -41,7 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- 3. MENÚ MÓVIL ---
     const menuBtn = document.getElementById('mobile-menu-btn');
     const navLinks = document.getElementById('nav-links');
-    const navItems = document.querySelectorAll('.nav-item');
     let menuOpen = false;
 
     if(menuBtn && navLinks) {
@@ -52,27 +51,27 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 4. TRANSICIONES DE PÁGINA Y SCROLL MENÚ (REPARADO) ---
+    // --- 4. TRANSICIONES DE PÁGINA Y SCROLL MENÚ (REPARADO Y FUNCIONAL) ---
     document.querySelectorAll('a').forEach(anchor => {
         if(anchor.href && !anchor.target && !anchor.id.includes('calendly')) {
             anchor.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
                 
-                // Si el link es en la misma página (Ej: #servicios)
+                // Si el link es un # (ancla en la misma página) -> Hacer Scroll
                 if (targetUrl && targetUrl.startsWith('#')) {
                     e.preventDefault();
                     
-                    // Cierra el menu movil si esta abierto
+                    // Cerrar el menú si estamos en el celular
                     if(menuOpen && menuBtn) {
                         navLinks.classList.remove('active'); menuOpen = false;
                         menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>';
                     }
 
-                    // Baja suavemente hacia la seccion
+                    // Ir a la sección
                     if (typeof lenis !== 'undefined') { lenis.scrollTo(targetUrl); } 
                     else { document.querySelector(targetUrl).scrollIntoView({behavior: 'smooth'}); }
                 } 
-                // Si el link va a Privacidad o cambia de idioma
+                // Si el link va a Privacidad o cambia de idioma -> Bajar Cristal
                 else if (this.hostname === window.location.hostname || targetUrl.startsWith('.') || targetUrl.startsWith('/')) {
                     e.preventDefault();
                     if(overlay) {
@@ -113,50 +112,78 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 6. SIMULADOR DE ESTRÉS (GAMIFICACIÓN B2B) ---
     const slider = document.getElementById('traffic-slider');
+    const metricUsers = document.getElementById('metric-users');
+    const metricRps = document.getElementById('metric-rps');
+    const metricStatus = document.getElementById('metric-status');
     const barTrad = document.getElementById('bar-trad');
     const barJbda = document.getElementById('bar-jbda');
     const statusTrad = document.getElementById('status-trad');
     const statusJbda = document.getElementById('status-jbda');
-    const trafficVal = document.getElementById('traffic-value');
+    const cpuTrad = document.getElementById('cpu-trad');
+    const cpuJbda = document.getElementById('cpu-jbda');
 
     if (slider && barTrad && barJbda) {
         slider.addEventListener('input', (e) => {
             const val = parseInt(e.target.value);
-            // Lee si la página está en inglés o español por la etiqueta del HTML
             const isEnglish = document.documentElement.lang === 'en';
             
-            // Textos del Slider
-            if(val < 30) trafficVal.innerText = isEnglish ? 'Low (Normal)' : 'Bajo (Normal)';
-            else if(val < 70) trafficVal.innerText = isEnglish ? 'Medium (Peak Hours)' : 'Medio (Horario Pico)';
-            else trafficVal.innerText = isEnglish ? 'CRITICAL (DDoS / Overload)' : 'CRÍTICO (DDoS / Sobrecarga)';
+            let users = Math.floor(150 + (val * 248.5)); 
+            let rps = Math.floor(300 + (val * 1497));    
+            
+            metricUsers.innerText = users.toLocaleString();
+            metricRps.innerText = rps.toLocaleString();
 
-            // Matemáticas Red Tradicional
+            metricStatus.classList.remove('status-green', 'status-yellow', 'status-red');
+            if(val < 40) {
+                metricStatus.innerText = isEnglish ? 'Stable' : 'Estable';
+                metricStatus.classList.add('status-green');
+            } else if(val < 75) {
+                metricStatus.innerText = isEnglish ? 'Warning (Peak)' : 'Riesgo (Pico)';
+                metricStatus.classList.add('status-yellow');
+            } else {
+                metricStatus.innerText = isEnglish ? 'CRITICAL / OVERLOAD' : 'CRÍTICO / SOBRECARGA';
+                metricStatus.classList.add('status-red');
+            }
+
             let tradWidth = 5 + (val * 1.5);
             if(tradWidth > 100) tradWidth = 100;
             barTrad.style.width = `${tradWidth}%`;
-
+            
+            let cpuT = Math.min(100, Math.floor(15 + (val * 0.95)));
+            
             if(val > 75) {
-                barTrad.style.backgroundColor = '#ef4444'; // Falla en Rojo
+                barTrad.style.backgroundColor = '#ef4444'; 
                 barTrad.parentElement.parentElement.classList.add('alert-shake');
                 statusTrad.innerText = isEnglish ? 'Latency: 999ms (FAILURE)' : 'Latencia: 999ms (CAÍDA)';
-                statusTrad.style.color = '#ef4444';
+                statusTrad.className = 'status status-red';
+                cpuTrad.innerText = isEnglish ? `CPU: 100% (CRASH)` : `CPU: 100% (COLAPSO)`;
+                cpuTrad.className = 'cpu-load status-red';
             } else if (val > 40) {
-                barTrad.style.backgroundColor = '#f59e0b'; // Advertencia Amarilla
+                barTrad.style.backgroundColor = '#f59e0b'; 
                 barTrad.parentElement.parentElement.classList.remove('alert-shake');
-                statusTrad.innerText = isEnglish ? 'Latency: 250ms (Warning)' : 'Latencia: 250ms (Riesgo)';
-                statusTrad.style.color = '#f59e0b';
+                let latT = Math.floor(65 + (val-50)*8);
+                statusTrad.innerText = isEnglish ? `Latency: ${latT}ms` : `Latencia: ${latT}ms`;
+                statusTrad.className = 'status status-yellow';
+                cpuTrad.innerText = `CPU: ${cpuT}%`;
+                cpuTrad.className = 'cpu-load status-yellow';
             } else {
-                barTrad.style.backgroundColor = '#10b981'; // Estable en Verde
+                barTrad.style.backgroundColor = '#10b981'; 
                 barTrad.parentElement.parentElement.classList.remove('alert-shake');
-                statusTrad.innerText = isEnglish ? 'Latency: 15ms (Stable)' : 'Latencia: 15ms (Estable)';
-                statusTrad.style.color = 'var(--soft-grey)';
+                let latT = Math.floor(15 + val);
+                statusTrad.innerText = isEnglish ? `Latency: ${latT}ms` : `Latencia: ${latT}ms`;
+                statusTrad.className = 'status status-green';
+                cpuTrad.innerText = `CPU: ${cpuT}%`;
+                cpuTrad.className = 'cpu-load status-green';
             }
 
-            // Matemáticas Arquitectura JBDA (Mantiene la estabilidad visual)
             let jbdaWidth = 5 + (val * 0.15); 
+            let cpuJ = Math.floor(12 + (val * 0.33)); 
+            let latJ = 12 + Math.floor(val * 0.05);   
+
             barJbda.style.width = `${jbdaWidth}%`;
             barJbda.style.backgroundColor = 'var(--pink-premium)';
-            statusJbda.innerText = isEnglish ? 'Latency: 12ms (Stable, 99.8% QoS)' : 'Latencia: 12ms (Estable, 99.8% QoS)';
+            statusJbda.innerText = isEnglish ? `Latency: ${latJ}ms (99.8% QoS)` : `Latencia: ${latJ}ms (99.8% QoS)`;
+            cpuJbda.innerText = isEnglish ? `CPU: ${cpuJ}% (Load Balanced)` : `CPU: ${cpuJ}% (Balanceo Activo)`;
         });
     }
 
@@ -219,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, 1200);
 
-    // --- 10. ANIMACIÓN DE RED (CON APAGADO INTELIGENTE PARA AHORRAR CPU) ---
+    // --- 10. ANIMACIÓN DE RED INTERACTIVA (CON APAGADO INTELIGENTE) ---
     const canvas = document.getElementById('network-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
@@ -234,16 +261,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         window.addEventListener('mouseout', function() { mouse.x = undefined; mouse.y = undefined; });
 
-        // SENSOR DE INTERSECCIÓN (APAGA LA RED SI NO SE VE)
+        // SENSOR DE INTERSECCIÓN (APAGA LA RED SI LA CABECERA NO SE VE)
         const header = document.querySelector('header');
         if (header) {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     isCanvasVisible = entry.isIntersecting;
                     if (isCanvasVisible && !animationFrameId) {
-                        animateCanvas(); // Enciende si se ve
+                        animateCanvas(); 
                     } else if (!isCanvasVisible && animationFrameId) {
-                        cancelAnimationFrame(animationFrameId); // Apaga si no se ve
+                        cancelAnimationFrame(animationFrameId); 
                         animationFrameId = null;
                     }
                 });
@@ -298,7 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         function animateCanvas() {
-            if (!isCanvasVisible) return; // Freno de seguridad
+            if (!isCanvasVisible) return; 
             animationFrameId = requestAnimationFrame(animateCanvas);
             ctx.clearRect(0, 0, width, height);
             for (let i = 0; i < particles.length; i++) {
@@ -352,6 +379,16 @@ document.addEventListener("DOMContentLoaded", () => {
         document.addEventListener('click', (event) => { if (!conciergeToggle.contains(event.target) && !conciergeMenu.contains(event.target)) { conciergeMenu.classList.remove('active'); } });
     }
 
+    // --- 14. MODO TERMINAL (EASTER EGG - BLINDADO) ---
+    const terminalToggle = document.getElementById('terminal-toggle');
+    if(terminalToggle) { 
+        terminalToggle.addEventListener('click', (e) => { 
+            e.stopPropagation(); // Evita que otros clicks cancelen el evento
+            document.body.classList.toggle('terminal-mode'); 
+        }); 
+    }
+
+    // --- 15. PROTECCIÓN ---
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.addEventListener('keydown', event => { if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || (event.ctrlKey && event.keyCode === 85)) { event.preventDefault(); } });
 });
