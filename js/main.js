@@ -1,21 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // --- 0. PRELOADER Y CRISTAL LÍQUIDO CON MEMORIA ---
+    // --- 0. PRELOADER Y CRISTAL LÍQUIDO ---
     const overlay = document.getElementById('page-transition-overlay');
     const preloader = document.getElementById('preloader');
     
-    // El Cristal Líquido se "desempaña" cuando el DOM está listo
     window.addEventListener('pageshow', () => {
         if(overlay) overlay.classList.add('hidden');
     });
 
-    // El preloader (Logo cargando) solo aparece la PRIMERA vez que entras a la página
     if (preloader) {
         if (sessionStorage.getItem('jbda_preloader_shown')) {
-            // Si ya estabas navegando, apágalo al instante (Cero flashazos)
             preloader.style.display = 'none';
         } else {
-            // Si eres visitante nuevo, muestra la carga y guárdalo en la memoria
             setTimeout(() => { 
                 preloader.classList.add('preloader-hidden'); 
                 sessionStorage.setItem('jbda_preloader_shown', 'true');
@@ -36,7 +32,42 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 2. MODO OSCURO NATIVO CON MEMORIA ---
+    // --- 2. LENIS SCROLL (FÍSICA INERCIAL) ---
+    if (typeof Lenis !== 'undefined') {
+        const lenis = new Lenis({
+            duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+            direction: 'vertical', gestureDirection: 'vertical', smooth: true
+        });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+    }
+
+    // --- 3. TRANSICIONES DE PÁGINA A PRUEBA DE FALLOS ---
+    document.querySelectorAll('a').forEach(anchor => {
+        if(anchor.href && !anchor.target && !anchor.id.includes('calendly')) {
+            anchor.addEventListener('click', function(e) {
+                const targetUrl = this.getAttribute('href');
+                
+                // Si es un ancla interna (#) desliza con Lenis
+                if (targetUrl.startsWith('#')) {
+                    e.preventDefault();
+                    if(typeof lenis !== 'undefined') lenis.scrollTo(targetUrl);
+                } 
+                // Si es una página de JBDA (Index o Privacidad) baja el cristal
+                else if (this.hostname === window.location.hostname || targetUrl.startsWith('.') || targetUrl.startsWith('/')) {
+                    e.preventDefault();
+                    if(overlay) {
+                        overlay.classList.remove('hidden'); 
+                        setTimeout(() => { window.location.href = this.href; }, 400); 
+                    } else {
+                        window.location.href = this.href;
+                    }
+                }
+            });
+        }
+    });
+
+    // --- 4. MODO OSCURO NATIVO CON MEMORIA ---
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const moonIcon = document.getElementById('moon-icon');
     const sunIcon = document.getElementById('sun-icon');
@@ -51,84 +82,17 @@ document.addEventListener("DOMContentLoaded", () => {
             document.body.classList.toggle('dark-theme');
             if (document.body.classList.contains('dark-theme')) {
                 localStorage.setItem('jbda_theme', 'dark');
-                moonIcon.style.display = 'none'; sunIcon.style.display = 'block';
+                if(moonIcon) moonIcon.style.display = 'none'; 
+                if(sunIcon) sunIcon.style.display = 'block';
             } else {
                 localStorage.setItem('jbda_theme', 'light');
-                moonIcon.style.display = 'block'; sunIcon.style.display = 'none';
+                if(moonIcon) moonIcon.style.display = 'block'; 
+                if(sunIcon) sunIcon.style.display = 'none';
             }
         });
     }
 
-    // --- 3. MOTOR BILINGÜE CON MEMORIA ---
-    const langToggleBtn = document.getElementById('lang-toggle-btn');
-    const langTextElements = document.querySelectorAll('.lang-text');
-    
-    function setLanguage(lang) {
-        langTextElements.forEach(el => {
-            if (lang === 'en' && el.hasAttribute('data-en')) { 
-                el.innerHTML = el.getAttribute('data-en'); 
-            } else if (el.hasAttribute('data-es')) { 
-                el.innerHTML = el.getAttribute('data-es'); 
-            }
-        });
-        if(langToggleBtn) { langToggleBtn.innerText = lang === 'en' ? 'ES' : 'EN'; }
-    }
-
-    let currentLang = localStorage.getItem('jbda_lang') || 'es';
-    setLanguage(currentLang);
-
-    if (langToggleBtn) {
-        langToggleBtn.addEventListener('click', () => {
-            currentLang = currentLang === 'es' ? 'en' : 'es';
-            localStorage.setItem('jbda_lang', currentLang);
-            setLanguage(currentLang);
-        });
-    }
-
-    // --- 4. MOTOR LENIS (SCROLL INERCIAL DE ALTA GAMA) ---
-    const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-        direction: 'vertical',
-        gestureDirection: 'vertical',
-        smooth: true,
-        mouseMultiplier: 1,
-        smoothTouch: false,
-        touchMultiplier: 2,
-        infinite: false,
-    });
-    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
-
-    // --- 5. TRANSICIONES DE PÁGINA (CRISTAL EMPAÑADO) ---
-    document.querySelectorAll('a').forEach(anchor => {
-        if(anchor.href && !anchor.target && !anchor.id.includes('calendly')) {
-            // Si el link es en la misma página (Ej: #servicios)
-            if (anchor.getAttribute('href').startsWith('#')) {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    lenis.scrollTo(this.getAttribute('href')); 
-                });
-            } 
-            // Si el link va a Privacidad u otra página nuestra
-            else if (anchor.href.includes(window.location.hostname) || anchor.href.includes('file://')) {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = this.href;
-                    if(overlay) {
-                        // Vuelve a empañar el cristal
-                        overlay.classList.remove('hidden'); 
-                        // Espera medio segundo y lanza la página
-                        setTimeout(() => { window.location.href = target; }, 500); 
-                    } else {
-                        window.location.href = target;
-                    }
-                });
-            }
-        }
-    });
-
-    // --- 6. BOTONES MAGNÉTICOS & RIPPLE ---
+    // --- 5. BOTONES MAGNÉTICOS ---
     const magneticBtns = document.querySelectorAll('.magnetic-btn');
     magneticBtns.forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
@@ -142,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.addEventListener('mouseleave', () => { btn.style.transform = `translate(0px, 0px)`; });
     });
 
-    // --- 7. MOTOR DE DATOS: CONTADORES DINÁMICOS ---
+    // --- 6. CONTADORES DINÁMICOS ---
     const counters = document.querySelectorAll('.counter-val');
     if(counters.length > 0) {
         let observerCounters = new IntersectionObserver(entries => {
@@ -150,8 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if(entry.isIntersecting) {
                     const target = parseFloat(entry.target.getAttribute('data-target'));
                     const isDecimal = entry.target.getAttribute('data-decimal') === 'true';
-                    const duration = 1500;
-                    const step = target / (duration / 16);
+                    const duration = 1500; const step = target / (duration / 16);
                     let current = 0;
                     const updateCounter = () => {
                         current += step;
@@ -162,15 +125,14 @@ document.addEventListener("DOMContentLoaded", () => {
                             entry.target.innerText = target;
                         }
                     };
-                    updateCounter();
-                    observerCounters.unobserve(entry.target);
+                    updateCounter(); observerCounters.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.5 });
         counters.forEach(c => observerCounters.observe(c));
     }
 
-    // --- 8. SCROLL-FOCUS DINÁMICO ---
+    // --- 7. SCROLL-FOCUS SEGURO ---
     setTimeout(() => {
         const focusCards = document.querySelectorAll('.card, .team-card, details');
         if(focusCards.length > 0) {
@@ -178,11 +140,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 entries.forEach(entry => {
                     if (entry.target.classList.contains('aos-animate') || !entry.target.hasAttribute('data-aos')) {
                         if(entry.isIntersecting) {
-                            entry.target.classList.add('scroll-focused');
-                            entry.target.classList.remove('scroll-dimmed');
+                            entry.target.classList.add('scroll-focused'); entry.target.classList.remove('scroll-dimmed');
                         } else {
-                            entry.target.classList.remove('scroll-focused');
-                            entry.target.classList.add('scroll-dimmed');
+                            entry.target.classList.remove('scroll-focused'); entry.target.classList.add('scroll-dimmed');
                         }
                     }
                 });
@@ -191,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, 1200);
 
-    // --- 9. ANIMACIÓN DE RED INTERACTIVA ---
+    // --- 8. ANIMACIÓN DE RED INTERACTIVA ---
     const canvas = document.getElementById('network-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
@@ -221,7 +181,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if(mouse.x != undefined && mouse.y != undefined) {
                     let dx = mouse.x - this.x; let dy = mouse.y - this.y;
                     let distance = Math.sqrt(dx * dx + dy * dy);
-                    
                     if (distance < mouse.radius) {
                         ctx.beginPath(); ctx.moveTo(this.x, this.y); ctx.lineTo(mouse.x, mouse.y);
                         const isDark = document.body.classList.contains('dark-theme');
@@ -247,23 +206,18 @@ document.addEventListener("DOMContentLoaded", () => {
         function initCanvas() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = document.querySelector('header').offsetHeight;
-            particles = [];
-            const particleCount = window.innerWidth < 768 ? 60 : 120;
+            particles = []; const particleCount = window.innerWidth < 768 ? 60 : 120;
             for (let i = 0; i < particleCount; i++) { particles.push(new Particle()); }
         }
 
         function animateCanvas() {
             requestAnimationFrame(animateCanvas);
             ctx.clearRect(0, 0, width, height);
-            
             for (let i = 0; i < particles.length; i++) {
-                let p = particles[i];
-                p.update(); p.draw();
-
+                let p = particles[i]; p.update(); p.draw();
                 for (let j = i + 1; j < particles.length; j++) {
                     let p2 = particles[j]; 
                     let dist = Math.sqrt(Math.pow(p.x - p2.x, 2) + Math.pow(p.y - p2.y, 2));
-                    
                     if (dist < 160) {
                         ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
                         const isDark = document.body.classList.contains('dark-theme');
@@ -276,13 +230,11 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('resize', initCanvas); initCanvas(); animateCanvas();
     }
 
-    // --- 10. BARRA DE PROGRESO Y SOMBRA DINÁMICA ---
+    // --- 9. SOMBRA DE NAVBAR ---
     const nav = document.getElementById('main-nav');
     const progressBar = document.getElementById('scroll-progress');
     window.addEventListener('scroll', () => { 
-        if(nav) {
-            if (window.scrollY > 50) { nav.classList.add('nav-scrolled'); } else { nav.classList.remove('nav-scrolled'); } 
-        }
+        if(nav) { if (window.scrollY > 50) { nav.classList.add('nav-scrolled'); } else { nav.classList.remove('nav-scrolled'); } }
         if(progressBar) {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -291,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 11. LÓGICA DEL MENÚ MÓVIL ---
+    // --- 10. MENÚ MÓVIL ---
     const menuBtn = document.getElementById('mobile-menu-btn');
     const navLinks = document.getElementById('nav-links');
     const navItems = document.querySelectorAll('.nav-item');
@@ -300,40 +252,38 @@ document.addEventListener("DOMContentLoaded", () => {
     if(menuBtn && navLinks) {
         menuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active'); menuOpen = !menuOpen;
-            if(menuOpen) { menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>'; } else { menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>'; }
+            if(menuOpen) { menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>'; } 
+            else { menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>'; }
         });
 
         navItems.forEach(item => {
-            if(item.id !== 'dark-mode-toggle' && item.id !== 'lang-toggle-btn') {
+            if(!item.classList.contains('lang-toggle-link') && item.id !== 'dark-mode-toggle') {
                 item.addEventListener('click', () => { navLinks.classList.remove('active'); menuOpen = false; menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>'; });
             }
         });
     }
 
-    // --- 12. INICIALIZACIÓN DE ENLACES Y AOS ---
     if (typeof AOS !== 'undefined') { AOS.init({ duration: 1000, once: true, offset: 100 }); }
 
+    // --- 11. ENLACES Y CALENDLY ---
     const numeroWhatsApp = "525613388030"; const mensajeGeneral = "Hola JBDA, solicito información de consultoría."; const urlWhatsGeneral = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeGeneral)}`;
-    
     if(document.getElementById('link-whatsapp-footer')) document.getElementById('link-whatsapp-footer').href = urlWhatsGeneral; 
     if(document.getElementById('link-concierge-whatsapp')) document.getElementById('link-concierge-whatsapp').href = urlWhatsGeneral; 
     if(document.getElementById('link-linkedin')) document.getElementById('link-linkedin').href = "https://www.linkedin.com/company/jbdamx/";
 
     const urlCalendly = "https://calendly.com/jbda_tech/diagnostico";
     const abrirCalendly = (e) => { e.preventDefault(); Calendly.initPopupWidget({url: urlCalendly}); document.getElementById('concierge-menu').classList.remove('active'); return false; };
-    
     if(document.getElementById('link-hero')) document.getElementById('link-hero').addEventListener('click', abrirCalendly); 
     if(document.getElementById('link-cta')) document.getElementById('link-cta').addEventListener('click', abrirCalendly); 
     if(document.getElementById('link-concierge-calendly')) document.getElementById('link-concierge-calendly').addEventListener('click', abrirCalendly);
 
-    // --- 13. LÓGICA DEL BOTÓN FLOTANTE ---
+    // --- 12. BOTÓN FLOTANTE ---
     const conciergeToggle = document.getElementById('concierge-toggle'); const conciergeMenu = document.getElementById('concierge-menu');
     if(conciergeToggle && conciergeMenu) {
         conciergeToggle.addEventListener('click', (e) => { e.stopPropagation(); conciergeMenu.classList.toggle('active'); });
         document.addEventListener('click', (event) => { if (!conciergeToggle.contains(event.target) && !conciergeMenu.contains(event.target)) { conciergeMenu.classList.remove('active'); } });
     }
 
-    // --- 14. SCRIPT DE PROTECCIÓN ---
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.addEventListener('keydown', event => { if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || (event.ctrlKey && event.keyCode === 85)) { event.preventDefault(); } });
 });
