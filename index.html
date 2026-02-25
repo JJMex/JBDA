@@ -191,6 +191,34 @@
             </div>
         </section>
 
+        <section id="stress-test-container" data-aos="fade-up">
+            <div class="glass-track" style="padding: 60px 8%; text-align: left; max-width: 1000px;">
+                <span class="section-label">Simulador de Carga</span>
+                <h2 class="title-serif" style="font-size: clamp(32px, 4vw, 42px); color: var(--dark-grey);">Prueba de Estrés: Tráfico Corporativo</h2>
+                
+                <div class="stress-ui">
+                    <div class="slider-container">
+                        <label>Volumen de Usuarios / Peticiones</label>
+                        <input type="range" id="traffic-slider" min="0" max="100" value="0" aria-label="Simulador de Tráfico">
+                        <span id="traffic-value">Bajo (Normal)</span>
+                    </div>
+                    
+                    <div class="graphs">
+                        <div class="graph-box traditional">
+                            <h4>Red Tradicional</h4>
+                            <div class="bar-container"><div class="bar trad" id="bar-trad"></div></div>
+                            <span class="status" id="status-trad">Latencia: 15ms (Estable)</span>
+                        </div>
+                        <div class="graph-box jbda">
+                            <h4>Arquitectura Blindada JBDA</h4>
+                            <div class="bar-container"><div class="bar jbda" id="bar-jbda"></div></div>
+                            <span class="status" id="status-jbda" style="color: var(--pink-premium);">Latencia: 12ms (Estable, 99.8% QoS)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="nuestra-firma">
             <span class="section-label" data-aos="fade-up">El Equipo Directivo</span>
             <h2 class="title-serif" data-aos="fade-up" style="font-size: clamp(36px, 5vw, 48px); margin-bottom: 40px;">Ingeniería guiada por visión de negocio.</h2>
