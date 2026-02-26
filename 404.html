@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - Conexión Perdida | JBDA</title>
     
+    <meta property="og:title" content="404 - Nodo no encontrado | JBDA">
+    <meta property="og:description" content="Consultoría Estratégica en Redes. El enlace que buscas no existe o ha sido movido.">
+    <meta property="og:image" content="/JBDA/assets/og-image.png">
+    <meta property="og:type" content="website">
+    
     <link rel="icon" href="/JBDA/assets/Isotipo.png" type="image/png">
     <link rel="apple-touch-icon" href="/JBDA/assets/Isotipo.png">
     
@@ -17,8 +22,10 @@
 <body id="error-page">
 
     <div id="page-transition-overlay"></div>
+    
     <div class="orbs-container"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
     <div class="blueprint-grid"></div>
+    
     <div class="cursor-led" id="cursor-led"></div>
 
     <nav id="main-nav">
@@ -26,7 +33,7 @@
             <a href="/JBDA/" aria-label="Volver al inicio"><img src="/JBDA/assets/JBDA.png" alt="JBDA Logo"></a>
         </div>
         <div class="nav-links">
-            <button id="dark-mode-toggle" class="nav-item" aria-label="Alternar Modo Oscuro" style="background: none; border: none; cursor: none; margin-left: 10px; display: flex; align-items: center; justify-content: center; transition: color 0.3s ease;">
+            <button id="dark-mode-toggle" class="nav-item" aria-label="Alternar Modo Oscuro" style="background: none; border: none; cursor: none; margin-left: 10px; display: flex; align-items: center; justify-content: center; transition: color 0.3s ease; color: var(--soft-grey);">
                 <svg id="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 <svg id="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
             </button>
@@ -35,10 +42,10 @@
 
     <header style="text-align: center; display: flex; align-items: center; min-height: 80vh;">
         <canvas id="network-canvas"></canvas>
-        <div class="hero-content" style="margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+        <div class="hero-content" style="margin: 0 auto; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2;">
             <h2 class="scramble-text" style="color: var(--pink-premium); font-size: 16px; letter-spacing: 5px; margin-bottom: 20px;">ERROR 404</h2>
-            <h1 class="title-serif scramble-text" style="font-size: clamp(50px, 8vw, 100px); line-height: 1; margin-bottom: 20px;">Conexión Perdida.</h1>
-            <p style="font-size: 20px; max-width: 500px; margin-bottom: 50px;">El nodo arquitectónico que intentas alcanzar no existe o la ruta ha sido modificada en nuestros servidores.</p>
+            <h1 class="title-serif scramble-text" style="font-size: clamp(50px, 8vw, 100px); line-height: 1; margin-bottom: 20px; color: var(--dark-grey);">Conexión Perdida.</h1>
+            <p style="font-size: 20px; max-width: 500px; margin-bottom: 50px; color: var(--soft-grey);">El nodo arquitectónico que intentas alcanzar no existe o la ruta ha sido modificada en nuestros servidores.</p>
             <a href="/JBDA/" class="btn-main magnetic-btn" aria-label="Reestablecer Conexión">Reestablecer Conexión</a>
         </div>
     </header>
