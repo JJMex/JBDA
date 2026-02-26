@@ -73,7 +73,7 @@ Este proyecto utiliza **GitHub Actions** para su optimización y despliegue auto
 
 **JBDA | Consultoría Estratégica en Infraestructura de Redes** Para auditorías de red, optimización de CAPEX o despliegue de arquitecturas multivendor, comuníquese a través del portal de asistencia:
 
-* 🌐 **Web Oficial:** [https://jjmex.github.io/JBDA/](https://www.TU-DOMINIO.com](https://jjmex.github.io/JBDA) 
+* 🌐 **Web Oficial:** [https://jjmex.github.io/JBDA/](https://jjmex.github.io/JBDA) 
 * ✉️ **Contacto:** [JBDA_Tech@icloud.com](mailto:JBDA_Tech@icloud.com)
 
 <br>
