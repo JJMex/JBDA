@@ -358,3 +358,12 @@ body.terminal-mode .bar { background-color: #00ff00 !important; }
 body.terminal-mode::after { content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); z-index: 9999; background-size: 100% 2px, 3px 100%; pointer-events: none; opacity: 0.4; }
 #terminal-toggle { cursor: pointer !important; opacity: 0.2; font-family: monospace; transition: opacity 0.3s; margin-left: 5px; position: relative; z-index: 10000; pointer-events: auto; }
 #terminal-toggle:hover { opacity: 1; color: var(--pink-premium) !important; }
+
+/* --- SCROLLBAR PREMIUM (CHROME/EDGE) --- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--white); transition: background 0.3s; }
+body.dark-theme ::-webkit-scrollbar-track, body.terminal-mode ::-webkit-scrollbar-track { background: var(--dark-grey); }
+::-webkit-scrollbar-thumb { background: rgba(212, 0, 109, 0.4); border-radius: 10px; border: 2px solid var(--white); }
+body.dark-theme ::-webkit-scrollbar-thumb { border-color: var(--dark-grey); }
+::-webkit-scrollbar-thumb:hover { background: var(--pink-premium); }
+body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color: #050505; }
