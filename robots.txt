@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Bloqueamos el acceso a carpetas de código interno para que no las indexe como páginas
+Disallow: /css/
+Disallow: /js/
+
+# Dirección del mapa del sitio para Googlebot
+Sitemap: https://jjmex.github.io/JBDA/sitemap.xml

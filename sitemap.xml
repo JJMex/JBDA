@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://jjmex.github.io/JBDA/</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jjmex.github.io/JBDA/en/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jjmex.github.io/JBDA/"/>
+  </url>
+
+  <url>
+    <loc>https://jjmex.github.io/JBDA/en/</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jjmex.github.io/JBDA/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jjmex.github.io/JBDA/en/"/>
+  </url>
+
+  <url>
+    <loc>https://jjmex.github.io/JBDA/privacidad/</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jjmex.github.io/JBDA/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jjmex.github.io/JBDA/privacidad/"/>
+  </url>
+
+  <url>
+    <loc>https://jjmex.github.io/JBDA/en/privacy/</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jjmex.github.io/JBDA/privacidad/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jjmex.github.io/JBDA/en/privacy/"/>
+  </url>
+
+</urlset>
