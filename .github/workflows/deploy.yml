@@ -1,0 +1,41 @@
+name: "🚀 Despliegue Élite JBDA (Optimización Total)"
+
+on:
+  push:
+    branches: ["main"] # Se activa cada vez que guardas cambios en main
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout del código original
+        uses: actions/checkout@v4
+
+      - name: 🛠️ Setup Node.js (Motor de compresión)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 📦 Instalar Herramientas de Minificación
+        run: npm install -g html-minifier-terser clean-css-cli uglify-js
+
+      - name: 🧹 Ejecutar Limpieza y Compresión (HTML, CSS, JS)
+        run: |
+          echo "Minificando archivos HTML..."
+          find . -type f -name "*.html" -not -path "*/node_modules/*" -not -path "*/\.git/*" -exec html-minifier-terser --collapse-whitespace --remove-comments --minify-css true --minify-js true -o {} {} \;
+          
+          echo "Minificando archivos CSS..."
+          find ./css -type f -name "*.css" -exec cleancss -o {} {} \;
+          
+          echo "Minificando archivos JS..."
+          find ./js -type f -name "*.js" -exec uglifyjs {} -o {} -m -c \;
+
+      - name: 🚀 Desplegar a Producción (Rama gh-pages)
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: . # Despliega la raíz ya optimizada
+          branch: gh-pages # Manda el código sucio a esta rama
+          clean: true
