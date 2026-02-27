@@ -17,12 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- 1. NUEVO: LINTERNA VOLUMÉTRICA & CURSOR LED ---
+    // --- 1. LINTERNA VOLUMÉTRICA & CURSOR LED ---
     const cursorLed = document.getElementById('cursor-led');
     window.addEventListener('mousemove', (e) => {
-        // Mueve el LED
         if (cursorLed) cursorLed.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-        // Mueve la Linterna (Blueprint Grid)
         document.documentElement.style.setProperty('--mouse-x', e.clientX + 'px');
         document.documentElement.style.setProperty('--mouse-y', e.clientY + 'px');
     });
@@ -41,16 +39,26 @@ document.addEventListener("DOMContentLoaded", () => {
         requestAnimationFrame(raf);
     }
 
-    // --- 3. MENÚ MÓVIL ---
+    // --- 3. MENÚ MÓVIL (NUEVA LÓGICA GLASSMORPHISM) ---
     const menuBtn = document.getElementById('mobile-menu-btn');
     const navLinks = document.getElementById('nav-links');
     let menuOpen = false;
 
+    function closeMobileMenu() {
+        if(menuOpen && navLinks && menuBtn) {
+            navLinks.classList.remove('active');
+            menuBtn.classList.remove('open');
+            document.body.style.overflow = '';
+            menuOpen = false;
+        }
+    }
+
     if(menuBtn && navLinks) {
         menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active'); menuOpen = !menuOpen;
-            if(menuOpen) { menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>'; } 
-            else { menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>'; }
+            menuOpen = !menuOpen;
+            navLinks.classList.toggle('active');
+            menuBtn.classList.toggle('open');
+            document.body.style.overflow = menuOpen ? 'hidden' : '';
         });
     }
 
@@ -61,12 +69,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 const targetUrl = this.getAttribute('href');
                 if (targetUrl && targetUrl.startsWith('#')) {
                     e.preventDefault();
-                    if(menuOpen && menuBtn) {
-                        navLinks.classList.remove('active'); menuOpen = false;
-                        menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>';
-                    }
-                    if (typeof lenis !== 'undefined') { lenis.scrollTo(targetUrl); } 
-                    else { document.querySelector(targetUrl).scrollIntoView({behavior: 'smooth'}); }
+                    
+                    closeMobileMenu(); // Cierra el menú antes de hacer el scroll
+
+                    setTimeout(() => {
+                        if (typeof lenis !== 'undefined') { lenis.scrollTo(targetUrl); } 
+                        else { document.querySelector(targetUrl).scrollIntoView({behavior: 'smooth'}); }
+                    }, 50); // Delay mínimo para asegurar fluidez
                 } 
                 else if (this.hostname === window.location.hostname || targetUrl.startsWith('.') || targetUrl.startsWith('/')) {
                     e.preventDefault();
@@ -81,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 5. NUEVO: MOTOR DATA SCRAMBLE (DECODIFICADOR) ---
+    // --- 5. MOTOR DATA SCRAMBLE (DECODIFICADOR) ---
     class TextScramble {
         constructor(el) {
             this.el = el;
@@ -125,7 +134,6 @@ document.addEventListener("DOMContentLoaded", () => {
         randomChar() { return this.chars[Math.floor(Math.random() * this.chars.length)]; }
     }
 
-    // Iniciar el Decodificador cuando el texto entra en pantalla
     const scrambles = document.querySelectorAll('.scramble-text');
     const scrambleObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
@@ -134,14 +142,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 const original = entry.target.getAttribute('data-original') || entry.target.innerText;
                 entry.target.setAttribute('data-original', original);
                 fx.setText(original);
-                entry.target.scrambled = true; // Solo lo hace 1 vez
+                entry.target.scrambled = true;
             }
         });
     }, {threshold: 0.1});
     
     scrambles.forEach(el => {
         el.setAttribute('data-original', el.innerText);
-        el.innerHTML = '&nbsp;'; // Oculta temporalmente para el impacto
+        el.innerHTML = '&nbsp;'; 
         scrambleObserver.observe(el);
     });
 
@@ -448,4 +456,3 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.addEventListener('keydown', event => { if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || (event.ctrlKey && event.keyCode === 85)) { event.preventDefault(); } });
 });
-
