@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         requestAnimationFrame(raf);
     }
 
-    // --- 3. MENÚ MÓVIL (NUEVA LÓGICA GLASSMORPHISM) ---
+    // --- 3. MENÚ MÓVIL (NUEVA LÓGICA) ---
     const menuBtn = document.getElementById('mobile-menu-btn');
     const navLinks = document.getElementById('nav-links');
     let menuOpen = false;
@@ -69,22 +69,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 const targetUrl = this.getAttribute('href');
                 if (targetUrl && targetUrl.startsWith('#')) {
                     e.preventDefault();
-                    
-                    closeMobileMenu(); // Cierra el menú antes de hacer el scroll
-
+                    closeMobileMenu(); 
                     setTimeout(() => {
                         if (typeof lenis !== 'undefined') { lenis.scrollTo(targetUrl); } 
                         else { document.querySelector(targetUrl).scrollIntoView({behavior: 'smooth'}); }
-                    }, 50); // Delay mínimo para asegurar fluidez
+                    }, 50);
                 } 
                 else if (this.hostname === window.location.hostname || targetUrl.startsWith('.') || targetUrl.startsWith('/')) {
                     e.preventDefault();
                     if(overlay) {
                         overlay.classList.remove('hidden'); 
                         setTimeout(() => { window.location.href = this.href; }, 400); 
-                    } else {
-                        window.location.href = this.href;
-                    }
+                    } else { window.location.href = this.href; }
                 }
             });
         }
@@ -117,14 +113,11 @@ document.addEventListener("DOMContentLoaded", () => {
             let output = ''; let complete = 0;
             for (let i = 0, n = this.queue.length; i < n; i++) {
                 let { from, to, start, end, char } = this.queue[i];
-                if (this.frame >= end) {
-                    complete++; output += to;
-                } else if (this.frame >= start) {
+                if (this.frame >= end) { complete++; output += to; } 
+                else if (this.frame >= start) {
                     if (!char || Math.random() < 0.28) { char = this.randomChar(); this.queue[i].char = char; }
                     output += `<span class="dud">${char}</span>`;
-                } else {
-                    output += from;
-                }
+                } else { output += from; }
             }
             this.el.innerHTML = output;
             if (complete === this.queue.length) { this.resolve(); } else {
@@ -283,9 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         if(current < target) {
                             entry.target.innerText = isDecimal ? current.toFixed(1) : Math.ceil(current);
                             requestAnimationFrame(updateCounter);
-                        } else {
-                            entry.target.innerText = target;
-                        }
+                        } else { entry.target.innerText = target; }
                     };
                     updateCounter(); observerCounters.unobserve(entry.target);
                 }
@@ -294,7 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
         counters.forEach(c => observerCounters.observe(c));
     }
 
-    // --- 10. SCROLL-FOCUS ---
+    // --- 10. SCROLL-FOCUS (OPACIDAD DE TARJETAS) ---
     setTimeout(() => {
         const focusCards = document.querySelectorAll('.card, .team-card, details');
         if(focusCards.length > 0) {
@@ -312,6 +303,20 @@ document.addEventListener("DOMContentLoaded", () => {
             focusCards.forEach(c => observerFocus.observe(c));
         }
     }, 1200);
+
+    // --- 10.5 NUEVO: REVELACIÓN EN DOS PASOS (SVG CENTRO DE PANTALLA) ---
+    const svgCards = document.querySelectorAll('.card');
+    if(svgCards.length > 0) {
+        let observerSvg = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('svg-animate'); // Dispara el trazado
+                    observerSvg.unobserve(entry.target); // Solo se dibuja una vez
+                }
+            });
+        }, { rootMargin: "-45% 0px -45% 0px" }); // Se activa exclusivamente al tocar el centro exacto
+        svgCards.forEach(c => observerSvg.observe(c));
+    }
 
     // --- 11. ANIMACIÓN DE RED INTERACTIVA ---
     const canvas = document.getElementById('network-canvas');
@@ -333,11 +338,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     isCanvasVisible = entry.isIntersecting;
-                    if (isCanvasVisible && !animationFrameId) {
-                        animateCanvas(); 
-                    } else if (!isCanvasVisible && animationFrameId) {
-                        cancelAnimationFrame(animationFrameId); 
-                        animationFrameId = null;
+                    if (isCanvasVisible && !animationFrameId) { animateCanvas(); } 
+                    else if (!isCanvasVisible && animationFrameId) {
+                        cancelAnimationFrame(animationFrameId); animationFrameId = null;
                     }
                 });
             }, { rootMargin: "100px" }); 
@@ -426,17 +429,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (typeof AOS !== 'undefined') { AOS.init({ duration: 1000, once: true, offset: 100 }); }
 
-    // --- 13. ENLACES Y CALENDLY ---
-    const numeroWhatsApp = "525613388030"; const mensajeGeneral = "Hola JBDA, solicito información de consultoría."; const urlWhatsGeneral = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeGeneral)}`;
-    if(document.getElementById('link-whatsapp-footer')) document.getElementById('link-whatsapp-footer').href = urlWhatsGeneral; 
-    if(document.getElementById('link-concierge-whatsapp')) document.getElementById('link-concierge-whatsapp').href = urlWhatsGeneral; 
-    if(document.getElementById('link-linkedin')) document.getElementById('link-linkedin').href = "https://www.linkedin.com/company/jbdamx/";
+    // --- 13. ENLACES CENTRALIZADOS Y CALENDLY ---
+    if (typeof JBDA_CONFIG !== 'undefined') {
+        const isEnglish = document.documentElement.lang === 'en';
+        const mensaje = isEnglish ? JBDA_CONFIG.whatsappMsgEN : JBDA_CONFIG.whatsappMsgES;
+        const urlWhats = `https://wa.me/${JBDA_CONFIG.whatsappNum}?text=${encodeURIComponent(mensaje)}`;
+        
+        if(document.getElementById('link-whatsapp-footer')) document.getElementById('link-whatsapp-footer').href = urlWhats; 
+        if(document.getElementById('link-concierge-whatsapp')) document.getElementById('link-concierge-whatsapp').href = urlWhats; 
+        if(document.getElementById('link-linkedin')) document.getElementById('link-linkedin').href = JBDA_CONFIG.linkedin;
 
-    const urlCalendly = "https://calendly.com/jbda_tech/diagnostico";
-    const abrirCalendly = (e) => { e.preventDefault(); Calendly.initPopupWidget({url: urlCalendly}); document.getElementById('concierge-menu').classList.remove('active'); return false; };
-    if(document.getElementById('link-hero')) document.getElementById('link-hero').addEventListener('click', abrirCalendly); 
-    if(document.getElementById('link-cta')) document.getElementById('link-cta').addEventListener('click', abrirCalendly); 
-    if(document.getElementById('link-concierge-calendly')) document.getElementById('link-concierge-calendly').addEventListener('click', abrirCalendly);
+        // Inyecta dinámicamente el correo en todos los elementos designados
+        const emailLinks = document.querySelectorAll('.link-email');
+        emailLinks.forEach(el => {
+            el.href = `mailto:${JBDA_CONFIG.email}`;
+            const textSpan = el.querySelector('.email-text');
+            if (textSpan) textSpan.innerText = JBDA_CONFIG.email;
+        });
+
+        const abrirCalendly = (e) => { e.preventDefault(); Calendly.initPopupWidget({url: JBDA_CONFIG.calendly}); document.getElementById('concierge-menu').classList.remove('active'); return false; };
+        if(document.getElementById('link-hero')) document.getElementById('link-hero').addEventListener('click', abrirCalendly); 
+        if(document.getElementById('link-cta')) document.getElementById('link-cta').addEventListener('click', abrirCalendly); 
+        if(document.getElementById('link-concierge-calendly')) document.getElementById('link-concierge-calendly').addEventListener('click', abrirCalendly);
+    }
 
     // --- 14. BOTÓN FLOTANTE ---
     const conciergeToggle = document.getElementById('concierge-toggle'); const conciergeMenu = document.getElementById('concierge-menu');
