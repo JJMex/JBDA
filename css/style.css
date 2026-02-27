@@ -92,7 +92,7 @@ nav.nav-scrolled .logo-container img { height: 55px; }
 .lang-toggle-link { font-size: 14px !important; font-weight: 800 !important; margin-left: 10px; cursor: none !important; }
 .lang-toggle-link::after { display: none !important; }
 
-/* --- BOTÓN HAMBURGUESA (ARQUITECTURA CORREGIDA) --- */
+/* --- ESTRUCTURA BASE DEL BOTÓN MÓVIL --- */
 .mobile-menu-btn { display: none; background: none; border: none; z-index: 2000; cursor: pointer; padding: 5px; margin-right: -5px; }
 .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; width: 28px; height: 18px; pointer-events: none; }
 .hamburger-lines .line { display: block; height: 2px; width: 100%; background-color: var(--dark-grey); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); border-radius: 2px; }
@@ -257,7 +257,7 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
 .concierge-item:hover { background: rgba(212, 0, 109, 0.08); color: var(--pink-premium); }
 
 /* ==============================================================
-   OVERLAY MÓVIL GLASSMORPHISM (CORREGIDO)
+   OVERLAY MÓVIL GLASSMORPHISM (ARQUITECTURA BLINDADA)
    ============================================================== */
 @media (max-width: 900px) {
     nav { height: 90px; padding: 15px 5%; }
@@ -266,10 +266,10 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
     /* Mostrar Botón Móvil */
     .mobile-menu-btn { display: block; }
 
-    /* Animación de la X */
-    .mobile-menu-btn.open .line1 { transform: translateY(8px) rotate(45deg); background-color: var(--pink-premium); }
+    /* Animación de la X (Con !important para evitar choques con Modo Oscuro) */
+    .mobile-menu-btn.open .line1 { transform: translateY(8px) rotate(45deg); background-color: var(--pink-premium) !important; }
     .mobile-menu-btn.open .line2 { opacity: 0; }
-    .mobile-menu-btn.open .line3 { transform: translateY(-8px) rotate(-45deg); background-color: var(--pink-premium); }
+    .mobile-menu-btn.open .line3 { transform: translateY(-8px) rotate(-45deg); background-color: var(--pink-premium) !important; }
     
     /* Overlay Fullscreen Glassmorphism */
     .nav-links { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(253, 242, 248, 0.85); backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.4s ease, visibility 0.4s ease; z-index: 1500; opacity: 0; visibility: hidden; }
