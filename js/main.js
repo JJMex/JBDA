@@ -448,3 +448,37 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.addEventListener('keydown', event => { if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || (event.ctrlKey && event.keyCode === 85)) { event.preventDefault(); } });
 });
+
+
+/* =========================================
+   LÓGICA DEL MENÚ MÓVIL (HAMBURGUESA)
+========================================= */
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    if (hamburgerBtn && mobileOverlay) {
+        // Abrir/Cerrar al tocar la hamburguesa
+        hamburgerBtn.addEventListener('click', () => {
+            hamburgerBtn.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            
+            // Congelar el scroll del fondo cuando el menú está abierto
+            if (mobileOverlay.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Cerrar el menú automáticamente cuando se hace clic en un enlace
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburgerBtn.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    }
+});
