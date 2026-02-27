@@ -23,14 +23,14 @@
     <link rel="icon" href="assets/Isotipo.png" type="image/png">
     <link rel="apple-touch-icon" href="assets/Isotipo.png">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#050505">
+    <meta name="theme-color" content="#ffffff">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500;1,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="dark-theme">
+<body>
 
     <div id="page-transition-overlay"></div>
     
@@ -47,7 +47,7 @@
             <a href="#arquitectura" class="nav-item">Arquitectura</a>
             <a href="#servicios" class="nav-item">Servicios</a>
             <a href="en/" class="nav-item lang-switch">EN</a>
-            <button id="dark-mode-toggle" class="nav-item" aria-label="Alternar Modo Oscuro" style="background: none; border: none; cursor: pointer; margin-left: 10px; display: flex; align-items: center; justify-content: center; color: var(--soft-grey);">
+            <button id="dark-mode-toggle" class="nav-item" aria-label="Alternar Modo" style="background: none; border: none; cursor: pointer; margin-left: 10px; display: flex; align-items: center; justify-content: center; color: var(--silver-dark);">
                 <svg id="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 <svg id="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
             </button>
@@ -64,14 +64,14 @@
         <div class="mobile-nav-links">
             <a href="#arquitectura" class="mobile-link">Arquitectura</a>
             <a href="#servicios" class="mobile-link">Servicios</a>
-            <a href="en/" class="mobile-link" style="color: var(--soft-grey); font-size: 1.2rem; margin-top: 20px; font-family: 'Inter', sans-serif;">English Version</a>
+            <a href="en/" class="mobile-link" style="color: var(--silver-mid); font-size: 1.2rem; margin-top: 20px; font-family: 'Inter', sans-serif;">English Version</a>
         </div>
     </div>
 
     <header id="hero" style="text-align: center; display: flex; align-items: center; min-height: 100vh; position: relative;">
         <div class="hero-content" style="margin: 0 auto; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; padding: 0 20px;">
             <h1 class="title-serif scramble-text" style="font-size: clamp(40px, 8vw, 85px); line-height: 1.1; margin-bottom: 20px;">Diseñamos la columna<br>vertebral de su negocio.</h1>
-            <p style="font-size: clamp(16px, 2vw, 20px); max-width: 600px; margin-bottom: 40px; color: var(--soft-grey);">Consultoría Estratégica en Infraestructura de Redes y Telecomunicaciones.</p>
+            <p style="font-size: clamp(16px, 2vw, 20px); max-width: 600px; margin-bottom: 40px; color: var(--silver-dark);">Consultoría Estratégica en Infraestructura de Redes y Telecomunicaciones.</p>
             <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
                 <a href="#arquitectura" class="btn-main magnetic-btn">Explorar Arquitectura</a>
                 <a href="https://wa.me/525613388030" target="_blank" class="btn-secondary magnetic-btn">Portal de Asistencia</a>
@@ -82,7 +82,7 @@
     <section id="arquitectura" style="padding: 100px 20px; position: relative; z-index: 2;">
         <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
             <h2 class="title-serif scramble-text" style="font-size: clamp(30px, 5vw, 50px); margin-bottom: 50px;">Simulador de Estrés de Red</h2>
-            <canvas id="network-canvas" style="width: 100%; height: 500px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(5,5,5,0.6); backdrop-filter: blur(10px);"></canvas>
+            <canvas id="network-canvas" style="width: 100%; height: 500px; border-radius: 20px; border: 1px solid rgba(161,161,166,0.3); background: rgba(245,245,247,0.6); backdrop-filter: blur(10px);"></canvas>
         </div>
     </section>
 
@@ -90,60 +90,60 @@
         <div style="max-width: 1200px; margin: 0 auto;">
             <h2 class="title-serif scramble-text" style="font-size: clamp(30px, 5vw, 50px); text-align: center; margin-bottom: 60px;">Soluciones Integradas</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-                <div class="glass-card" style="padding: 40px; border-radius: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(12px);">
+                <div class="glass-card" style="padding: 40px; border-radius: 20px; background: rgba(245,245,247,0.5); border: 1px solid rgba(161,161,166,0.2); backdrop-filter: blur(12px);">
                     <h3 class="title-serif" style="color: var(--pink-premium); font-size: 24px; margin-bottom: 15px;">01. Arquitectura y Diseño</h3>
-                    <p style="color: var(--soft-grey); line-height: 1.6;">Optimización de CAPEX y diseño escalable. Evitamos el sobredimensionamiento con topologías LAN/WAN preparadas para el futuro.</p>
+                    <p style="color: var(--silver-dark); line-height: 1.6;">Optimización de CAPEX y diseño escalable. Evitamos el sobredimensionamiento con topologías LAN/WAN preparadas para el futuro.</p>
                 </div>
-                <div class="glass-card" style="padding: 40px; border-radius: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(12px);">
+                <div class="glass-card" style="padding: 40px; border-radius: 20px; background: rgba(245,245,247,0.5); border: 1px solid rgba(161,161,166,0.2); backdrop-filter: blur(12px);">
                     <h3 class="title-serif" style="color: var(--pink-premium); font-size: 24px; margin-bottom: 15px;">02. Despliegue y Blindaje</h3>
-                    <p style="color: var(--soft-grey); line-height: 1.6;">Implementación Multivendor experta. Segmentación estricta (VLANs) y Hardening para aislar el tráfico crítico de su operación.</p>
+                    <p style="color: var(--silver-dark); line-height: 1.6;">Implementación Multivendor experta. Segmentación estricta (VLANs) y Hardening para aislar el tráfico crítico de su operación.</p>
                 </div>
-                <div class="glass-card" style="padding: 40px; border-radius: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(12px);">
+                <div class="glass-card" style="padding: 40px; border-radius: 20px; background: rgba(245,245,247,0.5); border: 1px solid rgba(161,161,166,0.2); backdrop-filter: blur(12px);">
                     <h3 class="title-serif" style="color: var(--pink-premium); font-size: 24px; margin-bottom: 15px;">03. Gestión Proactiva (NOC)</h3>
-                    <p style="color: var(--soft-grey); line-height: 1.6;">Dashboards ejecutivos con visibilidad total. Mantenimiento preventivo para mitigar anomalías antes de que impacten su negocio.</p>
+                    <p style="color: var(--silver-dark); line-height: 1.6;">Dashboards ejecutivos con visibilidad total. Mantenimiento preventivo para mitigar anomalías antes de que impacten su negocio.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="ecosistema" style="padding: 60px 0; overflow: hidden; position: relative; z-index: 2; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
+    <section id="ecosistema" style="padding: 60px 0; overflow: hidden; position: relative; z-index: 2; border-top: 1px solid rgba(161,161,166,0.2); border-bottom: 1px solid rgba(161,161,166,0.2);">
         <div style="text-align: center; margin-bottom: 30px;">
-            <p style="color: var(--soft-grey); font-size: 12px; letter-spacing: 3px; text-transform: uppercase;">Agnósticos a la marca. Leales a su rendimiento.</p>
+            <p style="color: var(--silver-mid); font-size: 12px; letter-spacing: 3px; text-transform: uppercase;">Agnósticos a la marca. Leales a su rendimiento.</p>
         </div>
-        <div style="display: flex; gap: 60px; justify-content: center; align-items: center; flex-wrap: wrap; opacity: 0.5;">
-            <h3 class="title-serif">Cisco</h3>
-            <h3 class="title-serif">Fortinet</h3>
-            <h3 class="title-serif">Palo Alto</h3>
-            <h3 class="title-serif">Huawei</h3>
-            <h3 class="title-serif">Meraki</h3>
+        <div style="display: flex; gap: 60px; justify-content: center; align-items: center; flex-wrap: wrap; opacity: 0.8;">
+            <h3 class="title-serif" style="color: var(--silver-dark);">Cisco</h3>
+            <h3 class="title-serif" style="color: var(--silver-dark);">Fortinet</h3>
+            <h3 class="title-serif" style="color: var(--silver-dark);">Palo Alto</h3>
+            <h3 class="title-serif" style="color: var(--silver-dark);">Huawei</h3>
+            <h3 class="title-serif" style="color: var(--silver-dark);">Meraki</h3>
         </div>
     </section>
 
-    <footer style="padding: 80px 20px 40px; background: #020202; position: relative; z-index: 2;">
+    <footer style="padding: 80px 20px 40px; background: var(--silver-light); position: relative; z-index: 2;">
         <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px;">
             
             <div style="max-width: 320px;">
                 <img src="assets/JBDA.png" alt="JBDA Logo" style="width: 160px; margin-bottom: 20px;">
-                <p style="color: var(--soft-grey); font-size: 14px; line-height: 1.6;">Consultoría de élite en infraestructura digital. Optimizando el rendimiento y la seguridad para el sector empresarial.</p>
+                <p style="color: var(--silver-dark); font-size: 14px; line-height: 1.6;">Consultoría de élite en infraestructura digital. Optimizando el rendimiento y la seguridad para el sector empresarial.</p>
             </div>
 
             <div class="footer-col">
-                <h5 style="color: var(--white); margin-bottom: 20px; font-size: 16px;">Contacto Corporativo</h5>
-                <p style="color: var(--soft-grey); font-size: 14px; margin-bottom: 15px;"><strong>Ventas y Consultoría</strong><br>Atención a Nivel Ejecutivo</p>
+                <h5 style="color: var(--silver-dark); margin-bottom: 20px; font-size: 16px;">Contacto Corporativo</h5>
+                <p style="color: var(--silver-dark); font-size: 14px; margin-bottom: 15px;"><strong>Ventas y Consultoría</strong><br>Atención a Nivel Ejecutivo</p>
                 <a href="mailto:JBDA_Tech@icloud.com" style="display: block; color: var(--pink-premium); text-decoration: none; margin-bottom: 12px; font-size: 14px;">✉️ JBDA_Tech@icloud.com</a>
-                <a href="https://wa.me/525613388030" target="_blank" style="display: block; color: var(--soft-grey); text-decoration: none; margin-bottom: 12px; font-size: 14px;">💬 Portal de Asistencia</a>
-                <a href="https://linkedin.com/company/jbda" target="_blank" style="display: block; color: var(--soft-grey); text-decoration: none; font-size: 14px;">🔗 LinkedIn Oficial</a>
+                <a href="https://wa.me/525613388030" target="_blank" style="display: block; color: var(--silver-dark); text-decoration: none; margin-bottom: 12px; font-size: 14px;">💬 Portal de Asistencia</a>
+                <a href="https://linkedin.com/company/jbda" target="_blank" style="display: block; color: var(--silver-dark); text-decoration: none; font-size: 14px;">🔗 LinkedIn Oficial</a>
             </div>
 
             <div class="footer-col">
-                <h5 style="color: var(--white); margin-bottom: 20px; font-size: 16px;">Marco Legal</h5>
-                <a href="privacidad/" style="display: block; color: var(--soft-grey); text-decoration: none; margin-bottom: 12px; font-size: 14px;">Aviso de Privacidad</a>
-                <a href="privacidad/" style="display: block; color: var(--soft-grey); text-decoration: none; font-size: 14px;">Términos y Condiciones</a>
+                <h5 style="color: var(--silver-dark); margin-bottom: 20px; font-size: 16px;">Marco Legal</h5>
+                <a href="privacidad/" style="display: block; color: var(--silver-dark); text-decoration: none; margin-bottom: 12px; font-size: 14px;">Aviso de Privacidad</a>
+                <a href="privacidad/" style="display: block; color: var(--silver-dark); text-decoration: none; font-size: 14px;">Términos y Condiciones</a>
             </div>
 
         </div>
-        <div style="max-width: 1200px; margin: 50px auto 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
-            <p style="color: rgba(255,255,255,0.2); font-size: 12px;">&copy; 2026 JBDA Technologies. Todos los derechos reservados.</p>
+        <div style="max-width: 1200px; margin: 50px auto 0; text-align: center; border-top: 1px solid rgba(161,161,166,0.3); padding-top: 20px;">
+            <p style="color: var(--silver-mid); font-size: 12px;">&copy; 2026 JBDA Technologies. Todos los derechos reservados.</p>
         </div>
     </footer>
 
