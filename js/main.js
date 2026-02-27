@@ -42,18 +42,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- 3. MENÚ MÓVIL ---
-    const menuBtn = document.getElementById('mobile-menu-btn');
-    const navLinks = document.getElementById('nav-links');
-    let menuOpen = false;
+const menuBtn = document.getElementById('mobile-menu-btn');
+const navLinks = document.getElementById('nav-links');
 
-    if(menuBtn && navLinks) {
-        menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active'); menuOpen = !menuOpen;
-            if(menuOpen) { menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>'; } 
-            else { menuBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>'; }
+if(menuBtn && navLinks) {
+    menuBtn.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('active');
+        menuBtn.classList.toggle('open'); // Activa la animación de las barras a "X"
+        
+        // Bloquear scroll del cuerpo al estar abierto para mejorar la inmersión
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    // Cerrar menú al hacer clic en un enlace (útil para Single Page Application)
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            menuBtn.classList.remove('open');
+            document.body.style.overflow = '';
         });
-    }
-
+    });
+}
     // --- 4. TRANSICIONES DE PÁGINA Y SCROLL ---
     document.querySelectorAll('a').forEach(anchor => {
         if(anchor.href && !anchor.target && !anchor.id.includes('calendly')) {
