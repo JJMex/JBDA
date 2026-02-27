@@ -368,3 +368,71 @@ body.dark-theme ::-webkit-scrollbar-thumb { border-color: var(--dark-grey); }
 ::-webkit-scrollbar-thumb:hover { background: var(--pink-premium); }
 body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color: #050505; }
 
+/* --- NUEVA ESTRUCTURA HAMBURGUESA --- */
+.hamburger-lines {
+    height: 22px;
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hamburger-lines .line {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--dark-grey); /* Se adaptará al modo oscuro automáticamente */
+    transition: transform 0.4s ease-in-out, opacity 0.2s ease;
+}
+
+/* Animación a "X" */
+.mobile-menu-btn.open .line1 { transform: translateY(10px) rotate(45deg); background: var(--pink-premium); }
+.mobile-menu-btn.open .line2 { opacity: 0; }
+.mobile-menu-btn.open .line3 { transform: translateY(-10px) rotate(-45deg); background: var(--pink-premium); }
+
+/* --- OVERLAY FULLSCREEN GLASS --- */
+@media (max-width: 900px) {
+    .nav-links {
+        right: 0;
+        top: 0;
+        visibility: hidden;
+        opacity: 0;
+        height: 100vh;
+        width: 100vw;
+        background: rgba(253, 242, 248, 0.7) !important; /* Blanco/Plata semitransparente */
+        backdrop-filter: blur(20px) saturate(150%);
+        -webkit-backdrop-filter: blur(20px) saturate(150%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), visibility 0.5s ease;
+    }
+
+    .nav-links.active {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    /* Menú en Cascada */
+    .nav-links a {
+        font-family: 'Playfair Display', serif !important;
+        font-size: 32px !important;
+        margin: 15px 0 !important;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .nav-links.active a {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Delays para el efecto cascada */
+    .nav-links.active a:nth-child(1) { transition-delay: 0.2s; }
+    .nav-links.active a:nth-child(2) { transition-delay: 0.3s; }
+    .nav-links.active a:nth-child(3) { transition-delay: 0.4s; }
+    .nav-links.active a:nth-child(4) { transition-delay: 0.5s; }
+    .nav-links.active a:nth-child(5) { transition-delay: 0.6s; }
+}
