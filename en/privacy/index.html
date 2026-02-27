@@ -26,24 +26,12 @@
             <a href="../" aria-label="Back to Home"><img src="../../assets/JBDA.png" alt="JBDA Logo"></a>
         </div>
         
-        <div class="nav-links">
-            <a href="../" class="nav-item back-link" style="display: flex; align-items: center; text-transform: uppercase; font-weight: 700; color: var(--pink-premium);">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                <span class="desktop-text">Back to Home</span>
+        <div style="display: flex; align-items: center; justify-content: flex-end;">
+            <a href="../" class="nav-item back-link" style="display: flex; align-items: center; text-transform: uppercase; font-weight: 700; color: var(--pink-premium); font-size: 14px; text-decoration: none; opacity: 1; transform: none; visibility: visible;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span class="desktop-text" style="font-family: 'Inter', sans-serif;">Go Back</span>
             </a>
-            
-            <button id="dark-mode-toggle" class="nav-item" aria-label="Toggle Mode" style="background: none; border: none; cursor: pointer; margin-left: 20px; color: var(--dark-grey);">
-                <svg id="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                <svg id="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-            </button>
         </div>
-        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú">
-        <div class="hamburger-lines">
-        <span class="line line1"></span>
-        <span class="line line2"></span>
-        <span class="line line3"></span>
-    </div>
-</button>
     </nav>
 
     <main class="legal-container">
@@ -88,10 +76,23 @@
         <p>To exercise any of the ARCO rights, you must submit the respective request by sending an email to our privacy team at <a href="#" class="link-email" style="color: var(--pink-premium); text-decoration: none;"><strong class="email-text">JBDA_Tech@icloud.com</strong></a>.</p>
     </main>
 
-    <div class="mega-footer-dark" style="margin-top: 0; border-top-left-radius: 0; border-top-right-radius: 0;">
-        <footer style="padding-top: 40px;">
-            <div class="footer-col" style="text-align: center; width: 100%;">
-                <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin-top: 20px;">&copy; 2026 JBDA Technologies. All rights reserved.</p>
+    <div id="mega-footer" class="mega-footer-dark" style="margin-top: 40px;">
+        <footer>
+            <div class="footer-col">
+                <a href="../" aria-label="Back to Home"><img src="../../assets/JBDA.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px; filter: brightness(0) invert(1);" loading="lazy"></a>
+                <p><strong>JBDA 2026</strong> <span id="terminal-toggle" title="Modo Ingeniero">>_</span><br>Strategic Consulting in<br>Network Infrastructure.</p><br>
+            </div>
+            <div class="footer-col">
+                <h5>Corporate Contact</h5>
+                <p style="margin-bottom: 15px;"><strong>Sales & Consulting</strong><br>Executive Level Support</p>
+                <a href="#" class="social-link link-email" aria-label="Enviar correo corporativo a JBDA"><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><span class="email-text">JBDA_Tech@icloud.com</span></a>
+                <a id="link-whatsapp-footer" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Portal de Atención vía WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>Portal de Asistencia</a>
+                <a id="link-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visitar perfil de LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>LinkedIn Oficial</a>
+            </div>
+            <div class="footer-col">
+                <h5>Operational Coverage</h5>
+                <p>On-site Support:<br>CDMX • Morelos</p>
+                <p>Remote Support:<br>Global Reach</p>
             </div>
         </footer>
     </div>
