@@ -2,7 +2,7 @@
   "name": "JBDA | Consultoría en Redes",
   "short_name": "JBDA",
   "description": "Consultoría estratégica en infraestructura de redes y telecomunicaciones.",
-  "start_url": "/JBDA/",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#050505",
   "theme_color": "#D4006D",
