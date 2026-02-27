@@ -4,334 +4,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JBDA | Strategic Network Consulting</title>
-    <meta name="description" content="We design the backbone of your business. Strategic consulting in network infrastructure to maximize CAPEX and ensure availability.">
+
     <meta property="og:title" content="JBDA | Strategic Network Consulting">
-    <meta property="og:description" content="Elite-level engineering. We assess your network needs to optimize your tech investment and reduce downtime by 85%.">
+    <meta property="og:description" content="We design the backbone of your business. Enterprise Architecture, Security, and Network Management.">
     <meta property="og:image" content="../assets/og-image.png">
-    <meta property="og:url" content="https://jjmex.github.io/JBDA/en/">
     <meta property="og:type" content="website">
-
-    <link rel="alternate" hreflang="es" href="https://jjmex.github.io/JBDA/" />
-    <link rel="alternate" hreflang="en" href="https://jjmex.github.io/JBDA/en/" />
-    <link rel="alternate" hreflang="x-default" href="https://jjmex.github.io/JBDA/" />
-
+    
     <link rel="icon" href="../assets/Isotipo.png" type="image/png">
     <link rel="apple-touch-icon" href="../assets/Isotipo.png">
-
     <link rel="manifest" href="../manifest.json">
     <meta name="theme-color" content="#050505">
-
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500;1,800&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "JBDA | Strategic Network Consulting",
-      "url": "https://jjmex.github.io/JBDA/en/",
-      "logo": "https://jjmex.github.io/JBDA/assets/JBDA.png",
-      "image": "https://jjmex.github.io/JBDA/assets/JBDA.png",
-      "description": "Strategic consulting in network infrastructure designed to maximize operational efficiency and monetize your technological investment.",
-      "founder": [
-        { "@type": "Person", "name": "Lic. Danyssha Gutiérrez" },
-        { "@type": "Person", "name": "Ing. José Cruz" }
-      ],
-      "areaServed": ["MX", "US", "Global"],
-      "knowsAbout": ["Telecommunications", "SD-WAN", "VLANs", "Hardening", "CAPEX Optimization"]
-    }
-    </script>
 </head>
-<body id="inicio">
+<body class="dark-theme">
 
     <div id="page-transition-overlay"></div>
-
-    <div class="scroll-progress" id="scroll-progress"></div>
+    
     <div class="orbs-container"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
     <div class="blueprint-grid"></div>
-    
     <div class="cursor-led" id="cursor-led"></div>
-    <div id="preloader"><img src="../assets/JBDA.png" alt="Loading JBDA..." class="preload-logo"></div>
 
     <nav id="main-nav">
-        <div class="logo-container"><a href="#inicio" aria-label="Back to Home"><img src="../assets/JBDA.png" alt="JBDA Logo"></a></div>
-        <div class="nav-links" id="nav-links">
-            <a href="#servicios" class="nav-item">Methodology</a>
-            <a href="#diferenciadores" class="nav-item">Consulting</a>
-            <a href="#nuestra-firma" class="nav-item">About Us</a>
-            <a href="#contacto" class="nav-item">Contact</a>
-            
-            <a href="../" class="nav-item lang-toggle-link" aria-label="Switch to Spanish">ES</a>
-            
-            <button id="dark-mode-toggle" class="nav-item" aria-label="Toggle Dark Mode" style="background: none; border: none; margin-left: 10px; display: flex; align-items: center; justify-content: center; transition: color 0.3s ease;">
-                <svg id="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                <svg id="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <div class="logo-container">
+            <a href="#" aria-label="Back to top"><img src="../assets/JBDA.png" alt="JBDA Logo"></a>
+        </div>
+        
+        <div class="nav-links desktop-links">
+            <a href="#architecture" class="nav-item">Architecture</a>
+            <a href="#services" class="nav-item">Services</a>
+            <a href="../" class="nav-item lang-switch">ES</a>
+            <button id="dark-mode-toggle" class="nav-item" aria-label="Toggle Dark Mode" style="background: none; border: none; cursor: pointer; margin-left: 10px; display: flex; align-items: center; justify-content: center; color: var(--soft-grey);">
+                <svg id="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <svg id="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
             </button>
         </div>
-        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open navigation menu"><svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg></button>
+
+        <button id="hamburger-btn" class="hamburger-btn" aria-label="Open menu">
+            <span class="line line-1"></span>
+            <span class="line line-2"></span>
+            <span class="line line-3"></span>
+        </button>
     </nav>
 
-    <header>
-        <canvas id="network-canvas"></canvas>
-        <div class="hero-content" data-aos="fade-up">
-            <h2 class="scramble-text">Infrastructure & Telecommunications</h2>
-            <h1>
-                <span class="scramble-text">We design the </span>
-                <span class='editorial-italic scramble-text'>backbone</span><br>
-                <span class="scramble-text">of your business.</span>
-            </h1>
-            <p>Strategic consulting in network infrastructure designed to maximize operational efficiency and monetize your technological investment.</p>
-            <a id="link-hero" href="#" class="btn-main magnetic-btn" aria-label="Schedule a Diagnosis">Schedule a Diagnosis</a>
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay">
+        <div class="mobile-nav-links">
+            <a href="#architecture" class="mobile-link">Architecture</a>
+            <a href="#services" class="mobile-link">Services</a>
+            <a href="../" class="mobile-link" style="color: var(--soft-grey); font-size: 1.2rem; margin-top: 20px; font-family: 'Inter', sans-serif;">Versión en Español</a>
+        </div>
+    </div>
+
+    <header id="hero" style="text-align: center; display: flex; align-items: center; min-height: 100vh; position: relative;">
+        <div class="hero-content" style="margin: 0 auto; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; padding: 0 20px;">
+            <h1 class="title-serif scramble-text" style="font-size: clamp(40px, 8vw, 85px); line-height: 1.1; margin-bottom: 20px;">We design the backbone<br>of your business.</h1>
+            <p style="font-size: clamp(16px, 2vw, 20px); max-width: 600px; margin-bottom: 40px; color: var(--soft-grey);">Strategic Consulting in Network Infrastructure and Telecommunications.</p>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+                <a href="#architecture" class="btn-main magnetic-btn">Explore Architecture</a>
+                <a href="https://wa.me/525613388030" target="_blank" class="btn-secondary magnetic-btn">Executive Support</a>
+            </div>
         </div>
     </header>
 
-    <main>
-        <section id="ecosistema" data-aos="fade-up">
-            <div class="glass-track">
-                <span style="font-size: 12px; text-transform: uppercase; letter-spacing: 3px; color: var(--pink-premium); font-weight: 800; margin-bottom: 10px; display: block;">Multivendor Ecosystem</span>
-                <p style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--dark-grey); margin-bottom: 20px;">Integration capability and operational expertise.</p>
-                <div class="marquee-wrapper">
-                    <div class="marquee-track">
-                        <img src="../assets/Huawei.png" alt="Huawei" class="brand-logo"><img src="../assets/Cisco.png" alt="Cisco" class="brand-logo"><img src="../assets/Fortinet.png" alt="Fortinet" class="brand-logo"><img src="../assets/Aruba.png" alt="Aruba" class="brand-logo"><img src="../assets/3Com.png" alt="3Com" class="brand-logo"><img src="../assets/H3C.png" alt="H3C" class="brand-logo"><img src="../assets/ProxMox.png" alt="Proxmox" class="brand-logo">
-                        <img src="../assets/Huawei.png" alt="Huawei" class="brand-logo"><img src="../assets/Cisco.png" alt="Cisco" class="brand-logo"><img src="../assets/Fortinet.png" alt="Fortinet" class="brand-logo"><img src="../assets/Aruba.png" alt="Aruba" class="brand-logo"><img src="../assets/3Com.png" alt="3Com" class="brand-logo"><img src="../assets/H3C.png" alt="H3C" class="brand-logo"><img src="../assets/ProxMox.png" alt="Proxmox" class="brand-logo">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="manifiesto-global">
-            <div class="texto-manifiesto" data-aos="fade-right">
-                <p>The network is not an accessory;<br> it is the <span class='editorial-italic' style='color: var(--pink-premium);'>circulatory system</span><br> of the modern enterprise.</p>
-                <p class="sub">At <strong>JBDA</strong> we merge elite engineering precision with a results-oriented financial business vision.</p>
-            </div>
-            <div class="cajas-filosofia">
-                <div class="filosofia-box" data-aos="fade-left" data-aos-delay="100">
-                    <h3>Mission</h3>
-                    <p>Transform the technological infrastructure of organizations into a strategic asset, guaranteeing operational continuity and profitability.</p>
-                </div>
-                <div class="filosofia-box asimetrica" data-aos="fade-left" data-aos-delay="200">
-                    <h3>Vision</h3>
-                    <p>To be the standard of excellence in telecommunications; the ally IT leaders turn to when performance is non-negotiable.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="servicios">
-            <div class="servicios-left">
-                <span class="section-label" data-aos="fade-right">Operational Methodology</span>
-                <h2 class="title-serif scramble-text" style="font-size: clamp(36px, 5vw, 52px);" data-aos="fade-right">JBDA Reengineering System</h2>
-            </div>
-            <div class="servicios-right">
-                <div class="card" data-aos="fade-up">
-                    <span class="card-num">Phase 01</span>
-                    <div class="icon-wrapper">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle pathLength="1" cx="12" cy="5" r="3"/><circle pathLength="1" cx="5" cy="19" r="3"/><circle pathLength="1" cx="19" cy="19" r="3"/><line pathLength="1" x1="10.5" y1="7.5" x2="6.5" y2="16.5"/><line pathLength="1" x1="13.5" y1="7.5" x2="17.5" y2="16.5"/><line pathLength="1" x1="7.5" y1="19" x2="16.5" y2="19"/></svg>
-                    </div>
-                    <h3>Audit & Strategic Architecture</h3>
-                    <ul>
-                        <li><strong>CAPEX Optimization:</strong> Pre-purchase needs assessment. We prevent hardware oversizing.</li>
-                        <li><strong>Scalable Design:</strong> LAN/WAN network planning ready for corporate growth.</li>
-                    </ul>
-                </div>
-                <div class="card" data-aos="fade-up">
-                    <span class="card-num">Phase 02</span>
-                    <div class="icon-wrapper">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect pathLength="1" x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect pathLength="1" x="2" y="14" width="20" height="8" rx="2" ry="2"/><line pathLength="1" x1="6" y1="6" x2="6.01" y2="6"/><line pathLength="1" x1="6" y1="18" x2="6.01" y2="18"/></svg>
-                    </div>
-                    <h3>Deployment & Infrastructure Hardening</h3>
-                    <ul>
-                        <li><strong>Advanced Configuration:</strong> Expert deployment in mission-critical multivendor environments (Huawei, Cisco, Fortinet).</li>
-                        <li><strong>Segmentation & Security:</strong> Device hardening, VLAN creation, and strict QoS policies.</li>
-                    </ul>
-                </div>
-                <div class="card" data-aos="fade-up">
-                    <span class="card-num">Phase 03</span>
-                    <div class="icon-wrapper">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline pathLength="1" points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                    </div>
-                    <h3>Analytics & Continuous Proactive Management</h3>
-                    <ul>
-                        <li><strong>Total Visibility:</strong> Real-time executive dashboards for the control of every node in your network.</li>
-                        <li><strong>Preventive Maintenance:</strong> Early detection and isolation of anomalies before they impact operations.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <div id="impacto-container">
-            <section id="impacto" data-aos="fade-up" data-aos-duration="1200">
-                <div class="impacto-texto">
-                    <span class="section-label" style="color: var(--pink-premium);">Impact Capability</span>
-                    <h2 class="title-serif scramble-text">Executive<br>Track Record</h2>
-                </div>
-                <div class="grid-impacto">
-                    <div class="impacto-item">
-                        <h3><span class="counter-val" data-target="85">0</span>%</h3>
-                        <h4>Downtime Mitigation</h4>
-                        <p>Reengineering focus to reduce historical downtime.</p>
-                    </div>
-                    <div class="impacto-item">
-                        <h3><span class="counter-val" data-target="40">0</span>%</h3>
-                        <h4>CAPEX Optimization</h4>
-                        <p>Reduction of technological overinvestments.</p>
-                    </div>
-                    <div class="impacto-item">
-                        <h3><span class="counter-val" data-target="99.8" data-decimal="true">0.0</span>%</h3>
-                        <h4>Standard Availability</h4>
-                        <p>Our baseline metric for mission-critical architectures.</p>
-                    </div>
-                </div>
-            </section>
+    <section id="architecture" style="padding: 100px 20px; position: relative; z-index: 2;">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+            <h2 class="title-serif scramble-text" style="font-size: clamp(30px, 5vw, 50px); margin-bottom: 50px;">Network Stress Simulator</h2>
+            <canvas id="network-canvas" style="width: 100%; height: 500px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(5,5,5,0.6); backdrop-filter: blur(10px);"></canvas>
         </div>
+    </section>
 
-        <section id="diferenciadores">
-            <div class="diff-left">
-                <h2 class="quote-massive" data-aos="fade-right">"We do not sell boxes;<br><span class=\"quote-highlight\">we integrate solutions."</span></h2>
-            </div>
-            <div class="diff-right">
-                <div class="diff-item" data-aos="fade-up"><h4>Multisector Expertise</h4><p>Proven track record in mission-critical environments: Corporate, Premium Hospitality, and Heavy Industry.</p></div>
-                <div class="diff-item" data-aos="fade-up"><h4>Brand Agnostic</h4><p>Absolute loyalty to your performance and ROI, not to a specific manufacturer's quotas.</p></div>
-                <div class="diff-item" data-aos="fade-up"><h4>Hybrid Coverage</h4><p>Executive physical presence in CDMX and Morelos, combined with global remote management.</p></div>
-            </div>
-        </section>
-
-        <section id="stress-test-container" data-aos="fade-up">
-            <div class="glass-track" style="padding: 60px 8%; text-align: left; max-width: 1000px;">
-                <span class="section-label">Load Simulator</span>
-                <h2 class="title-serif scramble-text" style="font-size: clamp(32px, 4vw, 42px); color: var(--dark-grey);">Stress Test: Corporate Traffic</h2>
-                
-                <div class="stress-ui">
-                    <div class="slider-container">
-                        <label>Network Traffic Volume</label>
-                        <input type="range" id="traffic-slider" min="0" max="100" value="0" aria-label="Traffic Simulator">
-                        
-                        <div class="metrics-dashboard">
-                            <div class="metric-item">
-                                <span class="metric-label">Concurrent Users</span>
-                                <span id="metric-users" class="metric-value">150</span>
-                            </div>
-                            <div class="metric-item">
-                                <span class="metric-label">Requests (RPS)</span>
-                                <span id="metric-rps" class="metric-value">300</span>
-                            </div>
-                            <div class="metric-item">
-                                <span class="metric-label">Status</span>
-                                <span id="metric-status" class="metric-value status-green">Stable</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="graphs">
-                        <div class="graph-box traditional">
-                            <h4>Traditional Network</h4>
-                            <div class="bar-container"><div class="bar trad" id="bar-trad"></div></div>
-                            <div class="hardware-metrics">
-                                <span class="status status-green" id="status-trad">Latency: 15ms</span>
-                                <span class="cpu-load status-green" id="cpu-trad">CPU: 15%</span>
-                            </div>
-                        </div>
-                        <div class="graph-box jbda">
-                            <h4>JBDA Hardened Architecture</h4>
-                            <div class="bar-container"><div class="bar jbda" id="bar-jbda"></div></div>
-                            <div class="hardware-metrics">
-                                <span class="status" id="status-jbda" style="color: var(--pink-premium);">Latency: 12ms</span>
-                                <span class="cpu-load" id="cpu-jbda" style="color: var(--pink-premium);">CPU: 12% (Active Balancing)</span>
-                            </div>
-                        </div>
-                    </div>
+    <section id="services" style="padding: 100px 20px; position: relative; z-index: 2;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 class="title-serif scramble-text" style="font-size: clamp(30px, 5vw, 50px); text-align: center; margin-bottom: 60px;">Integrated Solutions</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div class="glass-card" style="padding: 40px; border-radius: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(12px);">
+                    <h3 class="title-serif" style="color: var(--pink-premium); font-size: 24px; margin-bottom: 15px;">01. Architecture & Design</h3>
+                    <p style="color: var(--soft-grey); line-height: 1.6;">CAPEX optimization and scalable design. We prevent hardware overallocation with future-proof LAN/WAN topologies.</p>
+                </div>
+                <div class="glass-card" style="padding: 40px; border-radius: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(12px);">
+                    <h3 class="title-serif" style="color: var(--pink-premium); font-size: 24px; margin-bottom: 15px;">02. Deployment & Hardening</h3>
+                    <p style="color: var(--soft-grey); line-height: 1.6;">Expert Multivendor implementation. Strict segmentation (VLANs) and Hardening to isolate critical operational traffic.</p>
+                </div>
+                <div class="glass-card" style="padding: 40px; border-radius: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(12px);">
+                    <h3 class="title-serif" style="color: var(--pink-premium); font-size: 24px; margin-bottom: 15px;">03. Proactive Mgmt (NOC)</h3>
+                    <p style="color: var(--soft-grey); line-height: 1.6;">Executive dashboards providing total visibility. Preventive maintenance to mitigate anomalies before they impact your business.</p>
                 </div>
             </div>
-        </section>
-
-        <section id="nuestra-firma">
-            <span class="section-label" data-aos="fade-up">Executive Team</span>
-            <h2 class="title-serif scramble-text" data-aos="fade-up" style="font-size: clamp(36px, 5vw, 48px); margin-bottom: 40px;">Engineering driven by business vision.</h2>
-            <p class="manifesto" data-aos="fade-up">Our firm was born from a critical observation: corporations were spending millions on oversized hardware, while their networks continued to experience structural failures. At JBDA, we ensure that every tech investment translates into profitability, security, and uninterrupted operational flow.</p>
-
-            <div class="team-grid">
-                <div class="team-card" data-aos="fade-up" data-aos-delay="100">
-                    <span class="member-role">Managing Partner & CEO</span>
-                    <h3 class="member-name">Lic. Danyssha Gutiérrez</h3>
-                    <p class="member-bio">With a background in Law and sharp corporate insight, Danyssha leads JBDA's administrative strategy. Her goal is clear: aligning tech infrastructure with business objectives. She specializes in budget optimization, ensuring organizations get the maximum market yield without overinvestments (CAPEX), guaranteeing profitability and strategic compliance.</p>
-                </div>
-                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
-                    <span class="member-role">Managing Partner & CTO</span>
-                    <h3 class="member-name">Ing. José Cruz</h3>
-                    <p class="member-bio">Expert in the design and hardening of mission-critical networks. He has led engineering teams in complex audits, reengineering, and multivendor deployments, guaranteeing fail-safe architectures. His operational approach ensures maximum coverage, Quality of Service (QoS), and 99.8% availability at every site, transforming vulnerable infrastructures into high-performance networks.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="faq">
-            <div class="faq-texto" data-aos="fade-right">
-                <span class="section-label">Key Answers</span>
-                <h2 class="title-serif scramble-text">Frequently Asked<br>Questions</h2>
-            </div>
-            <div class="faq-container" data-aos="fade-left">
-                <details>
-                    <summary>Does the network evaluation require halting our operations?</summary>
-                    <div class="faq-content">No. Our initial diagnostics and audits are performed using passive, read-only methods. Your operations, users, and critical systems will not experience any interruption during data collection.</div>
-                </details>
-                <details>
-                    <summary>We have hardware from different brands, can you integrate it?</summary>
-                    <div class="faq-content">Absolutely. We are brand agnostic and specialists in multivendor environments (Cisco, Huawei, Fortinet, Aruba, etc.). Our approach is to optimize the performance of the hardware you already own before suggesting new investments (CAPEX).</div>
-                </details>
-                <details>
-                    <summary>How do you differ from our ISP or internal support team?</summary>
-                    <div class="faq-content">Your internal team and Internet Service Provider maintain daily operations (Helpdesk). We act as Level 3 strategic consultants. We step in to resolve complex bottlenecks, design network reengineering, segment for security (VLANs/Hardening), and leave a solid infrastructure that your internal team can easily manage.</div>
-                </details>
-                <details>
-                    <summary>Our company is not in CDMX or Morelos, do you have coverage?</summary>
-                    <div class="faq-content">Yes. Although our main physical base is in CDMX and Morelos, we design architectures, complex remote configurations (VPN, SD-WAN, Proxmox), and manage national and international projects for the corporate, industrial, and hotel sectors.</div>
-                </details>
-            </div>
-        </section>
-    </main>
-
-    <div id="mega-footer" class="mega-footer-dark">
-        <section id="contacto" data-aos="fade-up">
-            <h2 class="scramble-text">Preliminary Diagnosis Session</h2>
-            <p style="font-size: 20px; font-weight: 300; opacity: 0.8; margin-bottom: 40px; max-width: 850px; margin-left: auto; margin-right: auto; line-height: 1.6; font-family: 'Inter', sans-serif;">
-                Schedule a <strong>30-minute executive assessment</strong> to analyze your current network challenges and outline immediate impact solutions. For in-depth audits and infrastructure reengineering, we develop technical and commercial proposals tailored to your operation.
-            </p>
-            <a id="link-cta" href="#" class="btn-main magnetic-btn" aria-label="Schedule a Diagnosis via Calendly">Request Consulting</a>
-        </section>
-        <footer>
-            <div class="footer-col">
-                <a href="../" aria-label="Back to Home"><img src="../assets/JBDA.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px; filter: brightness(0) invert(1);" loading="lazy"></a>
-                <p><strong>JBDA 2026</strong> <span id="terminal-toggle" title="Modo Ingeniero">>_</span><br>Strategic Consulting in<br>Network Infrastructure.</p><br>
-                <a href="privacy/" class="legal-link" aria-label="Privacy Policy and Legal Terms">Privacy Policy</a>
-            </div>
-            <div class="footer-col">
-                <h5>Corporate Contact</h5>
-                <p style="margin-bottom: 15px;"><strong>Sales & Consulting</strong><br>Executive Support</p>
-                <a href="mailto:JBDA_Tech@icloud.com" class="social-link" aria-label="Enviar correo corporativo a JBDA"><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>JBDA_Tech@icloud.com</a>
-                <a id="link-whatsapp-footer" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Portal de Atención vía WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>Portal de Asistencia</a>
-                <a id="link-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visitar perfil de LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>LinkedIn Oficial</a>
-            </div>
-            <div class="footer-col">
-                <h5>Operational Coverage</h5>
-                <p>On-site Support:<br>CDMX • Morelos</p>
-                <p>Remote Support:<br>Global Reach</p>
-            </div>
-        </footer>
-    </div>
-
-    <div class="floating-concierge" style="z-index: 99990;">
-        <div class="concierge-menu" id="concierge-menu">
-            <a href="#" class="concierge-item" id="link-concierge-calendly"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg><span>Schedule a Diagnosis</span></a>
-            <a href="#" class="concierge-item" id="link-concierge-whatsapp" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg><span>Direct Message</span></a>
         </div>
-        <button class="concierge-toggle magnetic-btn" id="concierge-toggle" aria-label="Contact options"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></button>
-    </div>
+    </section>
+
+    <section id="ecosystem" style="padding: 60px 0; overflow: hidden; position: relative; z-index: 2; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <p style="color: var(--soft-grey); font-size: 12px; letter-spacing: 3px; text-transform: uppercase;">Brand Agnostic. Loyal to your performance.</p>
+        </div>
+        <div style="display: flex; gap: 60px; justify-content: center; align-items: center; flex-wrap: wrap; opacity: 0.5;">
+            <h3 class="title-serif">Cisco</h3>
+            <h3 class="title-serif">Fortinet</h3>
+            <h3 class="title-serif">Palo Alto</h3>
+            <h3 class="title-serif">Huawei</h3>
+            <h3 class="title-serif">Meraki</h3>
+        </div>
+    </section>
+
+    <footer style="padding: 80px 20px 40px; background: #020202; position: relative; z-index: 2;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px;">
+            
+            <div style="max-width: 320px;">
+                <img src="../assets/JBDA.png" alt="JBDA Logo" style="width: 160px; margin-bottom: 20px;">
+                <p style="color: var(--soft-grey); font-size: 14px; line-height: 1.6;">Elite consulting in digital infrastructure. Optimizing performance and security for the enterprise sector.</p>
+            </div>
+
+            <div class="footer-col">
+                <h5 style="color: var(--white); margin-bottom: 20px; font-size: 16px;">Corporate Contact</h5>
+                <p style="color: var(--soft-grey); font-size: 14px; margin-bottom: 15px;"><strong>Sales & Consulting</strong><br>Executive Level Support</p>
+                <a href="mailto:JBDA_Tech@icloud.com" style="display: block; color: var(--pink-premium); text-decoration: none; margin-bottom: 12px; font-size: 14px;">✉️ JBDA_Tech@icloud.com</a>
+                <a href="https://wa.me/525613388030" target="_blank" style="display: block; color: var(--soft-grey); text-decoration: none; margin-bottom: 12px; font-size: 14px;">💬 Executive Support Portal</a>
+                <a href="https://linkedin.com/company/jbda" target="_blank" style="display: block; color: var(--soft-grey); text-decoration: none; font-size: 14px;">🔗 Official LinkedIn</a>
+            </div>
+
+            <div class="footer-col">
+                <h5 style="color: var(--white); margin-bottom: 20px; font-size: 16px;">Legal Framework</h5>
+                <a href="privacy/" style="display: block; color: var(--soft-grey); text-decoration: none; margin-bottom: 12px; font-size: 14px;">Privacy Policy</a>
+                <a href="privacy/" style="display: block; color: var(--soft-grey); text-decoration: none; font-size: 14px;">Terms and Conditions</a>
+            </div>
+
+        </div>
+        <div style="max-width: 1200px; margin: 50px auto 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
+            <p style="color: rgba(255,255,255,0.2); font-size: 12px;">&copy; 2026 JBDA Technologies. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
-    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../js/main.js"></script>
 </body>
 </html>
