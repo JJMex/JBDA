@@ -151,7 +151,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 barTrad.style.backgroundColor = '#ef4444'; barTrad.parentElement.parentElement.classList.add('alert-shake');
                 statusTrad.innerText = isEnglish ? 'Latency: 999ms (FAILURE)' : 'Latencia: 999ms (CAÍDA)'; statusTrad.className = 'status status-red';
                 cpuTrad.innerText = isEnglish ? `CPU: 100% (CRASH)` : `CPU: 100% (COLAPSO)`; cpuTrad.className = 'cpu-load status-red';
-                // Slider cambia a rojo
                 slider.style.setProperty('--thumb-color', '#ef4444'); slider.style.setProperty('--thumb-glow', 'rgba(239, 68, 68, 0.6)');
             } else if (val > 40) {
                 metricStatus.innerText = isEnglish ? 'Warning' : 'Riesgo'; metricStatus.classList.add('status-yellow');
@@ -159,7 +158,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 let latT = Math.floor(65 + (val-50)*8);
                 statusTrad.innerText = isEnglish ? `Latency: ${latT}ms` : `Latencia: ${latT}ms`; statusTrad.className = 'status status-yellow';
                 cpuTrad.innerText = `CPU: ${cpuT}%`; cpuTrad.className = 'cpu-load status-yellow';
-                // Slider cambia a amarillo
                 slider.style.setProperty('--thumb-color', '#f59e0b'); slider.style.setProperty('--thumb-glow', 'rgba(245, 158, 11, 0.6)');
             } else {
                 metricStatus.innerText = isEnglish ? 'Stable' : 'Estable'; metricStatus.classList.add('status-green');
@@ -167,7 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 let latT = Math.floor(15 + val);
                 statusTrad.innerText = isEnglish ? `Latency: ${latT}ms` : `Latencia: ${latT}ms`; statusTrad.className = 'status status-green';
                 cpuTrad.innerText = `CPU: ${cpuT}%`; cpuTrad.className = 'cpu-load status-green';
-                // Slider vuelve a rosa premium
                 slider.style.setProperty('--thumb-color', 'var(--pink-premium)'); slider.style.setProperty('--thumb-glow', 'rgba(212, 0, 109, 0.5)');
             }
 
@@ -180,22 +177,56 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 7. BOTONES MAGNÉTICOS CON FÍSICA DE RESORTE ---
+    // --- 7. BOTONES MAGNÉTICOS CON FÍSICAS DE RESORTE (ÉLITE) ---
     const magneticBtns = document.querySelectorAll('.magnetic-btn');
     magneticBtns.forEach(btn => {
+        const baseTransition = 'box-shadow 0.4s ease, border-color 0.4s ease, color 0.3s ease';
+        let currentX = 0;
+        let currentY = 0;
+
+        // 1. Seguimiento magnético en PC
         btn.addEventListener('mousemove', (e) => {
             const rect = btn.getBoundingClientRect();
             const h = rect.width / 2; const v = rect.height / 2;
-            const xTranslate = e.clientX - rect.left - h; const yTranslate = e.clientY - rect.top - v;
-            btn.style.transition = 'none'; // Quita la transición para seguir el mouse al instante
-            btn.style.transform = `translate(${xTranslate * 0.3}px, ${yTranslate * 0.3}px)`;
-            const xRipple = e.clientX - rect.left; const yRipple = e.clientY - rect.top;
-            btn.style.setProperty('--x', `${xRipple}px`); btn.style.setProperty('--y', `${yRipple}px`);
+            currentX = (e.clientX - rect.left - h) * 0.4; 
+            currentY = (e.clientY - rect.top - v) * 0.4;
+            
+            btn.style.transition = `${baseTransition}, transform 0.1s ease-out`; 
+            btn.style.transform = `translate(${currentX}px, ${currentY}px) scale(1)`;
+            
+            // Expansión del color rosa interno
+            btn.style.setProperty('--x', `${e.clientX - rect.left}px`); 
+            btn.style.setProperty('--y', `${e.clientY - rect.top}px`);
         });
+
+        // 2. Rebote de resorte al sacar el mouse
         btn.addEventListener('mouseleave', () => { 
-            // Añade física de rebote elástico (Spring Curve) al soltar el mouse
-            btn.style.transition = 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; 
-            btn.style.transform = `translate(0px, 0px)`; 
+            currentX = 0; currentY = 0;
+            btn.style.transition = `${baseTransition}, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)`; 
+            btn.style.transform = `translate(0px, 0px) scale(1)`; 
+        });
+
+        // 3. Aplastamiento al hacer clic en PC
+        btn.addEventListener('mousedown', () => {
+            btn.style.transition = `${baseTransition}, transform 0.1s ease-in`;
+            btn.style.transform = `translate(${currentX}px, ${currentY}px) scale(0.92)`;
+        });
+
+        // Rebote hacia afuera al soltar el clic
+        btn.addEventListener('mouseup', () => {
+            btn.style.transition = `${baseTransition}, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)`;
+            btn.style.transform = `translate(${currentX}px, ${currentY}px) scale(1)`;
+        });
+
+        // 4. Aplastamiento en táctil (Móvil)
+        btn.addEventListener('touchstart', () => {
+            btn.style.transition = `${baseTransition}, transform 0.1s ease-in`;
+            btn.style.transform = `translate(0px, 0px) scale(0.92)`;
+        }, {passive: true});
+
+        btn.addEventListener('touchend', () => {
+            btn.style.transition = `${baseTransition}, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)`;
+            btn.style.transform = `translate(0px, 0px) scale(1)`;
         });
     });
 
