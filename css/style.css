@@ -73,7 +73,7 @@ body::before {
 @media (pointer: coarse) { .cursor-led { display: none !important; } }
 
 /* ==============================================================
-   EFECTO: MASK REVEAL (ESTÁNDAR SILICON VALLEY)
+   EFECTO: MASK REVEAL
    ============================================================== */
 .reveal-text { display: inline-flex; overflow: hidden; vertical-align: bottom; }
 .reveal-text .reveal-inner { display: inline-block; transform: translateY(110%); opacity: 0; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease; }
@@ -92,7 +92,8 @@ nav {
     padding-bottom: 25px;
     padding-left: 8%; padding-right: 8%;
     display: flex; justify-content: space-between; align-items: center; 
-    position: sticky; top: 0; background: transparent; z-index: 1000; 
+    position: sticky; top: 0; background: transparent; 
+    z-index: 9999; /* Blindaje Anti-Bug iOS */
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
     border-bottom: 1px solid transparent; 
 }
@@ -287,54 +288,60 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
 @media (max-width: 900px) {
     nav { 
         height: auto !important; 
-        /* Matemática estricta: Empujamos el contenido EXACTAMENTE el tamaño del notch + 8px. */
-        padding-top: calc(env(safe-area-inset-top, 0px) + 8px) !important;
+        /* CÁLCULO EXACTO: Pegado al Notch dejando solo 2px de respiro */
+        padding-top: calc(env(safe-area-inset-top, 0px) + 2px) !important;
         padding-bottom: 12px !important;
         padding-left: 5% !important;
         padding-right: 5% !important;
+        display: flex !important;
         align-items: center !important; 
     }
     nav.nav-scrolled {
-        padding-top: calc(env(safe-area-inset-top, 0px) + 5px) !important;
+        padding-top: calc(env(safe-area-inset-top, 0px) + 2px) !important;
         padding-bottom: 8px !important;
     }
 
-    /* EL SCRIM: Gradiente que oscurece el fondo solo en la parte superior para legibilidad */
+    /* EL SCRIM (Sombra trasera para la hora blanca) */
     nav::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; width: 100%;
-        height: calc(env(safe-area-inset-top, 0px) + 25px);
+        content: ''; position: absolute; top: 0; left: 0; width: 100%;
+        height: calc(env(safe-area-inset-top, 0px) + 30px);
         background: linear-gradient(to bottom, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0) 100%);
-        z-index: -1;
-        pointer-events: none;
+        z-index: -1; pointer-events: none;
     }
 
-    .logo-container { display: flex; align-items: center; height: auto; margin: 0; padding: 0; position: relative; z-index: 10; }
+    .logo-container { position: relative; z-index: 10; display: flex; align-items: center; height: auto; margin: 0; padding: 0; }
     .logo-container a { display: flex; align-items: center; text-decoration: none; }
     .logo-container img { height: 35px !important; width: auto; display: block; } 
     nav.nav-scrolled .logo-container img { height: 30px !important; }
     
-    /* BOTÓN BLINDADO (El hack translateZ fuerza a Safari a no ocultarlo tras el cristal) */
+    /* BOTÓN INVULNERABLE AL CRISTAL (Z-Index Supremo) */
     .mobile-menu-btn { 
         display: flex !important; 
         align-items: center; justify-content: center; 
         padding: 10px; margin-right: -10px; 
         position: relative; 
-        z-index: 99999 !important; 
-        transform: translateZ(10px);
-        -webkit-transform: translateZ(10px);
+        z-index: 100000 !important; 
     }
 
     .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; width: 26px; height: 16px; pointer-events: none; }
-    .hamburger-lines .line { display: block; height: 2px; width: 100%; background-color: var(--dark-grey); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); border-radius: 2px; }
+    .hamburger-lines .line { display: block; height: 2px; width: 100%; background-color: var(--dark-grey); transition: all 0.3s ease; border-radius: 2px; }
 
-    /* Cambio de color de la "X" a Gris Oscuro para máximo contraste al abrir el menú */
+    /* LA "X" en color oscuro para máximo contraste sobre el fondo rosa */
     .mobile-menu-btn.open .line1 { transform: translateY(7px) rotate(45deg); background-color: var(--dark-grey) !important; }
     .mobile-menu-btn.open .line2 { opacity: 0; }
     .mobile-menu-btn.open .line3 { transform: translateY(-7px) rotate(-45deg); background-color: var(--dark-grey) !important; }
     
-    .nav-links { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(253, 242, 248, 0.95); backdrop-filter: blur(15px) saturate(180%); -webkit-backdrop-filter: blur(15px) saturate(180%); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.4s ease, visibility 0.4s ease; z-index: 1500; opacity: 0; visibility: hidden; }
+    /* OVERLAY DEL MENÚ (Z-Index por debajo del botón) */
+    .nav-links { 
+        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+        background: rgba(253, 242, 248, 0.95); 
+        backdrop-filter: blur(15px) saturate(180%); -webkit-backdrop-filter: blur(15px) saturate(180%); 
+        display: flex; flex-direction: column; justify-content: center; align-items: center; 
+        transition: opacity 0.4s ease, visibility 0.4s ease; 
+        z-index: 99998 !important; /* El botón es 100000, así que la X nunca será tapada */
+        opacity: 0; visibility: hidden; 
+        padding-top: env(safe-area-inset-top, 0px);
+    }
     .nav-links.active { opacity: 1; visibility: visible; }
     
     .nav-links a { font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 600; margin: 15px 0; color: var(--dark-grey); letter-spacing: 1px; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; }
@@ -422,7 +429,7 @@ body.dark-theme #dark-mode-toggle:hover, body.dark-theme .lang-toggle-link:hover
     body.dark-theme .hamburger-lines .line { background-color: #f8fafc; }
     body.dark-theme .nav-links a { color: #f8fafc; }
     body.dark-theme nav::before { display: none !important; }
-    /* La "X" en modo oscuro debe ser blanca */
+    /* Modo Oscuro = "X" blanca obligatoria */
     body.dark-theme .mobile-menu-btn.open .line1 { background-color: #f8fafc !important; }
     body.dark-theme .mobile-menu-btn.open .line3 { background-color: #f8fafc !important; }
 }
