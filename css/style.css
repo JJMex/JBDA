@@ -74,11 +74,11 @@ body::before {
 @media (pointer: coarse) { .cursor-led { display: none !important; } }
 
 /* ==============================================================
-   NAVEGACIÓN DESKTOP & iOS PWA SAFE AREA
+   NAVEGACIÓN NATIVA (DESKTOP & iOS SAFE AREA)
    ============================================================== */
 nav { 
-    /* El padding-top absorbe el Notch, dejando intacto el centrado de los elementos */
-    padding: env(safe-area-inset-top, 0px) 8% 0 8%; 
+    /* La función max() asegura que tome el Notch si existe, o 25px si es PC */
+    padding: max(env(safe-area-inset-top, 0px), 25px) 8% 20px 8%; 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
@@ -86,22 +86,20 @@ nav {
     top: 0; 
     background: transparent; 
     z-index: 1000; 
-    /* Altura base (110px) sumada dinámicamente al tamaño del Notch */
-    height: calc(110px + env(safe-area-inset-top, 0px)); 
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
     border-bottom: 1px solid transparent; 
 }
 nav.nav-scrolled { 
-    height: calc(80px + env(safe-area-inset-top, 0px)); 
-    background: rgba(253, 242, 248, 0.5); 
-    backdrop-filter: blur(10px) saturate(180%); 
-    -webkit-backdrop-filter: blur(10px) saturate(180%); 
+    padding: max(env(safe-area-inset-top, 0px), 12px) 8% 12px 8%; 
+    background: rgba(253, 242, 248, 0.65); /* Cristal sutilmente más denso */
+    backdrop-filter: blur(15px) saturate(180%); 
+    -webkit-backdrop-filter: blur(15px) saturate(180%); 
     border-bottom: 1px solid rgba(251, 207, 232, 0.5); 
     box-shadow: 0 10px 30px -10px rgba(212, 0, 109, 0.15); 
 }
 .logo-container a { display: block; text-decoration: none; }
-.logo-container img { height: 85px; width: auto; transition: all 0.5s ease; display: block; }
-nav.nav-scrolled .logo-container img { height: 55px; } 
+.logo-container img { height: 75px; width: auto; transition: all 0.5s ease; display: block; }
+nav.nav-scrolled .logo-container img { height: 50px; } 
 .logo-container img:hover { transform: scale(1.03); }
 .nav-links { display: flex; align-items: center; gap: 40px; }
 .nav-links a { white-space: nowrap; text-decoration: none; color: var(--soft-grey); font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; position: relative; padding: 5px 0; transition: color 0.3s ease; display: flex; align-items: center;}
@@ -197,7 +195,6 @@ header p { font-size: 22px; color: var(--soft-grey); max-width: 600px; margin-bo
 .diff-item h4 { font-size: 16px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--pink-premium); font-weight: 800; font-family: 'Inter', sans-serif; }
 .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; line-height: 1.7; }
 
-/* --- DASHBOARD DE MÉTRICAS --- */
 #stress-test-container { padding: 60px 8% 100px 8%; text-align: center; position: relative; z-index: 2; }
 .stress-ui { display: flex; flex-direction: column; gap: 40px; margin-top: 40px; }
 .slider-container { background: rgba(255, 255, 255, 0.6); padding: 40px 30px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 10px 20px rgba(0,0,0,0.02); }
@@ -282,17 +279,15 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
    OVERLAY MÓVIL GLASSMORPHISM & PWA SAFE AREA BLINDADA
    ============================================================== */
 @media (max-width: 900px) {
-    /* La altura se calcula sumando el alto deseado (90px) + el Notch.
-       El padding superior absorbe el Notch, dejando exactamente 90px libres para el contenido */
+    /* El padding abraza naturalmente al logo. max() protege si el celular no tiene notch */
     nav { 
-        height: calc(90px + env(safe-area-inset-top, 0px)) !important; 
-        padding: env(safe-area-inset-top, 0px) 5% 0 5% !important; 
+        padding: max(env(safe-area-inset-top, 0px), 15px) 5% 15px 5% !important; 
     }
     nav.nav-scrolled {
-        height: calc(80px + env(safe-area-inset-top, 0px)) !important;
+        padding: max(env(safe-area-inset-top, 0px), 10px) 5% 10px 5% !important;
     }
 
-    .logo-container img { height: 60px; }
+    .logo-container img { height: 50px; } /* Ajuste elegante para PWA */
     
     .mobile-menu-btn { display: block; }
 
