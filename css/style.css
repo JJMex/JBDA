@@ -75,21 +75,9 @@ body::before {
 /* ==============================================================
    EFECTO: MASK REVEAL (ESTÁNDAR SILICON VALLEY)
    ============================================================== */
-.reveal-text {
-    display: inline-flex;
-    overflow: hidden; 
-    vertical-align: bottom;
-}
-.reveal-text .reveal-inner {
-    display: inline-block;
-    transform: translateY(110%); 
-    opacity: 0;
-    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
-}
-body.page-loaded .reveal-text .reveal-inner {
-    transform: translateY(0); 
-    opacity: 1;
-}
+.reveal-text { display: inline-flex; overflow: hidden; vertical-align: bottom; }
+.reveal-text .reveal-inner { display: inline-block; transform: translateY(110%); opacity: 0; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease; }
+body.page-loaded .reveal-text .reveal-inner { transform: translateY(0); opacity: 1; }
 .hero-content h2 .reveal-inner { transition-delay: 0.1s; }
 .hero-content h1 .reveal-text:nth-child(1) .reveal-inner { transition-delay: 0.2s; }
 .hero-content h1 .reveal-text:nth-child(2) .reveal-inner { transition-delay: 0.3s; }
@@ -99,10 +87,9 @@ body.page-loaded .reveal-text .reveal-inner {
    NAVEGACIÓN DESKTOP
    ============================================================== */
 nav { 
-    box-sizing: border-box !important;
-    height: calc(env(safe-area-inset-top, 0px) + 90px) !important; 
-    padding-top: env(safe-area-inset-top, 0px) !important;
-    padding-bottom: 0 !important;
+    height: auto !important; 
+    padding-top: calc(env(safe-area-inset-top, 0px) + 25px);
+    padding-bottom: 25px;
     padding-left: 8%; padding-right: 8%;
     display: flex; justify-content: space-between; align-items: center; 
     position: sticky; top: 0; background: transparent; z-index: 1000; 
@@ -110,18 +97,18 @@ nav {
     border-bottom: 1px solid transparent; 
 }
 nav.nav-scrolled { 
-    height: calc(env(safe-area-inset-top, 0px) + 70px) !important;
-    padding-top: env(safe-area-inset-top, 0px) !important;
-    padding-bottom: 0 !important;
+    padding-top: calc(env(safe-area-inset-top, 0px) + 15px);
+    padding-bottom: 15px;
     background: rgba(253, 242, 248, 0.65); 
     backdrop-filter: blur(15px) saturate(180%); -webkit-backdrop-filter: blur(15px) saturate(180%); 
     border-bottom: 1px solid rgba(251, 207, 232, 0.5); 
     box-shadow: 0 10px 30px -10px rgba(212, 0, 109, 0.15); 
 }
-.logo-container { display: flex; align-items: center; height: 100%; margin: 0; padding: 0; }
-.logo-container a { display: flex; align-items: center; text-decoration: none; height: 100%; }
-.logo-container img { height: 50px !important; width: auto; transition: all 0.5s ease; display: block; }
-nav.nav-scrolled .logo-container img { height: 38px !important; } 
+.logo-container { display: flex; align-items: center; margin: 0; padding: 0; }
+.logo-container a { display: block; text-decoration: none; }
+.logo-container img { height: 60px; width: auto; transition: all 0.5s ease; display: block; }
+nav.nav-scrolled .logo-container img { height: 45px; } 
+.logo-container img:hover { transform: scale(1.03); }
 
 .nav-links { display: flex; align-items: center; gap: 40px; }
 .nav-links a { white-space: nowrap; text-decoration: none; color: var(--soft-grey); font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; position: relative; padding: 5px 0; transition: color 0.3s ease; display: flex; align-items: center;}
@@ -135,10 +122,8 @@ nav.nav-scrolled .logo-container img { height: 38px !important; }
 .lang-toggle-link { font-size: 14px !important; font-weight: 800 !important; margin-left: 10px; cursor: none !important; }
 .lang-toggle-link::after { display: none !important; }
 
-/* Botón Móvil Base (Blindaje de Z-index altísimo) */
-.mobile-menu-btn { display: none; background: none; border: none; z-index: 2500; cursor: pointer; position: relative; }
-.hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; width: 28px; height: 18px; pointer-events: none; }
-.hamburger-lines .line { display: block; height: 2px; width: 100%; background-color: var(--dark-grey); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); border-radius: 2px; }
+/* Botón Móvil Oculto en PC */
+.mobile-menu-btn { display: none; }
 
 header, section { position: relative; z-index: 1; background-color: transparent !important; background-image: none !important; }
 header { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; overflow: hidden; }
@@ -302,45 +287,68 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
    ============================================================== */
 @media (max-width: 900px) {
     nav { 
-        box-sizing: border-box !important;
-        /* Área matemática estricta: 70px de espacio útil + el Notch */
-        height: calc(env(safe-area-inset-top, 0px) + 70px) !important; 
-        padding-top: env(safe-area-inset-top, 0px) !important;
-        padding-bottom: 0 !important;
+        height: auto !important; 
+        /* max() garantiza al menos 20px de respiro o el Notch, sin sumar duplicados */
+        padding-top: max(env(safe-area-inset-top), 20px) !important;
+        padding-bottom: 15px !important;
         padding-left: 5% !important;
         padding-right: 5% !important;
-        display: flex !important;
-        align-items: center !important; 
-        /* NOTA: Se eliminó position relative para NO romper el scroll sticky */
     }
     nav.nav-scrolled {
-        height: calc(env(safe-area-inset-top, 0px) + 60px) !important;
+        padding-top: max(env(safe-area-inset-top), 15px) !important;
+        padding-bottom: 15px !important;
     }
 
-    /* EL SCRIM: Gradiente que oscurece el fondo solo en la parte de la hora */
+    /* EL SCRIM: Sombra detrás de la barra de estado para leer la hora en blanco */
     nav::before {
         content: '';
         position: absolute;
         top: 0; left: 0; width: 100%;
-        height: calc(env(safe-area-inset-top, 0px) + 15px);
+        height: calc(max(env(safe-area-inset-top), 20px) + 25px);
         background: linear-gradient(to bottom, rgba(15, 23, 42, 0.35) 0%, rgba(15, 23, 42, 0) 100%);
-        z-index: -1; /* Atrás de todo, no afecta los botones */
+        z-index: -1;
         pointer-events: none;
     }
 
-    .logo-container { display: flex; align-items: center; height: 100%; margin: 0; padding: 0; }
-    .logo-container a { display: flex; align-items: center; text-decoration: none; height: 100%; }
-    .logo-container img { height: 40px !important; width: auto; display: block; } 
-    nav.nav-scrolled .logo-container img { height: 35px !important; }
+    .logo-container img { height: 38px !important; } 
+    nav.nav-scrolled .logo-container img { height: 34px !important; }
     
-    /* Z-INDEX 2500 absoluto para que el menú nunca tape la X */
-    .mobile-menu-btn { display: flex !important; align-items: center; justify-content: center; padding: 10px; margin-right: -10px; z-index: 2500 !important; }
+    /* RESTAURACIÓN DEL BOTÓN HAMBURGUESA (Invulnerable) */
+    .mobile-menu-btn { 
+        display: block !important; 
+        background: none; 
+        border: none; 
+        z-index: 2500 !important; 
+        cursor: pointer; 
+        padding: 5px; 
+        margin: 0; 
+        position: relative; 
+    }
+    
+    .hamburger-lines { 
+        display: flex; 
+        flex-direction: column; 
+        justify-content: space-between; 
+        width: 26px; 
+        height: 16px; 
+        pointer-events: none; 
+    }
+    
+    .hamburger-lines .line { 
+        display: block; 
+        height: 2px; 
+        width: 100%; 
+        background-color: var(--dark-grey); 
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
+        border-radius: 2px; 
+    }
 
-    .mobile-menu-btn.open .line1 { transform: translateY(8px) rotate(45deg); background-color: var(--pink-premium) !important; }
+    .mobile-menu-btn.open .line1 { transform: translateY(7px) rotate(45deg); background-color: var(--pink-premium) !important; }
     .mobile-menu-btn.open .line2 { opacity: 0; }
-    .mobile-menu-btn.open .line3 { transform: translateY(-8px) rotate(-45deg); background-color: var(--pink-premium) !important; }
+    .mobile-menu-btn.open .line3 { transform: translateY(-7px) rotate(-45deg); background-color: var(--pink-premium) !important; }
     
-    .nav-links { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(253, 242, 248, 0.85); backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.4s ease, visibility 0.4s ease; z-index: 1500; opacity: 0; visibility: hidden; }
+    /* Menú Overlay */
+    .nav-links { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(253, 242, 248, 0.9); backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.4s ease, visibility 0.4s ease; z-index: 1500; opacity: 0; visibility: hidden; }
     .nav-links.active { opacity: 1; visibility: visible; }
     
     .nav-links a { font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 600; margin: 15px 0; color: var(--dark-grey); letter-spacing: 1px; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; }
@@ -423,7 +431,7 @@ body.dark-theme .marquee-wrapper .brand-logo:hover { filter: brightness(0) inver
 body.dark-theme #dark-mode-toggle, body.dark-theme .lang-toggle-link { color: #f8fafc; }
 body.dark-theme #dark-mode-toggle:hover, body.dark-theme .lang-toggle-link:hover { color: var(--pink-premium); }
 
-/* Apagar el scrim en Modo Oscuro (no se necesita porque el fondo ya es oscuro) */
+/* Apagar el scrim oscuro cuando el tema ya es oscuro */
 @media (max-width: 900px) { 
     body.dark-theme .nav-links { background: rgba(15, 23, 42, 0.85) !important; backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); } 
     body.dark-theme .hamburger-lines .line { background-color: #f8fafc; }
