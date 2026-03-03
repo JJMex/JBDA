@@ -74,11 +74,16 @@ body::before {
 @media (pointer: coarse) { .cursor-led { display: none !important; } }
 
 /* ==============================================================
-   NAVEGACIÓN DESKTOP & PWA SAFE AREA
+   NAVEGACIÓN NATIVA (DESKTOP & iOS SAFE AREA)
    ============================================================== */
 nav { 
-    /* El padding-top absorbe el Notch dinámicamente */
-    padding: env(safe-area-inset-top, 0px) 8% 0 8%; 
+    /* Altura automática: La caja abraza al logo y elimina vacíos matemáticos */
+    height: auto !important; 
+    /* Padding dinámico: Notch + 15px de respiro superior, 15px inferior */
+    padding-top: calc(env(safe-area-inset-top, 0px) + 15px) !important;
+    padding-bottom: 15px !important;
+    padding-left: 8%;
+    padding-right: 8%;
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
@@ -86,13 +91,13 @@ nav {
     top: 0; 
     background: transparent; 
     z-index: 1000; 
-    /* Altura fija calculada: 110px útiles + Notch */
-    height: calc(110px + env(safe-area-inset-top, 0px)); 
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
     border-bottom: 1px solid transparent; 
 }
 nav.nav-scrolled { 
-    height: calc(80px + env(safe-area-inset-top, 0px)); 
+    /* Al hacer scroll, reducimos el respiro para hacerlo más compacto */
+    padding-top: calc(env(safe-area-inset-top, 0px) + 10px) !important;
+    padding-bottom: 10px !important;
     background: rgba(253, 242, 248, 0.65); 
     backdrop-filter: blur(15px) saturate(180%); 
     -webkit-backdrop-filter: blur(15px) saturate(180%); 
@@ -100,8 +105,8 @@ nav.nav-scrolled {
     box-shadow: 0 10px 30px -10px rgba(212, 0, 109, 0.15); 
 }
 .logo-container a { display: block; text-decoration: none; }
-.logo-container img { height: 85px; width: auto; transition: all 0.5s ease; display: block; }
-nav.nav-scrolled .logo-container img { height: 55px; } 
+.logo-container img { height: 75px; width: auto; transition: all 0.5s ease; display: block; }
+nav.nav-scrolled .logo-container img { height: 50px; } 
 .logo-container img:hover { transform: scale(1.03); }
 .nav-links { display: flex; align-items: center; gap: 40px; }
 .nav-links a { white-space: nowrap; text-decoration: none; color: var(--soft-grey); font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; position: relative; padding: 5px 0; transition: color 0.3s ease; display: flex; align-items: center;}
@@ -281,17 +286,22 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
    OVERLAY MÓVIL GLASSMORPHISM & PWA SAFE AREA BLINDADA
    ============================================================== */
 @media (max-width: 900px) {
-    /* La altura base del menú es 90px. Le sumamos el notch dinámicamente. */
+    /* Desactivamos altura fija para abrazar el logo de forma exacta */
     nav { 
-        height: calc(90px + env(safe-area-inset-top, 0px)) !important; 
-        /* El padding superior será exactamente el tamaño del notch, empujando el contenido al área segura */
-        padding: env(safe-area-inset-top, 0px) 5% 0 5% !important; 
+        height: auto !important; 
+        /* Padding superior dinámico: Notch + 12px de respiro */
+        padding-top: calc(env(safe-area-inset-top, 0px) + 12px) !important;
+        padding-bottom: 12px !important;
+        padding-left: 5% !important;
+        padding-right: 5% !important;
     }
     nav.nav-scrolled {
-        height: calc(75px + env(safe-area-inset-top, 0px)) !important;
+        padding-top: calc(env(safe-area-inset-top, 0px) + 8px) !important;
+        padding-bottom: 8px !important;
     }
 
-    .logo-container img { height: 45px; } /* Ajuste elegante para PWA */
+    .logo-container img { height: 45px !important; } 
+    nav.nav-scrolled .logo-container img { height: 40px !important; }
     
     .mobile-menu-btn { display: block; }
 
@@ -344,7 +354,7 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
 
 body#privacidad-page .mobile-menu-btn { display: none !important; }
 @media (max-width: 900px) {
-    body#privacidad-page .nav-links { position: static; width: auto; height: auto; background: transparent !important; flex-direction: row; display: flex; gap: 20px; align-items: center; visibility: visible; opacity: 1; }
+    body#privacidad-page .nav-links { position: static; width: auto; height: auto; background: transparent !important; flex-direction: row; display: flex; gap: 20px; align-items: center; visibility: visible; opacity: 1; padding-top: 0 !important; }
     body#privacidad-page .nav-links a.back-link .desktop-text { display: none; }
     body#privacidad-page .nav-links a.back-link svg { width: 24px; height: 24px; margin-right: 0 !important; }
     body#privacidad-page .nav-links a { margin: 0; transform: none; font-size: 14px; opacity: 1;}
