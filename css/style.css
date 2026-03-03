@@ -392,3 +392,25 @@ body.dark-theme ::-webkit-scrollbar-track, body.terminal-mode ::-webkit-scrollba
 body.dark-theme ::-webkit-scrollbar-thumb { border-color: var(--dark-grey); }
 ::-webkit-scrollbar-thumb:hover { background: var(--pink-premium); }
 body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color: #050505; }
+
+/* ==============================================================
+   SOPORTE PARA PWA iOS (NOTCH Y STATUS BAR)
+   ============================================================== */
+nav {
+    padding-top: env(safe-area-inset-top) !important;
+    height: calc(110px + env(safe-area-inset-top)) !important;
+}
+nav.nav-scrolled {
+    height: calc(80px + env(safe-area-inset-top)) !important;
+}
+
+@media (max-width: 900px) {
+    nav {
+        padding-top: calc(15px + env(safe-area-inset-top)) !important;
+        height: calc(90px + env(safe-area-inset-top)) !important;
+    }
+    /* Aseguramos que el overlay del menú inicie desde el borde superior */
+    .nav-links {
+        padding-top: env(safe-area-inset-top);
+    }
+}
