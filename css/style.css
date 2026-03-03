@@ -73,9 +73,32 @@ body::before {
 @keyframes blink-txrx { 0%, 100% { opacity: 1; } 33% { opacity: 0; } 66% { opacity: 0.8; } }
 @media (pointer: coarse) { .cursor-led { display: none !important; } }
 
-/* --- NAVEGACIÓN DESKTOP --- */
-nav { padding: 0 8%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: transparent; z-index: 1000; height: 110px; transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); border-bottom: 1px solid transparent; }
-nav.nav-scrolled { height: 80px; background: rgba(253, 242, 248, 0.5); backdrop-filter: blur(10px) saturate(180%); -webkit-backdrop-filter: blur(10px) saturate(180%); border-bottom: 1px solid rgba(251, 207, 232, 0.5); box-shadow: 0 10px 30px -10px rgba(212, 0, 109, 0.15); }
+/* ==============================================================
+   NAVEGACIÓN DESKTOP & iOS PWA SAFE AREA
+   ============================================================== */
+nav { 
+    /* El padding-top absorbe el Notch, dejando intacto el centrado de los elementos */
+    padding: env(safe-area-inset-top, 0px) 8% 0 8%; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    position: sticky; 
+    top: 0; 
+    background: transparent; 
+    z-index: 1000; 
+    /* Altura base (110px) sumada dinámicamente al tamaño del Notch */
+    height: calc(110px + env(safe-area-inset-top, 0px)); 
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
+    border-bottom: 1px solid transparent; 
+}
+nav.nav-scrolled { 
+    height: calc(80px + env(safe-area-inset-top, 0px)); 
+    background: rgba(253, 242, 248, 0.5); 
+    backdrop-filter: blur(10px) saturate(180%); 
+    -webkit-backdrop-filter: blur(10px) saturate(180%); 
+    border-bottom: 1px solid rgba(251, 207, 232, 0.5); 
+    box-shadow: 0 10px 30px -10px rgba(212, 0, 109, 0.15); 
+}
 .logo-container a { display: block; text-decoration: none; }
 .logo-container img { height: 85px; width: auto; transition: all 0.5s ease; display: block; }
 nav.nav-scrolled .logo-container img { height: 55px; } 
@@ -137,7 +160,6 @@ header p { font-size: 22px; color: var(--soft-grey); max-width: 600px; margin-bo
 .card:hover .icon-wrapper { background: var(--pink-premium); }
 .card:hover .icon-wrapper svg { stroke: #ffffff; }
 .icon-wrapper svg * { stroke-dasharray: 1; stroke-dashoffset: 1; }
-/* Revelación SVG en 2 pasos */
 .card.svg-animate .icon-wrapper svg * { animation: drawSvg 2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
 @keyframes drawSvg { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 
@@ -257,25 +279,30 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
 .concierge-item:hover { background: rgba(212, 0, 109, 0.08); color: var(--pink-premium); }
 
 /* ==============================================================
-   OVERLAY MÓVIL GLASSMORPHISM (ARQUITECTURA BLINDADA)
+   OVERLAY MÓVIL GLASSMORPHISM & PWA SAFE AREA BLINDADA
    ============================================================== */
 @media (max-width: 900px) {
-    nav { height: 90px; padding: 15px 5%; }
+    /* La altura se calcula sumando el alto deseado (90px) + el Notch.
+       El padding superior absorbe el Notch, dejando exactamente 90px libres para el contenido */
+    nav { 
+        height: calc(90px + env(safe-area-inset-top, 0px)) !important; 
+        padding: env(safe-area-inset-top, 0px) 5% 0 5% !important; 
+    }
+    nav.nav-scrolled {
+        height: calc(80px + env(safe-area-inset-top, 0px)) !important;
+    }
+
     .logo-container img { height: 60px; }
     
-    /* Mostrar Botón Móvil */
     .mobile-menu-btn { display: block; }
 
-    /* Animación de la X (Con !important para evitar choques con Modo Oscuro) */
     .mobile-menu-btn.open .line1 { transform: translateY(8px) rotate(45deg); background-color: var(--pink-premium) !important; }
     .mobile-menu-btn.open .line2 { opacity: 0; }
     .mobile-menu-btn.open .line3 { transform: translateY(-8px) rotate(-45deg); background-color: var(--pink-premium) !important; }
     
-    /* Overlay Fullscreen Glassmorphism */
     .nav-links { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(253, 242, 248, 0.85); backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.4s ease, visibility 0.4s ease; z-index: 1500; opacity: 0; visibility: hidden; }
     .nav-links.active { opacity: 1; visibility: visible; }
     
-    /* Enlaces en Cascada */
     .nav-links a { font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 600; margin: 15px 0; color: var(--dark-grey); letter-spacing: 1px; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; }
     .nav-links a::after { display: none; }
     .nav-links.active a { opacity: 1; transform: translateY(0); }
@@ -286,7 +313,6 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
     .nav-links.active a:nth-child(5) { transition-delay: 0.5s; }
     .nav-links.active a:nth-child(6) { transition-delay: 0.6s; }
 
-    /* Ajustes generales móviles */
     #manifiesto-global { grid-template-columns: 1fr; padding: 60px 5%; gap: 40px;}
     .filosofia-box.asimetrica { margin-left: 0; }
     #ecosistema { padding: 40px 5%; }
@@ -392,38 +418,3 @@ body.dark-theme ::-webkit-scrollbar-track, body.terminal-mode ::-webkit-scrollba
 body.dark-theme ::-webkit-scrollbar-thumb { border-color: var(--dark-grey); }
 ::-webkit-scrollbar-thumb:hover { background: var(--pink-premium); }
 body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color: #050505; }
-
- /* ==============================================================
-   SOPORTE PWA iOS (NOTCH Y STATUS BAR) - ARQUITECTURA FLUIDA
-   ============================================================== */
-/* Desktop */
-nav {
-    height: auto !important;
-    /* Empujamos el contenido hacia abajo (Notch + espacio visual) */
-    padding-top: calc(env(safe-area-inset-top) + 12px) !important;
-    padding-bottom: 12px !important;
-}
-nav.nav-scrolled {
-    height: auto !important;
-    padding-top: calc(env(safe-area-inset-top) + 12px) !important;
-    padding-bottom: 12px !important;
-}
-
-/* Móvil */
-@media (max-width: 900px) {
-    nav {
-        height: auto !important;
-        /* Matemáticas exactas para empujar el menú móvil a la zona segura */
-        padding-top: calc(env(safe-area-inset-top) + 15px) !important;
-        padding-bottom: 15px !important;
-    }
-    nav.nav-scrolled {
-        height: auto !important;
-        padding-top: calc(env(safe-area-inset-top) + 10px) !important;
-        padding-bottom: 10px !important;
-    }
-    /* Aseguramos que la lista del menú overlay empiece por debajo del notch */
-    .nav-links {
-        padding-top: env(safe-area-inset-top) !important;
-    }
-}
