@@ -73,7 +73,7 @@ body::before {
 @media (pointer: coarse) { .cursor-led { display: none !important; } }
 
 /* ==============================================================
-   EFECTO: MASK REVEAL (ESTÁNDAR SILICON VALLEY)
+   EFECTO: MASK REVEAL
    ============================================================== */
 .reveal-text { display: inline-flex; overflow: hidden; vertical-align: bottom; }
 .reveal-text .reveal-inner { display: inline-block; transform: translateY(110%); opacity: 0; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease; }
@@ -92,7 +92,8 @@ nav {
     padding-bottom: 20px;
     padding-left: 8%; padding-right: 8%;
     display: flex; justify-content: space-between; align-items: center; 
-    position: sticky; top: 0; background: transparent; z-index: 9999; 
+    position: sticky; top: 0; background: transparent; 
+    z-index: 9999;
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
     border-bottom: 1px solid transparent; 
 }
@@ -101,10 +102,9 @@ nav.nav-scrolled {
     padding-bottom: 12px;
     background: rgba(253, 242, 248, 0.7); 
     backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); 
-    border-bottom: 1px solid rgba(212, 0, 109, 0.05); 
+    border-bottom: 1px solid rgba(212, 0, 109, 0.05);
     box-shadow: 0 10px 30px -10px rgba(212, 0, 109, 0.1); 
 }
-/* Scrim para Desktop / General */
 nav::before {
     content: ''; position: absolute; top: 0; left: 0; width: 100%;
     height: calc(env(safe-area-inset-top, 0px) + 35px);
@@ -132,9 +132,6 @@ nav.nav-scrolled .logo-container img { height: 45px; }
 
 .mobile-menu-btn { display: none; background: transparent; border: none; outline: none; -webkit-appearance: none; }
 
-/* ==============================================================
-   SECCIONES Y COMPONENTES
-   ============================================================== */
 header, section { position: relative; z-index: 1; background-color: transparent !important; background-image: none !important; }
 header { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; overflow: hidden; }
 #network-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
@@ -292,64 +289,69 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
 .concierge-item { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--dark-grey); font-size: 14px; font-weight: 600; border-radius: 8px; transition: all 0.2s ease; font-family: 'Inter', sans-serif; }
 .concierge-item:hover { background: rgba(212, 0, 109, 0.08); color: var(--pink-premium); }
 
-
 /* ==============================================================
-   DISEÑO MÓVIL TOP 1 (ÉLITE)
+   DISEÑO MÓVIL TOP 1 (ÉLITE Y BLINDADO)
    ============================================================== */
 @media (max-width: 900px) {
     nav { 
-        /* Ajuste preciso para navegador y PWA */
+        /* Ajuste preciso con max() para Navegador web y PWA (App) */
         padding-top: max(calc(env(safe-area-inset-top) + 5px), 18px) !important;
         padding-bottom: 15px !important;
-        padding-left: 6% !important; 
-        padding-right: 6% !important;
+        padding-left: 6% !important; padding-right: 6% !important;
     }
     nav.nav-scrolled {
         padding-top: max(calc(env(safe-area-inset-top) + 2px), 12px) !important;
         padding-bottom: 12px !important;
     }
 
-    /* Logo con más autoridad en móvil (42px) */
+    /* Logo con autoridad (42px) */
     .logo-container img { height: 42px !important; }
     nav.nav-scrolled .logo-container img { height: 36px !important; }
 
-    /* BOTÓN HAMBURGUESA ASIMÉTRICO (MODERNO Y BLINDADO CONTRA iOS) */
+    /* BOTÓN HAMBURGUESA ASIMÉTRICO Y POSICIÓN ABSOLUTA (Cero Bugs) */
     .mobile-menu-btn { 
         display: flex !important; 
-        flex-direction: column; justify-content: center; align-items: flex-end; 
-        width: 40px; height: 40px; 
+        justify-content: center; align-items: center; 
+        width: 44px; height: 44px; 
         background: transparent !important; border: none !important; outline: none !important;
         -webkit-appearance: none !important; box-shadow: none !important;
         z-index: 100000 !important; cursor: pointer;
         padding: 0; margin-right: -5px;
     }
 
+    /* Contenedor Fijo para evitar que Flexbox rompa las líneas al rotar */
     .hamburger-lines { 
-        display: flex; flex-direction: column; 
-        gap: 8px; /* Espaciado premium para 2 líneas */
+        position: relative; 
         width: 28px; 
+        height: 12px; 
     }
 
-    .line { 
-        display: block; height: 2px; 
+    .hamburger-lines .line { 
+        position: absolute; 
+        right: 0; /* Anclado a la derecha para estilo asimétrico */
+        display: block; 
+        height: 2px; 
         background-color: var(--dark-grey); 
-        transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1); 
+        transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
         border-radius: 4px;
     }
 
-    /* Estilo asimétrico (La línea de arriba es más corta) */
-    .line1 { width: 18px; align-self: flex-end; }
-    .line2 { width: 28px; }
+    /* Jerarquía estricta nth-child para ignorar código antiguo */
+    .hamburger-lines .line:nth-child(1) { top: 0; width: 18px !important; }
+    .hamburger-lines .line:nth-child(2) { top: 10px; width: 28px !important; }
+    .hamburger-lines .line:nth-child(3) { display: none !important; } /* Destruye línea 3 si existe */
 
-    /* Animación de Morphing a la "X" perfecta */
-    .mobile-menu-btn.open .line1 { 
-        width: 28px;
-        transform: translateY(5px) rotate(45deg); 
+    /* Animación de la "X" (Moviendo ambas al centro = top: 5px) */
+    .mobile-menu-btn.open .hamburger-lines .line:nth-child(1) { 
+        top: 5px; 
+        width: 28px !important; 
+        transform: rotate(45deg); 
         background-color: var(--dark-grey) !important;
     }
-    .mobile-menu-btn.open .line2 { 
-        width: 28px;
-        transform: translateY(-5px) rotate(-45deg); 
+    .mobile-menu-btn.open .hamburger-lines .line:nth-child(2) { 
+        top: 5px; 
+        width: 28px !important; 
+        transform: rotate(-45deg); 
         background-color: var(--dark-grey) !important;
     }
 
@@ -363,8 +365,16 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
         transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .nav-links.active { opacity: 1; visibility: visible; }
-    .nav-links a { font-size: 28px; font-weight: 700; margin: 15px 0; color: var(--dark-grey); letter-spacing: -0.5px; }
+    .nav-links a { font-size: 28px; font-weight: 700; margin: 15px 0; color: var(--dark-grey); letter-spacing: -0.5px; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease;}
     .nav-links a::after { display: none; }
+    
+    .nav-links.active a { opacity: 1; transform: translateY(0); }
+    .nav-links.active a:nth-child(1) { transition-delay: 0.1s; }
+    .nav-links.active a:nth-child(2) { transition-delay: 0.2s; }
+    .nav-links.active a:nth-child(3) { transition-delay: 0.3s; }
+    .nav-links.active a:nth-child(4) { transition-delay: 0.4s; }
+    .nav-links.active a:nth-child(5) { transition-delay: 0.5s; }
+    .nav-links.active a:nth-child(6) { transition-delay: 0.6s; }
 
     /* Ajustes Móviles de Secciones */
     #manifiesto-global { grid-template-columns: 1fr; padding: 60px 5%; gap: 40px;}
@@ -437,13 +447,15 @@ body.dark-theme .marquee-wrapper .brand-logo:hover { filter: brightness(0) inver
 body.dark-theme #dark-mode-toggle, body.dark-theme .lang-toggle-link { color: #f8fafc; }
 body.dark-theme #dark-mode-toggle:hover, body.dark-theme .lang-toggle-link:hover { color: var(--pink-premium); }
 body.dark-theme nav::before { background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%); }
+
 @media (max-width: 900px) { 
     body.dark-theme .nav-links { background: rgba(15, 23, 42, 0.85) !important; backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); } 
-    body.dark-theme .line { background-color: #f8fafc; }
+    body.dark-theme .hamburger-lines .line { background-color: #f8fafc; }
     body.dark-theme .nav-links a { color: #f8fafc; }
     body.dark-theme nav::before { display: none !important; }
-    body.dark-theme .mobile-menu-btn.open .line1 { background-color: #f8fafc !important; }
-    body.dark-theme .mobile-menu-btn.open .line2 { background-color: #f8fafc !important; }
+    /* "X" Blanca Obligatoria en Modo Oscuro */
+    body.dark-theme .mobile-menu-btn.open .hamburger-lines .line:nth-child(1) { background-color: #f8fafc !important; }
+    body.dark-theme .mobile-menu-btn.open .hamburger-lines .line:nth-child(2) { background-color: #f8fafc !important; }
 }
 
 /* ==============================================================
@@ -465,7 +477,8 @@ body.terminal-mode .bar { background-color: #00ff00 !important; }
 body.terminal-mode::after { content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); z-index: 9999; background-size: 100% 2px, 3px 100%; pointer-events: none; opacity: 0.4; }
 #terminal-toggle { cursor: pointer !important; opacity: 0.2; font-family: monospace; transition: opacity 0.3s; margin-left: 5px; position: relative; z-index: 10000; pointer-events: auto; }
 #terminal-toggle:hover { opacity: 1; color: var(--pink-premium) !important; }
-body.terminal-mode .line { background-color: #00ff00 !important; }
+body.terminal-mode .hamburger-lines .line { background-color: #00ff00 !important; }
+body.terminal-mode .mobile-menu-btn.open .hamburger-lines .line:nth-child(1), body.terminal-mode .mobile-menu-btn.open .hamburger-lines .line:nth-child(2) { background-color: #00ff00 !important; }
 body.terminal-mode nav::before { display: none !important; }
 
 /* --- SCROLLBAR PREMIUM --- */
