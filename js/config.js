@@ -5,7 +5,7 @@ const JBDA_CONFIG = {
     whatsappMsgEN: "Hello JBDA, I would like to request consulting information.",
     
     // ✉️ Correo Electrónico Corporativo
-    email: "JBDA_Tech@icloud.com",
+    email: "info@jbda.com.mx",
     
     // 🔗 Redes Sociales
     linkedin: "https://www.linkedin.com/company/jbdamx/",
