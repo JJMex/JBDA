@@ -77,33 +77,34 @@ body::before {
    ============================================================== */
 .reveal-text {
     display: inline-flex;
-    overflow: hidden; /* El contenedor actúa como máscara/ranura */
+    overflow: hidden; 
     vertical-align: bottom;
 }
 .reveal-text .reveal-inner {
     display: inline-block;
-    transform: translateY(110%); /* Oculto abajo */
+    transform: translateY(110%); 
     opacity: 0;
     transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
 }
 body.page-loaded .reveal-text .reveal-inner {
-    transform: translateY(0); /* Emerge hacia arriba fluidamente */
+    transform: translateY(0); 
     opacity: 1;
 }
-
-/* Cascada fluida para el Banner Principal */
 .hero-content h2 .reveal-inner { transition-delay: 0.1s; }
 .hero-content h1 .reveal-text:nth-child(1) .reveal-inner { transition-delay: 0.2s; }
 .hero-content h1 .reveal-text:nth-child(2) .reveal-inner { transition-delay: 0.3s; }
 .hero-content h1 .reveal-text:nth-child(4) .reveal-inner { transition-delay: 0.4s; }
 
 /* ==============================================================
-   NAVEGACIÓN NATIVA (DESKTOP & iOS SAFE AREA)
+   NAVEGACIÓN NATIVA (CAJA ESTRICTA PARA iOS/PWA)
    ============================================================== */
 nav { 
-    height: auto !important; 
-    padding-top: calc(env(safe-area-inset-top, 0px) + 15px) !important;
-    padding-bottom: 15px !important;
+    box-sizing: border-box !important;
+    /* Desktop: Altura total de 90px útiles + espacio del Notch si existe */
+    height: calc(env(safe-area-inset-top, 0px) + 90px) !important; 
+    /* El padding abraza EXACTAMENTE el Notch, aislando la barra de la Isla Dinámica */
+    padding-top: env(safe-area-inset-top, 0px) !important;
+    padding-bottom: 0 !important;
     padding-left: 8%; padding-right: 8%;
     display: flex; justify-content: space-between; align-items: center; 
     position: sticky; top: 0; background: transparent; z-index: 1000; 
@@ -111,17 +112,20 @@ nav {
     border-bottom: 1px solid transparent; 
 }
 nav.nav-scrolled { 
-    padding-top: calc(env(safe-area-inset-top, 0px) + 10px) !important;
-    padding-bottom: 10px !important;
+    /* Al hacer scroll, la barra baja a 70px de alto útil */
+    height: calc(env(safe-area-inset-top, 0px) + 70px) !important;
+    padding-top: env(safe-area-inset-top, 0px) !important;
+    padding-bottom: 0 !important;
     background: rgba(253, 242, 248, 0.65); 
     backdrop-filter: blur(15px) saturate(180%); -webkit-backdrop-filter: blur(15px) saturate(180%); 
     border-bottom: 1px solid rgba(251, 207, 232, 0.5); 
     box-shadow: 0 10px 30px -10px rgba(212, 0, 109, 0.15); 
 }
-.logo-container a { display: block; text-decoration: none; }
-.logo-container img { height: 75px; width: auto; transition: all 0.5s ease; display: block; }
-nav.nav-scrolled .logo-container img { height: 50px; } 
-.logo-container img:hover { transform: scale(1.03); }
+.logo-container { display: flex; align-items: center; height: 100%; margin: 0; padding: 0; }
+.logo-container a { display: flex; align-items: center; text-decoration: none; height: 100%; }
+.logo-container img { height: 50px !important; width: auto; transition: all 0.5s ease; display: block; }
+nav.nav-scrolled .logo-container img { height: 38px !important; } 
+
 .nav-links { display: flex; align-items: center; gap: 40px; }
 .nav-links a { white-space: nowrap; text-decoration: none; color: var(--soft-grey); font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; position: relative; padding: 5px 0; transition: color 0.3s ease; display: flex; align-items: center;}
 .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background-color: var(--pink-premium); transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
@@ -134,7 +138,8 @@ nav.nav-scrolled .logo-container img { height: 50px; }
 .lang-toggle-link { font-size: 14px !important; font-weight: 800 !important; margin-left: 10px; cursor: none !important; }
 .lang-toggle-link::after { display: none !important; }
 
-.mobile-menu-btn { display: none; background: none; border: none; z-index: 2000; cursor: pointer; padding: 5px; margin-right: -5px; }
+/* Botón Móvil blindado */
+.mobile-menu-btn { display: none; background: none; border: none; z-index: 2000; cursor: pointer; padding: 5px; height: 100%; align-items: center; justify-content: center; margin: 0; }
 .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; width: 28px; height: 18px; pointer-events: none; }
 .hamburger-lines .line { display: block; height: 2px; width: 100%; background-color: var(--dark-grey); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); border-radius: 2px; }
 
@@ -295,23 +300,38 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
 .concierge-item { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--dark-grey); font-size: 14px; font-weight: 600; border-radius: 8px; transition: all 0.2s ease; font-family: 'Inter', sans-serif; }
 .concierge-item:hover { background: rgba(212, 0, 109, 0.08); color: var(--pink-premium); }
 
+/* ==============================================================
+   OVERLAY MÓVIL GLASSMORPHISM & PWA NATIVA (ARQUITECTURA DE CAJA)
+   ============================================================== */
 @media (max-width: 900px) {
     nav { 
-        height: auto !important; 
-        padding-top: calc(env(safe-area-inset-top, 0px) + 12px) !important;
-        padding-bottom: 12px !important;
+        /* Forzamos el modelo de caja estricto */
+        box-sizing: border-box !important;
+        /* Altura fija: 60px de área útil + exactamente lo que mida el Notch */
+        height: calc(env(safe-area-inset-top, 0px) + 60px) !important; 
+        /* El padding superior absorbe el Notch con precisión milimétrica */
+        padding-top: env(safe-area-inset-top, 0px) !important;
+        padding-bottom: 0 !important;
         padding-left: 5% !important;
         padding-right: 5% !important;
+        display: flex !important;
+        align-items: center !important; /* Centra el logo exactamente en los 60px libres */
     }
     nav.nav-scrolled {
-        padding-top: calc(env(safe-area-inset-top, 0px) + 8px) !important;
-        padding-bottom: 8px !important;
+        /* Al hacer scroll, mantenemos la misma estructura para evitar brincos */
+        height: calc(env(safe-area-inset-top, 0px) + 60px) !important;
+        padding-top: env(safe-area-inset-top, 0px) !important;
+        padding-bottom: 0 !important;
     }
 
-    .logo-container img { height: 45px !important; } 
-    nav.nav-scrolled .logo-container img { height: 40px !important; }
+    /* Logo más estilizado y compacto para que respire dentro de los 60px */
+    .logo-container { display: flex; align-items: center; height: 100%; margin: 0; padding: 0; }
+    .logo-container a { display: flex; align-items: center; text-decoration: none; height: 100%; }
+    .logo-container img { height: 32px !important; } 
+    nav.nav-scrolled .logo-container img { height: 32px !important; }
     
-    .mobile-menu-btn { display: block; }
+    /* El botón se alinea en el mismo nivel */
+    .mobile-menu-btn { display: flex; align-items: center; justify-content: center; height: 100%; margin: 0; padding: 5px; }
 
     .mobile-menu-btn.open .line1 { transform: translateY(8px) rotate(45deg); background-color: var(--pink-premium) !important; }
     .mobile-menu-btn.open .line2 { opacity: 0; }
@@ -368,6 +388,9 @@ body#privacidad-page .mobile-menu-btn { display: none !important; }
     body#privacidad-page .nav-links a { margin: 0; transform: none; font-size: 14px; opacity: 1;}
 }
 
+/* ==============================================================
+   CAPA DE MODO OSCURO
+   ============================================================== */
 body.dark-theme { --white: #0f172a; --silver: #1e293b; --dark-grey: #f8fafc; --soft-grey: #94a3b8; --pink-premium: #f472b6; --border: #334155; --bg-liquid-3: #020617; }
 body.dark-theme .blueprint-grid { background-image: linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px); }
 body.dark-theme .orb-1 { background: rgba(212, 0, 109, 0.25) !important; } 
@@ -403,6 +426,9 @@ body.dark-theme #dark-mode-toggle:hover, body.dark-theme .lang-toggle-link:hover
     body#privacidad-page.dark-theme .nav-links { background: transparent !important;} 
 }
 
+/* ==============================================================
+   MODO TERMINAL MATRIX
+   ============================================================== */
 body.terminal-mode, body.terminal-mode.dark-theme { background: #050505 !important; animation: none !important; }
 body.terminal-mode *, body.terminal-mode.dark-theme * { color: #00ff00 !important; font-family: 'Courier New', Courier, monospace !important; border-color: #004400 !important; text-shadow: 0 0 5px rgba(0, 255, 0, 0.5) !important; }
 body.terminal-mode header, body.terminal-mode section, body.terminal-mode nav, body.terminal-mode .concierge-menu, body.terminal-mode.dark-theme nav.nav-scrolled { background-color: transparent !important; background-image: none !important; box-shadow: none !important; border: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important;}
@@ -421,6 +447,7 @@ body.terminal-mode::after { content: " "; display: block; position: fixed; top: 
 #terminal-toggle:hover { opacity: 1; color: var(--pink-premium) !important; }
 body.terminal-mode .hamburger-lines .line { background-color: #00ff00 !important; }
 
+/* --- SCROLLBAR PREMIUM --- */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--white); transition: background 0.3s; }
 body.dark-theme ::-webkit-scrollbar-track, body.terminal-mode ::-webkit-scrollbar-track { background: var(--dark-grey); }
