@@ -17,35 +17,48 @@
     <link rel="stylesheet" href="/css/style.css">
     
     <style>
+        /* 1. Glitch Orgánico (Invocado por JS) */
         .glitch-404 { display: inline-block; cursor: crosshair; transition: color 0.3s ease; position: relative; }
-        .glitch-active { animation: glitchAnim 4s infinite; }
-        @keyframes glitchAnim {
-            0%, 95% { transform: none; text-shadow: none; opacity: 1; }
-            96% { transform: skew(-8deg) translate(-2px, 1px); text-shadow: 3px 0 var(--pink-premium); opacity: 0.8; }
-            97% { transform: none; text-shadow: none; opacity: 1; }
-            98% { transform: skew(8deg) translate(2px, -1px); text-shadow: -3px 0 #10b981; opacity: 0.8; }
-            99%, 100% { transform: none; text-shadow: none; opacity: 1; }
+        .glitch-trigger { animation: glitchSingle 0.3s forwards; }
+        @keyframes glitchSingle {
+            0%, 100% { transform: none; text-shadow: none; opacity: 1; }
+            25% { transform: skew(-8deg) translate(-2px, 1px); text-shadow: 3px 0 var(--pink-premium); opacity: 0.8; }
+            75% { transform: skew(8deg) translate(2px, -1px); text-shadow: -3px 0 #10b981; opacity: 0.8; }
         }
-        .status-200 { color: #10b981 !important; animation: none !important; transform: none !important; text-shadow: 0 0 25px rgba(16, 185, 129, 0.4) !important; cursor: default; }
+        .status-200 { color: #10b981 !important; text-shadow: 0 0 25px rgba(16, 185, 129, 0.4) !important; cursor: default; }
         
-        .terminal-window { background: #050505; width: 100%; max-width: 700px; margin: 25px auto 30px auto; border-radius: 12px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 45px 65px -15px rgba(0,0,0,0.4), inset 0 1px 0px rgba(255,255,255,0.15), inset 0 0 20px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.05); text-align: left;}
-        .terminal-header { background: #1a1a1a; padding: 12px 18px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .window-dot { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.3); }
+        /* 2. Sombra Multicapa y Textura CRT (Scanlines) */
+        .terminal-window { 
+            background: #050505; width: 100%; max-width: 700px; margin: 25px auto 30px auto; 
+            border-radius: 12px; overflow: hidden; position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 45px 65px -15px rgba(0,0,0,0.4), inset 0 1px 0px rgba(255,255,255,0.15), inset 0 0 20px rgba(0,0,0,0.8); 
+            border: 1px solid rgba(255,255,255,0.05); text-align: left;
+        }
+        .terminal-window::after {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 3px, 3px 100%; pointer-events: none; opacity: 0.12; z-index: 10;
+        }
+
+        /* 3. Interactividad Mac UI */
+        .terminal-header { background: #1a1a1a; padding: 12px 18px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); position: relative; z-index: 11;}
+        .terminal-header:hover .dot-icon { opacity: 1; }
+        .window-dot { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center; cursor: pointer; }
+        .dot-icon { opacity: 0; font-size: 8px; font-weight: 800; color: rgba(0,0,0,0.6); transition: opacity 0.2s; line-height: 1; font-family: sans-serif;}
         .dot-red { background-color: #ff5f56; }
         .dot-yellow { background-color: #ffbd2e; }
         .dot-green { background-color: #27c93f; }
-        .terminal-body { padding: 25px 30px; font-family: 'Courier New', Courier, monospace; min-height: 200px; }
         
+        .terminal-body { padding: 25px 30px; font-family: 'Courier New', Courier, monospace; min-height: 200px; position: relative; z-index: 11;}
         .terminal-line { color: #00ff41; text-shadow: 0 0 6px rgba(0, 255, 65, 0.4); font-size: 14px; margin-bottom: 12px; display: block; opacity: 0; line-height: 1.6; word-wrap: break-word;}
         .terminal-line span.timestamp { color: #64748b; text-shadow: none; margin-right: 8px; }
         .terminal-line span.sys { color: #94a3b8; text-shadow: none; font-weight: bold; }
         .terminal-line span.warn { color: #f59e0b; text-shadow: 0 0 8px rgba(245, 158, 11, 0.5); font-weight: bold; }
         .terminal-line span.highlight { color: var(--pink-premium); text-shadow: 0 0 10px rgba(212, 0, 109, 0.6); font-weight: bold; }
-        
         .terminal-cursor { display: inline-block; width: 8px; height: 16px; background-color: var(--pink-premium); vertical-align: middle; margin-left: 6px; animation: blink 1s step-end infinite; box-shadow: 0 0 10px var(--pink-premium); }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        /* ENRUTAMIENTO PREDICTIVO (QUICK LINKS) */
+        /* Links Predictivos */
         .predictive-routing { margin-top: 10px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
         .predictive-title { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--soft-grey); font-weight: 600; font-family: 'Inter', sans-serif;}
         .quick-links-container { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
@@ -78,7 +91,7 @@
     <main style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px 5%; position: relative; z-index: 2;">
         <div style="text-align: center; max-width: 800px; width: 100%; display: flex; flex-direction: column; align-items: center;">
             
-            <h1 id="glitch-404" class="title-serif glitch-404 glitch-active" style="font-size: clamp(80px, 15vw, 140px); color: var(--dark-grey); margin-bottom: 0px; line-height: 1; letter-spacing: -4px;">
+            <h1 id="glitch-404" class="title-serif glitch-404" style="font-size: clamp(80px, 15vw, 140px); color: var(--dark-grey); margin-bottom: 0px; line-height: 1; letter-spacing: -4px;">
                 404
             </h1>
             
@@ -87,14 +100,17 @@
             </h2>
             
             <div class="terminal-window">
-                <div class="terminal-header"><div class="window-dot dot-red"></div><div class="window-dot dot-yellow"></div><div class="window-dot dot-green"></div></div>
+                <div class="terminal-header">
+                    <div class="window-dot dot-red"><span class="dot-icon">&#10005;</span></div>
+                    <div class="window-dot dot-yellow"><span class="dot-icon">&minus;</span></div>
+                    <div class="window-dot dot-green"><span class="dot-icon">&#43;</span></div>
+                </div>
                 <div class="terminal-body" id="terminal-lines"></div>
             </div>
             
             <div class="predictive-routing">
                 <span class="predictive-title" id="localized-predictive-title">Rutas estables disponibles:</span>
-                <div class="quick-links-container" id="quick-links-box">
-                    </div>
+                <div class="quick-links-container" id="quick-links-box"></div>
             </div>
             
         </div>
@@ -110,71 +126,55 @@
             const glitchText = document.getElementById('glitch-404');
             const quickLinksBox = document.getElementById('quick-links-box');
             
-            // 1. Contexto de Red
             const path = window.location.pathname;
             const safePath = path.length > 35 ? path.substring(0, 35) + '...' : path;
             const isEnglish = path.startsWith('/en/');
             
-            // Timestamp Real (Ej: [14:23:05])
+            // 1. Detección Inteligente del OS
+            let osName = "Host_Desconocido";
+            const ua = navigator.userAgent;
+            if (ua.indexOf("Win") !== -1) osName = "Windows_NT";
+            if (ua.indexOf("Mac") !== -1) osName = "MacIntel";
+            if (ua.indexOf("Linux") !== -1) osName = "Linux_x86_64";
+            if (ua.indexOf("Android") !== -1) osName = "Android_OS";
+            if (ua.indexOf("like Mac") !== -1) osName = "iOS_Device";
+            
             const getTimestamp = () => {
                 const now = new Date();
                 return `[${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}]`;
             };
 
-            // Diccionario Corporativo
             const es = {
                 tabTitle: "404 - Diagnóstico | JBDA",
-                logoLabel: "Volver al inicio",
-                navLinkText: "Re-enrutar al Inicio",
-                navLinkLabel: "Forzar enrutamiento de red",
-                failTitle: "Falla de Enrutamiento",
-                predictiveTitle: "Rutas estables disponibles:",
-                links: [
-                    { text: "Metodología", url: "/#servicios" },
-                    { text: "Consultoría", url: "/#diferenciadores" },
-                    { text: "Contacto Corporativo", url: "/#contacto" }
-                ],
+                logoLabel: "Volver al inicio", navLinkText: "Re-enrutar al Inicio", navLinkLabel: "Forzar enrutamiento de red",
+                failTitle: "Falla de Enrutamiento", predictiveTitle: "Rutas estables disponibles:",
+                links: [ { text: "Metodología", url: "/#servicios" }, { text: "Consultoría", url: "/#diferenciadores" }, { text: "Contacto", url: "/#contacto" } ],
                 terminal: [
-                    `<span class="timestamp">${getTimestamp()}</span> <span class="sys">SYS_INIT:</span> Handshake TCP establecido. Cliente detectado.`,
+                    `<span class="timestamp">${getTimestamp()}</span> <span class="sys">SYS_INIT:</span> Handshake TCP. Host: [${osName}] conectado.`,
                     `<span class="timestamp">${getTimestamp()}</span> <span class="sys">INFO:</span> Ejecutando traceroute a <span class="highlight">${safePath}</span>...`,
                     `<span class="timestamp">${getTimestamp()}</span> <span class="warn">WARN:</span> Tiempo de espera agotado (Timeout).`,
                     `<span class="timestamp">${getTimestamp()}</span> <span class="highlight">ERR_404:</span> Nodo inalcanzable en la arquitectura actual.`,
                     `<span class="timestamp">${getTimestamp()}</span> <span class="sys">ACTION:</span> Solicitando re-enrutamiento manual`
                 ],
-                easterEgg: {
-                    fixedTitle: "JBDA | Red Restaurada",
-                    terminalLine: `<span class="timestamp">${getTimestamp()}</span> <span style="color:#00ff41; font-weight:bold; text-shadow: 0 0 10px #00ff41;">STATUS 200: Protocolo de emergencia activado.</span><br><span class="timestamp">${getTimestamp()}</span> Conexión restaurada con éxito.<br><span class="timestamp">${getTimestamp()}</span> Redirigiendo tráfico corporativo...`
-                }
+                easterEgg: `<span class="timestamp">${getTimestamp()}</span> <span style="color:#00ff41; font-weight:bold; text-shadow: 0 0 10px #00ff41;">STATUS 200: Protocolo de emergencia activado.</span><br><span class="timestamp">${getTimestamp()}</span> Conexión restaurada con éxito.<br><span class="timestamp">${getTimestamp()}</span> Redirigiendo tráfico corporativo...`
             };
 
             const en = {
                 tabTitle: "404 - Diagnostics | JBDA",
-                logoLabel: "Back to Home",
-                navLinkText: "Re-route to Home",
-                navLinkLabel: "Force network routing",
-                failTitle: "Routing Failure",
-                predictiveTitle: "Stable routes available:",
-                links: [
-                    { text: "Methodology", url: "/en/#servicios" },
-                    { text: "Consulting", url: "/en/#diferenciadores" },
-                    { text: "Corporate Contact", url: "/en/#contacto" }
-                ],
+                logoLabel: "Back to Home", navLinkText: "Re-route to Home", navLinkLabel: "Force network routing",
+                failTitle: "Routing Failure", predictiveTitle: "Stable routes available:",
+                links: [ { text: "Methodology", url: "/en/#servicios" }, { text: "Consulting", url: "/en/#diferenciadores" }, { text: "Contact", url: "/en/#contacto" } ],
                 terminal: [
-                    `<span class="timestamp">${getTimestamp()}</span> <span class="sys">SYS_INIT:</span> TCP Handshake established. Client detected.`,
+                    `<span class="timestamp">${getTimestamp()}</span> <span class="sys">SYS_INIT:</span> TCP Handshake. Host: [${osName}] connected.`,
                     `<span class="timestamp">${getTimestamp()}</span> <span class="sys">INFO:</span> Executing traceroute to <span class="highlight">${safePath}</span>...`,
                     `<span class="timestamp">${getTimestamp()}</span> <span class="warn">WARN:</span> Connection timeout exceeded.`,
                     `<span class="timestamp">${getTimestamp()}</span> <span class="highlight">ERR_404:</span> Node unreachable in current architecture.`,
                     `<span class="timestamp">${getTimestamp()}</span> <span class="sys">ACTION:</span> Requesting manual re-routing`
                 ],
-                easterEgg: {
-                    fixedTitle: "JBDA | Network Restored",
-                    terminalLine: `<span class="timestamp">${getTimestamp()}</span> <span style="color:#00ff41; font-weight:bold; text-shadow: 0 0 10px #00ff41;">STATUS 200: Emergency protocol activated.</span><br><span class="timestamp">${getTimestamp()}</span> Connection successfully restored.<br><span class="timestamp">${getTimestamp()}</span> Redirecting corporate traffic...`
-                }
+                easterEgg: `<span class="timestamp">${getTimestamp()}</span> <span style="color:#00ff41; font-weight:bold; text-shadow: 0 0 10px #00ff41;">STATUS 200: Emergency protocol activated.</span><br><span class="timestamp">${getTimestamp()}</span> Connection successfully restored.<br><span class="timestamp">${getTimestamp()}</span> Redirecting corporate traffic...`
             };
 
             const localized = isEnglish ? en : es;
-
-            // 2. Inyectar UI
             document.documentElement.lang = isEnglish ? "en" : "es";
             document.title = localized.tabTitle;
             
@@ -188,85 +188,67 @@
             document.getElementById('localized-predictive-title').innerText = localized.predictiveTitle;
             glitchText.setAttribute('title', isEnglish ? 'Attempt manual override' : 'Intentar re-conexión manual');
 
-            // Inyectar Quick Links
             localized.links.forEach(link => {
-                const a = document.createElement('a');
-                a.href = link.url;
-                a.className = 'quick-link';
-                a.innerText = link.text;
-                quickLinksBox.appendChild(a);
+                const a = document.createElement('a'); a.href = link.url; a.className = 'quick-link'; a.innerText = link.text; quickLinksBox.appendChild(a);
             });
 
-            // 3. Ejecutar Telemetría (Efecto Máquina de Escribir)
-            const lines = localized.terminal;
-            let lineIndex = 0;
-            let typeInterval;
-            
+            // Motor de terminal
+            const lines = localized.terminal; let lineIndex = 0; let typeInterval;
             function typeLine() {
                 if (lineIndex < lines.length) {
-                    const p = document.createElement('p');
-                    p.className = 'terminal-line';
-                    p.style.opacity = '1';
-                    
-                    if (lineIndex === lines.length - 1) {
-                        p.innerHTML = `${lines[lineIndex]}<span class="terminal-cursor"></span>`;
-                    } else {
-                        p.innerHTML = lines[lineIndex];
-                    }
-
+                    const p = document.createElement('p'); p.className = 'terminal-line'; p.style.opacity = '1';
+                    p.innerHTML = lineIndex === lines.length - 1 ? `${lines[lineIndex]}<span class="terminal-cursor"></span>` : lines[lineIndex];
                     if (lineIndex > 0) {
                         const prev = terminalBox.children[lineIndex - 1];
-                        if(prev.innerHTML.includes('terminal-cursor')) {
-                            prev.innerHTML = prev.innerHTML.replace('<span class="terminal-cursor"></span>', '');
-                        }
+                        if(prev.innerHTML.includes('terminal-cursor')) prev.innerHTML = prev.innerHTML.replace('<span class="terminal-cursor"></span>', '');
                     }
-
-                    terminalBox.appendChild(p);
-                    lineIndex++;
-                    // Ritmos de carga realistas
-                    let delay = 600;
-                    if(lineIndex === 1) delay = 800; // Handshake
-                    if(lineIndex === 2) delay = 1500; // Timeout
-                    if(lineIndex === 3) delay = 500; // 404
-                    typeInterval = setTimeout(typeLine, delay);
+                    terminalBox.appendChild(p); lineIndex++;
+                    typeInterval = setTimeout(typeLine, lineIndex === 1 ? 800 : (lineIndex === 2 ? 1500 : (lineIndex === 3 ? 500 : 600)));
                 }
             }
-            
             setTimeout(typeLine, 400);
 
-            // 4. EL EASTER EGG (200 OK - Restauración de Red)
-            let fixed = false;
-            glitchText.addEventListener('click', function() {
-                if(fixed) return;
-                fixed = true;
-                clearTimeout(typeInterval); 
-                
-                this.classList.remove('glitch-active');
-                this.classList.add('status-200');
-                this.innerText = '200';
-                
-                document.title = localized.easterEgg.fixedTitle;
+            // Glitch Orgánico Impredecible
+            let glitchTimeout;
+            function triggerOrganicGlitch() {
+                if(glitchText.classList.contains('status-200')) return;
+                glitchText.classList.add('glitch-trigger');
+                setTimeout(() => glitchText.classList.remove('glitch-trigger'), 300);
+                glitchTimeout = setTimeout(triggerOrganicGlitch, Math.random() * 5000 + 2000); // Entre 2 y 7 seg
+            }
+            triggerOrganicGlitch();
 
+            // Easter Egg (Conexión Restaurada)
+            let fixed = false;
+            const triggerFix = () => {
+                if(fixed) return; fixed = true;
+                clearTimeout(typeInterval); clearTimeout(glitchTimeout);
+                glitchText.classList.remove('glitch-trigger'); glitchText.classList.add('status-200'); glitchText.innerText = '200';
+                
                 const linesAdded = terminalBox.querySelectorAll('.terminal-line');
                 if(linesAdded.length > 0) {
                     const last = linesAdded[linesAdded.length - 1];
-                    if(last.innerHTML.includes('terminal-cursor')) {
-                        last.innerHTML = last.innerHTML.replace(/<span class="terminal-cursor"><\/span>/g, '');
-                    }
+                    if(last.innerHTML.includes('terminal-cursor')) last.innerHTML = last.innerHTML.replace(/<span class="terminal-cursor"><\/span>/g, '');
                 }
-                
-                const successLine = document.createElement('p');
-                successLine.className = 'terminal-line';
-                successLine.style.opacity = '1';
-                successLine.innerHTML = `${localized.easterEgg.terminalLine}<span class="terminal-cursor" style="background-color:#00ff41; box-shadow: 0 0 10px #00ff41;"></span>`;
+                const successLine = document.createElement('p'); successLine.className = 'terminal-line'; successLine.style.opacity = '1';
+                successLine.innerHTML = `${localized.easterEgg}<span class="terminal-cursor" style="background-color:#00ff41; box-shadow: 0 0 10px #00ff41;"></span>`;
                 terminalBox.appendChild(successLine);
 
-                // Redirigir respetando idioma
                 setTimeout(() => {
                     const overlay = document.getElementById('page-transition-overlay');
                     if(overlay) overlay.classList.remove('hidden');
                     setTimeout(() => { window.location.href = homeLink; }, 500);
-                }, 2200); // Da tiempo a leer el mensaje de restauración
+                }, 2200);
+            };
+
+            glitchText.addEventListener('click', triggerFix);
+            
+            // Eventos en botones Mac (Easter Egg visual)
+            const macDots = document.querySelectorAll('.window-dot');
+            macDots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    if(!fixed) { dot.style.transform = 'scale(0.8)'; setTimeout(() => dot.style.transform = 'scale(1)', 150); triggerFix(); }
+                });
             });
         });
     </script>
