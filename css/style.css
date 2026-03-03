@@ -40,7 +40,6 @@ body {
 
 h1, h2, .quote-massive, .title-serif { font-family: 'Playfair Display', serif; }
 ::selection { background-color: var(--pink-premium); color: #ffffff; }
-.dud { color: var(--soft-grey); opacity: 0.5; font-family: 'Courier New', Courier, monospace; letter-spacing: 2px;}
 
 /* --- ORBES DE LUZ --- */
 .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--pink-premium); width: 0%; z-index: 100000; pointer-events: none; transition: width 0.1s ease-out; }
@@ -74,33 +73,48 @@ body::before {
 @media (pointer: coarse) { .cursor-led { display: none !important; } }
 
 /* ==============================================================
+   NUEVO EFECTO: MASK REVEAL (ESTÁNDAR SILICON VALLEY)
+   ============================================================== */
+.reveal-text {
+    display: inline-flex;
+    overflow: hidden; /* El contenedor actúa como máscara/ranura */
+    vertical-align: bottom;
+}
+.reveal-text .reveal-inner {
+    display: inline-block;
+    transform: translateY(110%); /* Oculto abajo */
+    opacity: 0;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
+}
+body.page-loaded .reveal-text .reveal-inner {
+    transform: translateY(0); /* Emerge hacia arriba fluidamente */
+    opacity: 1;
+}
+
+/* Cascada fluida para el Banner Principal */
+.hero-content h2 .reveal-inner { transition-delay: 0.1s; }
+.hero-content h1 .reveal-text:nth-child(1) .reveal-inner { transition-delay: 0.2s; }
+.hero-content h1 .reveal-text:nth-child(2) .reveal-inner { transition-delay: 0.3s; }
+.hero-content h1 .reveal-text:nth-child(4) .reveal-inner { transition-delay: 0.4s; }
+
+/* ==============================================================
    NAVEGACIÓN NATIVA (DESKTOP & iOS SAFE AREA)
    ============================================================== */
 nav { 
-    /* Altura automática: La caja abraza al logo y elimina vacíos matemáticos */
     height: auto !important; 
-    /* Padding dinámico: Notch + 15px de respiro superior, 15px inferior */
     padding-top: calc(env(safe-area-inset-top, 0px) + 15px) !important;
     padding-bottom: 15px !important;
-    padding-left: 8%;
-    padding-right: 8%;
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    position: sticky; 
-    top: 0; 
-    background: transparent; 
-    z-index: 1000; 
+    padding-left: 8%; padding-right: 8%;
+    display: flex; justify-content: space-between; align-items: center; 
+    position: sticky; top: 0; background: transparent; z-index: 1000; 
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
     border-bottom: 1px solid transparent; 
 }
 nav.nav-scrolled { 
-    /* Al hacer scroll, reducimos el respiro para hacerlo más compacto */
     padding-top: calc(env(safe-area-inset-top, 0px) + 10px) !important;
     padding-bottom: 10px !important;
     background: rgba(253, 242, 248, 0.65); 
-    backdrop-filter: blur(15px) saturate(180%); 
-    -webkit-backdrop-filter: blur(15px) saturate(180%); 
+    backdrop-filter: blur(15px) saturate(180%); -webkit-backdrop-filter: blur(15px) saturate(180%); 
     border-bottom: 1px solid rgba(251, 207, 232, 0.5); 
     box-shadow: 0 10px 30px -10px rgba(212, 0, 109, 0.15); 
 }
@@ -120,7 +134,6 @@ nav.nav-scrolled .logo-container img { height: 50px; }
 .lang-toggle-link { font-size: 14px !important; font-weight: 800 !important; margin-left: 10px; cursor: none !important; }
 .lang-toggle-link::after { display: none !important; }
 
-/* --- ESTRUCTURA BASE DEL BOTÓN MÓVIL --- */
 .mobile-menu-btn { display: none; background: none; border: none; z-index: 2000; cursor: pointer; padding: 5px; margin-right: -5px; }
 .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; width: 28px; height: 18px; pointer-events: none; }
 .hamburger-lines .line { display: block; height: 2px; width: 100%; background-color: var(--dark-grey); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); border-radius: 2px; }
@@ -282,14 +295,9 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
 .concierge-item { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--dark-grey); font-size: 14px; font-weight: 600; border-radius: 8px; transition: all 0.2s ease; font-family: 'Inter', sans-serif; }
 .concierge-item:hover { background: rgba(212, 0, 109, 0.08); color: var(--pink-premium); }
 
-/* ==============================================================
-   OVERLAY MÓVIL GLASSMORPHISM & PWA SAFE AREA BLINDADA
-   ============================================================== */
 @media (max-width: 900px) {
-    /* Desactivamos altura fija para abrazar el logo de forma exacta */
     nav { 
         height: auto !important; 
-        /* Padding superior dinámico: Notch + 12px de respiro */
         padding-top: calc(env(safe-area-inset-top, 0px) + 12px) !important;
         padding-bottom: 12px !important;
         padding-left: 5% !important;
@@ -360,9 +368,6 @@ body#privacidad-page .mobile-menu-btn { display: none !important; }
     body#privacidad-page .nav-links a { margin: 0; transform: none; font-size: 14px; opacity: 1;}
 }
 
-/* ==============================================================
-   CAPA DE MODO OSCURO
-   ============================================================== */
 body.dark-theme { --white: #0f172a; --silver: #1e293b; --dark-grey: #f8fafc; --soft-grey: #94a3b8; --pink-premium: #f472b6; --border: #334155; --bg-liquid-3: #020617; }
 body.dark-theme .blueprint-grid { background-image: linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px); }
 body.dark-theme .orb-1 { background: rgba(212, 0, 109, 0.25) !important; } 
@@ -398,9 +403,6 @@ body.dark-theme #dark-mode-toggle:hover, body.dark-theme .lang-toggle-link:hover
     body#privacidad-page.dark-theme .nav-links { background: transparent !important;} 
 }
 
-/* ==============================================================
-   MODO TERMINAL MATRIX
-   ============================================================== */
 body.terminal-mode, body.terminal-mode.dark-theme { background: #050505 !important; animation: none !important; }
 body.terminal-mode *, body.terminal-mode.dark-theme * { color: #00ff00 !important; font-family: 'Courier New', Courier, monospace !important; border-color: #004400 !important; text-shadow: 0 0 5px rgba(0, 255, 0, 0.5) !important; }
 body.terminal-mode header, body.terminal-mode section, body.terminal-mode nav, body.terminal-mode .concierge-menu, body.terminal-mode.dark-theme nav.nav-scrolled { background-color: transparent !important; background-image: none !important; box-shadow: none !important; border: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important;}
@@ -419,7 +421,6 @@ body.terminal-mode::after { content: " "; display: block; position: fixed; top: 
 #terminal-toggle:hover { opacity: 1; color: var(--pink-premium) !important; }
 body.terminal-mode .hamburger-lines .line { background-color: #00ff00 !important; }
 
-/* --- SCROLLBAR PREMIUM --- */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--white); transition: background 0.3s; }
 body.dark-theme ::-webkit-scrollbar-track, body.terminal-mode ::-webkit-scrollbar-track { background: var(--dark-grey); }
