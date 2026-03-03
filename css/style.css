@@ -93,7 +93,7 @@ nav {
     padding-left: 8%; padding-right: 8%;
     display: flex; justify-content: space-between; align-items: center; 
     position: sticky; top: 0; background: transparent; 
-    z-index: 9999; /* Blindaje Anti-Bug iOS */
+    z-index: 9999; 
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
     border-bottom: 1px solid transparent; 
 }
@@ -123,7 +123,8 @@ nav.nav-scrolled .logo-container img { height: 45px; }
 .lang-toggle-link { font-size: 14px !important; font-weight: 800 !important; margin-left: 10px; cursor: none !important; }
 .lang-toggle-link::after { display: none !important; }
 
-.mobile-menu-btn { display: none; }
+/* Reseteo maestro para botón móvil en Desktop */
+.mobile-menu-btn { display: none; background: transparent; border: none; outline: none; -webkit-appearance: none; }
 
 header, section { position: relative; z-index: 1; background-color: transparent !important; background-image: none !important; }
 header { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; overflow: hidden; }
@@ -288,9 +289,9 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
 @media (max-width: 900px) {
     nav { 
         height: auto !important; 
-        /* CÁLCULO EXACTO: Pegado al Notch dejando solo 2px de respiro */
+        /* Mantemos la medida ultra ajustada (+2px) para que no haya hueco gigante */
         padding-top: calc(env(safe-area-inset-top, 0px) + 2px) !important;
-        padding-bottom: 12px !important;
+        padding-bottom: 10px !important;
         padding-left: 5% !important;
         padding-right: 5% !important;
         display: flex !important;
@@ -301,7 +302,6 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
         padding-bottom: 8px !important;
     }
 
-    /* EL SCRIM (Sombra trasera para la hora blanca) */
     nav::before {
         content: ''; position: absolute; top: 0; left: 0; width: 100%;
         height: calc(env(safe-area-inset-top, 0px) + 30px);
@@ -311,34 +311,43 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
 
     .logo-container { position: relative; z-index: 10; display: flex; align-items: center; height: auto; margin: 0; padding: 0; }
     .logo-container a { display: flex; align-items: center; text-decoration: none; }
-    .logo-container img { height: 35px !important; width: auto; display: block; } 
-    nav.nav-scrolled .logo-container img { height: 30px !important; }
+    /* Logo optimizado: un poco más grande (42px) para mantener presencia ejecutiva */
+    .logo-container img { height: 42px !important; width: auto; display: block; transition: all 0.3s ease; } 
+    nav.nav-scrolled .logo-container img { height: 35px !important; }
     
-    /* BOTÓN INVULNERABLE AL CRISTAL (Z-Index Supremo) */
+    /* BOTÓN HAMBURGUESA ANTIMAGIA DE iOS (Limpieza total de fondos nativos) */
     .mobile-menu-btn { 
         display: flex !important; 
         align-items: center; justify-content: center; 
         padding: 10px; margin-right: -10px; 
         position: relative; 
         z-index: 100000 !important; 
+        transform: translateZ(10px);
+        -webkit-transform: translateZ(10px);
+        
+        /* Estas líneas matan el recuadro gris raro que te puso iOS */
+        background: transparent !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        -webkit-appearance: none !important;
+        -webkit-tap-highlight-color: transparent !important;
     }
 
     .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; width: 26px; height: 16px; pointer-events: none; }
     .hamburger-lines .line { display: block; height: 2px; width: 100%; background-color: var(--dark-grey); transition: all 0.3s ease; border-radius: 2px; }
 
-    /* LA "X" en color oscuro para máximo contraste sobre el fondo rosa */
     .mobile-menu-btn.open .line1 { transform: translateY(7px) rotate(45deg); background-color: var(--dark-grey) !important; }
     .mobile-menu-btn.open .line2 { opacity: 0; }
     .mobile-menu-btn.open .line3 { transform: translateY(-7px) rotate(-45deg); background-color: var(--dark-grey) !important; }
     
-    /* OVERLAY DEL MENÚ (Z-Index por debajo del botón) */
     .nav-links { 
         position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
         background: rgba(253, 242, 248, 0.95); 
         backdrop-filter: blur(15px) saturate(180%); -webkit-backdrop-filter: blur(15px) saturate(180%); 
         display: flex; flex-direction: column; justify-content: center; align-items: center; 
         transition: opacity 0.4s ease, visibility 0.4s ease; 
-        z-index: 99998 !important; /* El botón es 100000, así que la X nunca será tapada */
+        z-index: 99998 !important; 
         opacity: 0; visibility: hidden; 
         padding-top: env(safe-area-inset-top, 0px);
     }
@@ -429,7 +438,6 @@ body.dark-theme #dark-mode-toggle:hover, body.dark-theme .lang-toggle-link:hover
     body.dark-theme .hamburger-lines .line { background-color: #f8fafc; }
     body.dark-theme .nav-links a { color: #f8fafc; }
     body.dark-theme nav::before { display: none !important; }
-    /* Modo Oscuro = "X" blanca obligatoria */
     body.dark-theme .mobile-menu-btn.open .line1 { background-color: #f8fafc !important; }
     body.dark-theme .mobile-menu-btn.open .line3 { background-color: #f8fafc !important; }
 }
