@@ -73,7 +73,7 @@ body::before {
 @media (pointer: coarse) { .cursor-led { display: none !important; } }
 
 /* ==============================================================
-   NUEVO EFECTO: MASK REVEAL (ESTÁNDAR SILICON VALLEY)
+   EFECTO: MASK REVEAL (ESTÁNDAR SILICON VALLEY)
    ============================================================== */
 .reveal-text {
     display: inline-flex;
@@ -134,6 +134,11 @@ nav.nav-scrolled .logo-container img { height: 38px !important; }
 .back-link:hover svg { transform: translateX(-4px); } 
 .lang-toggle-link { font-size: 14px !important; font-weight: 800 !important; margin-left: 10px; cursor: none !important; }
 .lang-toggle-link::after { display: none !important; }
+
+/* Botón Móvil Base (Blindaje de Z-index altísimo) */
+.mobile-menu-btn { display: none; background: none; border: none; z-index: 2500; cursor: pointer; position: relative; }
+.hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; width: 28px; height: 18px; pointer-events: none; }
+.hamburger-lines .line { display: block; height: 2px; width: 100%; background-color: var(--dark-grey); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); border-radius: 2px; }
 
 header, section { position: relative; z-index: 1; background-color: transparent !important; background-image: none !important; }
 header { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; overflow: hidden; }
@@ -293,52 +298,43 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
 .concierge-item:hover { background: rgba(212, 0, 109, 0.08); color: var(--pink-premium); }
 
 /* ==============================================================
-   OVERLAY MÓVIL GLASSMORPHISM & PWA NATIVA (ARQUITECTURA BLINDADA)
+   OVERLAY MÓVIL GLASSMORPHISM & PWA NATIVA BLINDADA
    ============================================================== */
 @media (max-width: 900px) {
     nav { 
         box-sizing: border-box !important;
-        /* Altura fija: 75px de área útil + exactamente lo que mida el Notch */
-        height: calc(env(safe-area-inset-top, 0px) + 75px) !important; 
+        /* Área matemática estricta: 70px de espacio útil + el Notch */
+        height: calc(env(safe-area-inset-top, 0px) + 70px) !important; 
         padding-top: env(safe-area-inset-top, 0px) !important;
-        padding-bottom: 15px !important;
+        padding-bottom: 0 !important;
         padding-left: 5% !important;
         padding-right: 5% !important;
         display: flex !important;
-        /* LA MAGIA: Ancla los elementos abajo, matando el hueco gigante */
-        align-items: flex-end !important; 
-        position: relative;
+        align-items: center !important; 
+        /* NOTA: Se eliminó position relative para NO romper el scroll sticky */
     }
     nav.nav-scrolled {
-        height: calc(env(safe-area-inset-top, 0px) + 65px) !important;
-        padding-bottom: 10px !important;
+        height: calc(env(safe-area-inset-top, 0px) + 60px) !important;
     }
 
-    /* EL SCRIM: Degradado sutil detrás del Notch para que la hora blanca sea legible */
+    /* EL SCRIM: Gradiente que oscurece el fondo solo en la parte de la hora */
     nav::before {
         content: '';
         position: absolute;
         top: 0; left: 0; width: 100%;
-        /* Cubre el Notch y baja 20px más difuminándose */
-        height: calc(env(safe-area-inset-top, 0px) + 20px);
-        background: linear-gradient(to bottom, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0) 100%);
-        z-index: 0;
+        height: calc(env(safe-area-inset-top, 0px) + 15px);
+        background: linear-gradient(to bottom, rgba(15, 23, 42, 0.35) 0%, rgba(15, 23, 42, 0) 100%);
+        z-index: -1; /* Atrás de todo, no afecta los botones */
         pointer-events: none;
     }
 
-    /* Elevamos los elementos visuales por encima del degradado */
-    .logo-container, .mobile-menu-btn {
-        position: relative;
-        z-index: 1;
-    }
-
-    .logo-container { display: flex; align-items: flex-end; height: auto; margin: 0; padding: 0; }
-    .logo-container a { display: flex; align-items: flex-end; text-decoration: none; }
-    .logo-container img { height: 35px !important; width: auto; display: block; } 
-    nav.nav-scrolled .logo-container img { height: 30px !important; }
+    .logo-container { display: flex; align-items: center; height: 100%; margin: 0; padding: 0; }
+    .logo-container a { display: flex; align-items: center; text-decoration: none; height: 100%; }
+    .logo-container img { height: 40px !important; width: auto; display: block; } 
+    nav.nav-scrolled .logo-container img { height: 35px !important; }
     
-    /* El botón hamburguesa y todo el contenedor se comportan como componentes limpios */
-    .mobile-menu-btn { display: flex; align-items: center; justify-content: center; height: 35px; margin: 0; padding: 5px; }
+    /* Z-INDEX 2500 absoluto para que el menú nunca tape la X */
+    .mobile-menu-btn { display: flex !important; align-items: center; justify-content: center; padding: 10px; margin-right: -10px; z-index: 2500 !important; }
 
     .mobile-menu-btn.open .line1 { transform: translateY(8px) rotate(45deg); background-color: var(--pink-premium) !important; }
     .mobile-menu-btn.open .line2 { opacity: 0; }
@@ -427,13 +423,12 @@ body.dark-theme .marquee-wrapper .brand-logo:hover { filter: brightness(0) inver
 body.dark-theme #dark-mode-toggle, body.dark-theme .lang-toggle-link { color: #f8fafc; }
 body.dark-theme #dark-mode-toggle:hover, body.dark-theme .lang-toggle-link:hover { color: var(--pink-premium); }
 
-/* Excepción del gradiente (Scrim) en Modo Oscuro para que no se oscurezca de más */
+/* Apagar el scrim en Modo Oscuro (no se necesita porque el fondo ya es oscuro) */
 @media (max-width: 900px) { 
     body.dark-theme .nav-links { background: rgba(15, 23, 42, 0.85) !important; backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); } 
     body.dark-theme .hamburger-lines .line { background-color: #f8fafc; }
     body.dark-theme .nav-links a { color: #f8fafc; }
-    body#privacidad-page.dark-theme .nav-links { background: transparent !important;} 
-    body.dark-theme nav::before { background: linear-gradient(to bottom, rgba(2, 6, 23, 0.6) 0%, rgba(2, 6, 23, 0) 100%); }
+    body.dark-theme nav::before { display: none !important; }
 }
 
 /* ==============================================================
@@ -456,7 +451,7 @@ body.terminal-mode::after { content: " "; display: block; position: fixed; top: 
 #terminal-toggle { cursor: pointer !important; opacity: 0.2; font-family: monospace; transition: opacity 0.3s; margin-left: 5px; position: relative; z-index: 10000; pointer-events: auto; }
 #terminal-toggle:hover { opacity: 1; color: var(--pink-premium) !important; }
 body.terminal-mode .hamburger-lines .line { background-color: #00ff00 !important; }
-body.terminal-mode nav::before { display: none !important; } /* Apaga el scrim en modo terminal */
+body.terminal-mode nav::before { display: none !important; }
 
 /* --- SCROLLBAR PREMIUM --- */
 ::-webkit-scrollbar { width: 8px; }
