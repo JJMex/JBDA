@@ -1,20 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // --- 0. PRELOADER Y CRISTAL LÍQUIDO ---
+    // --- 0. PRELOADER Y REVELACIÓN DE TEXTO ---
     const overlay = document.getElementById('page-transition-overlay');
     const preloader = document.getElementById('preloader');
     
-    window.addEventListener('pageshow', () => { if(overlay) overlay.classList.add('hidden'); });
+    // Envuelve los textos para la animación de máscara
+    document.querySelectorAll('.reveal-text').forEach(el => {
+        el.innerHTML = `<span class="reveal-inner">${el.innerHTML}</span>`;
+    });
+
+    window.addEventListener('pageshow', () => { 
+        if(overlay) overlay.classList.add('hidden'); 
+    });
+
+    const triggerReveal = () => {
+        document.body.classList.add('page-loaded');
+    };
 
     if (preloader) {
         if (sessionStorage.getItem('jbda_preloader_shown')) {
             preloader.style.display = 'none';
+            setTimeout(triggerReveal, 50);
         } else {
             setTimeout(() => { 
                 preloader.classList.add('preloader-hidden'); 
                 sessionStorage.setItem('jbda_preloader_shown', 'true');
+                setTimeout(triggerReveal, 100);
             }, 900);
         }
+    } else {
+        setTimeout(triggerReveal, 50);
     }
 
     // --- 1. LINTERNA VOLUMÉTRICA & CURSOR LED ---
@@ -39,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         requestAnimationFrame(raf);
     }
 
-    // --- 3. MENÚ MÓVIL (NUEVA LÓGICA) ---
+    // --- 3. MENÚ MÓVIL ---
     const menuBtn = document.getElementById('mobile-menu-btn');
     const navLinks = document.getElementById('nav-links');
     let menuOpen = false;
@@ -86,67 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 5. MOTOR DATA SCRAMBLE (DECODIFICADOR) ---
-    class TextScramble {
-        constructor(el) {
-            this.el = el;
-            this.chars = '!<>-_\\/[]{}—=+*^?#_010101';
-            this.update = this.update.bind(this);
-        }
-        setText(newText) {
-            const oldText = this.el.innerText;
-            const length = Math.max(oldText.length, newText.length);
-            const promise = new Promise((resolve) => this.resolve = resolve);
-            this.queue = [];
-            for (let i = 0; i < length; i++) {
-                const from = oldText[i] || ''; const to = newText[i] || '';
-                const start = Math.floor(Math.random() * 40);
-                const end = start + Math.floor(Math.random() * 40);
-                this.queue.push({ from, to, start, end });
-            }
-            cancelAnimationFrame(this.frameRequest);
-            this.frame = 0;
-            this.update();
-            return promise;
-        }
-        update() {
-            let output = ''; let complete = 0;
-            for (let i = 0, n = this.queue.length; i < n; i++) {
-                let { from, to, start, end, char } = this.queue[i];
-                if (this.frame >= end) { complete++; output += to; } 
-                else if (this.frame >= start) {
-                    if (!char || Math.random() < 0.28) { char = this.randomChar(); this.queue[i].char = char; }
-                    output += `<span class="dud">${char}</span>`;
-                } else { output += from; }
-            }
-            this.el.innerHTML = output;
-            if (complete === this.queue.length) { this.resolve(); } else {
-                this.frameRequest = requestAnimationFrame(this.update); this.frame++;
-            }
-        }
-        randomChar() { return this.chars[Math.floor(Math.random() * this.chars.length)]; }
-    }
-
-    const scrambles = document.querySelectorAll('.scramble-text');
-    const scrambleObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting && !entry.target.scrambled) {
-                const fx = new TextScramble(entry.target);
-                const original = entry.target.getAttribute('data-original') || entry.target.innerText;
-                entry.target.setAttribute('data-original', original);
-                fx.setText(original);
-                entry.target.scrambled = true;
-            }
-        });
-    }, {threshold: 0.1});
-    
-    scrambles.forEach(el => {
-        el.setAttribute('data-original', el.innerText);
-        el.innerHTML = '&nbsp;'; 
-        scrambleObserver.observe(el);
-    });
-
-    // --- 6. MODO OSCURO NATIVO ---
+    // --- 5. MODO OSCURO NATIVO ---
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const moonIcon = document.getElementById('moon-icon');
     const sunIcon = document.getElementById('sun-icon');
@@ -171,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 7. SIMULADOR DE ESTRÉS ---
+    // --- 6. SIMULADOR DE ESTRÉS ---
     const slider = document.getElementById('traffic-slider');
     const metricUsers = document.getElementById('metric-users');
     const metricRps = document.getElementById('metric-rps');
@@ -247,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 8. BOTONES MAGNÉTICOS ---
+    // --- 7. BOTONES MAGNÉTICOS ---
     const magneticBtns = document.querySelectorAll('.magnetic-btn');
     magneticBtns.forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
@@ -261,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.addEventListener('mouseleave', () => { btn.style.transform = `translate(0px, 0px)`; });
     });
 
-    // --- 9. CONTADORES DINÁMICOS ---
+    // --- 8. CONTADORES DINÁMICOS ---
     const counters = document.querySelectorAll('.counter-val');
     if(counters.length > 0) {
         let observerCounters = new IntersectionObserver(entries => {
@@ -285,7 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
         counters.forEach(c => observerCounters.observe(c));
     }
 
-    // --- 10. SCROLL-FOCUS (OPACIDAD DE TARJETAS) ---
+    // --- 9. SCROLL-FOCUS ---
     setTimeout(() => {
         const focusCards = document.querySelectorAll('.card, .team-card, details');
         if(focusCards.length > 0) {
@@ -304,17 +259,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, 1200);
 
-    // --- 10.5 NUEVO: REVELACIÓN EN DOS PASOS (SVG CENTRO DE PANTALLA) ---
+    // --- 10. ANIMACIÓN SVG ---
     const svgCards = document.querySelectorAll('.card');
     if(svgCards.length > 0) {
         let observerSvg = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
-                    entry.target.classList.add('svg-animate'); // Dispara el trazado
-                    observerSvg.unobserve(entry.target); // Solo se dibuja una vez
+                    entry.target.classList.add('svg-animate'); 
+                    observerSvg.unobserve(entry.target); 
                 }
             });
-        }, { rootMargin: "-45% 0px -45% 0px" }); // Se activa exclusivamente al tocar el centro exacto
+        }, { rootMargin: "-45% 0px -45% 0px" }); 
         svgCards.forEach(c => observerSvg.observe(c));
     }
 
@@ -429,7 +384,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (typeof AOS !== 'undefined') { AOS.init({ duration: 1000, once: true, offset: 100 }); }
 
-    // --- 13. ENLACES CENTRALIZADOS Y CALENDLY ---
+    // --- 13. ENLACES CENTRALIZADOS ---
     if (typeof JBDA_CONFIG !== 'undefined') {
         const isEnglish = document.documentElement.lang === 'en';
         const mensaje = isEnglish ? JBDA_CONFIG.whatsappMsgEN : JBDA_CONFIG.whatsappMsgES;
@@ -439,7 +394,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if(document.getElementById('link-concierge-whatsapp')) document.getElementById('link-concierge-whatsapp').href = urlWhats; 
         if(document.getElementById('link-linkedin')) document.getElementById('link-linkedin').href = JBDA_CONFIG.linkedin;
 
-        // Inyecta dinámicamente el correo en todos los elementos designados
         const emailLinks = document.querySelectorAll('.link-email');
         emailLinks.forEach(el => {
             el.href = `mailto:${JBDA_CONFIG.email}`;
