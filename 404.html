@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>404 - Redirection in Progress | JBDA</title>
+    <title>404 - Diagnóstico de Red | JBDA</title>
     
     <link rel="icon" href="/assets/Isotipo.png" type="image/png">
     <link rel="apple-touch-icon" href="/assets/Isotipo.png">
@@ -28,17 +28,32 @@
         }
         .status-200 { color: #10b981 !important; animation: none !important; transform: none !important; text-shadow: 0 0 25px rgba(16, 185, 129, 0.4) !important; cursor: default; }
         
-        .terminal-window { background: #050505; width: 100%; max-width: 650px; margin: 30px auto 40px auto; border-radius: 12px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 45px 65px -15px rgba(0,0,0,0.4), inset 0 1px 0px rgba(255,255,255,0.15), inset 0 0 20px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.05); text-align: left;}
+        .terminal-window { background: #050505; width: 100%; max-width: 700px; margin: 25px auto 30px auto; border-radius: 12px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 45px 65px -15px rgba(0,0,0,0.4), inset 0 1px 0px rgba(255,255,255,0.15), inset 0 0 20px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.05); text-align: left;}
         .terminal-header { background: #1a1a1a; padding: 12px 18px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .window-dot { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.3); }
         .dot-red { background-color: #ff5f56; }
         .dot-yellow { background-color: #ffbd2e; }
         .dot-green { background-color: #27c93f; }
-        .terminal-body { padding: 25px 30px; font-family: 'Courier New', Courier, monospace; min-height: 180px; }
-        .terminal-line { color: #00ff41; text-shadow: 0 0 6px rgba(0, 255, 65, 0.4); font-size: 15px; margin-bottom: 10px; display: block; opacity: 0; line-height: 1.6; }
+        .terminal-body { padding: 25px 30px; font-family: 'Courier New', Courier, monospace; min-height: 200px; }
+        
+        .terminal-line { color: #00ff41; text-shadow: 0 0 6px rgba(0, 255, 65, 0.4); font-size: 14px; margin-bottom: 12px; display: block; opacity: 0; line-height: 1.6; word-wrap: break-word;}
+        .terminal-line span.timestamp { color: #64748b; text-shadow: none; margin-right: 8px; }
+        .terminal-line span.sys { color: #94a3b8; text-shadow: none; font-weight: bold; }
+        .terminal-line span.warn { color: #f59e0b; text-shadow: 0 0 8px rgba(245, 158, 11, 0.5); font-weight: bold; }
         .terminal-line span.highlight { color: var(--pink-premium); text-shadow: 0 0 10px rgba(212, 0, 109, 0.6); font-weight: bold; }
-        .terminal-cursor { display: inline-block; width: 8px; height: 18px; background-color: var(--pink-premium); vertical-align: middle; margin-left: 6px; animation: blink 1s step-end infinite; box-shadow: 0 0 10px var(--pink-premium); }
+        
+        .terminal-cursor { display: inline-block; width: 8px; height: 16px; background-color: var(--pink-premium); vertical-align: middle; margin-left: 6px; animation: blink 1s step-end infinite; box-shadow: 0 0 10px var(--pink-premium); }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* ENRUTAMIENTO PREDICTIVO (QUICK LINKS) */
+        .predictive-routing { margin-top: 10px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        .predictive-title { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--soft-grey); font-weight: 600; font-family: 'Inter', sans-serif;}
+        .quick-links-container { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .quick-link { font-family: 'Courier New', Courier, monospace; font-size: 14px; color: var(--dark-grey); text-decoration: none; font-weight: 600; transition: color 0.3s ease; }
+        .quick-link:hover { color: var(--pink-premium); }
+        .quick-link::before { content: "[ "; color: var(--soft-grey); font-weight: 300; transition: color 0.3s ease; }
+        .quick-link::after { content: " ]"; color: var(--soft-grey); font-weight: 300; transition: color 0.3s ease; }
+        .quick-link:hover::before, .quick-link:hover::after { color: var(--pink-premium); }
     </style>
 </head>
 <body id="error-page" style="display: flex; flex-direction: column; min-height: 100vh;">
@@ -55,7 +70,7 @@
         <div style="display: flex; align-items: center; justify-content: flex-end;">
             <a href="/" id="localized-nav-link" class="nav-item back-link" style="display: flex; align-items: center; text-transform: uppercase; font-weight: 700; color: var(--pink-premium); font-size: 13px; letter-spacing: 1px; text-decoration: none; transition: transform 0.3s ease;">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                <span class="desktop-text" id="localized-nav-text" style="font-family: 'Inter', sans-serif;">Cargando enrutamiento...</span>
+                <span class="desktop-text" id="localized-nav-text" style="font-family: 'Inter', sans-serif;">Cargando telemetría...</span>
             </a>
         </div>
     </nav>
@@ -67,8 +82,8 @@
                 404
             </h1>
             
-            <h2 id="localized-fail-title" style="font-size: clamp(16px, 3vw, 22px); color: var(--pink-premium); margin-top: 10px; margin-bottom: 10px; font-weight: 800; font-family: 'Inter', sans-serif; letter-spacing: 4px; text-transform: uppercase;">
-                Redirection in Progress
+            <h2 id="localized-fail-title" style="font-size: clamp(16px, 3vw, 22px); color: var(--pink-premium); margin-top: 10px; margin-bottom: 5px; font-weight: 800; font-family: 'Inter', sans-serif; letter-spacing: 4px; text-transform: uppercase;">
+                Falla de Enrutamiento
             </h2>
             
             <div class="terminal-window">
@@ -76,7 +91,11 @@
                 <div class="terminal-body" id="terminal-lines"></div>
             </div>
             
-            <a href="/" id="localized-cta-button" class="btn-main magnetic-btn" aria-label="Volver al inicio">Reset Connection</a>
+            <div class="predictive-routing">
+                <span class="predictive-title" id="localized-predictive-title">Rutas estables disponibles:</span>
+                <div class="quick-links-container" id="quick-links-box">
+                    </div>
+            </div>
             
         </div>
     </main>
@@ -89,80 +108,96 @@
         document.addEventListener("DOMContentLoaded", () => {
             const terminalBox = document.getElementById('terminal-lines');
             const glitchText = document.getElementById('glitch-404');
+            const quickLinksBox = document.getElementById('quick-links-box');
             
-            // --- 1. Detectar el Idioma y Cargar los Textos ---
+            // 1. Contexto de Red
             const path = window.location.pathname;
-            const safePath = path.length > 30 ? path.substring(0, 30) + '...' : path;
+            const safePath = path.length > 35 ? path.substring(0, 35) + '...' : path;
             const isEnglish = path.startsWith('/en/');
+            
+            // Timestamp Real (Ej: [14:23:05])
+            const getTimestamp = () => {
+                const now = new Date();
+                return `[${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}]`;
+            };
 
-            // Diccionario de textos
+            // Diccionario Corporativo
             const es = {
-                tabTitle: "404 - Diagnóstico de Red | JBDA",
+                tabTitle: "404 - Diagnóstico | JBDA",
                 logoLabel: "Volver al inicio",
-                navLinkText: "Forzar Enrutamiento",
+                navLinkText: "Re-enrutar al Inicio",
                 navLinkLabel: "Forzar enrutamiento de red",
                 failTitle: "Falla de Enrutamiento",
-                ctaButton: "Redirigir Tráfico al Inicio",
+                predictiveTitle: "Rutas estables disponibles:",
+                links: [
+                    { text: "Metodología", url: "/#servicios" },
+                    { text: "Consultoría", url: "/#diferenciadores" },
+                    { text: "Contacto Corporativo", url: "/#contacto" }
+                ],
                 terminal: [
-                    `> ejecutando traceroute a <span class="highlight">${safePath}</span>...`,
-                    `> latencia superada. <span class="highlight">paquete de datos perdido.</span>`,
-                    `> <span class="highlight">error 404:</span> nodo inalcanzable en la arquitectura actual.`,
-                    `> solicitando re-enrutamiento manual`
+                    `<span class="timestamp">${getTimestamp()}</span> <span class="sys">SYS_INIT:</span> Handshake TCP establecido. Cliente detectado.`,
+                    `<span class="timestamp">${getTimestamp()}</span> <span class="sys">INFO:</span> Ejecutando traceroute a <span class="highlight">${safePath}</span>...`,
+                    `<span class="timestamp">${getTimestamp()}</span> <span class="warn">WARN:</span> Tiempo de espera agotado (Timeout).`,
+                    `<span class="timestamp">${getTimestamp()}</span> <span class="highlight">ERR_404:</span> Nodo inalcanzable en la arquitectura actual.`,
+                    `<span class="timestamp">${getTimestamp()}</span> <span class="sys">ACTION:</span> Solicitando re-enrutamiento manual`
                 ],
                 easterEgg: {
-                    fixedTitle: "JBDA | Conexión Restaurada",
-                    terminalLine: "> status 200: protocolo de emergencia activado.<br>> conexión restaurada.<br>> redirigiendo tráfico..."
+                    fixedTitle: "JBDA | Red Restaurada",
+                    terminalLine: `<span class="timestamp">${getTimestamp()}</span> <span style="color:#00ff41; font-weight:bold; text-shadow: 0 0 10px #00ff41;">STATUS 200: Protocolo de emergencia activado.</span><br><span class="timestamp">${getTimestamp()}</span> Conexión restaurada con éxito.<br><span class="timestamp">${getTimestamp()}</span> Redirigiendo tráfico corporativo...`
                 }
             };
 
             const en = {
-                tabTitle: "404 - Network Diagnostic | JBDA",
+                tabTitle: "404 - Diagnostics | JBDA",
                 logoLabel: "Back to Home",
-                navLinkText: "Force Routing",
+                navLinkText: "Re-route to Home",
                 navLinkLabel: "Force network routing",
                 failTitle: "Routing Failure",
-                ctaButton: "Reset Connection",
+                predictiveTitle: "Stable routes available:",
+                links: [
+                    { text: "Methodology", url: "/en/#servicios" },
+                    { text: "Consulting", url: "/en/#diferenciadores" },
+                    { text: "Corporate Contact", url: "/en/#contacto" }
+                ],
                 terminal: [
-                    `> executing traceroute to <span class="highlight">${safePath}</span>...`,
-                    `> latency exceeded. <span class="highlight">data packet lost.</span>`,
-                    `> <span class="highlight">error 404:</span> node unreachable in current architecture.`,
-                    `> requesting manual re-routing`
+                    `<span class="timestamp">${getTimestamp()}</span> <span class="sys">SYS_INIT:</span> TCP Handshake established. Client detected.`,
+                    `<span class="timestamp">${getTimestamp()}</span> <span class="sys">INFO:</span> Executing traceroute to <span class="highlight">${safePath}</span>...`,
+                    `<span class="timestamp">${getTimestamp()}</span> <span class="warn">WARN:</span> Connection timeout exceeded.`,
+                    `<span class="timestamp">${getTimestamp()}</span> <span class="highlight">ERR_404:</span> Node unreachable in current architecture.`,
+                    `<span class="timestamp">${getTimestamp()}</span> <span class="sys">ACTION:</span> Requesting manual re-routing`
                 ],
                 easterEgg: {
-                    fixedTitle: "JBDA | Connection Restored",
-                    terminalLine: "> status 200: emergency protocol activated.<br>> connection restored.<br>> redirecting traffic..."
+                    fixedTitle: "JBDA | Network Restored",
+                    terminalLine: `<span class="timestamp">${getTimestamp()}</span> <span style="color:#00ff41; font-weight:bold; text-shadow: 0 0 10px #00ff41;">STATUS 200: Emergency protocol activated.</span><br><span class="timestamp">${getTimestamp()}</span> Connection successfully restored.<br><span class="timestamp">${getTimestamp()}</span> Redirecting corporate traffic...`
                 }
             };
 
-            // Selecciona el diccionario correcto
             const localized = isEnglish ? en : es;
 
-            // --- 2. Inyectar Textos Estáticos e Idioma ---
+            // 2. Inyectar UI
             document.documentElement.lang = isEnglish ? "en" : "es";
             document.title = localized.tabTitle;
             
-            const logoLink = document.getElementById('localized-logo-link');
-            const navLink = document.getElementById('localized-nav-link');
-            const navText = document.getElementById('localized-nav-text');
-            const failTitle = document.getElementById('localized-fail-title');
-            const ctaButton = document.getElementById('localized-cta-button');
-            
-            // Actualiza enlaces para respetar la carpeta /en/ si aplica
             const homeLink = isEnglish ? "/en/" : "/";
-            logoLink.href = homeLink;
-            logoLink.setAttribute('aria-label', localized.logoLabel);
-            navLink.href = homeLink;
-            navLink.setAttribute('aria-label', localized.navLinkLabel);
-            navText.innerText = localized.navLinkText;
-            failTitle.innerText = localized.failTitle;
-            ctaButton.href = homeLink;
-            ctaButton.innerText = localized.ctaButton;
-            
-            // Título de glitch
+            document.getElementById('localized-logo-link').href = homeLink;
+            document.getElementById('localized-logo-link').setAttribute('aria-label', localized.logoLabel);
+            document.getElementById('localized-nav-link').href = homeLink;
+            document.getElementById('localized-nav-link').setAttribute('aria-label', localized.navLinkLabel);
+            document.getElementById('localized-nav-text').innerText = localized.navLinkText;
+            document.getElementById('localized-fail-title').innerText = localized.failTitle;
+            document.getElementById('localized-predictive-title').innerText = localized.predictiveTitle;
             glitchText.setAttribute('title', isEnglish ? 'Attempt manual override' : 'Intentar re-conexión manual');
 
+            // Inyectar Quick Links
+            localized.links.forEach(link => {
+                const a = document.createElement('a');
+                a.href = link.url;
+                a.className = 'quick-link';
+                a.innerText = link.text;
+                quickLinksBox.appendChild(a);
+            });
 
-            // --- 3. Ejecutar la Animación del Terminal Matrix ---
+            // 3. Ejecutar Telemetría (Efecto Máquina de Escribir)
             const lines = localized.terminal;
             let lineIndex = 0;
             let typeInterval;
@@ -188,13 +223,18 @@
 
                     terminalBox.appendChild(p);
                     lineIndex++;
-                    typeInterval = setTimeout(typeLine, lineIndex === 1 ? 900 : (lineIndex === 2 ? 1400 : 1000));
+                    // Ritmos de carga realistas
+                    let delay = 600;
+                    if(lineIndex === 1) delay = 800; // Handshake
+                    if(lineIndex === 2) delay = 1500; // Timeout
+                    if(lineIndex === 3) delay = 500; // 404
+                    typeInterval = setTimeout(typeLine, delay);
                 }
             }
             
-            setTimeout(typeLine, 600);
+            setTimeout(typeLine, 400);
 
-            // --- 4. EL EASTER EGG (200 OK - Sincronizado con idioma) ---
+            // 4. EL EASTER EGG (200 OK - Restauración de Red)
             let fixed = false;
             glitchText.addEventListener('click', function() {
                 if(fixed) return;
@@ -205,7 +245,6 @@
                 this.classList.add('status-200');
                 this.innerText = '200';
                 
-                // Actualiza título de pestaña
                 document.title = localized.easterEgg.fixedTitle;
 
                 const linesAdded = terminalBox.querySelectorAll('.terminal-line');
@@ -219,15 +258,15 @@
                 const successLine = document.createElement('p');
                 successLine.className = 'terminal-line';
                 successLine.style.opacity = '1';
-                successLine.innerHTML = `> <span style="color:#00ff41; font-weight:bold; text-shadow: 0 0 10px #00ff41;">${localized.easterEgg.terminalLine}</span><span class="terminal-cursor" style="background-color:#00ff41; box-shadow: 0 0 10px #00ff41;"></span>`;
+                successLine.innerHTML = `${localized.easterEgg.terminalLine}<span class="terminal-cursor" style="background-color:#00ff41; box-shadow: 0 0 10px #00ff41;"></span>`;
                 terminalBox.appendChild(successLine);
 
                 // Redirigir respetando idioma
                 setTimeout(() => {
                     const overlay = document.getElementById('page-transition-overlay');
                     if(overlay) overlay.classList.remove('hidden');
-                    setTimeout(() => { window.location.href = homeLink; }, 400);
-                }, 1800);
+                    setTimeout(() => { window.location.href = homeLink; }, 500);
+                }, 2200); // Da tiempo a leer el mensaje de restauración
             });
         });
     </script>
