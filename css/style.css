@@ -3,7 +3,7 @@
     --white: #fdf2f8; --silver: #fce7f3; --dark-grey: #0f172a; 
     --soft-grey: #475569; --pink-premium: #D4006D; --border: #fbcfe8; --bg-liquid-3: #fff0f5; 
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html { scroll-padding-top: 110px; scrollbar-width: thin; scrollbar-color: rgba(212, 0, 109, 0.4) transparent; }
 
 /* --- LENIS SCROLL --- */
@@ -73,7 +73,7 @@ body::before {
 @media (pointer: coarse) { .cursor-led { display: none !important; } }
 
 /* ==============================================================
-   EFECTO: MASK REVEAL
+   EFECTO: MASK REVEAL (ESTÁNDAR SILICON VALLEY)
    ============================================================== */
 .reveal-text { display: inline-flex; overflow: hidden; vertical-align: bottom; }
 .reveal-text .reveal-inner { display: inline-block; transform: translateY(110%); opacity: 0; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease; }
@@ -88,23 +88,30 @@ body.page-loaded .reveal-text .reveal-inner { transform: translateY(0); opacity:
    ============================================================== */
 nav { 
     height: auto !important; 
-    padding-top: calc(env(safe-area-inset-top, 0px) + 25px);
-    padding-bottom: 25px;
+    padding-top: calc(env(safe-area-inset-top, 0px) + 20px);
+    padding-bottom: 20px;
     padding-left: 8%; padding-right: 8%;
     display: flex; justify-content: space-between; align-items: center; 
-    position: sticky; top: 0; background: transparent; 
-    z-index: 9999; 
+    position: sticky; top: 0; background: transparent; z-index: 9999; 
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
     border-bottom: 1px solid transparent; 
 }
 nav.nav-scrolled { 
-    padding-top: calc(env(safe-area-inset-top, 0px) + 15px);
-    padding-bottom: 15px;
-    background: rgba(253, 242, 248, 0.65); 
-    backdrop-filter: blur(15px) saturate(180%); -webkit-backdrop-filter: blur(15px) saturate(180%); 
-    border-bottom: 1px solid rgba(251, 207, 232, 0.5); 
-    box-shadow: 0 10px 30px -10px rgba(212, 0, 109, 0.15); 
+    padding-top: calc(env(safe-area-inset-top, 0px) + 12px);
+    padding-bottom: 12px;
+    background: rgba(253, 242, 248, 0.7); 
+    backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); 
+    border-bottom: 1px solid rgba(212, 0, 109, 0.05); 
+    box-shadow: 0 10px 30px -10px rgba(212, 0, 109, 0.1); 
 }
+/* Scrim para Desktop / General */
+nav::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%;
+    height: calc(env(safe-area-inset-top, 0px) + 35px);
+    background: linear-gradient(to bottom, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0) 100%);
+    z-index: -1; pointer-events: none; opacity: 0.8;
+}
+
 .logo-container { display: flex; align-items: center; margin: 0; padding: 0; }
 .logo-container a { display: block; text-decoration: none; }
 .logo-container img { height: 60px; width: auto; transition: all 0.5s ease; display: block; }
@@ -123,9 +130,11 @@ nav.nav-scrolled .logo-container img { height: 45px; }
 .lang-toggle-link { font-size: 14px !important; font-weight: 800 !important; margin-left: 10px; cursor: none !important; }
 .lang-toggle-link::after { display: none !important; }
 
-/* Reseteo maestro para botón móvil en Desktop */
 .mobile-menu-btn { display: none; background: transparent; border: none; outline: none; -webkit-appearance: none; }
 
+/* ==============================================================
+   SECCIONES Y COMPONENTES
+   ============================================================== */
 header, section { position: relative; z-index: 1; background-color: transparent !important; background-image: none !important; }
 header { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; overflow: hidden; }
 #network-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
@@ -283,86 +292,81 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
 .concierge-item { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--dark-grey); font-size: 14px; font-weight: 600; border-radius: 8px; transition: all 0.2s ease; font-family: 'Inter', sans-serif; }
 .concierge-item:hover { background: rgba(212, 0, 109, 0.08); color: var(--pink-premium); }
 
+
 /* ==============================================================
-   OVERLAY MÓVIL GLASSMORPHISM & PWA NATIVA BLINDADA
+   DISEÑO MÓVIL TOP 1 (ÉLITE)
    ============================================================== */
 @media (max-width: 900px) {
     nav { 
-        height: auto !important; 
-        /* Mantemos la medida ultra ajustada (+2px) para que no haya hueco gigante */
-        padding-top: calc(env(safe-area-inset-top, 0px) + 2px) !important;
-        padding-bottom: 10px !important;
-        padding-left: 5% !important;
-        padding-right: 5% !important;
-        display: flex !important;
-        align-items: center !important; 
+        /* Ajuste preciso para navegador y PWA */
+        padding-top: max(calc(env(safe-area-inset-top) + 5px), 18px) !important;
+        padding-bottom: 15px !important;
+        padding-left: 6% !important; 
+        padding-right: 6% !important;
     }
     nav.nav-scrolled {
-        padding-top: calc(env(safe-area-inset-top, 0px) + 2px) !important;
-        padding-bottom: 8px !important;
+        padding-top: max(calc(env(safe-area-inset-top) + 2px), 12px) !important;
+        padding-bottom: 12px !important;
     }
 
-    nav::before {
-        content: ''; position: absolute; top: 0; left: 0; width: 100%;
-        height: calc(env(safe-area-inset-top, 0px) + 30px);
-        background: linear-gradient(to bottom, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0) 100%);
-        z-index: -1; pointer-events: none;
-    }
+    /* Logo con más autoridad en móvil (42px) */
+    .logo-container img { height: 42px !important; }
+    nav.nav-scrolled .logo-container img { height: 36px !important; }
 
-    .logo-container { position: relative; z-index: 10; display: flex; align-items: center; height: auto; margin: 0; padding: 0; }
-    .logo-container a { display: flex; align-items: center; text-decoration: none; }
-    /* Logo optimizado: un poco más grande (42px) para mantener presencia ejecutiva */
-    .logo-container img { height: 42px !important; width: auto; display: block; transition: all 0.3s ease; } 
-    nav.nav-scrolled .logo-container img { height: 35px !important; }
-    
-    /* BOTÓN HAMBURGUESA ANTIMAGIA DE iOS (Limpieza total de fondos nativos) */
+    /* BOTÓN HAMBURGUESA ASIMÉTRICO (MODERNO Y BLINDADO CONTRA iOS) */
     .mobile-menu-btn { 
         display: flex !important; 
-        align-items: center; justify-content: center; 
-        padding: 10px; margin-right: -10px; 
-        position: relative; 
-        z-index: 100000 !important; 
-        transform: translateZ(10px);
-        -webkit-transform: translateZ(10px);
-        
-        /* Estas líneas matan el recuadro gris raro que te puso iOS */
-        background: transparent !important;
-        border: none !important;
-        outline: none !important;
-        box-shadow: none !important;
-        -webkit-appearance: none !important;
-        -webkit-tap-highlight-color: transparent !important;
+        flex-direction: column; justify-content: center; align-items: flex-end; 
+        width: 40px; height: 40px; 
+        background: transparent !important; border: none !important; outline: none !important;
+        -webkit-appearance: none !important; box-shadow: none !important;
+        z-index: 100000 !important; cursor: pointer;
+        padding: 0; margin-right: -5px;
     }
 
-    .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; width: 26px; height: 16px; pointer-events: none; }
-    .hamburger-lines .line { display: block; height: 2px; width: 100%; background-color: var(--dark-grey); transition: all 0.3s ease; border-radius: 2px; }
+    .hamburger-lines { 
+        display: flex; flex-direction: column; 
+        gap: 8px; /* Espaciado premium para 2 líneas */
+        width: 28px; 
+    }
 
-    .mobile-menu-btn.open .line1 { transform: translateY(7px) rotate(45deg); background-color: var(--dark-grey) !important; }
-    .mobile-menu-btn.open .line2 { opacity: 0; }
-    .mobile-menu-btn.open .line3 { transform: translateY(-7px) rotate(-45deg); background-color: var(--dark-grey) !important; }
-    
+    .line { 
+        display: block; height: 2px; 
+        background-color: var(--dark-grey); 
+        transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1); 
+        border-radius: 4px;
+    }
+
+    /* Estilo asimétrico (La línea de arriba es más corta) */
+    .line1 { width: 18px; align-self: flex-end; }
+    .line2 { width: 28px; }
+
+    /* Animación de Morphing a la "X" perfecta */
+    .mobile-menu-btn.open .line1 { 
+        width: 28px;
+        transform: translateY(5px) rotate(45deg); 
+        background-color: var(--dark-grey) !important;
+    }
+    .mobile-menu-btn.open .line2 { 
+        width: 28px;
+        transform: translateY(-5px) rotate(-45deg); 
+        background-color: var(--dark-grey) !important;
+    }
+
+    /* MENÚ OVERLAY CRISTAL */
     .nav-links { 
         position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
-        background: rgba(253, 242, 248, 0.95); 
-        backdrop-filter: blur(15px) saturate(180%); -webkit-backdrop-filter: blur(15px) saturate(180%); 
+        background: rgba(253, 242, 248, 0.98); 
+        backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); 
         display: flex; flex-direction: column; justify-content: center; align-items: center; 
-        transition: opacity 0.4s ease, visibility 0.4s ease; 
-        z-index: 99998 !important; 
-        opacity: 0; visibility: hidden; 
-        padding-top: env(safe-area-inset-top, 0px);
+        z-index: 99998; opacity: 0; visibility: hidden; 
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .nav-links.active { opacity: 1; visibility: visible; }
-    
-    .nav-links a { font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 600; margin: 15px 0; color: var(--dark-grey); letter-spacing: 1px; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; }
+    .nav-links a { font-size: 28px; font-weight: 700; margin: 15px 0; color: var(--dark-grey); letter-spacing: -0.5px; }
     .nav-links a::after { display: none; }
-    .nav-links.active a { opacity: 1; transform: translateY(0); }
-    .nav-links.active a:nth-child(1) { transition-delay: 0.1s; }
-    .nav-links.active a:nth-child(2) { transition-delay: 0.2s; }
-    .nav-links.active a:nth-child(3) { transition-delay: 0.3s; }
-    .nav-links.active a:nth-child(4) { transition-delay: 0.4s; }
-    .nav-links.active a:nth-child(5) { transition-delay: 0.5s; }
-    .nav-links.active a:nth-child(6) { transition-delay: 0.6s; }
 
+    /* Ajustes Móviles de Secciones */
     #manifiesto-global { grid-template-columns: 1fr; padding: 60px 5%; gap: 40px;}
     .filosofia-box.asimetrica { margin-left: 0; }
     #ecosistema { padding: 40px 5%; }
@@ -410,7 +414,7 @@ body.dark-theme .orb-1 { background: rgba(212, 0, 109, 0.25) !important; }
 body.dark-theme .orb-2 { background: rgba(148, 163, 184, 0.15) !important; } 
 body.dark-theme .orb-3 { background: rgba(244, 114, 182, 0.15) !important; } 
 body.dark-theme #page-transition-overlay { background: rgba(15, 23, 42, 0.2); }
-body.dark-theme nav.nav-scrolled { background: rgba(15, 23, 42, 0.5); border-bottom-color: rgba(244, 114, 182, 0.2); }
+body.dark-theme nav.nav-scrolled { background: rgba(15, 23, 42, 0.8); border-bottom-color: rgba(255,255,255,0.05); }
 body.dark-theme .glass-track, body.dark-theme .slider-container, body.dark-theme .graph-box { background: rgba(30, 41, 59, 0.5); border-color: rgba(244, 114, 182, 0.3); }
 body.dark-theme .card, body.dark-theme .team-card, body.dark-theme details, body.dark-theme .legal-container { background: rgba(30, 41, 59, 0.6); border-color: rgba(244, 114, 182, 0.2); }
 body.dark-theme details[open] { background: rgba(15, 23, 42, 0.9); border-color: var(--pink-premium) !important; }
@@ -432,14 +436,14 @@ body.dark-theme .marquee-wrapper:hover .brand-logo { filter: brightness(0) inver
 body.dark-theme .marquee-wrapper .brand-logo:hover { filter: brightness(0) invert(1) opacity(1) drop-shadow(0 0 10px rgba(255,255,255,0.4)) !important; }
 body.dark-theme #dark-mode-toggle, body.dark-theme .lang-toggle-link { color: #f8fafc; }
 body.dark-theme #dark-mode-toggle:hover, body.dark-theme .lang-toggle-link:hover { color: var(--pink-premium); }
-
+body.dark-theme nav::before { background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%); }
 @media (max-width: 900px) { 
     body.dark-theme .nav-links { background: rgba(15, 23, 42, 0.85) !important; backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); } 
-    body.dark-theme .hamburger-lines .line { background-color: #f8fafc; }
+    body.dark-theme .line { background-color: #f8fafc; }
     body.dark-theme .nav-links a { color: #f8fafc; }
     body.dark-theme nav::before { display: none !important; }
     body.dark-theme .mobile-menu-btn.open .line1 { background-color: #f8fafc !important; }
-    body.dark-theme .mobile-menu-btn.open .line3 { background-color: #f8fafc !important; }
+    body.dark-theme .mobile-menu-btn.open .line2 { background-color: #f8fafc !important; }
 }
 
 /* ==============================================================
@@ -461,7 +465,7 @@ body.terminal-mode .bar { background-color: #00ff00 !important; }
 body.terminal-mode::after { content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); z-index: 9999; background-size: 100% 2px, 3px 100%; pointer-events: none; opacity: 0.4; }
 #terminal-toggle { cursor: pointer !important; opacity: 0.2; font-family: monospace; transition: opacity 0.3s; margin-left: 5px; position: relative; z-index: 10000; pointer-events: auto; }
 #terminal-toggle:hover { opacity: 1; color: var(--pink-premium) !important; }
-body.terminal-mode .hamburger-lines .line { background-color: #00ff00 !important; }
+body.terminal-mode .line { background-color: #00ff00 !important; }
 body.terminal-mode nav::before { display: none !important; }
 
 /* --- SCROLLBAR PREMIUM --- */
