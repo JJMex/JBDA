@@ -28,10 +28,67 @@
         }
         .status-200 { color: #10b981 !important; animation: none !important; transform: none !important; text-shadow: 0 0 25px rgba(16, 185, 129, 0.4) !important; cursor: default; }
         
-        .terminal-box { font-family: 'Courier New', Courier, monospace; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(212, 0, 109, 0.2); padding: 30px; border-radius: 12px; text-align: left; margin: 30px auto 40px auto; max-width: 600px; min-height: 180px; box-shadow: inset 0 0 30px rgba(0,0,0,0.4); width: 100%;}
-        .terminal-line { color: #94a3b8; font-size: 15px; margin-bottom: 10px; display: block; opacity: 0; line-height: 1.5; }
-        .terminal-line span.highlight { color: var(--pink-premium); font-weight: bold; }
-        .terminal-cursor { display: inline-block; width: 8px; height: 18px; background-color: var(--pink-premium); vertical-align: middle; margin-left: 6px; animation: blink 1s step-end infinite; box-shadow: 0 0 8px var(--pink-premium);}
+        /* FLOATING TERMINAL WINDOW */
+        .terminal-window {
+            background: #050505;
+            width: 100%;
+            max-width: 650px;
+            margin: 30px auto 40px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            /* Multi-layer box shadow */
+            box-shadow: 
+                0 15px 35px rgba(0,0,0,0.5), 
+                0 45px 65px -15px rgba(0,0,0,0.4),
+                inset 0 1px 0px rgba(255,255,255,0.15),
+                inset 0 0 20px rgba(0,0,0,0.8);
+            border: 1px solid rgba(255,255,255,0.05);
+            text-align: left;
+        }
+
+        /* MAC STYLE WINDOW CHROME */
+        .terminal-header {
+            background: #1a1a1a;
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .window-dot { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.3); }
+        .dot-red { background-color: #ff5f56; }
+        .dot-yellow { background-color: #ffbd2e; }
+        .dot-green { background-color: #27c93f; }
+
+        /* TERMINAL BODY */
+        .terminal-body {
+            padding: 25px 30px;
+            font-family: 'Courier New', Courier, monospace;
+            min-height: 180px;
+        }
+        
+        /* NEON GREEN WITH CRT GLOW */
+        .terminal-line { 
+            color: #00ff41; 
+            text-shadow: 0 0 6px rgba(0, 255, 65, 0.4); 
+            font-size: 15px; 
+            margin-bottom: 10px; 
+            display: block; 
+            opacity: 0; 
+            line-height: 1.6; 
+        }
+        
+        /* JBDA PINK HIGHLIGHT */
+        .terminal-line span.highlight { 
+            color: var(--pink-premium); 
+            text-shadow: 0 0 10px rgba(212, 0, 109, 0.6);
+            font-weight: bold; 
+        }
+        
+        .terminal-cursor { 
+            display: inline-block; width: 8px; height: 18px; 
+            background-color: var(--pink-premium); vertical-align: middle; margin-left: 6px; 
+            animation: blink 1s step-end infinite; box-shadow: 0 0 10px var(--pink-premium);
+        }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
     </style>
 </head>
@@ -65,8 +122,15 @@
                 Routing Failure
             </h2>
             
-            <div class="terminal-box" id="terminal-lines">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="window-dot dot-red"></div>
+                    <div class="window-dot dot-yellow"></div>
+                    <div class="window-dot dot-green"></div>
                 </div>
+                <div class="terminal-body" id="terminal-lines">
+                    </div>
+            </div>
             
             <a href="../" class="btn-main magnetic-btn" aria-label="Back to Home">Redirect Traffic to Home</a>
             
@@ -82,15 +146,13 @@
             const terminalBox = document.getElementById('terminal-lines');
             const glitchText = document.getElementById('glitch-404');
             
-            // 1. Read actual failed path
             const path = window.location.pathname;
             const safePath = path.length > 30 ? path.substring(0, 30) + '...' : path;
             
-            // 2. Command Sequence
             const lines = [
                 `> executing traceroute to <span class="highlight">${safePath}</span>...`,
-                `> latency exceeded. data packet lost.`,
-                `> error 404: node unreachable in current architecture.`,
+                `> latency exceeded. <span class="highlight">data packet lost.</span>`,
+                `> <span class="highlight">error 404:</span> node unreachable in current architecture.`,
                 `> requesting manual re-routing_`
             ];
 
@@ -122,21 +184,19 @@
                 }
             }
             
-            setTimeout(typeLine, 600); // Start scan after half a second
+            setTimeout(typeLine, 600);
 
-            // 3. EASTER EGG (200 OK State)
+            // EASTER EGG (200 OK State)
             let fixed = false;
             glitchText.addEventListener('click', function() {
                 if(fixed) return;
                 fixed = true;
                 clearTimeout(typeInterval); 
                 
-                // Transform 404
                 this.classList.remove('glitch-active');
                 this.classList.add('status-200');
                 this.innerText = '200';
                 
-                // Update terminal
                 const linesAdded = terminalBox.querySelectorAll('.terminal-line');
                 if(linesAdded.length > 0) {
                     const last = linesAdded[linesAdded.length - 1];
@@ -148,11 +208,9 @@
                 const successLine = document.createElement('p');
                 successLine.className = 'terminal-line';
                 successLine.style.opacity = '1';
-                successLine.style.color = '#10b981';
-                successLine.innerHTML = `> status 200: emergency protocol engaged. connection restored.<br>> redirecting traffic...<span class="terminal-cursor" style="background-color:#10b981; box-shadow: 0 0 8px #10b981;"></span>`;
+                successLine.innerHTML = `> <span style="color:#00ff41; font-weight:bold; text-shadow: 0 0 10px #00ff41;">status 200: emergency protocol engaged.</span><br>> connection restored.<br>> redirecting traffic...<span class="terminal-cursor" style="background-color:#00ff41; box-shadow: 0 0 10px #00ff41;"></span>`;
                 terminalBox.appendChild(successLine);
 
-                // Redirect home after fixing network
                 setTimeout(() => {
                     const overlay = document.getElementById('page-transition-overlay');
                     if(overlay) overlay.classList.remove('hidden');
