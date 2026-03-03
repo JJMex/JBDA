@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const overlay = document.getElementById('page-transition-overlay');
     const preloader = document.getElementById('preloader');
     
-    // Envuelve los textos para la animación de máscara
     document.querySelectorAll('.reveal-text').forEach(el => {
         el.innerHTML = `<span class="reveal-inner">${el.innerHTML}</span>`;
     });
@@ -13,9 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if(overlay) overlay.classList.add('hidden'); 
     });
 
-    const triggerReveal = () => {
-        document.body.classList.add('page-loaded');
-    };
+    const triggerReveal = () => { document.body.classList.add('page-loaded'); };
 
     if (preloader) {
         if (sessionStorage.getItem('jbda_preloader_shown')) {
@@ -46,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         el.addEventListener('mouseleave', () => { if(cursorLed) cursorLed.classList.remove('tx-rx'); });
     });
 
-    // --- 2. LENIS SCROLL (FÍSICA INERCIAL) ---
+    // --- 2. LENIS SCROLL ---
     let lenis;
     if (typeof Lenis !== 'undefined') {
         lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), direction: 'vertical', smooth: true });
@@ -77,14 +74,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 4. TRANSICIONES DE PÁGINA Y SCROLL ---
+    // --- 4. TRANSICIONES DE PÁGINA ---
     document.querySelectorAll('a').forEach(anchor => {
         if(anchor.href && !anchor.target && !anchor.id.includes('calendly')) {
             anchor.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
                 if (targetUrl && targetUrl.startsWith('#')) {
-                    e.preventDefault();
-                    closeMobileMenu(); 
+                    e.preventDefault(); closeMobileMenu(); 
                     setTimeout(() => {
                         if (typeof lenis !== 'undefined') { lenis.scrollTo(targetUrl); } 
                         else { document.querySelector(targetUrl).scrollIntoView({behavior: 'smooth'}); }
@@ -92,10 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 } 
                 else if (this.hostname === window.location.hostname || targetUrl.startsWith('.') || targetUrl.startsWith('/')) {
                     e.preventDefault();
-                    if(overlay) {
-                        overlay.classList.remove('hidden'); 
-                        setTimeout(() => { window.location.href = this.href; }, 400); 
-                    } else { window.location.href = this.href; }
+                    if(overlay) { overlay.classList.remove('hidden'); setTimeout(() => { window.location.href = this.href; }, 400); } 
+                    else { window.location.href = this.href; }
                 }
             });
         }
@@ -116,17 +110,15 @@ document.addEventListener("DOMContentLoaded", () => {
             document.body.classList.toggle('dark-theme');
             if (document.body.classList.contains('dark-theme')) {
                 localStorage.setItem('jbda_theme', 'dark');
-                if(moonIcon) moonIcon.style.display = 'none'; 
-                if(sunIcon) sunIcon.style.display = 'block';
+                if(moonIcon) moonIcon.style.display = 'none'; if(sunIcon) sunIcon.style.display = 'block';
             } else {
                 localStorage.setItem('jbda_theme', 'light');
-                if(moonIcon) moonIcon.style.display = 'block'; 
-                if(sunIcon) sunIcon.style.display = 'none';
+                if(moonIcon) moonIcon.style.display = 'block'; if(sunIcon) sunIcon.style.display = 'none';
             }
         });
     }
 
-    // --- 6. SIMULADOR DE ESTRÉS ---
+    // --- 6. SIMULADOR DE ESTRÉS DINÁMICO ---
     const slider = document.getElementById('traffic-slider');
     const metricUsers = document.getElementById('metric-users');
     const metricRps = document.getElementById('metric-rps');
@@ -145,21 +137,9 @@ document.addEventListener("DOMContentLoaded", () => {
             
             let users = Math.floor(150 + (val * 248.5)); 
             let rps = Math.floor(300 + (val * 1497));    
-            
             metricUsers.innerText = users.toLocaleString();
             metricRps.innerText = rps.toLocaleString();
-
             metricStatus.classList.remove('status-green', 'status-yellow', 'status-red');
-            if(val < 40) {
-                metricStatus.innerText = isEnglish ? 'Stable' : 'Estable';
-                metricStatus.classList.add('status-green');
-            } else if(val < 75) {
-                metricStatus.innerText = isEnglish ? 'Warning (Peak)' : 'Riesgo (Pico)';
-                metricStatus.classList.add('status-yellow');
-            } else {
-                metricStatus.innerText = isEnglish ? 'CRITICAL / OVERLOAD' : 'CRÍTICO / SOBRECARGA';
-                metricStatus.classList.add('status-red');
-            }
 
             let tradWidth = 5 + (val * 1.5);
             if(tradWidth > 100) tradWidth = 100;
@@ -167,53 +147,56 @@ document.addEventListener("DOMContentLoaded", () => {
             let cpuT = Math.min(100, Math.floor(15 + (val * 0.95)));
             
             if(val > 75) {
-                barTrad.style.backgroundColor = '#ef4444'; 
-                barTrad.parentElement.parentElement.classList.add('alert-shake');
-                statusTrad.innerText = isEnglish ? 'Latency: 999ms (FAILURE)' : 'Latencia: 999ms (CAÍDA)';
-                statusTrad.className = 'status status-red';
-                cpuTrad.innerText = isEnglish ? `CPU: 100% (CRASH)` : `CPU: 100% (COLAPSO)`;
-                cpuTrad.className = 'cpu-load status-red';
+                metricStatus.innerText = isEnglish ? 'CRITICAL' : 'CRÍTICO'; metricStatus.classList.add('status-red');
+                barTrad.style.backgroundColor = '#ef4444'; barTrad.parentElement.parentElement.classList.add('alert-shake');
+                statusTrad.innerText = isEnglish ? 'Latency: 999ms (FAILURE)' : 'Latencia: 999ms (CAÍDA)'; statusTrad.className = 'status status-red';
+                cpuTrad.innerText = isEnglish ? `CPU: 100% (CRASH)` : `CPU: 100% (COLAPSO)`; cpuTrad.className = 'cpu-load status-red';
+                // Slider cambia a rojo
+                slider.style.setProperty('--thumb-color', '#ef4444'); slider.style.setProperty('--thumb-glow', 'rgba(239, 68, 68, 0.6)');
             } else if (val > 40) {
-                barTrad.style.backgroundColor = '#f59e0b'; 
-                barTrad.parentElement.parentElement.classList.remove('alert-shake');
+                metricStatus.innerText = isEnglish ? 'Warning' : 'Riesgo'; metricStatus.classList.add('status-yellow');
+                barTrad.style.backgroundColor = '#f59e0b'; barTrad.parentElement.parentElement.classList.remove('alert-shake');
                 let latT = Math.floor(65 + (val-50)*8);
-                statusTrad.innerText = isEnglish ? `Latency: ${latT}ms` : `Latencia: ${latT}ms`;
-                statusTrad.className = 'status status-yellow';
-                cpuTrad.innerText = `CPU: ${cpuT}%`;
-                cpuTrad.className = 'cpu-load status-yellow';
+                statusTrad.innerText = isEnglish ? `Latency: ${latT}ms` : `Latencia: ${latT}ms`; statusTrad.className = 'status status-yellow';
+                cpuTrad.innerText = `CPU: ${cpuT}%`; cpuTrad.className = 'cpu-load status-yellow';
+                // Slider cambia a amarillo
+                slider.style.setProperty('--thumb-color', '#f59e0b'); slider.style.setProperty('--thumb-glow', 'rgba(245, 158, 11, 0.6)');
             } else {
-                barTrad.style.backgroundColor = '#10b981'; 
-                barTrad.parentElement.parentElement.classList.remove('alert-shake');
+                metricStatus.innerText = isEnglish ? 'Stable' : 'Estable'; metricStatus.classList.add('status-green');
+                barTrad.style.backgroundColor = '#10b981'; barTrad.parentElement.parentElement.classList.remove('alert-shake');
                 let latT = Math.floor(15 + val);
-                statusTrad.innerText = isEnglish ? `Latency: ${latT}ms` : `Latencia: ${latT}ms`;
-                statusTrad.className = 'status status-green';
-                cpuTrad.innerText = `CPU: ${cpuT}%`;
-                cpuTrad.className = 'cpu-load status-green';
+                statusTrad.innerText = isEnglish ? `Latency: ${latT}ms` : `Latencia: ${latT}ms`; statusTrad.className = 'status status-green';
+                cpuTrad.innerText = `CPU: ${cpuT}%`; cpuTrad.className = 'cpu-load status-green';
+                // Slider vuelve a rosa premium
+                slider.style.setProperty('--thumb-color', 'var(--pink-premium)'); slider.style.setProperty('--thumb-glow', 'rgba(212, 0, 109, 0.5)');
             }
 
             let jbdaWidth = 5 + (val * 0.15); 
             let cpuJ = Math.floor(12 + (val * 0.33)); 
             let latJ = 12 + Math.floor(val * 0.05);   
-
-            barJbda.style.width = `${jbdaWidth}%`;
-            barJbda.style.backgroundColor = 'var(--pink-premium)';
+            barJbda.style.width = `${jbdaWidth}%`; barJbda.style.backgroundColor = 'var(--pink-premium)';
             statusJbda.innerText = isEnglish ? `Latency: ${latJ}ms (99.8% QoS)` : `Latencia: ${latJ}ms (99.8% QoS)`;
-            cpuJbda.innerText = isEnglish ? `CPU: ${cpuJ}% (Load Balanced)` : `CPU: ${cpuJ}% (Balanceo Activo)`;
+            cpuJbda.innerText = isEnglish ? `CPU: ${cpuJ}% (Active Balancing)` : `CPU: ${cpuJ}% (Balanceo Activo)`;
         });
     }
 
-    // --- 7. BOTONES MAGNÉTICOS ---
+    // --- 7. BOTONES MAGNÉTICOS CON FÍSICA DE RESORTE ---
     const magneticBtns = document.querySelectorAll('.magnetic-btn');
     magneticBtns.forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
             const rect = btn.getBoundingClientRect();
             const h = rect.width / 2; const v = rect.height / 2;
             const xTranslate = e.clientX - rect.left - h; const yTranslate = e.clientY - rect.top - v;
+            btn.style.transition = 'none'; // Quita la transición para seguir el mouse al instante
             btn.style.transform = `translate(${xTranslate * 0.3}px, ${yTranslate * 0.3}px)`;
             const xRipple = e.clientX - rect.left; const yRipple = e.clientY - rect.top;
             btn.style.setProperty('--x', `${xRipple}px`); btn.style.setProperty('--y', `${yRipple}px`);
         });
-        btn.addEventListener('mouseleave', () => { btn.style.transform = `translate(0px, 0px)`; });
+        btn.addEventListener('mouseleave', () => { 
+            // Añade física de rebote elástico (Spring Curve) al soltar el mouse
+            btn.style.transition = 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; 
+            btn.style.transform = `translate(0px, 0px)`; 
+        });
     });
 
     // --- 8. CONTADORES DINÁMICOS ---
@@ -229,8 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const updateCounter = () => {
                         current += step;
                         if(current < target) {
-                            entry.target.innerText = isDecimal ? current.toFixed(1) : Math.ceil(current);
-                            requestAnimationFrame(updateCounter);
+                            entry.target.innerText = isDecimal ? current.toFixed(1) : Math.ceil(current); requestAnimationFrame(updateCounter);
                         } else { entry.target.innerText = target; }
                     };
                     updateCounter(); observerCounters.unobserve(entry.target);
@@ -263,12 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const svgCards = document.querySelectorAll('.card');
     if(svgCards.length > 0) {
         let observerSvg = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.classList.add('svg-animate'); 
-                    observerSvg.unobserve(entry.target); 
-                }
-            });
+            entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('svg-animate'); observerSvg.unobserve(entry.target); } });
         }, { rootMargin: "-45% 0px -45% 0px" }); 
         svgCards.forEach(c => observerSvg.observe(c));
     }
@@ -279,13 +256,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const ctx = canvas.getContext('2d');
         let width, height, particles = [];
         let mouse = { x: null, y: null, radius: 150 };
-        let animationFrameId = null;
-        let isCanvasVisible = true;
+        let animationFrameId = null; let isCanvasVisible = true;
         
-        window.addEventListener('mousemove', function(event) {
-            const rect = canvas.getBoundingClientRect();
-            mouse.x = event.clientX - rect.left; mouse.y = event.clientY - rect.top;
-        });
+        window.addEventListener('mousemove', function(event) { const rect = canvas.getBoundingClientRect(); mouse.x = event.clientX - rect.left; mouse.y = event.clientY - rect.top; });
         window.addEventListener('mouseout', function() { mouse.x = undefined; mouse.y = undefined; });
 
         const header = document.querySelector('header');
@@ -294,9 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 entries.forEach(entry => {
                     isCanvasVisible = entry.isIntersecting;
                     if (isCanvasVisible && !animationFrameId) { animateCanvas(); } 
-                    else if (!isCanvasVisible && animationFrameId) {
-                        cancelAnimationFrame(animationFrameId); animationFrameId = null;
-                    }
+                    else if (!isCanvasVisible && animationFrameId) { cancelAnimationFrame(animationFrameId); animationFrameId = null; }
                 });
             }, { rootMargin: "100px" }); 
             observer.observe(header);
@@ -317,22 +288,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (this.baseY < 0 || this.baseY > height) this.baseY = Math.random() * height;
                 
                 if(mouse.x != undefined && mouse.y != undefined) {
-                    let dx = mouse.x - this.x; let dy = mouse.y - this.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    let dx = mouse.x - this.x; let dy = mouse.y - this.y; let distance = Math.sqrt(dx * dx + dy * dy);
                     if (distance < mouse.radius) {
                         ctx.beginPath(); ctx.moveTo(this.x, this.y); ctx.lineTo(mouse.x, mouse.y);
                         const isDark = document.body.classList.contains('dark-theme');
                         ctx.strokeStyle = isDark ? `rgba(244, 114, 182, ${0.4 - distance/mouse.radius * 0.4})` : `rgba(212, 0, 109, ${0.2 - distance/mouse.radius * 0.2})`; 
                         ctx.lineWidth = 1; ctx.stroke();
-                        const forceDirectionX = dx / distance; const forceDirectionY = dy / distance;
-                        const force = (mouse.radius - distance) / mouse.radius;
+                        const forceDirectionX = dx / distance; const forceDirectionY = dy / distance; const force = (mouse.radius - distance) / mouse.radius;
                         this.vx -= forceDirectionX * force * 1.5; this.vy -= forceDirectionY * force * 1.5;
                     }
                 }
                 let spring = 0.05; let friction = 0.85;
                 this.vx += (this.baseX - this.x) * spring; this.vy += (this.baseY - this.y) * spring;
-                this.vx *= friction; this.vy *= friction;
-                this.x += this.vx; this.y += this.vy;
+                this.vx *= friction; this.vy *= friction; this.x += this.vx; this.y += this.vy;
             }
             draw() {
                 const isDark = document.body.classList.contains('dark-theme');
@@ -341,22 +309,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        function initCanvas() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = document.querySelector('header').offsetHeight;
-            particles = []; const particleCount = window.innerWidth < 768 ? 60 : 120;
-            for (let i = 0; i < particleCount; i++) { particles.push(new Particle()); }
-        }
-
+        function initCanvas() { width = canvas.width = window.innerWidth; height = canvas.height = document.querySelector('header').offsetHeight; particles = []; const particleCount = window.innerWidth < 768 ? 60 : 120; for (let i = 0; i < particleCount; i++) { particles.push(new Particle()); } }
         function animateCanvas() {
-            if (!isCanvasVisible) return; 
-            animationFrameId = requestAnimationFrame(animateCanvas);
-            ctx.clearRect(0, 0, width, height);
+            if (!isCanvasVisible) return; animationFrameId = requestAnimationFrame(animateCanvas); ctx.clearRect(0, 0, width, height);
             for (let i = 0; i < particles.length; i++) {
                 let p = particles[i]; p.update(); p.draw();
                 for (let j = i + 1; j < particles.length; j++) {
-                    let p2 = particles[j]; 
-                    let dist = Math.sqrt(Math.pow(p.x - p2.x, 2) + Math.pow(p.y - p2.y, 2));
+                    let p2 = particles[j]; let dist = Math.sqrt(Math.pow(p.x - p2.x, 2) + Math.pow(p.y - p2.y, 2));
                     if (dist < 160) {
                         ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
                         const isDark = document.body.classList.contains('dark-theme');
@@ -369,7 +328,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('resize', initCanvas); initCanvas(); animateCanvas();
     }
 
-    // --- 12. SOMBRA DE NAVBAR ---
+    // --- 12. SOMBRA DE NAVBAR Y BARRA DE PROGRESO ---
     const nav = document.getElementById('main-nav');
     const progressBar = document.getElementById('scroll-progress');
     window.addEventListener('scroll', () => { 
@@ -395,11 +354,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if(document.getElementById('link-linkedin')) document.getElementById('link-linkedin').href = JBDA_CONFIG.linkedin;
 
         const emailLinks = document.querySelectorAll('.link-email');
-        emailLinks.forEach(el => {
-            el.href = `mailto:${JBDA_CONFIG.email}`;
-            const textSpan = el.querySelector('.email-text');
-            if (textSpan) textSpan.innerText = JBDA_CONFIG.email;
-        });
+        emailLinks.forEach(el => { el.href = `mailto:${JBDA_CONFIG.email}`; const textSpan = el.querySelector('.email-text'); if (textSpan) textSpan.innerText = JBDA_CONFIG.email; });
 
         const abrirCalendly = (e) => { e.preventDefault(); Calendly.initPopupWidget({url: JBDA_CONFIG.calendly}); document.getElementById('concierge-menu').classList.remove('active'); return false; };
         if(document.getElementById('link-hero')) document.getElementById('link-hero').addEventListener('click', abrirCalendly); 
@@ -416,12 +371,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 15. MODO TERMINAL ---
     const terminalToggle = document.getElementById('terminal-toggle');
-    if(terminalToggle) { 
-        terminalToggle.addEventListener('click', (e) => { 
-            e.stopPropagation(); document.body.classList.toggle('terminal-mode'); 
-        }); 
-    }
-
+    if(terminalToggle) { terminalToggle.addEventListener('click', (e) => { e.stopPropagation(); document.body.classList.toggle('terminal-mode'); }); }
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.addEventListener('keydown', event => { if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || (event.ctrlKey && event.keyCode === 85)) { event.preventDefault(); } });
 });
