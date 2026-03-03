@@ -122,7 +122,6 @@ nav.nav-scrolled .logo-container img { height: 45px; }
 .lang-toggle-link { font-size: 14px !important; font-weight: 800 !important; margin-left: 10px; cursor: none !important; }
 .lang-toggle-link::after { display: none !important; }
 
-/* Botón Móvil Oculto en PC */
 .mobile-menu-btn { display: none; }
 
 header, section { position: relative; z-index: 1; background-color: transparent !important; background-image: none !important; }
@@ -288,67 +287,54 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
 @media (max-width: 900px) {
     nav { 
         height: auto !important; 
-        /* max() garantiza al menos 20px de respiro o el Notch, sin sumar duplicados */
-        padding-top: max(env(safe-area-inset-top), 20px) !important;
-        padding-bottom: 15px !important;
+        /* Matemática estricta: Empujamos el contenido EXACTAMENTE el tamaño del notch + 8px. */
+        padding-top: calc(env(safe-area-inset-top, 0px) + 8px) !important;
+        padding-bottom: 12px !important;
         padding-left: 5% !important;
         padding-right: 5% !important;
+        align-items: center !important; 
     }
     nav.nav-scrolled {
-        padding-top: max(env(safe-area-inset-top), 15px) !important;
-        padding-bottom: 15px !important;
+        padding-top: calc(env(safe-area-inset-top, 0px) + 5px) !important;
+        padding-bottom: 8px !important;
     }
 
-    /* EL SCRIM: Sombra detrás de la barra de estado para leer la hora en blanco */
+    /* EL SCRIM: Gradiente que oscurece el fondo solo en la parte superior para legibilidad */
     nav::before {
         content: '';
         position: absolute;
         top: 0; left: 0; width: 100%;
-        height: calc(max(env(safe-area-inset-top), 20px) + 25px);
-        background: linear-gradient(to bottom, rgba(15, 23, 42, 0.35) 0%, rgba(15, 23, 42, 0) 100%);
+        height: calc(env(safe-area-inset-top, 0px) + 25px);
+        background: linear-gradient(to bottom, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0) 100%);
         z-index: -1;
         pointer-events: none;
     }
 
-    .logo-container img { height: 38px !important; } 
-    nav.nav-scrolled .logo-container img { height: 34px !important; }
+    .logo-container { display: flex; align-items: center; height: auto; margin: 0; padding: 0; position: relative; z-index: 10; }
+    .logo-container a { display: flex; align-items: center; text-decoration: none; }
+    .logo-container img { height: 35px !important; width: auto; display: block; } 
+    nav.nav-scrolled .logo-container img { height: 30px !important; }
     
-    /* RESTAURACIÓN DEL BOTÓN HAMBURGUESA (Invulnerable) */
+    /* BOTÓN BLINDADO (El hack translateZ fuerza a Safari a no ocultarlo tras el cristal) */
     .mobile-menu-btn { 
-        display: block !important; 
-        background: none; 
-        border: none; 
-        z-index: 2500 !important; 
-        cursor: pointer; 
-        padding: 5px; 
-        margin: 0; 
+        display: flex !important; 
+        align-items: center; justify-content: center; 
+        padding: 10px; margin-right: -10px; 
         position: relative; 
-    }
-    
-    .hamburger-lines { 
-        display: flex; 
-        flex-direction: column; 
-        justify-content: space-between; 
-        width: 26px; 
-        height: 16px; 
-        pointer-events: none; 
-    }
-    
-    .hamburger-lines .line { 
-        display: block; 
-        height: 2px; 
-        width: 100%; 
-        background-color: var(--dark-grey); 
-        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
-        border-radius: 2px; 
+        z-index: 99999 !important; 
+        transform: translateZ(10px);
+        -webkit-transform: translateZ(10px);
     }
 
-    .mobile-menu-btn.open .line1 { transform: translateY(7px) rotate(45deg); background-color: var(--pink-premium) !important; }
+    .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; width: 26px; height: 16px; pointer-events: none; }
+    .hamburger-lines .line { display: block; height: 2px; width: 100%; background-color: var(--dark-grey); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); border-radius: 2px; }
+
+    /* Cambio de color de la "X" a Gris Oscuro para máximo contraste al abrir el menú */
+    .mobile-menu-btn.open .line1 { transform: translateY(7px) rotate(45deg); background-color: var(--dark-grey) !important; }
     .mobile-menu-btn.open .line2 { opacity: 0; }
-    .mobile-menu-btn.open .line3 { transform: translateY(-7px) rotate(-45deg); background-color: var(--pink-premium) !important; }
+    .mobile-menu-btn.open .line3 { transform: translateY(-7px) rotate(-45deg); background-color: var(--dark-grey) !important; }
     
-    /* Menú Overlay */
-    .nav-links { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(253, 242, 248, 0.9); backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.4s ease, visibility 0.4s ease; z-index: 1500; opacity: 0; visibility: hidden; }
+    .nav-links { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(253, 242, 248, 0.95); backdrop-filter: blur(15px) saturate(180%); -webkit-backdrop-filter: blur(15px) saturate(180%); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.4s ease, visibility 0.4s ease; z-index: 1500; opacity: 0; visibility: hidden; }
     .nav-links.active { opacity: 1; visibility: visible; }
     
     .nav-links a { font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 600; margin: 15px 0; color: var(--dark-grey); letter-spacing: 1px; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; }
@@ -431,12 +417,14 @@ body.dark-theme .marquee-wrapper .brand-logo:hover { filter: brightness(0) inver
 body.dark-theme #dark-mode-toggle, body.dark-theme .lang-toggle-link { color: #f8fafc; }
 body.dark-theme #dark-mode-toggle:hover, body.dark-theme .lang-toggle-link:hover { color: var(--pink-premium); }
 
-/* Apagar el scrim oscuro cuando el tema ya es oscuro */
 @media (max-width: 900px) { 
     body.dark-theme .nav-links { background: rgba(15, 23, 42, 0.85) !important; backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); } 
     body.dark-theme .hamburger-lines .line { background-color: #f8fafc; }
     body.dark-theme .nav-links a { color: #f8fafc; }
     body.dark-theme nav::before { display: none !important; }
+    /* La "X" en modo oscuro debe ser blanca */
+    body.dark-theme .mobile-menu-btn.open .line1 { background-color: #f8fafc !important; }
+    body.dark-theme .mobile-menu-btn.open .line3 { background-color: #f8fafc !important; }
 }
 
 /* ==============================================================
