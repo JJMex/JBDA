@@ -393,24 +393,37 @@ body.dark-theme ::-webkit-scrollbar-thumb { border-color: var(--dark-grey); }
 ::-webkit-scrollbar-thumb:hover { background: var(--pink-premium); }
 body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color: #050505; }
 
-/* ==============================================================
-   SOPORTE PARA PWA iOS (NOTCH Y STATUS BAR)
+ /* ==============================================================
+   SOPORTE PWA iOS (NOTCH Y STATUS BAR) - ARQUITECTURA FLUIDA
    ============================================================== */
+/* Desktop */
 nav {
-    padding-top: env(safe-area-inset-top) !important;
-    height: calc(110px + env(safe-area-inset-top)) !important;
+    height: auto !important;
+    /* Empujamos el contenido hacia abajo (Notch + espacio visual) */
+    padding-top: calc(env(safe-area-inset-top) + 12px) !important;
+    padding-bottom: 12px !important;
 }
 nav.nav-scrolled {
-    height: calc(80px + env(safe-area-inset-top)) !important;
+    height: auto !important;
+    padding-top: calc(env(safe-area-inset-top) + 12px) !important;
+    padding-bottom: 12px !important;
 }
 
+/* Móvil */
 @media (max-width: 900px) {
     nav {
-        padding-top: calc(15px + env(safe-area-inset-top)) !important;
-        height: calc(90px + env(safe-area-inset-top)) !important;
+        height: auto !important;
+        /* Matemáticas exactas para empujar el menú móvil a la zona segura */
+        padding-top: calc(env(safe-area-inset-top) + 15px) !important;
+        padding-bottom: 15px !important;
     }
-    /* Aseguramos que el overlay del menú inicie desde el borde superior */
+    nav.nav-scrolled {
+        height: auto !important;
+        padding-top: calc(env(safe-area-inset-top) + 10px) !important;
+        padding-bottom: 10px !important;
+    }
+    /* Aseguramos que la lista del menú overlay empiece por debajo del notch */
     .nav-links {
-        padding-top: env(safe-area-inset-top);
+        padding-top: env(safe-area-inset-top) !important;
     }
 }
