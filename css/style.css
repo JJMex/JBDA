@@ -371,6 +371,7 @@ body.dark-theme ::-webkit-scrollbar-thumb { border-color: var(--dark-grey); }
 ::-webkit-scrollbar-thumb:hover { background: var(--pink-premium); }
 body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color: #050505; }
 
+
 /* ==============================================================
    NOTIFICACIÓN TOAST (GLOW PREMIUM)
    ============================================================== */
@@ -390,11 +391,13 @@ body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color
 .jbda-toast.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
 .jbda-toast svg { stroke: var(--pink-premium); width: 18px; height: 18px; }
 
+/* Inversión en modo oscuro para que resalte */
 body.dark-theme .jbda-toast { 
     background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px);
     color: #f8fafc; border-color: var(--pink-premium); 
     box-shadow: 0 15px 35px rgba(212, 0, 109, 0.35), 0 5px 15px rgba(0,0,0,0.5); 
 }
+
 
 /* ==============================================================
    JBDA CUSTOM CALENDLY MODAL
