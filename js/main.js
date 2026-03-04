@@ -410,11 +410,58 @@ document.addEventListener("DOMContentLoaded", () => {
         const emailLinks = document.querySelectorAll('.link-email');
         emailLinks.forEach(el => { el.href = `mailto:${JBDA_CONFIG.email}`; const textSpan = el.querySelector('.email-text'); if (textSpan) textSpan.innerText = JBDA_CONFIG.email; });
 
-        // ABRIR CALENDLY ÉLITE (PWA FIX)
+        // ==============================================================
+        // MOTOR MODAL JBDA (REEMPLAZO TOTAL DEL WIDGET NATIVO DE CALENDLY)
+        // ==============================================================
+        let customModal, customIframe;
+        
+        const initCustomCalendly = () => {
+            // Creamos el cristal de fondo
+            const overlay = document.createElement('div');
+            overlay.className = 'jbda-modal-overlay hidden';
+            
+            // Creamos nuestra "X" indestructible
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'jbda-modal-close';
+            
+            // Creamos el contenedor blanco del calendario
+            const content = document.createElement('div');
+            content.className = 'jbda-modal-content';
+            
+            // Inyectamos un Iframe desnudo (Calendly no puede modificar nada fuera de él)
+            const iframe = document.createElement('iframe');
+            iframe.width = '100%';
+            iframe.height = '100%';
+            iframe.frameBorder = '0';
+            
+            content.appendChild(iframe);
+            overlay.appendChild(closeBtn);
+            overlay.appendChild(content);
+            document.body.appendChild(overlay);
+            
+            const close = () => {
+                overlay.classList.add('hidden');
+                // Borramos el Iframe al cerrar para no gastar batería
+                setTimeout(() => iframe.src = '', 400); 
+            };
+            
+            closeBtn.addEventListener('click', close);
+            // Si tocas el cristal de fondo, también se cierra
+            overlay.addEventListener('click', (e) => { if(e.target === overlay) close(); });
+            
+            customModal = overlay;
+            customIframe = iframe;
+        };
+
         const abrirCalendly = (e) => { 
             e.preventDefault(); 
-            const cleanCalendlyUrl = JBDA_CONFIG.calendly + '?hide_event_type_details=1&hide_gdpr_banner=1';
-            Calendly.initPopupWidget({url: cleanCalendlyUrl}); 
+            if(!customModal) initCustomCalendly();
+            
+            // Forzamos la vista de "Embed" limpia y directa
+            const cleanUrl = JBDA_CONFIG.calendly + '?embed=1&hide_event_type_details=1&hide_gdpr_banner=1';
+            customIframe.src = cleanUrl;
+            customModal.classList.remove('hidden');
+            
             const concierge = document.getElementById('concierge-menu');
             if(concierge) concierge.classList.remove('active'); 
             return false; 
