@@ -372,16 +372,17 @@ body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color
 /* 1. Fondo de cristal para la pantalla completa */
 .calendly-overlay { background-color: rgba(15, 23, 42, 0.4) !important; backdrop-filter: blur(15px) saturate(150%) !important; -webkit-backdrop-filter: blur(15px) saturate(150%) !important; z-index: 100000 !important;}
 
-/* 2. Empujar el cuadro del calendario hacia abajo para que no toque el Notch */
-@media (max-width: 900px) { .calendly-popup { padding: max(env(safe-area-inset-top, 85px), 85px) 15px 30px 15px !important; } }
+/* 2. Empujar el cuadro del calendario hacia abajo */
+@media (max-width: 900px) { .calendly-popup { padding: max(env(safe-area-inset-top, 90px), 90px) 15px 30px 15px !important; } }
 
-/* 3. Bordes redondeados en la tarjeta blanca del calendario */
+/* 3. Diseño del contenedor principal */
 .calendly-popup-content { border-radius: 24px !important; overflow: hidden !important; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; }
 
-/* 4. REEMPLAZO ABSOLUTO DEL BOTÓN "X" DE CALENDLY */
-.calendly-close-overlay { 
+/* 4. UNIFICAR TODOS LOS BOTONES DE CERRAR POSIBLES (LA SOLUCIÓN DE FUERZA BRUTA) */
+/* Calendly inyecta dos posibles clases. Superponemos ambas en el mismo lugar seguro. */
+.calendly-close-overlay, .calendly-popup-close { 
     position: fixed !important;
-    top: max(env(safe-area-inset-top, 65px), 65px) !important; /* Fuerza mínima de 65px hacia abajo */
+    top: max(env(safe-area-inset-top, 70px), 70px) !important; 
     right: 20px !important; 
     bottom: auto !important; 
     left: auto !important; 
@@ -392,14 +393,21 @@ body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color
     box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
     opacity: 1 !important;
     color: transparent !important;
-    /* Dibujamos nuestra propia 'X' en código puro para que no falle */
+    /* Dibujamos nuestra propia 'X' en código puro (Base64) para que nunca falle */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 16 16'%3E%3Cpath fill='%23ffffff' d='M14.7 1.3c-.4-.4-1-.4-1.4 0L8 6.6 2.7 1.3c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4L6.6 8l-5.3 5.3c-.4.4-.4 1 0 1.4.2.2.4.3.7.3s.5-.1.7-.3L8 9.4l5.3 5.3c.2.2.5.3.7.3s.5-.1.7-.3c.4-.4.4-1 0-1.4L9.4 8l5.3-5.3c.4-.4.4-1 0-1.4z'/%3E%3C/svg%3E") !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
     transition: background-color 0.3s ease, transform 0.2s ease !important;
+    z-index: 100005 !important;
+    display: block !important;
+    cursor: pointer !important;
 }
 
-.calendly-close-overlay:hover { background-color: var(--pink-premium) !important; transform: scale(1.1) !important; }
+.calendly-close-overlay:hover, .calendly-popup-close:hover { background-color: var(--pink-premium) !important; transform: scale(1.1) !important; }
 
-/* 5. Ocultar todos los elementos basura que Calendly intente poner adentro */
-.calendly-close-overlay * { display: none !important; }
+/* 5. Destruir la 'X' original y todo elemento basura de Calendly dentro de los botones */
+.calendly-close-overlay svg, .calendly-popup-close svg, .calendly-close-overlay *, .calendly-popup-close * { 
+    display: none !important; 
+    opacity: 0 !important; 
+    visibility: hidden !important;
+}
