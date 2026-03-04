@@ -410,7 +410,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const emailLinks = document.querySelectorAll('.link-email');
         emailLinks.forEach(el => { el.href = `mailto:${JBDA_CONFIG.email}`; const textSpan = el.querySelector('.email-text'); if (textSpan) textSpan.innerText = JBDA_CONFIG.email; });
 
-        const abrirCalendly = (e) => { e.preventDefault(); Calendly.initPopupWidget({url: JBDA_CONFIG.calendly}); document.getElementById('concierge-menu').classList.remove('active'); return false; };
+        // ABRIR CALENDLY ÉLITE (PWA FIX)
+        const abrirCalendly = (e) => { 
+            e.preventDefault(); 
+            const cleanCalendlyUrl = JBDA_CONFIG.calendly + '?hide_event_type_details=1&hide_gdpr_banner=1';
+            Calendly.initPopupWidget({url: cleanCalendlyUrl}); 
+            const concierge = document.getElementById('concierge-menu');
+            if(concierge) concierge.classList.remove('active'); 
+            return false; 
+        };
+
         if(document.getElementById('link-hero')) document.getElementById('link-hero').addEventListener('click', abrirCalendly); 
         if(document.getElementById('link-cta')) document.getElementById('link-cta').addEventListener('click', abrirCalendly); 
         if(document.getElementById('link-concierge-calendly')) document.getElementById('link-concierge-calendly').addEventListener('click', abrirCalendly);
