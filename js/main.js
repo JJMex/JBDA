@@ -62,7 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 4. TRANSICIONES DE PÁGINA ---
     document.querySelectorAll('a').forEach(anchor => {
-        // Excluimos explícitamente calendly y cualquier cosa que empiece con mailto:
         if(anchor.href && !anchor.target && !anchor.id.includes('calendly') && !anchor.getAttribute('href').startsWith('mailto:')) {
             anchor.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
@@ -402,11 +401,9 @@ document.addEventListener("DOMContentLoaded", () => {
         let toastTimeout;
 
         emailLinks.forEach(el => {
-            // Actualizar el texto si tiene un span interno
             const textSpan = el.querySelector('.email-text'); 
             if (textSpan) textSpan.innerText = JBDA_CONFIG.email; 
             
-            // Extraer correo de forma inteligente
             let emailToCopy = JBDA_CONFIG.email;
             if (el.hasAttribute('href') && el.getAttribute('href').startsWith('mailto:')) {
                 emailToCopy = el.getAttribute('href').replace('mailto:', '');
@@ -415,10 +412,9 @@ document.addEventListener("DOMContentLoaded", () => {
             el.style.cursor = 'pointer';
             
             el.addEventListener('click', (e) => {
-                e.preventDefault(); // Bloqueo total al "Mail" de Windows/Mac
+                e.preventDefault(); 
                 e.stopPropagation();
 
-                // Función Fuerza Bruta (Fallback seguro)
                 const forceCopy = () => {
                     const textArea = document.createElement("textarea");
                     textArea.value = emailToCopy;
@@ -437,7 +433,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     document.body.removeChild(textArea);
                 };
 
-                // Intentar API moderna primero, si falla, usa Fuerza Bruta
                 if (navigator.clipboard && window.isSecureContext) {
                     navigator.clipboard.writeText(emailToCopy)
                         .then(() => showToast())
@@ -448,14 +443,14 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        // TOAST (Notificación minimalista)
+        // TOAST (Notificación Premium con el nuevo ícono)
         const showToast = () => {
             let toast = document.getElementById('jbda-toast');
             if (!toast) {
                 toast = document.createElement('div');
                 toast.id = 'jbda-toast';
                 toast.className = 'jbda-toast';
-                toast.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> ${isEnglish ? 'Email copied' : 'Correo copiado'}`;
+                toast.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> <span>${isEnglish ? 'Email copied' : 'Correo copiado'}</span>`;
                 document.body.appendChild(toast);
             }
             void toast.offsetWidth;
