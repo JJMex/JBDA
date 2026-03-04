@@ -367,11 +367,39 @@ body.dark-theme ::-webkit-scrollbar-thumb { border-color: var(--dark-grey); }
 body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color: #050505; }
 
 /* ==============================================================
-   OVERRIDE CALENDLY (ÉLITE & PWA FIX)
+   OVERRIDE CALENDLY (ÉLITE & PWA FIX) - SOLUCIÓN NOTCH IPHONE
    ============================================================== */
-.calendly-overlay { background-color: rgba(15, 23, 42, 0.4) !important; backdrop-filter: blur(15px) saturate(150%) !important; -webkit-backdrop-filter: blur(15px) saturate(150%) !important; }
+/* 1. Fondo de cristal para la pantalla completa */
+.calendly-overlay { background-color: rgba(15, 23, 42, 0.4) !important; backdrop-filter: blur(15px) saturate(150%) !important; -webkit-backdrop-filter: blur(15px) saturate(150%) !important; z-index: 100000 !important;}
+
+/* 2. Empujar el cuadro del calendario hacia abajo para que no toque el Notch */
+@media (max-width: 900px) { .calendly-popup { padding: max(env(safe-area-inset-top, 85px), 85px) 15px 30px 15px !important; } }
+
+/* 3. Bordes redondeados en la tarjeta blanca del calendario */
 .calendly-popup-content { border-radius: 24px !important; overflow: hidden !important; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; }
-.calendly-close-overlay { top: max(calc(env(safe-area-inset-top) + 15px), 25px) !important; right: 20px !important; bottom: auto !important; left: auto !important; }
-.calendly-close-overlay .calendly-close-button { background-color: var(--dark-grey) !important; width: 44px !important; height: 44px !important; border-radius: 50% !important; display: flex !important; justify-content: center !important; align-items: center !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important; transition: background-color 0.3s ease, transform 0.2s ease !important; }
-.calendly-close-overlay .calendly-close-button:hover { background-color: var(--pink-premium) !important; transform: scale(1.1) !important; }
-.calendly-close-overlay .calendly-close-button svg { fill: #ffffff !important; width: 20px !important; height: 20px !important; margin: 0 !important; position: static !important; }
+
+/* 4. REEMPLAZO ABSOLUTO DEL BOTÓN "X" DE CALENDLY */
+.calendly-close-overlay { 
+    position: fixed !important;
+    top: max(env(safe-area-inset-top, 65px), 65px) !important; /* Fuerza mínima de 65px hacia abajo */
+    right: 20px !important; 
+    bottom: auto !important; 
+    left: auto !important; 
+    width: 44px !important; 
+    height: 44px !important; 
+    background-color: var(--dark-grey) !important; 
+    border-radius: 50% !important; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
+    opacity: 1 !important;
+    color: transparent !important;
+    /* Dibujamos nuestra propia 'X' en código puro para que no falle */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 16 16'%3E%3Cpath fill='%23ffffff' d='M14.7 1.3c-.4-.4-1-.4-1.4 0L8 6.6 2.7 1.3c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4L6.6 8l-5.3 5.3c-.4.4-.4 1 0 1.4.2.2.4.3.7.3s.5-.1.7-.3L8 9.4l5.3 5.3c.2.2.5.3.7.3s.5-.1.7-.3c.4-.4.4-1 0-1.4L9.4 8l5.3-5.3c.4-.4.4-1 0-1.4z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    transition: background-color 0.3s ease, transform 0.2s ease !important;
+}
+
+.calendly-close-overlay:hover { background-color: var(--pink-premium) !important; transform: scale(1.1) !important; }
+
+/* 5. Ocultar todos los elementos basura que Calendly intente poner adentro */
+.calendly-close-overlay * { display: none !important; }
