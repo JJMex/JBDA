@@ -411,25 +411,22 @@ document.addEventListener("DOMContentLoaded", () => {
         emailLinks.forEach(el => { el.href = `mailto:${JBDA_CONFIG.email}`; const textSpan = el.querySelector('.email-text'); if (textSpan) textSpan.innerText = JBDA_CONFIG.email; });
 
         // ==============================================================
-        // MOTOR MODAL JBDA (REEMPLAZO TOTAL DEL WIDGET NATIVO DE CALENDLY)
+        // MOTOR MODAL JBDA (LA SOLUCIÓN DEFINITIVA DE LA "X")
         // ==============================================================
         let customModal, customIframe;
         
         const initCustomCalendly = () => {
-            // Creamos el cristal de fondo
             const overlay = document.createElement('div');
             overlay.className = 'jbda-modal-overlay hidden';
             
-            // EL SECRETO: INYECTAMOS UN SVG PURO QUE NO PUEDE SER DEFORMADO POR CSS EXTERNO
             const closeBtn = document.createElement('button');
             closeBtn.className = 'jbda-modal-close';
-            closeBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+            // AQUÍ INYECTAMOS EL SVG DIRECTAMENTE: INDESTRUCTIBLE POR CUALQUIER CSS
+            closeBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
             
-            // Creamos el contenedor blanco del calendario
             const content = document.createElement('div');
             content.className = 'jbda-modal-content';
             
-            // Inyectamos un Iframe desnudo (Calendly no puede modificar nada fuera de él)
             const iframe = document.createElement('iframe');
             iframe.width = '100%';
             iframe.height = '100%';
