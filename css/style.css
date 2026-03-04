@@ -367,95 +367,64 @@ body.dark-theme ::-webkit-scrollbar-thumb { border-color: var(--dark-grey); }
 body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color: #050505; }
 
 /* ==============================================================
-   OVERRIDE CALENDLY (ÉLITE & PWA FIX) - SOLUCIÓN SKINNING
+   JBDA CUSTOM CALENDLY MODAL (NIVEL ÉLITE 100% NATIVO)
    ============================================================== */
-/* 1. Fondo principal de cristal */
-.calendly-overlay {
-    background-color: rgba(15, 23, 42, 0.4) !important;
-    backdrop-filter: blur(15px) saturate(150%) !important;
-    -webkit-backdrop-filter: blur(15px) saturate(150%) !important;
+/* El Cristal Borroso de Fondo */
+.jbda-modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(15, 23, 42, 0.4); 
+    backdrop-filter: blur(15px) saturate(150%); 
+    -webkit-backdrop-filter: blur(15px) saturate(150%);
+    z-index: 100000; display: flex; justify-content: center; align-items: center;
+    opacity: 1; visibility: visible; 
+    transition: opacity 0.4s ease, visibility 0.4s ease;
 }
+.jbda-modal-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
-/* 2. Calendario con bordes redondos y sombra */
-.calendly-popup-content {
-    border-radius: 24px !important;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+/* El Contenedor del Calendario (Nuestra ventana) */
+.jbda-modal-content {
+    width: 100%; max-width: 1060px; height: 90vh; max-height: 700px;
+    background: transparent; border-radius: 24px; overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: scale(1); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
 }
+.jbda-modal-overlay.hidden .jbda-modal-content { transform: scale(0.95); }
 
-/* 3. Bajar el calendario en celular para evitar chocar con el Notch */
+/* LA "X" PERFECTA E INDESTRUCTIBLE (Fuera del Iframe) */
+.jbda-modal-close {
+    position: fixed; top: 30px; right: 30px; 
+    width: 44px; height: 44px;
+    background-color: var(--dark-grey); border-radius: 50%; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); 
+    cursor: pointer; z-index: 100001; display: flex; justify-content: center; align-items: center; 
+    transition: all 0.3s ease;
+    /* Ocultamos estilos base de botones html */
+    outline: none; padding: 0;
+}
+.jbda-modal-close:hover { background-color: var(--pink-premium); transform: scale(1.05) rotate(90deg); }
+
+/* Las líneas matemáticas de la "X" */
+.jbda-modal-close::before, .jbda-modal-close::after {
+    content: ''; position: absolute; width: 14px; height: 1.5px;
+    background-color: #ffffff; border-radius: 2px; display: block;
+}
+.jbda-modal-close::before { transform: rotate(45deg); }
+.jbda-modal-close::after { transform: rotate(-45deg); }
+
+/* Efecto App Nativa en Celular (Evita el Notch) */
 @media (max-width: 900px) {
-    .calendly-popup {
-        padding-top: max(env(safe-area-inset-top, 85px), 85px) !important;
+    .jbda-modal-overlay { align-items: flex-end; }
+    .jbda-modal-content { 
+        /* Calcula la altura total menos un espacio seguro para el notch */
+        height: calc(100vh - max(env(safe-area-inset-top, 60px), 60px)); 
+        max-height: 100vh;
+        border-radius: 24px 24px 0 0; 
+        border-bottom: none;
     }
-}
-
-/* 4. Skin del Botón: Convertimos sus botones en nuestro círculo */
-/* IMPORTANTE: Usamos flexbox para asegurar que la "X" matemática se centre */
-.calendly-close-button, 
-.calendly-popup-close {
-    position: fixed !important;
-    top: 30px !important;
-    right: 30px !important;
-    bottom: auto !important;
-    left: auto !important;
-    width: 44px !important;
-    height: 44px !important;
-    background-color: var(--dark-grey) !important;
-    border-radius: 50% !important;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
-    border: 1px solid rgba(255,255,255,0.1) !important;
-    transition: all 0.3s ease !important;
-    cursor: pointer !important;
-    opacity: 1 !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-}
-
-/* Hover Premium */
-.calendly-close-button:hover, 
-.calendly-popup-close:hover {
-    background-color: var(--pink-premium) !important;
-    transform: scale(1.05) rotate(90deg) !important;
-}
-
-/* Bajar el botón en Celular (Notch) */
-@media (max-width: 900px) {
-    .calendly-close-button, 
-    .calendly-popup-close {
-        top: max(env(safe-area-inset-top, 60px), 60px) !important;
-        right: 20px !important;
+    .jbda-modal-close { 
+        top: max(env(safe-area-inset-top, 10px), 10px); 
+        right: 20px; 
     }
-}
-
-/* 5. ELIMINAR CONTENIDO NATIVO: Desaparecemos la X fea o cualquier texto que Calendly intente poner */
-.calendly-close-button *, 
-.calendly-popup-close * {
-    display: none !important;
-}
-
-/* 6. DIBUJAR NUESTRA "X" PERFECTA E INDESTRUCTIBLE */
-.calendly-close-button::before,
-.calendly-close-button::after,
-.calendly-popup-close::before,
-.calendly-popup-close::after {
-    content: "" !important;
-    position: absolute !important;
-    width: 14px !important; /* Largo de la línea */
-    height: 1.5px !important; /* Grosor de la línea */
-    background-color: #ffffff !important;
-    border-radius: 2px !important;
-    display: block !important;
-}
-
-/* Rotación matemática para cruzar las líneas en el centro del flexbox */
-.calendly-close-button::before,
-.calendly-popup-close::before {
-    transform: rotate(45deg) !important;
-}
-
-.calendly-close-button::after,
-.calendly-popup-close::after {
-    transform: rotate(-45deg) !important;
 }
