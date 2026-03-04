@@ -50,10 +50,11 @@ body::before { content: ""; position: fixed; top: -10vh; left: -10vw; width: 120
 @keyframes pulse-logo { 0% { transform: scale(0.95); opacity: 0.7; filter: drop-shadow(0 0 10px rgba(212, 0, 109, 0.2)); } 100% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 25px rgba(212, 0, 109, 0.5)); } }
 .preloader-hidden { opacity: 0 !important; visibility: hidden !important; pointer-events: none; }
 
-@media (pointer: fine) { body, a, button, summary, .brand-logo, input[type=range] { cursor: none !important; } }
-.cursor-led { position: fixed; top: 0; left: 0; width: 10px; height: 10px; background-color: #10b981; border-radius: 2px; z-index: 999999; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 8px rgba(16, 185, 129, 0.8), 0 0 15px rgba(16, 185, 129, 0.5); animation: led-breathe 2s infinite alternate; transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s; }
+/* CURSOR SATÉLITE ÉLITE (Opción B) */
+/* Nota: Ya no ocultamos el cursor del sistema para mantener la precisión corporativa */
+.cursor-led { position: fixed; top: 0; left: 0; width: 8px; height: 8px; background-color: #10b981; border-radius: 2px; z-index: 999999; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 8px rgba(16, 185, 129, 0.8), 0 0 15px rgba(16, 185, 129, 0.5); animation: led-breathe 2s infinite alternate; transition: background-color 0.2s, box-shadow 0.2s, transform 0.15s cubic-bezier(0.25, 1, 0.5, 1); }
 @keyframes led-breathe { 0% { opacity: 0.4; box-shadow: 0 0 4px rgba(16, 185, 129, 0.5); } 100% { opacity: 1; box-shadow: 0 0 12px rgba(16, 185, 129, 0.9); } }
-.cursor-led.tx-rx { animation: blink-txrx 0.15s infinite !important; background-color: #34d399; box-shadow: 0 0 12px #34d399;}
+.cursor-led.tx-rx { animation: blink-txrx 0.15s infinite !important; background-color: #34d399; box-shadow: 0 0 12px #34d399; width: 12px; height: 12px; border-radius: 50%;}
 @keyframes blink-txrx { 0%, 100% { opacity: 1; } 33% { opacity: 0; } 66% { opacity: 0.8; } }
 @media (pointer: coarse) { .cursor-led { display: none !important; } }
 
@@ -88,7 +89,7 @@ nav.nav-scrolled .logo-container img { height: 45px; }
 .back-link { gap: 8px; }
 .back-link svg { fill: none !important; stroke: currentColor !important; stroke-width: 2.5; transition: transform 0.3s ease; }
 .back-link:hover svg { transform: translateX(-4px); } 
-.lang-toggle-link { font-size: 14px !important; font-weight: 800 !important; margin-left: 10px; cursor: none !important; }
+.lang-toggle-link { font-size: 14px !important; font-weight: 800 !important; margin-left: 10px; }
 .lang-toggle-link::after { display: none !important; }
 .mobile-menu-btn { display: none; background: transparent; border: none; outline: none; -webkit-appearance: none; }
 
@@ -214,7 +215,7 @@ details { margin-bottom: 15px; overflow: hidden; }
 details[open] { border-color: var(--pink-premium) !important; box-shadow: 0 15px 30px rgba(212,0,109,0.08) !important; background: rgba(253, 242, 248, 0.8); }
 details[open] .faq-content { animation: slideDownFAQ 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 @keyframes slideDownFAQ { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-summary { padding: 25px 30px; font-size: 18px; font-weight: 700; color: var(--dark-grey); transition: color 0.3s ease; list-style: none; position: relative; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; cursor: none !important;}
+summary { padding: 25px 30px; font-size: 18px; font-weight: 700; color: var(--dark-grey); transition: color 0.3s ease; list-style: none; position: relative; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; cursor: pointer; }
 summary:hover { color: var(--pink-premium); }
 summary::-webkit-details-marker { display: none; }
 summary::after { content: '+'; font-size: 24px; color: var(--pink-premium); transition: transform 0.3s ease; font-weight: 400; }
