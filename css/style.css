@@ -367,7 +367,7 @@ body.dark-theme ::-webkit-scrollbar-thumb { border-color: var(--dark-grey); }
 body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color: #050505; }
 
 /* ==============================================================
-   OVERRIDE CALENDLY (ÉLITE & PWA FIX) - SOLUCIÓN NATIVA (SKINNING)
+   OVERRIDE CALENDLY (ÉLITE & PWA FIX) - SOLUCIÓN SKINNING
    ============================================================== */
 /* 1. Fondo principal de cristal */
 .calendly-overlay {
@@ -390,12 +390,8 @@ body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color
     }
 }
 
-/* 4. Respetar el área de clics nativa del fondo (NO TOCAR DISPLAY NI Z-INDEX) */
-.calendly-close-overlay {
-    background-color: transparent !important;
-}
-
-/* 5. Transformar la estructura nativa en nuestro círculo Premium */
+/* 4. Skin del Botón: Convertimos sus botones en nuestro círculo */
+/* IMPORTANTE: Usamos flexbox para asegurar que la "X" matemática se centre */
 .calendly-close-button, 
 .calendly-popup-close {
     position: fixed !important;
@@ -409,22 +405,22 @@ body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color
     border-radius: 50% !important;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
     border: 1px solid rgba(255,255,255,0.1) !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+    opacity: 1 !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    transition: all 0.3s ease !important;
-    color: transparent !important; /* Oculta textos nativos basura */
-    background-image: none !important; /* Limpia imágenes de fondo nativas */
 }
 
-/* Animación Premium al pasar el mouse (Solo Desktop) */
+/* Hover Premium */
 .calendly-close-button:hover, 
 .calendly-popup-close:hover {
     background-color: var(--pink-premium) !important;
     transform: scale(1.05) rotate(90deg) !important;
 }
 
-/* Bajar el botón a la zona segura del Notch en Celular */
+/* Bajar el botón en Celular (Notch) */
 @media (max-width: 900px) {
     .calendly-close-button, 
     .calendly-popup-close {
@@ -433,22 +429,33 @@ body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color
     }
 }
 
-/* 6. CONTROLAR A LA BESTIA: Forzamos la X nativa de Calendly a ser elegante y perfecta (14px) */
-.calendly-close-button svg, 
-.calendly-popup-close svg,
-.calendly-close-button path,
-.calendly-popup-close path {
+/* 5. ELIMINAR CONTENIDO NATIVO: Desaparecemos la X fea o cualquier texto que Calendly intente poner */
+.calendly-close-button *, 
+.calendly-popup-close * {
+    display: none !important;
+}
+
+/* 6. DIBUJAR NUESTRA "X" PERFECTA E INDESTRUCTIBLE */
+.calendly-close-button::before,
+.calendly-close-button::after,
+.calendly-popup-close::before,
+.calendly-popup-close::after {
+    content: "" !important;
+    position: absolute !important;
+    width: 14px !important; /* Largo de la línea */
+    height: 1.5px !important; /* Grosor de la línea */
+    background-color: #ffffff !important;
+    border-radius: 2px !important;
     display: block !important;
-    width: 14px !important;
-    height: 14px !important;
-    min-width: 14px !important;
-    min-height: 14px !important;
-    max-width: 14px !important;
-    max-height: 14px !important;
-    fill: #ffffff !important;
-    stroke: #ffffff !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    position: static !important;
-    transform: none !important;
+}
+
+/* Rotación matemática para cruzar las líneas en el centro del flexbox */
+.calendly-close-button::before,
+.calendly-popup-close::before {
+    transform: rotate(45deg) !important;
+}
+
+.calendly-close-button::after,
+.calendly-popup-close::after {
+    transform: rotate(-45deg) !important;
 }
