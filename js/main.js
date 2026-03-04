@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // --- 0. PRELOADER Y REVELACIÓN DE TEXTO ---
+    // --- 1. PRELOADER Y REVELACIÓN DE TEXTO ---
     const overlay = document.getElementById('page-transition-overlay');
     const preloader = document.getElementById('preloader');
     
@@ -28,18 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         setTimeout(triggerReveal, 50);
     }
-
-    // --- 1. EFECTO SATÉLITE (CURSOR LED QUE SIGUE AL MOUSE NATIVO) ---
-    const cursorLed = document.getElementById('cursor-led');
-    window.addEventListener('mousemove', (e) => {
-        if (cursorLed) cursorLed.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-    });
-    
-    const interactives = document.querySelectorAll('a, button, summary, input[type=range], #terminal-toggle');
-    interactives.forEach(el => {
-        el.addEventListener('mouseenter', () => { if(cursorLed) cursorLed.classList.add('tx-rx'); });
-        el.addEventListener('mouseleave', () => { if(cursorLed) cursorLed.classList.remove('tx-rx'); });
-    });
 
     // --- 2. LENIS SCROLL ---
     let lenis;
