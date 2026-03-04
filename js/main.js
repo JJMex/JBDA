@@ -249,7 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
         svgCards.forEach(c => observerSvg.observe(c));
     }
 
-    // --- 11. RED INTERACTIVA CON PULSOS DE ENRUTAMIENTO (ÉLITE) ---
+    // --- 11. RED INTERACTIVA: PULSOS EFECTO COMETA (ÉLITE) ---
     const canvas = document.getElementById('network-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
@@ -272,7 +272,6 @@ document.addEventListener("DOMContentLoaded", () => {
             observer.observe(header);
         }
 
-        // Partículas (Nodos)
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
@@ -308,29 +307,44 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        // Pulsos de Luz (Paquetes de Datos)
+        // Nuevo Efecto Cometa (Línea difuminada en lugar de punto)
         class Pulse {
             constructor(p1, p2) {
                 this.p1 = p1; this.p2 = p2;
                 this.progress = 0;
-                this.speed = Math.random() * 0.015 + 0.01; // Velocidad del paquete
+                this.speed = Math.random() * 0.008 + 0.006; // Movimiento más elegante y deliberado
                 this.active = true;
+                this.length = 0.25; // La "cola" del cometa (25% de la línea)
             }
             update() {
                 this.progress += this.speed;
-                if (this.progress >= 1) this.active = false;
+                if (this.progress > 1 + this.length) this.active = false;
             }
             draw(ctx, isDark) {
                 if (!this.active) return;
-                let x = this.p1.x + (this.p2.x - this.p1.x) * this.progress;
-                let y = this.p1.y + (this.p2.y - this.p1.y) * this.progress;
+                
+                let startP = Math.max(0, this.progress - this.length);
+                let endP = Math.min(1, this.progress);
+
+                let x1 = this.p1.x + (this.p2.x - this.p1.x) * startP;
+                let y1 = this.p1.y + (this.p2.y - this.p1.y) * startP;
+                let x2 = this.p1.x + (this.p2.x - this.p1.x) * endP;
+                let y2 = this.p1.y + (this.p2.y - this.p1.y) * endP;
+
+                let colorRGB = isDark ? '244, 114, 182' : '212, 0, 109';
+                let gradient = ctx.createLinearGradient(x1, y1, x2, y2);
+                gradient.addColorStop(0, `rgba(${colorRGB}, 0)`); // Cola difuminada
+                gradient.addColorStop(1, `rgba(${colorRGB}, 1)`); // Cabeza brillante
+
                 ctx.beginPath();
-                ctx.arc(x, y, 2.5, 0, Math.PI * 2); // Tamaño del pulso
-                ctx.fillStyle = isDark ? 'rgba(244, 114, 182, 1)' : 'rgba(212, 0, 109, 1)';
-                ctx.shadowBlur = 8;
-                ctx.shadowColor = ctx.fillStyle;
-                ctx.fill();
-                ctx.shadowBlur = 0; // Reset
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = 2.5; // Cometa un poco más grueso que la red
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = `rgba(${colorRGB}, 0.8)`;
+                ctx.stroke();
+                ctx.shadowBlur = 0; // Reset para no afectar otros elementos
             }
         }
 
@@ -351,18 +365,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 for (let j = i + 1; j < particles.length; j++) {
                     let p2 = particles[j]; let dist = Math.sqrt(Math.pow(p.x - p2.x, 2) + Math.pow(p.y - p2.y, 2));
                     if (dist < 160) {
-                        // Dibuja las conexiones
                         ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
                         ctx.strokeStyle = isDark ? `rgba(244, 114, 182, ${0.25 - dist/160 * 0.25})` : `rgba(212, 0, 109, ${0.1 - dist/160 * 0.1})`; 
                         ctx.lineWidth = 0.8; ctx.stroke();
                         
-                        // Generar Pulso de Enrutamiento (Probabilidad aleatoria)
-                        if (Math.random() < 0.0015) { pulses.push(new Pulse(p, p2)); }
+                        // Generar Cometa (Probabilidad drásticamente reducida y solo en conexiones largas para evitar ruido)
+                        if (dist > 80 && Math.random() < 0.0003) { pulses.push(new Pulse(p, p2)); }
                     }
                 }
             }
 
-            // Actualizar y dibujar pulsos viajando
             for(let i = pulses.length - 1; i >= 0; i--) {
                 pulses[i].update();
                 pulses[i].draw(ctx, isDark);
