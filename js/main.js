@@ -62,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 4. TRANSICIONES DE PÁGINA ---
     document.querySelectorAll('a').forEach(anchor => {
+        // Excluimos explícitamente calendly y cualquier cosa que empiece con mailto:
         if(anchor.href && !anchor.target && !anchor.id.includes('calendly') && !anchor.getAttribute('href').startsWith('mailto:')) {
             anchor.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
