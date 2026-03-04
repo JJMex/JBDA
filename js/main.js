@@ -420,9 +420,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const overlay = document.createElement('div');
             overlay.className = 'jbda-modal-overlay hidden';
             
-            // Creamos nuestra "X" indestructible
+            // EL SECRETO: INYECTAMOS UN SVG PURO QUE NO PUEDE SER DEFORMADO POR CSS EXTERNO
             const closeBtn = document.createElement('button');
             closeBtn.className = 'jbda-modal-close';
+            closeBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
             
             // Creamos el contenedor blanco del calendario
             const content = document.createElement('div');
@@ -441,12 +442,10 @@ document.addEventListener("DOMContentLoaded", () => {
             
             const close = () => {
                 overlay.classList.add('hidden');
-                // Borramos el Iframe al cerrar para no gastar batería
                 setTimeout(() => iframe.src = '', 400); 
             };
             
             closeBtn.addEventListener('click', close);
-            // Si tocas el cristal de fondo, también se cierra
             overlay.addEventListener('click', (e) => { if(e.target === overlay) close(); });
             
             customModal = overlay;
@@ -457,7 +456,6 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault(); 
             if(!customModal) initCustomCalendly();
             
-            // Forzamos la vista de "Embed" limpia y directa
             const cleanUrl = JBDA_CONFIG.calendly + '?embed=1&hide_event_type_details=1&hide_gdpr_banner=1';
             customIframe.src = cleanUrl;
             customModal.classList.remove('hidden');
