@@ -367,7 +367,7 @@ body.dark-theme ::-webkit-scrollbar-thumb { border-color: var(--dark-grey); }
 body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color: #050505; }
 
 /* ==============================================================
-   JBDA CUSTOM CALENDLY MODAL (NIVEL ÉLITE 100% NATIVO)
+   JBDA CUSTOM CALENDLY MODAL (LA SOLUCIÓN DEFINITIVA)
    ============================================================== */
 /* El Cristal Borroso de Fondo */
 .jbda-modal-overlay {
@@ -392,39 +392,34 @@ body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color
 }
 .jbda-modal-overlay.hidden .jbda-modal-content { transform: scale(0.95); }
 
-/* LA "X" PERFECTA E INDESTRUCTIBLE (Fuera del Iframe) */
+/* EL BOTÓN DE CERRAR BLINDADO (Sin pseudo-elementos conflictivos) */
 .jbda-modal-close {
     position: fixed; top: 30px; right: 30px; 
     width: 44px; height: 44px;
     background-color: var(--dark-grey); border-radius: 50%; 
     box-shadow: 0 5px 15px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); 
-    cursor: pointer; z-index: 100001; display: flex; justify-content: center; align-items: center; 
+    cursor: pointer; z-index: 100001; 
+    display: flex; justify-content: center; align-items: center; 
     transition: all 0.3s ease;
-    /* Ocultamos estilos base de botones html */
-    outline: none; padding: 0;
+    /* Reseteo absoluto para que ningún otro CSS lo dañe */
+    outline: none !important; padding: 0 !important; margin: 0 !important;
+    -webkit-appearance: none !important;
 }
+
 .jbda-modal-close:hover { background-color: var(--pink-premium); transform: scale(1.05) rotate(90deg); }
 
-/* Las líneas matemáticas de la "X" */
-.jbda-modal-close::before, .jbda-modal-close::after {
-    content: ''; position: absolute; width: 14px; height: 1.5px;
-    background-color: #ffffff; border-radius: 2px; display: block;
+/* Reglas estrictas para el SVG inyectado */
+.jbda-modal-close svg {
+    display: block; width: 20px; height: 20px;
+    transition: stroke 0.3s ease;
 }
-.jbda-modal-close::before { transform: rotate(45deg); }
-.jbda-modal-close::after { transform: rotate(-45deg); }
 
 /* Efecto App Nativa en Celular (Evita el Notch) */
 @media (max-width: 900px) {
     .jbda-modal-overlay { align-items: flex-end; }
     .jbda-modal-content { 
-        /* Calcula la altura total menos un espacio seguro para el notch */
         height: calc(100vh - max(env(safe-area-inset-top, 60px), 60px)); 
-        max-height: 100vh;
-        border-radius: 24px 24px 0 0; 
-        border-bottom: none;
+        max-height: 100vh; border-radius: 24px 24px 0 0; border-bottom: none;
     }
-    .jbda-modal-close { 
-        top: max(env(safe-area-inset-top, 10px), 10px); 
-        right: 20px; 
-    }
+    .jbda-modal-close { top: max(env(safe-area-inset-top, 10px), 10px); right: 20px; }
 }
