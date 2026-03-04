@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(triggerReveal, 50);
     }
 
-    // --- 1. CURSOR LED VERDE (ESTILO HARDWARE) ---
+    // --- 1. EFECTO SATÉLITE (CURSOR LED QUE SIGUE AL MOUSE NATIVO) ---
     const cursorLed = document.getElementById('cursor-led');
     window.addEventListener('mousemove', (e) => {
         if (cursorLed) cursorLed.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
@@ -307,14 +307,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        // Nuevo Efecto Cometa (Línea difuminada en lugar de punto)
         class Pulse {
             constructor(p1, p2) {
                 this.p1 = p1; this.p2 = p2;
                 this.progress = 0;
-                this.speed = Math.random() * 0.008 + 0.006; // Movimiento más elegante y deliberado
+                this.speed = Math.random() * 0.008 + 0.006; 
                 this.active = true;
-                this.length = 0.25; // La "cola" del cometa (25% de la línea)
+                this.length = 0.25; 
             }
             update() {
                 this.progress += this.speed;
@@ -333,18 +332,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 let colorRGB = isDark ? '244, 114, 182' : '212, 0, 109';
                 let gradient = ctx.createLinearGradient(x1, y1, x2, y2);
-                gradient.addColorStop(0, `rgba(${colorRGB}, 0)`); // Cola difuminada
-                gradient.addColorStop(1, `rgba(${colorRGB}, 1)`); // Cabeza brillante
+                gradient.addColorStop(0, `rgba(${colorRGB}, 0)`); 
+                gradient.addColorStop(1, `rgba(${colorRGB}, 1)`); 
 
                 ctx.beginPath();
                 ctx.moveTo(x1, y1);
                 ctx.lineTo(x2, y2);
                 ctx.strokeStyle = gradient;
-                ctx.lineWidth = 2.5; // Cometa un poco más grueso que la red
+                ctx.lineWidth = 2.5; 
                 ctx.shadowBlur = 10;
                 ctx.shadowColor = `rgba(${colorRGB}, 0.8)`;
                 ctx.stroke();
-                ctx.shadowBlur = 0; // Reset para no afectar otros elementos
+                ctx.shadowBlur = 0; 
             }
         }
 
@@ -369,7 +368,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         ctx.strokeStyle = isDark ? `rgba(244, 114, 182, ${0.25 - dist/160 * 0.25})` : `rgba(212, 0, 109, ${0.1 - dist/160 * 0.1})`; 
                         ctx.lineWidth = 0.8; ctx.stroke();
                         
-                        // Generar Cometa (Probabilidad drásticamente reducida y solo en conexiones largas para evitar ruido)
                         if (dist > 80 && Math.random() < 0.0003) { pulses.push(new Pulse(p, p2)); }
                     }
                 }
