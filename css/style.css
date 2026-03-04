@@ -34,7 +34,6 @@ body { font-family: 'Inter', sans-serif; color: var(--dark-grey); line-height: 1
 .orb-2 { width: 55vw; height: 55vh; background: rgba(148, 163, 184, 0.25) !important; top: 20%; right: -10%; animation-duration: 30s; animation-direction: alternate-reverse; } 
 .orb-3 { width: 75vw; height: 75vh; background: rgba(251, 207, 232, 0.4) !important; bottom: -15%; left: 15%; animation-duration: 28s; } 
 
-/* Eliminamos la mutación de border-radius para evitar parpadeos en Chrome */
 @keyframes fluidAurora {
     0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
     33% { transform: translate3d(15vw, 15vh, 0) scale(1.15) rotate(15deg); }
@@ -64,18 +63,11 @@ h1, h2, .quote-massive, .title-serif { font-family: 'Playfair Display', serif; }
 @keyframes pulse-logo { 0% { transform: scale(0.95); opacity: 0.7; filter: drop-shadow(0 0 10px rgba(212, 0, 109, 0.2)); } 100% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 25px rgba(212, 0, 109, 0.5)); } }
 .preloader-hidden { opacity: 0 !important; visibility: hidden !important; pointer-events: none; }
 
-/* CURSOR SATÉLITE ÉLITE */
-.cursor-led { position: fixed; top: 0; left: 0; width: 8px; height: 8px; background-color: #10b981; border-radius: 2px; z-index: 999999; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 8px rgba(16, 185, 129, 0.8), 0 0 15px rgba(16, 185, 129, 0.5); animation: led-breathe 2s infinite alternate; transition: background-color 0.2s, box-shadow 0.2s, transform 0.15s cubic-bezier(0.25, 1, 0.5, 1); }
-@keyframes led-breathe { 0% { opacity: 0.4; box-shadow: 0 0 4px rgba(16, 185, 129, 0.5); } 100% { opacity: 1; box-shadow: 0 0 12px rgba(16, 185, 129, 0.9); } }
-.cursor-led.tx-rx { animation: blink-txrx 0.15s infinite !important; background-color: #34d399; box-shadow: 0 0 12px #34d399; width: 12px; height: 12px; border-radius: 50%;}
-@keyframes blink-txrx { 0%, 100% { opacity: 1; } 33% { opacity: 0; } 66% { opacity: 0.8; } }
-@media (pointer: coarse) { .cursor-led { display: none !important; } }
-
 /* ==============================================================
    EFECTO: MASK REVEAL
    ============================================================== */
 .reveal-text { display: inline-flex; overflow: hidden; vertical-align: bottom; padding-bottom: 0.25em; padding-right: 0.15em; margin-bottom: -0.25em; margin-right: -0.15em;}
-.reveal-text .reveal-inner { display: inline-block; transform: translateY(110%); opacity: 0; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease; }
+.reveal-text .reveal-inner { display: inline-block; transform: translateY(110%); opacity: 0; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease; will-change: transform, opacity;}
 body.page-loaded .reveal-text .reveal-inner { transform: translateY(0); opacity: 1; }
 .hero-content h2 .reveal-inner { transition-delay: 0.1s; }
 .hero-content h1 .reveal-text:nth-child(1) .reveal-inner { transition-delay: 0.2s; }
@@ -106,7 +98,6 @@ nav.nav-scrolled .logo-container img { height: 45px; }
 .lang-toggle-link::after { display: none !important; }
 .mobile-menu-btn { display: none; background: transparent; border: none; outline: none; -webkit-appearance: none; }
 
-/* Protegemos las secciones subiéndolas a la capa 10 para evitar colisiones con el fondo */
 header, section { position: relative; z-index: 10; background-color: transparent !important; background-image: none !important; }
 header { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; overflow: hidden; }
 .hero-content { position: relative; z-index: 10; max-width: 800px; }
