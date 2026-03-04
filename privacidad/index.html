@@ -1,109 +1,446 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Aviso de Privacidad | JBDA</title>
-    
-    <link rel="icon" href="../assets/Isotipo.png" type="image/png">
-    <meta name="theme-color" content="#050505">
+/* --- PALETA DE COLORES ORIGINAL --- */
+:root {
+    --white: #fdf2f8; --silver: #fce7f3; --dark-grey: #0f172a; 
+    --soft-grey: #475569; --pink-premium: #D4006D; --border: #fbcfe8; --bg-liquid-3: #fff0f5; 
+}
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-padding-top: 110px; scrollbar-width: thin; scrollbar-color: rgba(212, 0, 109, 0.4) transparent; }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500;1,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
-</head>
-<body id="privacidad-page">
+/* Accesibilidad Élite: Borde al navegar con teclado */
+*:focus-visible { outline: 2px solid var(--pink-premium); outline-offset: 4px; border-radius: 4px; }
 
-    <div id="page-transition-overlay"></div>
+/* --- LENIS SCROLL --- */
+html.lenis { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
 
-    <div class="orbs-container"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
-    <div class="blueprint-grid"></div>
-    <div class="cursor-led" id="cursor-led"></div>
+/* --- TRANSICIÓN LÍQUIDA --- */
+#page-transition-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(253, 242, 248, 0.15); backdrop-filter: blur(35px) saturate(150%); -webkit-backdrop-filter: blur(35px) saturate(150%); z-index: 99998; opacity: 1; visibility: visible; pointer-events: all; transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), visibility 0.8s ease; }
+#page-transition-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
-    <nav id="main-nav">
-        <div class="logo-container">
-            <a href="../" aria-label="Volver al inicio"><img src="../assets/JBDA.png" alt="JBDA Logo"></a>
-        </div>
-        
-        <div style="display: flex; align-items: center; justify-content: flex-end;">
-            <a href="../" class="nav-item back-link" style="display: flex; align-items: center; text-transform: uppercase; font-weight: 700; color: var(--pink-premium); font-size: 14px; text-decoration: none; opacity: 1; transform: none; visibility: visible;">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                <span class="desktop-text" style="font-family: 'Inter', sans-serif;">Regresar</span>
-            </a>
-        </div>
-    </nav>
+/* --- LIENZO INFINITO --- */
+body { font-family: 'Inter', sans-serif; color: var(--dark-grey); line-height: 1.8; -webkit-font-smoothing: antialiased; overflow-x: hidden; background-color: var(--white); transition: color 0.5s ease, background-color 0.5s ease; }
 
-    <main class="legal-container">
-        <span class="update-date">Última actualización: Febrero 2026</span>
-        <h1 class="title-serif">Aviso de Privacidad Integral</h1>
-        <p>En <strong>JBDA | Consultoría Estratégica en Infraestructura de Redes</strong>, estamos comprometidos con la protección de los datos personales de nuestros clientes, prospectos y socios comerciales. El presente Aviso de Privacidad tiene como objetivo informarle sobre el tratamiento que se le dará a sus datos personales cuando son recabados, utilizados, almacenados y/o transferidos por nosotros, en cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) de México.</p>
+/* MINIMALISMO PURO: Ocultamos los cuadros y la lupa */
+.blueprint-grid { display: none !important; }
 
-        <h2>1. Identidad y Domicilio del Responsable</h2>
-        <p>JBDA (en adelante, "la Firma"), con operaciones principales en la Ciudad de México y el Estado de Morelos, es la responsable del uso y protección de sus datos personales. Para cualquier duda o comentario relacionado con este aviso, puede contactarnos a través de nuestra dirección de correo electrónico corporativo: <a href="#" class="link-email" style="color: var(--pink-premium); text-decoration: none;"><strong class="email-text">JBDA_Tech@icloud.com</strong></a>.</p>
+/* AURORA FLUIDA MEJORADA (MÁS PRESENCIA Y CRUCE CENTRAL) */
+.orbs-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: 0; pointer-events: none; }
+.orb { position: absolute; border-radius: 50%; filter: blur(75px); opacity: 0.75; animation: fluidAurora 25s infinite alternate ease-in-out; transition: background 0.5s ease, opacity 0.5s ease; }
+.orb-1 { width: 65vw; height: 65vh; background: rgba(212, 0, 109, 0.2) !important; top: -5%; left: -5%; animation-duration: 25s; } 
+.orb-2 { width: 55vw; height: 55vh; background: rgba(148, 163, 184, 0.25) !important; top: 20%; right: -10%; animation-duration: 30s; animation-direction: alternate-reverse; } 
+.orb-3 { width: 75vw; height: 75vh; background: rgba(251, 207, 232, 0.4) !important; bottom: -15%; left: 15%; animation-duration: 28s; } 
 
-        <h2>2. Datos Personales Recabados</h2>
-        <p>Para llevar a cabo las finalidades descritas en el presente aviso de privacidad, recabaremos las siguientes categorías de datos personales:</p>
-        <ul>
-            <li><strong>Datos de identificación y contacto:</strong> Nombre completo, cargo o puesto, empresa para la que labora, teléfono institucional o móvil y correo electrónico corporativo.</li>
-            <li><strong>Datos técnicos y de infraestructura:</strong> Información relacionada con topologías de red, inventario de hardware (switches, firewalls, routers), configuraciones de VLANs, direcciones IP internas, y cualquier otro dato técnico estrictamente necesario para la ejecución de auditorías o simulaciones de estrés. <em>Nota: JBDA asume un rol de "Procesador" o consultor de esta información técnica, la cual es tratada bajo los más estrictos estándares de confidencialidad y ética profesional.</em></li>
-        </ul>
-        <p>JBDA <strong>no recaba datos personales sensibles</strong> (como origen racial, estado de salud, creencias religiosas o afiliación política) a través de su sitio web ni durante el proceso de consultoría inicial.</p>
+@keyframes fluidAurora {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 50%; }
+    33% { transform: translate(15vw, 15vh) scale(1.15) rotate(15deg); border-radius: 40% 60% 50% 50%; }
+    66% { transform: translate(-10vw, 20vh) scale(0.9) rotate(-10deg); border-radius: 60% 40% 60% 40%; }
+    100% { transform: translate(25vw, -10vh) scale(1.25) rotate(20deg); border-radius: 50% 50% 40% 60%; }
+}
 
-        <h2>3. Finalidades del Tratamiento de los Datos</h2>
-        <p>Los datos personales que recabamos de usted los utilizaremos para las siguientes finalidades primarias, que son necesarias para el servicio que solicita:</p>
-        <ul>
-            <li>Proveer los servicios de consultoría estratégica, auditoría y reingeniería de redes que nos sean requeridos.</li>
-            <li>Generar propuestas técnicas, comerciales y cotizaciones (optimización de CAPEX).</li>
-            <li>Establecer contacto y seguimiento para el agendamiento de sesiones de diagnóstico preliminar a través de plataformas de terceros (como Calendly).</li>
-            <li>Brindar soporte técnico y atención ejecutiva a través de nuestro portal de asistencia.</li>
-            <li>Elaborar contratos, acuerdos de confidencialidad (NDA) y facturación correspondiente a los servicios contratados.</li>
-        </ul>
+h1, h2, .quote-massive, .title-serif { font-family: 'Playfair Display', serif; }
+::selection { background-color: var(--pink-premium); color: #ffffff; }
+.editorial-italic { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500; }
+body::before { content: ""; position: fixed; top: -10vh; left: -10vw; width: 120vw; height: 120vh; background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E'); opacity: 0.04; pointer-events: none; z-index: 99997; animation: cinematicGrain 0.6s steps(2) infinite; }
+@keyframes cinematicGrain { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(-1%, 1%); } 50% { transform: translate(1%, -1%); } 75% { transform: translate(1%, 1%); } }
 
-        <h2>4. Transferencia de Datos Personales</h2>
-        <p>JBDA le informa que sus datos personales de contacto <strong>no serán vendidos, alquilados ni transferidos</strong> a terceros para fines de marketing o publicidad.</p>
-        <p>Sus datos solo podrán ser transferidos o compartidos dentro o fuera del país con:</p>
-        <ul>
-            <li>Fabricantes de hardware (ej. Cisco, Fortinet, Huawei) <strong>únicamente</strong> en los casos donde sea estrictamente necesario para el registro de licencias de equipos adquiridos por el cliente, gestión de garantías (RMA) o escalamiento de soporte técnico avanzado, siempre bajo previo consentimiento y conocimiento del cliente.</li>
-            <li>Autoridades competentes en los casos previstos por la ley.</li>
-        </ul>
+#preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--white); z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.6s ease, visibility 0.6s ease, background-color 0.5s ease; }
+.preload-logo { width: 150px; height: auto; animation: pulse-logo 1s infinite alternate cubic-bezier(0.4, 0, 0.2, 1); transition: filter 0.5s ease; }
+@keyframes pulse-logo { 0% { transform: scale(0.95); opacity: 0.7; filter: drop-shadow(0 0 10px rgba(212, 0, 109, 0.2)); } 100% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 25px rgba(212, 0, 109, 0.5)); } }
+.preloader-hidden { opacity: 0 !important; visibility: hidden !important; pointer-events: none; }
 
-        <h2>5. Medidas de Seguridad</h2>
-        <p>Para proteger sus datos personales contra daño, pérdida, alteración, destrucción o el uso, acceso o tratamiento no autorizado, JBDA ha establecido y mantiene medidas de seguridad administrativas, técnicas y físicas, alineadas a las mejores prácticas de ciberseguridad industrial y hardening de infraestructura que nosotros mismos implementamos en nuestros clientes.</p>
+/* CURSOR SATÉLITE ÉLITE */
+.cursor-led { position: fixed; top: 0; left: 0; width: 8px; height: 8px; background-color: #10b981; border-radius: 2px; z-index: 999999; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 8px rgba(16, 185, 129, 0.8), 0 0 15px rgba(16, 185, 129, 0.5); animation: led-breathe 2s infinite alternate; transition: background-color 0.2s, box-shadow 0.2s, transform 0.15s cubic-bezier(0.25, 1, 0.5, 1); }
+@keyframes led-breathe { 0% { opacity: 0.4; box-shadow: 0 0 4px rgba(16, 185, 129, 0.5); } 100% { opacity: 1; box-shadow: 0 0 12px rgba(16, 185, 129, 0.9); } }
+.cursor-led.tx-rx { animation: blink-txrx 0.15s infinite !important; background-color: #34d399; box-shadow: 0 0 12px #34d399; width: 12px; height: 12px; border-radius: 50%;}
+@keyframes blink-txrx { 0%, 100% { opacity: 1; } 33% { opacity: 0; } 66% { opacity: 0.8; } }
+@media (pointer: coarse) { .cursor-led { display: none !important; } }
 
-        <h2>6. Uso de Cookies y Tecnologías de Rastreo</h2>
-        <p>Le informamos que en nuestra página de internet utilizamos cookies y otras tecnologías para monitorear el comportamiento de los usuarios, brindarle un mejor servicio y experiencia al navegar en nuestra página. Las herramientas que utilizamos obtienen información sobre el tipo de navegador, sistema operativo, páginas visitadas y dirección IP, la cual se procesa de forma anónima para fines estadísticos.</p>
+/* ==============================================================
+   EFECTO: MASK REVEAL
+   ============================================================== */
+.reveal-text { display: inline-flex; overflow: hidden; vertical-align: bottom; padding-bottom: 0.25em; padding-right: 0.15em; margin-bottom: -0.25em; margin-right: -0.15em;}
+.reveal-text .reveal-inner { display: inline-block; transform: translateY(110%); opacity: 0; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease; }
+body.page-loaded .reveal-text .reveal-inner { transform: translateY(0); opacity: 1; }
+.hero-content h2 .reveal-inner { transition-delay: 0.1s; }
+.hero-content h1 .reveal-text:nth-child(1) .reveal-inner { transition-delay: 0.2s; }
+.hero-content h1 .reveal-text:nth-child(2) .reveal-inner { transition-delay: 0.3s; }
+.hero-content h1 .reveal-text:nth-child(4) .reveal-inner { transition-delay: 0.4s; }
 
-        <h2>7. Ejercicio de los Derechos ARCO</h2>
-        <p>Usted tiene derecho a conocer qué datos personales tenemos de usted, para qué los utilizamos y las condiciones del uso que les damos (Acceso). Asimismo, es su derecho solicitar la corrección de su información personal en caso de que esté desactualizada, sea inexacta o incompleta (Rectificación); que la eliminemos de nuestros registros o bases de datos (Cancelación); así como oponerse al uso de sus datos personales para fines específicos (Oposición). Estos derechos se conocen como derechos ARCO.</p>
-        <p>Para el ejercicio de cualquiera de los derechos ARCO, usted deberá presentar la solicitud respectiva enviando un correo electrónico a nuestro equipo de privacidad a <a href="#" class="link-email" style="color: var(--pink-premium); text-decoration: none;"><strong class="email-text">JBDA_Tech@icloud.com</strong></a>.</p>
-    </main>
+/* ==============================================================
+   NAVEGACIÓN DESKTOP
+   ============================================================== */
+nav { height: auto !important; padding-top: calc(env(safe-area-inset-top, 0px) + 20px); padding-bottom: 20px; padding-left: 8%; padding-right: 8%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: transparent; z-index: 9999; transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); border-bottom: 1px solid transparent; }
+nav.nav-scrolled { padding-top: calc(env(safe-area-inset-top, 0px) + 12px); padding-bottom: 12px; background: rgba(253, 242, 248, 0.7); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid rgba(212, 0, 109, 0.05); box-shadow: 0 10px 30px -10px rgba(212, 0, 109, 0.1); }
+nav::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: calc(env(safe-area-inset-top, 0px) + 35px); background: linear-gradient(to bottom, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0) 100%); z-index: -1; pointer-events: none; opacity: 0.8; }
+.scroll-progress { position: absolute; bottom: -1px; left: 0; height: 3px; background: var(--pink-premium); width: 0%; z-index: 10000; pointer-events: none; transition: width 0.1s ease-out; }
+.logo-container { display: flex; align-items: center; margin: 0; padding: 0; }
+.logo-container a { display: block; text-decoration: none; }
+.logo-container img { height: 60px; width: auto; transition: all 0.5s ease; display: block; }
+nav.nav-scrolled .logo-container img { height: 45px; } 
+.logo-container img:hover { transform: scale(1.03); }
+.nav-links { display: flex; align-items: center; gap: 40px; }
+.nav-links a { white-space: nowrap; text-decoration: none; color: var(--soft-grey); font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; position: relative; padding: 5px 0; transition: color 0.3s ease; display: flex; align-items: center;}
+.nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background-color: var(--pink-premium); transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+.nav-links a:hover { color: var(--dark-grey); }
+.nav-links a:hover::after { width: 100%; }
+.back-link { gap: 8px; }
+.back-link svg { fill: none !important; stroke: currentColor !important; stroke-width: 2.5; transition: transform 0.3s ease; }
+.back-link:hover svg { transform: translateX(-4px); } 
+.lang-toggle-link { font-size: 14px !important; font-weight: 800 !important; margin-left: 10px; }
+.lang-toggle-link::after { display: none !important; }
+.mobile-menu-btn { display: none; background: transparent; border: none; outline: none; -webkit-appearance: none; }
 
-    <div id="mega-footer" class="mega-footer-dark" style="margin-top: 40px;">
-        <footer>
-            <div class="footer-col">
-                <a href="../" aria-label="Volver al inicio"><img src="../assets/JBDA.png" alt="JBDA Logo" style="height: 40px; margin-bottom: 15px; filter: brightness(0) invert(1);" loading="lazy"></a>
-                <p><strong>JBDA 2026</strong> <span id="terminal-toggle" title="Modo Ingeniero">>_</span><br>Consultoría Estratégica en<br>Infraestructura de Redes.</p><br>
-                </div>
-            <div class="footer-col">
-                <h5>Contacto Corporativo</h5>
-                <p style="margin-bottom: 15px;"><strong>Ventas y Consultoría</strong><br>Atención a Nivel Ejecutivo</p>
-                <a href="#" class="social-link link-email" aria-label="Enviar correo corporativo a JBDA"><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><span class="email-text">JBDA_Tech@icloud.com</span></a>
-                <a id="link-whatsapp-footer" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Portal de Atención vía WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.508 0-9.987 4.479-9.987 9.987 0 1.763.459 3.474 1.33 4.988L2 22l5.167-1.357c1.47.8 3.123 1.22 4.814 1.22 5.509 0 9.987-4.478 9.987-9.987 0-2.667-1.038-5.176-2.925-7.062C17.158 2.927 14.65 2 12.012 2zM7.116 6.77c.158-.333.328-.339.482-.339h.35c.158 0 .412.06.627.287.215.227.82.801 1.004 1.173.184.373.114.646-.013.9-.127.253-.19.413-.381.633-.19.221-.399.493-.569.662-.184.186-.38.388-.164.757.215.369.959 1.574 2.06 2.557 1.414 1.264 2.615 1.657 2.99 1.84.375.184.593.153.815-.101.221-.253.945-1.099 1.198-1.475.253-.376.507-.312.854-.184.347.127 2.201 1.037 2.581 1.226.38.189.633.284.727.443.095.158.095.916-.285 1.992-.38 1.076-1.87 1.551-2.581 1.583-.711.032-1.36-.221-4.305-1.385-3.541-1.4-5.791-4.96-5.968-5.195-.177-.234-1.44-1.916-1.44-3.655 0-1.739.914-2.596 1.238-2.949z"/></svg>Portal de Asistencia</a>
-                <a id="link-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visitar perfil de LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>LinkedIn Oficial</a>
-            </div>
-            <div class="footer-col">
-                <h5>Cobertura Operativa</h5>
-                <p>Atención Presencial:<br>CDMX • Morelos</p>
-                <p>Soporte Remoto:<br>Alcance Global</p>
-            </div>
-        </footer>
-    </div>
+header, section { position: relative; z-index: 1; background-color: transparent !important; background-image: none !important; }
+header { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; overflow: hidden; }
+#network-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.hero-content { position: relative; z-index: 1; max-width: 800px; }
+header h2 { color: var(--pink-premium); font-size: 14px; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 30px; font-weight: 800; font-family: 'Inter', sans-serif;}
+header h1 { font-size: clamp(45px, 7vw, 85px); line-height: 1.05; margin-bottom: 35px; font-weight: 800; letter-spacing: -2px; color: var(--dark-grey); }
+header p { font-size: 22px; color: var(--soft-grey); max-width: 600px; margin-bottom: 50px; font-weight: 300; line-height: 1.6; }
+.btn-main { display: inline-block; padding: 22px 48px; background-color: var(--dark-grey); color: var(--white); text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; border: 1px solid var(--dark-grey); font-family: 'Inter', sans-serif; position: relative; overflow: hidden; z-index: 1; transition: box-shadow 0.4s ease, border-color 0.4s ease, color 0.3s ease; }
+.btn-main::before { content: ''; position: absolute; top: var(--y, 50%); left: var(--x, 50%); width: 0; height: 0; background-color: var(--pink-premium); border-radius: 50%; transform: translate(-50%, -50%); transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1), height 0.5s cubic-bezier(0.25, 1, 0.5, 1); z-index: -1; }
+.btn-main:hover::before { width: 400px; height: 400px; }
+.btn-main:hover { color: var(--white); box-shadow: 0 15px 30px rgba(212, 0, 109, 0.3); border-color: var(--pink-premium); background-color: transparent; }
 
-    <script src="../js/config.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
-    <script src="../js/main.js"></script>
-</body>
-</html>
+#ecosistema { padding: 20px 8% 60px 8%; text-align: center; }
+.glass-track { background: rgba(253, 242, 248, 0.3); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-top: 1px solid rgba(251, 207, 232, 0.6); border-bottom: 1px solid rgba(251, 207, 232, 0.6); border-radius: 20px; padding: 30px 0; margin: 0 auto; transition: background 0.5s ease, border-color 0.5s ease; }
+.marquee-wrapper { overflow: hidden; white-space: nowrap; position: relative; width: 100%; -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent); mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent); }
+.marquee-track { display: inline-block; animation: scroll-marquee 35s linear infinite; }
+.brand-logo { height: 40px; width: auto; margin: 0 50px; vertical-align: middle; filter: grayscale(100%) opacity(0.4); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+.marquee-wrapper:hover .marquee-track { animation-play-state: paused; }
+.marquee-wrapper:hover .brand-logo { opacity: 0.15; filter: grayscale(100%); }
+.marquee-wrapper .brand-logo:hover { opacity: 1 !important; filter: grayscale(0%) !important; transform: scale(1.15); z-index: 10; position: relative; }
+@keyframes scroll-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+#manifiesto-global { padding: 80px 8% 80px 8%; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: center; }
+.texto-manifiesto p { font-size: clamp(28px, 4vw, 42px); font-family: 'Playfair Display', serif; font-weight: 700; color: var(--dark-grey); line-height: 1.2; letter-spacing: -1px; margin-bottom: 20px;}
+.texto-manifiesto p.sub { font-size: 20px; font-family: 'Inter', sans-serif; font-weight: 300; color: var(--soft-grey); line-height: 1.6; max-width: 600px; }
+.cajas-filosofia { display: flex; flex-direction: column; gap: 40px; }
+.filosofia-box { padding-left: 30px; border-left: 3px solid var(--pink-premium); }
+.filosofia-box.asimetrica { margin-left: 40px; }
+.filosofia-box h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: var(--pink-premium); margin-bottom: 15px; font-weight: 800; font-family: 'Inter', sans-serif; }
+.filosofia-box p { font-size: 17px; color: var(--soft-grey); line-height: 1.7; font-weight: 400; }
+
+.card, .team-card, details { background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(251, 207, 232, 0.6); border-radius: 12px; position: relative; transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease, filter 0.5s ease, opacity 0.5s ease, background 0.5s ease !important; will-change: transform, opacity, filter; }
+.scroll-dimmed { filter: grayscale(50%) opacity(60%) !important; }
+.scroll-focused { filter: grayscale(0%) opacity(100%) !important; }
+.card:hover, .team-card:hover, details:hover { transform: translateY(-8px) scale(1.02) !important; box-shadow: 0 25px 50px rgba(0,0,0,0.08) !important; border-color: var(--pink-premium) !important; filter: grayscale(0%) opacity(100%) !important; z-index: 2; }
+
+.icon-wrapper { width: 56px; height: 56px; background: rgba(212, 0, 109, 0.08); border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; transition: all 0.4s ease; }
+.card:hover .icon-wrapper { background: var(--pink-premium); }
+.card:hover .icon-wrapper svg { stroke: #ffffff; }
+.icon-wrapper svg * { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.card.svg-animate .icon-wrapper svg * { animation: drawSvg 2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+@keyframes drawSvg { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+#servicios { padding: 40px 8% 140px 8%; display: flex; align-items: flex-start; gap: 100px; }
+.servicios-left { position: sticky; top: 160px; flex: 0 0 35%; }
+.servicios-right { flex: 1; display: flex; flex-direction: column; gap: 40px; padding-bottom: 80px; }
+.servicios-right .card { position: sticky; box-shadow: 0 -10px 40px rgba(0,0,0,0.04); }
+.servicios-right .card:nth-child(1) { top: 140px; }
+.servicios-right .card:nth-child(2) { top: 160px; }
+.servicios-right .card:nth-child(3) { top: 180px; }
+.section-label { color: var(--pink-premium); font-weight: 800; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: block; font-family: 'Inter', sans-serif; }
+.card { padding: 60px 50px; }
+.card-num { font-size: 12px; font-weight: 800; color: var(--pink-premium); margin-bottom: 30px; display: block; position: absolute; top: 40px; right: 40px; opacity: 0.5; font-family: 'Inter', sans-serif;}
+.card h3 { font-size: 26px; margin-bottom: 20px; letter-spacing: -0.5px; font-weight: 700; color: var(--dark-grey); font-family: 'Inter', sans-serif;}
+.card ul { list-style: none; }
+.card ul li { margin-bottom: 15px; font-size: 16px; color: var(--soft-grey); padding-left: 20px; border-left: 2px solid var(--pink-premium); line-height: 1.6; }
+
+#impacto-container { padding: 40px 0; }
+#impacto { padding: 90px 8%; background-color: var(--dark-grey) !important; color: var(--white); margin: 0 4%; border-radius: 30px; box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15); display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: center; transition: background-color 0.5s ease; }
+.impacto-texto { text-align: left; }
+.impacto-texto h2 { color: var(--white); font-size: clamp(32px, 4vw, 48px); letter-spacing: -1px; margin-top: 15px; line-height: 1.1; }
+.grid-impacto { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+.impacto-item:nth-child(3) { grid-column: span 2; }
+.impacto-item h3 { font-size: clamp(50px, 6vw, 75px); font-weight: 800; color: var(--pink-premium); line-height: 1; margin-bottom: 10px; letter-spacing: -2px; font-family: 'Inter', sans-serif; display: flex; align-items: baseline; gap: 2px;}
+.impacto-item h4 { font-size: 16px; color: var(--white); margin-bottom: 5px; font-weight: 700; font-family: 'Inter', sans-serif;}
+.impacto-item p { font-size: 14px; color: #cbd5e1; line-height: 1.6; font-weight: 300; }
+
+#diferenciadores { padding: 140px 8% 60px 8%; display: flex; align-items: flex-start; gap: 80px; }
+.diff-left { position: sticky; top: 160px; flex: 0 0 45%; }
+.diff-right { flex: 1; display: flex; flex-direction: column; gap: 80px; padding-bottom: 50px; }
+.quote-massive { font-size: clamp(45px, 6vw, 75px); font-family: 'Playfair Display', serif; font-weight: 800; line-height: 1.05; letter-spacing: -2px; color: var(--dark-grey); }
+.quote-highlight { color: var(--pink-premium); font-style: italic; }
+.diff-item { padding-left: 30px; border-left: 2px solid var(--pink-premium); transition: all 0.3s ease; }
+.diff-item:hover { border-left-width: 6px; }
+.diff-item h4 { font-size: 16px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--pink-premium); font-weight: 800; font-family: 'Inter', sans-serif; }
+.diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; line-height: 1.7; }
+
+/* Variables dinámicas para el color del Slider */
+#stress-test-container { padding: 60px 8% 100px 8%; text-align: center; position: relative; z-index: 2; }
+.stress-ui { display: flex; flex-direction: column; gap: 40px; margin-top: 40px; }
+.slider-container { background: rgba(255, 255, 255, 0.6); padding: 40px 30px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 10px 20px rgba(0,0,0,0.02); }
+.slider-container label { display: block; font-weight: 800; color: var(--dark-grey); margin-bottom: 25px; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;}
+input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin-bottom: 30px; --thumb-color: var(--pink-premium); --thumb-glow: rgba(212,0,109,0.5); }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 28px; width: 28px; border-radius: 50%; background: var(--thumb-color); cursor: ew-resize; margin-top: -10px; box-shadow: 0 0 15px var(--thumb-glow); transition: background 0.3s, box-shadow 0.3s, transform 0.1s;}
+input[type=range]::-webkit-slider-thumb:active { transform: scale(1.2); }
+input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 8px; background: rgba(71,85,105,0.2); border-radius: 4px; }
+.metrics-dashboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; background: rgba(15, 23, 42, 0.03); padding: 20px; border-radius: 12px; border: 1px solid rgba(15, 23, 42, 0.05); }
+.metric-item { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.metric-label { font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--soft-grey); letter-spacing: 1px; margin-bottom: 5px; }
+.metric-value { font-family: 'Courier New', Courier, monospace; font-size: 24px; font-weight: 800; color: var(--dark-grey); transition: color 0.3s ease; }
+.graphs { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.graph-box { background: rgba(255, 255, 255, 0.6); padding: 35px 30px; border-radius: 16px; border: 1px solid var(--border); text-align: left; transition: all 0.3s ease; display: flex; flex-direction: column; justify-content: space-between;}
+.graph-box h4 { margin-bottom: 20px; font-size: 18px; color: var(--dark-grey); font-weight: 800; font-family: 'Inter', sans-serif;}
+.bar-container { width: 100%; height: 16px; background: rgba(71,85,105,0.1); border-radius: 8px; overflow: hidden; margin-bottom: 20px; }
+.bar { height: 100%; border-radius: 8px; transition: width 0.1s ease-out, background-color 0.3s ease; }
+.bar.trad, .bar.jbda { width: 5%; background-color: #10b981; }
+.hardware-metrics { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(71,85,105,0.1); padding-top: 15px; }
+.hardware-metrics span { font-size: 14px; font-weight: 600; font-family: 'Courier New', Courier, monospace; }
+.status-green { color: #10b981 !important; }
+.status-yellow { color: #f59e0b !important; }
+.status-red { color: #ef4444 !important; }
+@keyframes shakeAlert { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+.alert-shake { animation: shakeAlert 0.4s ease-in-out infinite; border-color: #ef4444 !important; background: rgba(239, 68, 68, 0.05) !important;}
+
+#nuestra-firma { padding: 120px 10%; }
+.manifesto { font-size: 22px; color: var(--soft-grey); font-weight: 300; max-width: 850px; margin-bottom: 80px; line-height: 1.6; border-left: 3px solid var(--pink-premium); padding-left: 30px; }
+.team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;}
+@media (min-width: 901px) { .team-card:nth-child(2) { margin-top: 80px; } }
+.team-card { padding: 50px 40px; }
+.member-role { color: var(--pink-premium); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; margin-bottom: 15px; display: block; font-family: 'Inter', sans-serif;}
+.member-name { font-size: 26px; color: var(--dark-grey); font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px; font-family: 'Inter', sans-serif;}
+.member-bio { font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
+
+/* Animación Fluida en Acordeón */
+#faq { padding: 90px 8% 120px 8%; display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: start; }
+.faq-texto { position: sticky; top: 160px; } 
+.faq-texto h2 { font-size: clamp(36px, 4vw, 52px); margin-top: 15px; line-height: 1.1; }
+.faq-container { width: 100%; }
+details { margin-bottom: 15px; overflow: hidden; }
+details[open] { border-color: var(--pink-premium) !important; box-shadow: 0 15px 30px rgba(212,0,109,0.08) !important; background: rgba(253, 242, 248, 0.8); }
+details[open] .faq-content { animation: slideDownFAQ 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+@keyframes slideDownFAQ { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+summary { padding: 25px 30px; font-size: 18px; font-weight: 700; color: var(--dark-grey); transition: color 0.3s ease; list-style: none; position: relative; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; cursor: pointer; }
+summary:hover { color: var(--pink-premium); }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: '+'; font-size: 24px; color: var(--pink-premium); transition: transform 0.3s ease; font-weight: 400; }
+details[open] summary::after { content: '-'; transform: rotate(180deg); }
+.faq-content { padding: 0 30px 25px 30px; font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
+
+.legal-container { max-width: 900px; margin: 60px auto 100px auto; padding: 80px 8%; position: relative; z-index: 1; background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(251, 207, 232, 0.6); border-radius: 24px; box-shadow: 0 25px 50px rgba(0,0,0,0.05); transition: background 0.5s ease, border-color 0.5s ease; }
+.legal-container h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 800; color: var(--dark-grey); margin-bottom: 10px; letter-spacing: -1px; }
+.legal-container .update-date { font-size: 14px; color: var(--pink-premium); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 50px; }
+.legal-container h2 { font-size: 20px; font-weight: 700; color: var(--dark-grey); margin-top: 50px; margin-bottom: 20px; border-bottom: 1px solid rgba(212, 0, 109, 0.15); padding-bottom: 10px; }
+.legal-container h3 { font-size: 16px; font-weight: 700; color: var(--dark-grey); margin-top: 30px; margin-bottom: 15px; }
+.legal-container p { font-size: 16px; color: var(--soft-grey); margin-bottom: 20px; line-height: 1.8; }
+.legal-container ul { margin-bottom: 25px; padding-left: 20px; }
+.legal-container ul li { font-size: 16px; color: var(--soft-grey); margin-bottom: 10px; line-height: 1.8; }
+.legal-container strong { color: var(--dark-grey); font-weight: 600; }
+
+.mega-footer-dark { background-color: var(--dark-grey); color: var(--white); position: relative; z-index: 2; padding-top: 80px; border-top-left-radius: 40px; border-top-right-radius: 40px; transition: background-color 0.5s ease; }
+#contacto { background: transparent !important; color: var(--white); text-align: center; box-shadow: none !important; margin: 0; padding: 60px 5%; border-radius: 0; }
+#contacto h2 { font-size: 40px; margin-bottom: 25px; font-weight: 800; letter-spacing: -1px; color: var(--white); }
+#contacto p { color: #cbd5e1; }
+footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-between; align-items: flex-start; color: #cbd5e1; font-size: 14px; border: none !important; background: transparent !important;}
+.footer-col { flex: 1; min-width: 250px; }
+.footer-col h5 { color: var(--white); font-size: 16px; font-weight: 700; margin-bottom: 15px; font-family: 'Inter', sans-serif;}
+.footer-col p { margin-bottom: 8px; line-height: 1.6; }
+.social-link { display: flex; align-items: center; margin-bottom: 12px; font-weight: 600; color: var(--white) !important; transition: color 0.3s ease; text-decoration: none; }
+.social-link:hover { color: var(--pink-premium) !important; }
+.social-link svg { margin-right: 10px; fill: currentColor; flex-shrink: 0; }
+.legal-link { color: #cbd5e1; text-decoration: underline; font-size: 12px; transition: color 0.3s ease; }
+.legal-link:hover { color: var(--pink-premium); }
+
+.floating-concierge { position: fixed; bottom: 30px; right: 30px; z-index: 1000; display: flex; flex-direction: column; align-items: flex-end; }
+.concierge-toggle { width: 60px; height: 60px; border-radius: 50%; background-color: var(--dark-grey); color: var(--white); border: none; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(212, 0, 109, 0.3); transition: background-color 0.3s ease, transform 0.1s; }
+.concierge-toggle:hover { background-color: var(--pink-premium); }
+.concierge-menu { position: absolute; bottom: 75px; right: 0; background: rgba(253, 242, 248, 0.85); backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%); border: 1px solid rgba(212, 0, 109, 0.15); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 5px; width: 230px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+.concierge-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
+.concierge-item { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--dark-grey); font-size: 14px; font-weight: 600; border-radius: 8px; transition: all 0.2s ease; font-family: 'Inter', sans-serif; }
+.concierge-item:hover { background: rgba(212, 0, 109, 0.08); color: var(--pink-premium); }
+
+/* ==============================================================
+   DISEÑO MÓVIL TOP 1
+   ============================================================== */
+@media (max-width: 900px) {
+    nav { padding-top: max(calc(env(safe-area-inset-top) + 5px), 18px) !important; padding-bottom: 15px !important; padding-left: 6% !important; padding-right: 6% !important; }
+    nav.nav-scrolled { padding-top: max(calc(env(safe-area-inset-top) + 2px), 12px) !important; padding-bottom: 12px !important; }
+    .logo-container img { height: 42px !important; } nav.nav-scrolled .logo-container img { height: 36px !important; }
+    .mobile-menu-btn { display: flex !important; justify-content: center; align-items: center; width: 44px; height: 44px; background: transparent !important; border: none !important; outline: none !important; -webkit-appearance: none !important; box-shadow: none !important; z-index: 100000 !important; cursor: pointer; padding: 0; margin-right: -5px; }
+    .hamburger-lines { position: relative; width: 28px; height: 12px; }
+    .hamburger-lines .line { position: absolute; right: 0; display: block; height: 2px; background-color: var(--dark-grey); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-radius: 4px; }
+    .hamburger-lines .line:nth-child(1) { top: 0; width: 18px !important; }
+    .hamburger-lines .line:nth-child(2) { top: 10px; width: 28px !important; }
+    .hamburger-lines .line:nth-child(3) { display: none !important; } 
+    .mobile-menu-btn.open .hamburger-lines .line:nth-child(1) { top: 5px; width: 28px !important; transform: rotate(45deg); background-color: var(--dark-grey) !important; }
+    .mobile-menu-btn.open .hamburger-lines .line:nth-child(2) { top: 5px; width: 28px !important; transform: rotate(-45deg); background-color: var(--dark-grey) !important; }
+    .nav-links { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(253, 242, 248, 0.98); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 99998; opacity: 0; visibility: hidden; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); padding-top: env(safe-area-inset-top, 0px); }
+    .nav-links.active { opacity: 1; visibility: visible; }
+    .nav-links a { font-size: 28px; font-weight: 700; margin: 15px 0; color: var(--dark-grey); letter-spacing: -0.5px; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease;}
+    .nav-links a::after { display: none; }
+    .nav-links.active a { opacity: 1; transform: translateY(0); }
+    .nav-links.active a:nth-child(1) { transition-delay: 0.1s; } .nav-links.active a:nth-child(2) { transition-delay: 0.2s; } .nav-links.active a:nth-child(3) { transition-delay: 0.3s; } .nav-links.active a:nth-child(4) { transition-delay: 0.4s; } .nav-links.active a:nth-child(5) { transition-delay: 0.5s; } .nav-links.active a:nth-child(6) { transition-delay: 0.6s; }
+    #manifiesto-global { grid-template-columns: 1fr; padding: 60px 5%; gap: 40px;}
+    .filosofia-box.asimetrica { margin-left: 0; }
+    #ecosistema { padding: 40px 5%; } .glass-track { border-radius: 0; } 
+    #servicios { flex-direction: column; padding: 60px 5%; gap: 40px; }
+    .servicios-left { position: relative; top: 0; flex: 1; } .servicios-right { gap: 30px; } .servicios-right .card { position: relative; top: 0 !important; } 
+    #impacto { grid-template-columns: 1fr; padding: 60px 5%; margin: 0 5%; border-radius: 20px; } .grid-impacto { grid-template-columns: 1fr; } .impacto-item:nth-child(3) { grid-column: span 1; }
+    #diferenciadores { flex-direction: column; padding: 80px 5% 40px 5%; gap: 50px; } .diff-left { position: relative; top: 0; flex: 1; } .diff-right { gap: 50px; padding-bottom: 0; } .diff-item { padding-left: 20px; }
+    #nuestra-firma { padding: 60px 5%; } .team-grid { grid-template-columns: 1fr; gap: 40px; }
+    #faq { grid-template-columns: 1fr; padding: 60px 5%; gap: 30px;} .faq-texto { position: relative; top: 0; }
+    .legal-container { margin: 40px 5% 60px 5%; padding: 60px 8%; border-radius: 16px;}
+    #stress-test-container { padding: 40px 5%; } .metrics-dashboard { grid-template-columns: 1fr; } .graphs { grid-template-columns: 1fr; }
+    .mega-footer-dark { margin-top: 40px; border-top-left-radius: 20px; border-top-right-radius: 20px; padding-top: 40px;}
+    #contacto { margin: 0; padding: 40px 5%; }
+    header { padding-top: 100px; min-height: 80vh; } footer { flex-direction: column; gap: 40px; } .floating-concierge { bottom: 20px; right: 20px; }
+}
+
+body#privacidad-page .mobile-menu-btn { display: none !important; }
+@media (max-width: 900px) { body#privacidad-page .nav-links { position: static; width: auto; height: auto; background: transparent !important; flex-direction: row; display: flex; gap: 20px; align-items: center; visibility: visible; opacity: 1; padding-top: 0 !important; } body#privacidad-page .nav-links a.back-link .desktop-text { display: none; } body#privacidad-page .nav-links a.back-link svg { width: 24px; height: 24px; margin-right: 0 !important; } body#privacidad-page .nav-links a { margin: 0; transform: none; font-size: 14px; opacity: 1;} }
+
+/* ==============================================================
+   CAPA DE MODO OSCURO (ADAPTADA PARA AURORA)
+   ============================================================== */
+body.dark-theme { --white: #0f172a; --silver: #1e293b; --dark-grey: #f8fafc; --soft-grey: #94a3b8; --pink-premium: #f472b6; --border: #334155; --bg-liquid-3: #020617; background-color: var(--white); }
+body.dark-theme .orb-1 { background: rgba(212, 0, 109, 0.25) !important; } 
+body.dark-theme .orb-2 { background: rgba(15, 23, 42, 0.9) !important; } 
+body.dark-theme .orb-3 { background: rgba(244, 114, 182, 0.15) !important; } 
+body.dark-theme #page-transition-overlay { background: rgba(15, 23, 42, 0.2); }
+body.dark-theme nav.nav-scrolled { background: rgba(15, 23, 42, 0.8); border-bottom-color: rgba(255,255,255,0.05); }
+body.dark-theme .glass-track, body.dark-theme .slider-container, body.dark-theme .graph-box { background: rgba(30, 41, 59, 0.5); border-color: rgba(244, 114, 182, 0.3); }
+body.dark-theme .card, body.dark-theme .team-card, body.dark-theme details, body.dark-theme .legal-container { background: rgba(30, 41, 59, 0.6); border-color: rgba(244, 114, 182, 0.2); }
+body.dark-theme details[open] { background: rgba(15, 23, 42, 0.9); border-color: var(--pink-premium) !important; }
+body.dark-theme .concierge-menu { background: rgba(15, 23, 42, 0.95); border-color: rgba(244, 114, 182, 0.2); }
+body.dark-theme .metrics-dashboard { background: rgba(248, 250, 252, 0.05); border-color: rgba(248, 250, 252, 0.1); }
+body.dark-theme .metric-value { color: #f8fafc; }
+body.dark-theme .hardware-metrics { border-top-color: rgba(248,250,252,0.1); }
+body.dark-theme #impacto, body.dark-theme .mega-footer-dark { background-color: #020617 !important; }
+body.dark-theme #impacto h2, body.dark-theme .impacto-item h4, body.dark-theme #contacto h2, body.dark-theme .footer-col h5, body.dark-theme .social-link, body.dark-theme .slider-container label, body.dark-theme .graph-box h4 { color: #f8fafc !important; }
+body.dark-theme .impacto-item p, body.dark-theme #contacto p, body.dark-theme .footer-col p, body.dark-theme .legal-link { color: #cbd5e1 !important; }
+body.dark-theme .social-link:hover { color: var(--pink-premium) !important; }
+body.dark-theme .btn-main { background-color: #f8fafc; color: #0f172a; border-color: #f8fafc; }
+body.dark-theme .btn-main:hover { color: #f8fafc; border-color: var(--pink-premium); background-color: transparent; }
+body.dark-theme .concierge-toggle { background-color: #f8fafc; color: #0f172a; }
+body.dark-theme .concierge-toggle:hover { background-color: var(--pink-premium); color: #f8fafc; }
+body.dark-theme .brand-logo, body.dark-theme .logo-container img, body.dark-theme .preload-logo { filter: brightness(0) invert(1) opacity(0.85); }
+body.dark-theme footer .logo-container img { filter: brightness(0) invert(1) opacity(1); }
+body.dark-theme .marquee-wrapper:hover .brand-logo { filter: brightness(0) invert(1) opacity(0.2); }
+body.dark-theme .marquee-wrapper .brand-logo:hover { filter: brightness(0) invert(1) opacity(1) drop-shadow(0 0 10px rgba(255,255,255,0.4)) !important; }
+body.dark-theme #dark-mode-toggle, body.dark-theme .lang-toggle-link { color: #f8fafc; }
+body.dark-theme #dark-mode-toggle:hover, body.dark-theme .lang-toggle-link:hover { color: var(--pink-premium); }
+body.dark-theme nav::before { background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%); }
+
+@media (max-width: 900px) { 
+    body.dark-theme .nav-links { background: rgba(15, 23, 42, 0.85) !important; backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); } 
+    body.dark-theme .hamburger-lines .line { background-color: #f8fafc; }
+    body.dark-theme .nav-links a { color: #f8fafc; }
+    body.dark-theme nav::before { display: none !important; }
+    body.dark-theme .mobile-menu-btn.open .hamburger-lines .line:nth-child(1) { background-color: #f8fafc !important; }
+    body.dark-theme .mobile-menu-btn.open .hamburger-lines .line:nth-child(2) { background-color: #f8fafc !important; }
+}
+
+/* ==============================================================
+   MODO TERMINAL MATRIX
+   ============================================================== */
+body.terminal-mode, body.terminal-mode.dark-theme { background: #050505 !important; animation: none !important; }
+body.terminal-mode *, body.terminal-mode.dark-theme * { color: #00ff00 !important; font-family: 'Courier New', Courier, monospace !important; border-color: #004400 !important; text-shadow: 0 0 5px rgba(0, 255, 0, 0.5) !important; }
+body.terminal-mode header, body.terminal-mode section, body.terminal-mode nav, body.terminal-mode .concierge-menu, body.terminal-mode.dark-theme nav.nav-scrolled { background-color: transparent !important; background-image: none !important; box-shadow: none !important; border: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important;}
+body.terminal-mode .card, body.terminal-mode .team-card, body.terminal-mode details, body.terminal-mode .glass-track, body.terminal-mode .legal-container, body.terminal-mode .slider-container, body.terminal-mode .graph-box, body.terminal-mode.dark-theme .card, body.terminal-mode.dark-theme .glass-track, body.terminal-mode.dark-theme .legal-container, body.terminal-mode.dark-theme details[open], body.terminal-mode.dark-theme .concierge-menu, body.terminal-mode.dark-theme .metrics-dashboard { background: #050505 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; filter: none !important; box-shadow: none !important;}
+body.terminal-mode #impacto, body.terminal-mode .mega-footer-dark, body.terminal-mode.dark-theme #impacto, body.terminal-mode.dark-theme .mega-footer-dark { background-color: #050505 !important; border-top: 1px solid #00ff00 !important; }
+body.terminal-mode .btn-main, body.terminal-mode.dark-theme .btn-main { background-color: #002200 !important; border: 1px solid #00ff00 !important; color: #00ff00 !important; }
+body.terminal-mode .brand-logo, body.terminal-mode img, body.terminal-mode.dark-theme img, body.terminal-mode.dark-theme .preload-logo { filter: sepia(100%) hue-rotate(90deg) saturate(300%) brightness(80%) contrast(200%) !important; }
+body.terminal-mode .icon-wrapper { background-color: rgba(0, 255, 0, 0.1) !important; }
+body.terminal-mode svg { stroke: #00ff00 !important; fill: none !important; }
+body.terminal-mode .diff-item { border-left-color: #00ff00 !important; }
+body.terminal-mode .social-link svg, body.terminal-mode .concierge-item svg { fill: #00ff00 !important; stroke: none !important; }
+body.terminal-mode .icon-wrapper svg { animation: none !important; stroke-dasharray: none !important; stroke-dashoffset: 0 !important;}
+body.terminal-mode .bar { background-color: #00ff00 !important; }
+body.terminal-mode::after { content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); z-index: 9999; background-size: 100% 2px, 3px 100%; pointer-events: none; opacity: 0.4; }
+#terminal-toggle { cursor: pointer !important; opacity: 0.2; font-family: monospace; transition: opacity 0.3s; margin-left: 5px; position: relative; z-index: 10000; pointer-events: auto; }
+#terminal-toggle:hover { opacity: 1; color: var(--pink-premium) !important; }
+body.terminal-mode .hamburger-lines .line { background-color: #00ff00 !important; }
+body.terminal-mode .mobile-menu-btn.open .hamburger-lines .line:nth-child(1), body.terminal-mode .mobile-menu-btn.open .hamburger-lines .line:nth-child(2) { background-color: #00ff00 !important; }
+body.terminal-mode nav::before { display: none !important; }
+
+/* --- SCROLLBAR PREMIUM --- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--white); transition: background 0.3s; }
+body.dark-theme ::-webkit-scrollbar-track, body.terminal-mode ::-webkit-scrollbar-track { background: var(--dark-grey); }
+::-webkit-scrollbar-thumb { background: rgba(212, 0, 109, 0.4); border-radius: 10px; border: 2px solid var(--white); }
+body.dark-theme ::-webkit-scrollbar-thumb { border-color: var(--dark-grey); }
+::-webkit-scrollbar-thumb:hover { background: var(--pink-premium); }
+body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color: #050505; }
+
+/* ==============================================================
+   OVERRIDE CALENDLY (ÉLITE & PWA FIX) - SOLUCIÓN BUGS DE CLIC
+   ============================================================== */
+/* 1. Fondo de cristal transparente (El contenedor principal) */
+.calendly-overlay {
+    background-color: rgba(15, 23, 42, 0.4) !important;
+    backdrop-filter: blur(15px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(15px) saturate(150%) !important;
+}
+
+/* 2. Empujar el cuadro del calendario hacia abajo en celular para evitar el Notch */
+@media (max-width: 900px) {
+    .calendly-popup {
+        padding-top: max(env(safe-area-inset-top, 90px), 90px) !important;
+    }
+}
+
+/* 3. Diseño del calendario (Bordes redondos y sombra premium) */
+.calendly-popup-content {
+    border-radius: 24px !important;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 4. LA MAGIA: Ocultamos el ícono feo de Calendly SIN tocar las áreas de clic */
+.calendly-close-overlay svg,
+.calendly-popup-close svg,
+.calendly-close-button svg {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* 5. DISEÑO DE LA NUEVA "X" MATEMÁTICA EN LA CAPA CORRECTA */
+.calendly-popup-close {
+    background-color: var(--dark-grey) !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    transition: all 0.3s ease !important;
+    /* Coordenadas Laptop */
+    top: 30px !important;
+    right: 30px !important;
+    opacity: 1 !important;
+    display: block !important;
+}
+
+.calendly-popup-close:hover {
+    background-color: var(--pink-premium) !important;
+    transform: scale(1.05) rotate(90deg) !important;
+}
+
+/* Coordenadas Móvil (Notch) */
+@media (max-width: 900px) {
+    .calendly-popup-close {
+        top: max(env(safe-area-inset-top, 60px), 60px) !important;
+        right: 20px !important;
+    }
+}
+
+/* 6. Dibujo de las líneas cruzadas (X) */
+.calendly-popup-close::before,
+.calendly-popup-close::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 16px !important;
+    height: 1.5px !important;
+    background-color: #ffffff !important;
+    border-radius: 2px !important;
+    display: block !important;
+}
+
+.calendly-popup-close::before { transform: translate(-50%, -50%) rotate(45deg) !important; }
+.calendly-popup-close::after { transform: translate(-50%, -50%) rotate(-45deg) !important; }
