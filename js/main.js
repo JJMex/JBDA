@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 4. TRANSICIONES DE PÁGINA ---
     document.querySelectorAll('a').forEach(anchor => {
-        if(anchor.href && !anchor.target && !anchor.id.includes('calendly')) {
+        if(anchor.href && !anchor.target && !anchor.id.includes('calendly') && !anchor.classList.contains('link-email')) {
             anchor.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
                 if (targetUrl && targetUrl.startsWith('#')) {
@@ -86,8 +86,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const moonIcon = document.getElementById('moon-icon');
     const sunIcon = document.getElementById('sun-icon');
     
+    // NOTA: El chequeo inicial (Anti-FOUC) ya lo hace el script en el HTML, 
+    // pero aquí actualizamos los íconos del botón visual.
     if (localStorage.getItem('jbda_theme') === 'dark') {
-        document.body.classList.add('dark-theme');
         if (moonIcon && sunIcon) { moonIcon.style.display = 'none'; sunIcon.style.display = 'block'; }
     }
 
@@ -385,7 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (typeof AOS !== 'undefined') { AOS.init({ duration: 1000, once: true, offset: 100 }); }
 
-    // --- 13. ENLACES CENTRALIZADOS ---
+    // --- 13. ENLACES CENTRALIZADOS Y PORTAPAPELES ÉLITE ---
     if (typeof JBDA_CONFIG !== 'undefined') {
         const isEnglish = document.documentElement.lang === 'en';
         const mensaje = isEnglish ? JBDA_CONFIG.whatsappMsgEN : JBDA_CONFIG.whatsappMsgES;
@@ -395,12 +396,52 @@ document.addEventListener("DOMContentLoaded", () => {
         if(document.getElementById('link-concierge-whatsapp')) document.getElementById('link-concierge-whatsapp').href = urlWhats; 
         if(document.getElementById('link-linkedin')) document.getElementById('link-linkedin').href = JBDA_CONFIG.linkedin;
 
+        // SISTEMA DE PORTAPAPELES PARA CORREOS (Sustituye al molesto "mailto:")
         const emailLinks = document.querySelectorAll('.link-email');
-        emailLinks.forEach(el => { el.href = `mailto:${JBDA_CONFIG.email}`; const textSpan = el.querySelector('.email-text'); if (textSpan) textSpan.innerText = JBDA_CONFIG.email; });
+        let toastTimeout;
 
-        // ==============================================================
-        // MOTOR MODAL JBDA (LA SOLUCIÓN DEFINITIVA DE LA "X")
-        // ==============================================================
+        emailLinks.forEach(el => {
+            const textSpan = el.querySelector('.email-text'); 
+            if (textSpan) textSpan.innerText = JBDA_CONFIG.email; 
+            
+            // Cambiamos el comportamiento a un simple botón de copiar
+            el.style.cursor = 'pointer';
+            el.href = '#';
+            
+            el.addEventListener('click', async (e) => {
+                e.preventDefault();
+                try {
+                    await navigator.clipboard.writeText(JBDA_CONFIG.email);
+                    showToast();
+                } catch (err) {
+                    // Si el navegador bloquea el portapapeles, abrimos el correo como plan B
+                    window.location.href = `mailto:${JBDA_CONFIG.email}`; 
+                }
+            });
+        });
+
+        // Función para mostrar la notificación de éxito (Toast)
+        const showToast = () => {
+            let toast = document.getElementById('jbda-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'jbda-toast';
+                toast.className = 'jbda-toast';
+                toast.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> ${isEnglish ? 'Email copied' : 'Correo copiado'}`;
+                document.body.appendChild(toast);
+            }
+            
+            // Forzar el repintado del navegador
+            void toast.offsetWidth;
+            toast.classList.add('show');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        };
+
+        // MOTOR MODAL JBDA (CALENDLY)
         let customModal, customIframe;
         
         const initCustomCalendly = () => {
@@ -415,9 +456,7 @@ document.addEventListener("DOMContentLoaded", () => {
             content.className = 'jbda-modal-content';
             
             const iframe = document.createElement('iframe');
-            iframe.width = '100%';
-            iframe.height = '100%';
-            iframe.frameBorder = '0';
+            iframe.width = '100%'; iframe.height = '100%'; iframe.frameBorder = '0';
             
             content.appendChild(iframe);
             overlay.appendChild(closeBtn);
