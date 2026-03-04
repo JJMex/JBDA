@@ -367,75 +367,76 @@ body.dark-theme ::-webkit-scrollbar-thumb { border-color: var(--dark-grey); }
 body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color: #050505; }
 
 /* ==============================================================
-   OVERRIDE CALENDLY (ÉLITE & PWA FIX) - SOLUCIÓN JERARQUÍA CAPAS
+   OVERRIDE CALENDLY (ÉLITE & PWA FIX) - SOLUCIÓN BUGS DE CLIC
    ============================================================== */
-/* 1. Contenedor Maestro: Fondo de cristal */
-.calendly-overlay { background-color: rgba(15, 23, 42, 0.4) !important; backdrop-filter: blur(15px) saturate(150%) !important; -webkit-backdrop-filter: blur(15px) saturate(150%) !important; z-index: 100000 !important;}
-
-/* 2. Capa Cierra-Ventana: Debe ir POR DEBAJO del calendario para no interferir con los clics en los días */
-.calendly-close-overlay { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100% !important; height: 100% !important; background: transparent !important; z-index: 1 !important; border: none !important;}
-
-/* 3. Capa Calendario: Debe ir POR ENCIMA del cierra-ventana para ser clickeable */
-.calendly-popup { z-index: 2 !important; position: relative !important; }
-
-/* 4. Empujar el cuadro del calendario hacia abajo en móviles */
-@media (max-width: 900px) { .calendly-popup { padding: max(env(safe-area-inset-top, 90px), 90px) 15px 30px 15px !important; } }
-
-/* 5. Diseño del contenedor blanco */
-.calendly-popup-content { border-radius: 24px !important; overflow: hidden !important; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; }
-
-/* 6. BOTÓN PREMIUM DE CERRAR ("X") */
-.calendly-popup-close { 
-    position: fixed !important; 
-    top: 30px !important; 
-    right: 30px !important; 
-    bottom: auto !important; 
-    left: auto !important; 
-    width: 44px !important; 
-    height: 44px !important; 
-    background-color: var(--dark-grey) !important; 
-    border-radius: 50% !important; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
-    border: 1px solid rgba(255,255,255,0.1) !important;
-    opacity: 1 !important;
-    color: transparent !important; 
-    background-image: none !important; 
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-    z-index: 100005 !important; /* Siempre hasta arriba */
-    display: block !important;
-    cursor: pointer !important;
+/* 1. Fondo de cristal transparente (El contenedor principal) */
+.calendly-overlay {
+    background-color: rgba(15, 23, 42, 0.4) !important;
+    backdrop-filter: blur(15px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(15px) saturate(150%) !important;
 }
 
-/* Efecto hover interactivo en Laptop */
-.calendly-popup-close:hover { 
-    background-color: var(--pink-premium) !important; 
-    transform: scale(1.05) rotate(90deg) !important; 
-    box-shadow: 0 15px 35px rgba(212, 0, 109, 0.3) !important;
-}
-
-/* Ajuste específico para Celular (Bajar al Notch) */
+/* 2. Empujar el cuadro del calendario hacia abajo en celular para evitar el Notch */
 @media (max-width: 900px) {
-    .calendly-popup-close { 
-        top: max(env(safe-area-inset-top, 70px), 70px) !important; 
-        right: 20px !important; 
+    .calendly-popup {
+        padding-top: max(env(safe-area-inset-top, 90px), 90px) !important;
     }
 }
 
-/* 7. DESTRUIR NATIVOS: Ocultamos SVGs y basura interna de Calendly */
-.calendly-close-overlay *, .calendly-popup-close > * { 
-    display: none !important; 
-    opacity: 0 !important; 
-    visibility: hidden !important; 
+/* 3. Diseño del calendario (Bordes redondos y sombra premium) */
+.calendly-popup-content {
+    border-radius: 24px !important;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-/* 8. LA "X" PERFECTA: Dibujada con líneas matemáticas CSS */
-.calendly-popup-close::before, .calendly-popup-close::after {
+/* 4. LA MAGIA: Ocultamos el ícono feo de Calendly SIN tocar las áreas de clic */
+.calendly-close-overlay svg,
+.calendly-popup-close svg,
+.calendly-close-button svg {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* 5. DISEÑO DE LA NUEVA "X" MATEMÁTICA EN LA CAPA CORRECTA */
+.calendly-popup-close {
+    background-color: var(--dark-grey) !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    transition: all 0.3s ease !important;
+    /* Coordenadas Laptop */
+    top: 30px !important;
+    right: 30px !important;
+    opacity: 1 !important;
+    display: block !important;
+}
+
+.calendly-popup-close:hover {
+    background-color: var(--pink-premium) !important;
+    transform: scale(1.05) rotate(90deg) !important;
+}
+
+/* Coordenadas Móvil (Notch) */
+@media (max-width: 900px) {
+    .calendly-popup-close {
+        top: max(env(safe-area-inset-top, 60px), 60px) !important;
+        right: 20px !important;
+    }
+}
+
+/* 6. Dibujo de las líneas cruzadas (X) */
+.calendly-popup-close::before,
+.calendly-popup-close::after {
     content: "" !important;
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
-    width: 16px !important;  
-    height: 1.5px !important; 
+    width: 16px !important;
+    height: 1.5px !important;
     background-color: #ffffff !important;
     border-radius: 2px !important;
     display: block !important;
