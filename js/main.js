@@ -62,7 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 4. TRANSICIONES DE PÁGINA ---
     document.querySelectorAll('a').forEach(anchor => {
-        if(anchor.href && !anchor.target && !anchor.id.includes('calendly') && !anchor.classList.contains('link-email')) {
+        // Excluimos explícitamente calendly y cualquier cosa que empiece con mailto:
+        if(anchor.href && !anchor.target && !anchor.id.includes('calendly') && !anchor.getAttribute('href').startsWith('mailto:')) {
             anchor.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
                 if (targetUrl && targetUrl.startsWith('#')) {
@@ -86,8 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const moonIcon = document.getElementById('moon-icon');
     const sunIcon = document.getElementById('sun-icon');
     
-    // NOTA: El chequeo inicial (Anti-FOUC) ya lo hace el script en el HTML, 
-    // pero aquí actualizamos los íconos del botón visual.
     if (localStorage.getItem('jbda_theme') === 'dark') {
         if (moonIcon && sunIcon) { moonIcon.style.display = 'none'; sunIcon.style.display = 'block'; }
     }
@@ -396,31 +395,60 @@ document.addEventListener("DOMContentLoaded", () => {
         if(document.getElementById('link-concierge-whatsapp')) document.getElementById('link-concierge-whatsapp').href = urlWhats; 
         if(document.getElementById('link-linkedin')) document.getElementById('link-linkedin').href = JBDA_CONFIG.linkedin;
 
-        // SISTEMA DE PORTAPAPELES PARA CORREOS (Sustituye al molesto "mailto:")
-        const emailLinks = document.querySelectorAll('.link-email');
+        // ==============================================================
+        // SISTEMA DE PORTAPAPELES (TARGETING UNIVERSAL ANTI-MAILTO)
+        // ==============================================================
+        const emailLinks = document.querySelectorAll('.link-email, a[href^="mailto:"]');
         let toastTimeout;
 
         emailLinks.forEach(el => {
+            // Actualizar el texto si tiene un span interno
             const textSpan = el.querySelector('.email-text'); 
             if (textSpan) textSpan.innerText = JBDA_CONFIG.email; 
             
-            // Cambiamos el comportamiento a un simple botón de copiar
-            el.style.cursor = 'pointer';
-            el.href = '#';
+            // Extraer correo de forma inteligente
+            let emailToCopy = JBDA_CONFIG.email;
+            if (el.hasAttribute('href') && el.getAttribute('href').startsWith('mailto:')) {
+                emailToCopy = el.getAttribute('href').replace('mailto:', '');
+            }
             
-            el.addEventListener('click', async (e) => {
-                e.preventDefault();
-                try {
-                    await navigator.clipboard.writeText(JBDA_CONFIG.email);
-                    showToast();
-                } catch (err) {
-                    // Si el navegador bloquea el portapapeles, abrimos el correo como plan B
-                    window.location.href = `mailto:${JBDA_CONFIG.email}`; 
+            el.style.cursor = 'pointer';
+            
+            el.addEventListener('click', (e) => {
+                e.preventDefault(); // Bloqueo total al "Mail" de Windows/Mac
+                e.stopPropagation();
+
+                // Función Fuerza Bruta (Fallback seguro)
+                const forceCopy = () => {
+                    const textArea = document.createElement("textarea");
+                    textArea.value = emailToCopy;
+                    textArea.style.position = "fixed";
+                    textArea.style.top = "-9999px";
+                    textArea.style.left = "-9999px";
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                        showToast();
+                    } catch (err) {
+                        console.error('El portapapeles fue bloqueado por el sistema.');
+                    }
+                    document.body.removeChild(textArea);
+                };
+
+                // Intentar API moderna primero, si falla, usa Fuerza Bruta
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(emailToCopy)
+                        .then(() => showToast())
+                        .catch(() => forceCopy());
+                } else {
+                    forceCopy();
                 }
             });
         });
 
-        // Función para mostrar la notificación de éxito (Toast)
+        // TOAST (Notificación minimalista)
         const showToast = () => {
             let toast = document.getElementById('jbda-toast');
             if (!toast) {
@@ -430,18 +458,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 toast.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> ${isEnglish ? 'Email copied' : 'Correo copiado'}`;
                 document.body.appendChild(toast);
             }
-            
-            // Forzar el repintado del navegador
             void toast.offsetWidth;
             toast.classList.add('show');
-
             clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+            toastTimeout = setTimeout(() => { toast.classList.remove('show'); }, 3000);
         };
 
+        // ==============================================================
         // MOTOR MODAL JBDA (CALENDLY)
+        // ==============================================================
         let customModal, customIframe;
         
         const initCustomCalendly = () => {
