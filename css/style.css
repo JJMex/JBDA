@@ -25,18 +25,18 @@ body { font-family: 'Inter', sans-serif; color: var(--dark-grey); line-height: 1
 /* MINIMALISMO PURO: Ocultamos los cuadros y la lupa */
 .blueprint-grid { display: none !important; }
 
-/* AURORA FLUIDA (MESH GRADIENT CORPORATIVO) */
+/* AURORA FLUIDA MEJORADA (MÁS PRESENCIA Y CRUCE CENTRAL) */
 .orbs-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: 0; pointer-events: none; }
-.orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.65; animation: fluidAurora 25s infinite alternate ease-in-out; transition: background 0.5s ease, opacity 0.5s ease; }
-.orb-1 { width: 75vw; height: 75vh; background: rgba(212, 0, 109, 0.15) !important; top: -10%; left: -10%; animation-duration: 25s; } 
-.orb-2 { width: 65vw; height: 65vh; background: rgba(226, 232, 240, 0.8) !important; top: 30%; right: -20%; animation-duration: 30s; animation-direction: alternate-reverse; } 
-.orb-3 { width: 85vw; height: 85vh; background: rgba(251, 207, 232, 0.6) !important; bottom: -20%; left: 10%; animation-duration: 28s; } 
+.orb { position: absolute; border-radius: 50%; filter: blur(75px); opacity: 0.75; animation: fluidAurora 25s infinite alternate ease-in-out; transition: background 0.5s ease, opacity 0.5s ease; }
+.orb-1 { width: 65vw; height: 65vh; background: rgba(212, 0, 109, 0.2) !important; top: -5%; left: -5%; animation-duration: 25s; } 
+.orb-2 { width: 55vw; height: 55vh; background: rgba(148, 163, 184, 0.25) !important; top: 20%; right: -10%; animation-duration: 30s; animation-direction: alternate-reverse; } 
+.orb-3 { width: 75vw; height: 75vh; background: rgba(251, 207, 232, 0.4) !important; bottom: -15%; left: 15%; animation-duration: 28s; } 
 
 @keyframes fluidAurora {
     0% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 50%; }
-    33% { transform: translate(5vw, 10vh) scale(1.1) rotate(10deg); border-radius: 40% 60% 50% 50%; }
-    66% { transform: translate(-5vw, -5vh) scale(0.9) rotate(-5deg); border-radius: 60% 40% 60% 40%; }
-    100% { transform: translate(10vw, 0) scale(1.2) rotate(15deg); border-radius: 50% 50% 40% 60%; }
+    33% { transform: translate(15vw, 15vh) scale(1.15) rotate(15deg); border-radius: 40% 60% 50% 50%; }
+    66% { transform: translate(-10vw, 20vh) scale(0.9) rotate(-10deg); border-radius: 60% 40% 60% 40%; }
+    100% { transform: translate(25vw, -10vh) scale(1.25) rotate(20deg); border-radius: 50% 50% 40% 60%; }
 }
 
 h1, h2, .quote-massive, .title-serif { font-family: 'Playfair Display', serif; }
