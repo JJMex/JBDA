@@ -367,62 +367,77 @@ body.dark-theme ::-webkit-scrollbar-thumb { border-color: var(--dark-grey); }
 body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color: #050505; }
 
 /* ==============================================================
-   OVERRIDE CALENDLY (ÉLITE & PWA FIX) - DISEÑO APPLE/STRIPE
+   OVERRIDE CALENDLY (ÉLITE & PWA FIX) - DISEÑO MATEMÁTICO PURO
    ============================================================== */
 /* 1. Fondo de cristal para la pantalla completa */
 .calendly-overlay { background-color: rgba(15, 23, 42, 0.4) !important; backdrop-filter: blur(15px) saturate(150%) !important; -webkit-backdrop-filter: blur(15px) saturate(150%) !important; z-index: 100000 !important;}
 
-/* 2. Empujar el cuadro del calendario hacia abajo en celular */
+/* 2. Empujar el cuadro del calendario hacia abajo */
 @media (max-width: 900px) { .calendly-popup { padding: max(env(safe-area-inset-top, 90px), 90px) 15px 30px 15px !important; } }
 
 /* 3. Diseño del contenedor principal */
 .calendly-popup-content { border-radius: 24px !important; overflow: hidden !important; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; }
 
-/* 4. MANTENER EL OVERLAY INVISIBLE A PANTALLA COMPLETA (Cerrar al tocar fuera) */
+/* 4. MANTENER EL OVERLAY INVISIBLE A PANTALLA COMPLETA (Para que cierre al tocar fuera) */
 .calendly-close-overlay { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100% !important; height: 100% !important; background: transparent !important; z-index: 100001 !important; border: none !important;}
-.calendly-close-overlay *, .calendly-close-button { display: none !important; opacity: 0 !important; visibility: hidden !important; }
 
-/* 5. EL NUEVO BOTÓN PREMIUM (DISEÑO "QUIET LUXURY") */
+/* 5. CÍRCULO PRINCIPAL DEL BOTÓN (Laptop y Móvil) */
 .calendly-popup-close { 
     position: fixed !important; 
-    /* Por defecto para Laptop/Escritorio: Arriba a la derecha con márgenes limpios */
-    top: 40px !important; 
-    right: 40px !important; 
+    top: 30px !important; /* Posición segura en Laptop */
+    right: 30px !important; /* Posición segura en Laptop */
     bottom: auto !important; 
     left: auto !important; 
     width: 44px !important; 
     height: 44px !important; 
     background-color: var(--dark-grey) !important; 
     border-radius: 50% !important; 
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important; 
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    /* El secreto: Una "X" vectorizada de trazo fino (stroke) en lugar de relleno (fill) */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E") !important; 
-    background-repeat: no-repeat !important; 
-    background-position: center !important; 
-    /* El segundo secreto: Limitar el tamaño del ícono para que respire dentro del círculo */
-    background-size: 20px !important; 
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important; 
-    z-index: 100005 !important; 
-    opacity: 1 !important; 
-    cursor: pointer !important; 
-    color: transparent !important; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    opacity: 1 !important;
+    color: transparent !important; /* Escondemos cualquier texto residual */
+    background-image: none !important; /* ELIMINAMOS SVG, NADA DE IMÁGENES DEFORMADAS */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    z-index: 100005 !important;
+    display: block !important;
+    cursor: pointer !important;
 }
 
-/* Animación sutil de rotación al pasar el mouse (Solo Desktop) */
+/* Efecto hover interactivo en Laptop */
 .calendly-popup-close:hover { 
     background-color: var(--pink-premium) !important; 
     transform: scale(1.05) rotate(90deg) !important; 
     box-shadow: 0 15px 35px rgba(212, 0, 109, 0.3) !important;
 }
 
-/* Posicionamiento exclusivo para Celular (Fix del Notch) */
+/* Ajuste específico para Celular (Bajar al Notch) */
 @media (max-width: 900px) {
-    .calendly-popup-close {
+    .calendly-popup-close { 
         top: max(env(safe-area-inset-top, 70px), 70px) !important; 
         right: 20px !important; 
     }
 }
 
-/* 6. DESTRUIR LA 'X' BLANCA DELGADA NATIVA DENTRO DEL BOTÓN PERMITIDO */
-.calendly-popup-close::before, .calendly-popup-close::after, .calendly-popup-close span, .calendly-popup-close svg { display: none !important; content: none !important; }
+/* 6. DESTRUIR NATIVOS: Ocultamos SVGs y basura interna de Calendly */
+.calendly-close-overlay *, .calendly-popup-close > * { 
+    display: none !important; 
+    opacity: 0 !important; 
+    visibility: hidden !important; 
+}
+
+/* 7. LA "X" PERFECTA: Dibujada con líneas matemáticas CSS (No se deforma jamás) */
+.calendly-popup-close::before, .calendly-popup-close::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 16px !important;  /* Largo de la línea (X delicada y elegante) */
+    height: 1.5px !important; /* Grosor fino de la línea */
+    background-color: #ffffff !important;
+    border-radius: 2px !important;
+    display: block !important;
+}
+
+/* Cruzar las dos líneas */
+.calendly-popup-close::before { transform: translate(-50%, -50%) rotate(45deg) !important; }
+.calendly-popup-close::after { transform: translate(-50%, -50%) rotate(-45deg) !important; }
