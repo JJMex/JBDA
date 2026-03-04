@@ -29,12 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(triggerReveal, 50);
     }
 
-    // --- 1. LINTERNA VOLUMÉTRICA & CURSOR LED ---
+    // --- 1. CURSOR LED VERDE (ESTILO HARDWARE) ---
     const cursorLed = document.getElementById('cursor-led');
     window.addEventListener('mousemove', (e) => {
         if (cursorLed) cursorLed.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-        document.documentElement.style.setProperty('--mouse-x', e.clientX + 'px');
-        document.documentElement.style.setProperty('--mouse-y', e.clientY + 'px');
     });
     
     const interactives = document.querySelectorAll('a, button, summary, input[type=range], #terminal-toggle');
@@ -177,57 +175,31 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 7. BOTONES MAGNÉTICOS CON FÍSICAS DE RESORTE (ÉLITE) ---
+    // --- 7. BOTONES MAGNÉTICOS (FÍSICAS ÉLITE) ---
     const magneticBtns = document.querySelectorAll('.magnetic-btn');
     magneticBtns.forEach(btn => {
         const baseTransition = 'box-shadow 0.4s ease, border-color 0.4s ease, color 0.3s ease';
-        let currentX = 0;
-        let currentY = 0;
+        let currentX = 0; let currentY = 0;
 
-        // 1. Seguimiento magnético en PC
         btn.addEventListener('mousemove', (e) => {
             const rect = btn.getBoundingClientRect();
             const h = rect.width / 2; const v = rect.height / 2;
-            currentX = (e.clientX - rect.left - h) * 0.4; 
-            currentY = (e.clientY - rect.top - v) * 0.4;
-            
+            currentX = (e.clientX - rect.left - h) * 0.4; currentY = (e.clientY - rect.top - v) * 0.4;
             btn.style.transition = `${baseTransition}, transform 0.1s ease-out`; 
             btn.style.transform = `translate(${currentX}px, ${currentY}px) scale(1)`;
-            
-            // Expansión del color rosa interno
-            btn.style.setProperty('--x', `${e.clientX - rect.left}px`); 
-            btn.style.setProperty('--y', `${e.clientY - rect.top}px`);
+            btn.style.setProperty('--x', `${e.clientX - rect.left}px`); btn.style.setProperty('--y', `${e.clientY - rect.top}px`);
         });
 
-        // 2. Rebote de resorte al sacar el mouse
         btn.addEventListener('mouseleave', () => { 
             currentX = 0; currentY = 0;
             btn.style.transition = `${baseTransition}, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)`; 
             btn.style.transform = `translate(0px, 0px) scale(1)`; 
         });
 
-        // 3. Aplastamiento al hacer clic en PC
-        btn.addEventListener('mousedown', () => {
-            btn.style.transition = `${baseTransition}, transform 0.1s ease-in`;
-            btn.style.transform = `translate(${currentX}px, ${currentY}px) scale(0.92)`;
-        });
-
-        // Rebote hacia afuera al soltar el clic
-        btn.addEventListener('mouseup', () => {
-            btn.style.transition = `${baseTransition}, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)`;
-            btn.style.transform = `translate(${currentX}px, ${currentY}px) scale(1)`;
-        });
-
-        // 4. Aplastamiento en táctil (Móvil)
-        btn.addEventListener('touchstart', () => {
-            btn.style.transition = `${baseTransition}, transform 0.1s ease-in`;
-            btn.style.transform = `translate(0px, 0px) scale(0.92)`;
-        }, {passive: true});
-
-        btn.addEventListener('touchend', () => {
-            btn.style.transition = `${baseTransition}, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)`;
-            btn.style.transform = `translate(0px, 0px) scale(1)`;
-        });
+        btn.addEventListener('mousedown', () => { btn.style.transition = `${baseTransition}, transform 0.1s ease-in`; btn.style.transform = `translate(${currentX}px, ${currentY}px) scale(0.92)`; });
+        btn.addEventListener('mouseup', () => { btn.style.transition = `${baseTransition}, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)`; btn.style.transform = `translate(${currentX}px, ${currentY}px) scale(1)`; });
+        btn.addEventListener('touchstart', () => { btn.style.transition = `${baseTransition}, transform 0.1s ease-in`; btn.style.transform = `translate(0px, 0px) scale(0.92)`; }, {passive: true});
+        btn.addEventListener('touchend', () => { btn.style.transition = `${baseTransition}, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)`; btn.style.transform = `translate(0px, 0px) scale(1)`; });
     });
 
     // --- 8. CONTADORES DINÁMICOS ---
@@ -242,9 +214,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     let current = 0;
                     const updateCounter = () => {
                         current += step;
-                        if(current < target) {
-                            entry.target.innerText = isDecimal ? current.toFixed(1) : Math.ceil(current); requestAnimationFrame(updateCounter);
-                        } else { entry.target.innerText = target; }
+                        if(current < target) { entry.target.innerText = isDecimal ? current.toFixed(1) : Math.ceil(current); requestAnimationFrame(updateCounter); } 
+                        else { entry.target.innerText = target; }
                     };
                     updateCounter(); observerCounters.unobserve(entry.target);
                 }
@@ -260,11 +231,8 @@ document.addEventListener("DOMContentLoaded", () => {
             let observerFocus = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
                     if (entry.target.classList.contains('aos-animate') || !entry.target.hasAttribute('data-aos')) {
-                        if(entry.isIntersecting) {
-                            entry.target.classList.add('scroll-focused'); entry.target.classList.remove('scroll-dimmed');
-                        } else {
-                            entry.target.classList.remove('scroll-focused'); entry.target.classList.add('scroll-dimmed');
-                        }
+                        if(entry.isIntersecting) { entry.target.classList.add('scroll-focused'); entry.target.classList.remove('scroll-dimmed'); } 
+                        else { entry.target.classList.remove('scroll-focused'); entry.target.classList.add('scroll-dimmed'); }
                     }
                 });
             }, { rootMargin: "-25% 0px -25% 0px" }); 
@@ -281,11 +249,11 @@ document.addEventListener("DOMContentLoaded", () => {
         svgCards.forEach(c => observerSvg.observe(c));
     }
 
-    // --- 11. ANIMACIÓN DE RED INTERACTIVA ---
+    // --- 11. RED INTERACTIVA CON PULSOS DE ENRUTAMIENTO (ÉLITE) ---
     const canvas = document.getElementById('network-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
-        let width, height, particles = [];
+        let width, height, particles = [], pulses = [];
         let mouse = { x: null, y: null, radius: 150 };
         let animationFrameId = null; let isCanvasVisible = true;
         
@@ -304,6 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
             observer.observe(header);
         }
 
+        // Partículas (Nodos)
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
@@ -333,27 +302,71 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.vx += (this.baseX - this.x) * spring; this.vy += (this.baseY - this.y) * spring;
                 this.vx *= friction; this.vy *= friction; this.x += this.vx; this.y += this.vy;
             }
-            draw() {
-                const isDark = document.body.classList.contains('dark-theme');
+            draw(isDark) {
                 ctx.fillStyle = isDark ? 'rgba(244, 114, 182, 0.4)' : 'rgba(212, 0, 109, 0.2)';
                 ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fill();
             }
         }
 
-        function initCanvas() { width = canvas.width = window.innerWidth; height = canvas.height = document.querySelector('header').offsetHeight; particles = []; const particleCount = window.innerWidth < 768 ? 60 : 120; for (let i = 0; i < particleCount; i++) { particles.push(new Particle()); } }
+        // Pulsos de Luz (Paquetes de Datos)
+        class Pulse {
+            constructor(p1, p2) {
+                this.p1 = p1; this.p2 = p2;
+                this.progress = 0;
+                this.speed = Math.random() * 0.015 + 0.01; // Velocidad del paquete
+                this.active = true;
+            }
+            update() {
+                this.progress += this.speed;
+                if (this.progress >= 1) this.active = false;
+            }
+            draw(ctx, isDark) {
+                if (!this.active) return;
+                let x = this.p1.x + (this.p2.x - this.p1.x) * this.progress;
+                let y = this.p1.y + (this.p2.y - this.p1.y) * this.progress;
+                ctx.beginPath();
+                ctx.arc(x, y, 2.5, 0, Math.PI * 2); // Tamaño del pulso
+                ctx.fillStyle = isDark ? 'rgba(244, 114, 182, 1)' : 'rgba(212, 0, 109, 1)';
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = ctx.fillStyle;
+                ctx.fill();
+                ctx.shadowBlur = 0; // Reset
+            }
+        }
+
+        function initCanvas() { 
+            width = canvas.width = window.innerWidth; height = canvas.height = document.querySelector('header').offsetHeight; 
+            particles = []; pulses = [];
+            const particleCount = window.innerWidth < 768 ? 60 : 120; 
+            for (let i = 0; i < particleCount; i++) { particles.push(new Particle()); } 
+        }
+        
         function animateCanvas() {
-            if (!isCanvasVisible) return; animationFrameId = requestAnimationFrame(animateCanvas); ctx.clearRect(0, 0, width, height);
+            if (!isCanvasVisible) return; 
+            animationFrameId = requestAnimationFrame(animateCanvas); ctx.clearRect(0, 0, width, height);
+            const isDark = document.body.classList.contains('dark-theme');
+            
             for (let i = 0; i < particles.length; i++) {
-                let p = particles[i]; p.update(); p.draw();
+                let p = particles[i]; p.update(); p.draw(isDark);
                 for (let j = i + 1; j < particles.length; j++) {
                     let p2 = particles[j]; let dist = Math.sqrt(Math.pow(p.x - p2.x, 2) + Math.pow(p.y - p2.y, 2));
                     if (dist < 160) {
+                        // Dibuja las conexiones
                         ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
-                        const isDark = document.body.classList.contains('dark-theme');
                         ctx.strokeStyle = isDark ? `rgba(244, 114, 182, ${0.25 - dist/160 * 0.25})` : `rgba(212, 0, 109, ${0.1 - dist/160 * 0.1})`; 
                         ctx.lineWidth = 0.8; ctx.stroke();
+                        
+                        // Generar Pulso de Enrutamiento (Probabilidad aleatoria)
+                        if (Math.random() < 0.0015) { pulses.push(new Pulse(p, p2)); }
                     }
                 }
+            }
+
+            // Actualizar y dibujar pulsos viajando
+            for(let i = pulses.length - 1; i >= 0; i--) {
+                pulses[i].update();
+                pulses[i].draw(ctx, isDark);
+                if(!pulses[i].active) pulses.splice(i, 1);
             }
         }
         window.addEventListener('resize', initCanvas); initCanvas(); animateCanvas();
