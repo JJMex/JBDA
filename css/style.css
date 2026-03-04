@@ -26,52 +26,32 @@ body { font-family: 'Inter', sans-serif; color: var(--dark-grey); line-height: 1
 .blueprint-grid { display: none !important; }
 
 /* ==============================================================
-   AURORA FLUIDA ACELERADA POR GPU (ANTI-PARPADEO)
+   1. AURORA FLUIDA (CAPA 0 - OPTIMIZACIÓN EXTREMA GPU)
    ============================================================== */
 .orbs-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: 0; pointer-events: none; }
-
-.orb { 
-    position: absolute; border-radius: 50%; filter: blur(75px); opacity: 0.75; 
-    animation: fluidAurora 25s infinite alternate ease-in-out; 
-    transition: background 0.5s ease, opacity 0.5s ease; 
-    /* OPTIMIZACIÓN CHROME: Obliga al uso de Tarjeta Gráfica */
-    will-change: transform, border-radius;
-    backface-visibility: hidden;
-    perspective: 1000px;
-    transform-style: preserve-3d;
-}
-
+.orb { position: absolute; border-radius: 50%; filter: blur(75px); opacity: 0.75; animation: fluidAurora 25s infinite alternate ease-in-out; transition: background 0.5s ease, opacity 0.5s ease; will-change: transform; transform: translateZ(0); backface-visibility: hidden; }
 .orb-1 { width: 65vw; height: 65vh; background: rgba(212, 0, 109, 0.2) !important; top: -5%; left: -5%; animation-duration: 25s; } 
 .orb-2 { width: 55vw; height: 55vh; background: rgba(148, 163, 184, 0.25) !important; top: 20%; right: -10%; animation-duration: 30s; animation-direction: alternate-reverse; } 
 .orb-3 { width: 75vw; height: 75vh; background: rgba(251, 207, 232, 0.4) !important; bottom: -15%; left: 15%; animation-duration: 28s; } 
 
-/* El uso de translate3d en lugar de translate elimina el destello blanco en monitores rápidos */
+/* Eliminamos la mutación de border-radius para evitar parpadeos en Chrome */
 @keyframes fluidAurora {
-    0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); border-radius: 50%; }
-    33% { transform: translate3d(15vw, 15vh, 0) scale(1.15) rotate(15deg); border-radius: 40% 60% 50% 50%; }
-    66% { transform: translate3d(-10vw, 20vh, 0) scale(0.9) rotate(-10deg); border-radius: 60% 40% 60% 40%; }
-    100% { transform: translate3d(25vw, -10vh, 0) scale(1.25) rotate(20deg); border-radius: 50% 50% 40% 60%; }
+    0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+    33% { transform: translate3d(15vw, 15vh, 0) scale(1.15) rotate(15deg); }
+    66% { transform: translate3d(-10vw, 20vh, 0) scale(0.9) rotate(-10deg); }
+    100% { transform: translate3d(25vw, -10vh, 0) scale(1.25) rotate(20deg); }
 }
 
 /* ==============================================================
-   RUIDO CINEMATOGRÁFICO ACELERADO POR GPU
+   2. RUIDO CINEMATOGRÁFICO (CAPA 1 - FONDO LIMPIO)
    ============================================================== */
-body::before { 
-    content: ""; position: fixed; top: -10vh; left: -10vw; width: 120vw; height: 120vh; 
-    background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E'); 
-    opacity: 0.04; pointer-events: none; z-index: 99997; 
-    animation: cinematicGrain 0.6s steps(2) infinite; 
-    will-change: transform;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-}
+body::before { content: ""; position: fixed; top: -10vh; left: -10vw; width: 120vw; height: 120vh; background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E'); opacity: 0.04; pointer-events: none; z-index: 1; animation: cinematicGrain 0.6s steps(2) infinite; will-change: transform; transform: translateZ(0); backface-visibility: hidden;}
+@keyframes cinematicGrain { 0%, 100% { transform: translate3d(0, 0, 0); } 25% { transform: translate3d(-1%, 1%, 0); } 50% { transform: translate3d(1%, -1%, 0); } 75% { transform: translate3d(1%, 1%, 0); } }
 
-@keyframes cinematicGrain { 
-    0%, 100% { transform: translate3d(0, 0, 0); } 
-    25% { transform: translate3d(-1%, 1%, 0); } 
-    50% { transform: translate3d(1%, -1%, 0); } 
-    75% { transform: translate3d(1%, 1%, 0); } 
-}
+/* ==============================================================
+   3. RED INTERACTIVA (CAPA 2 - INDEPENDIENTE DEL TEXTO)
+   ============================================================== */
+#network-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; will-change: transform; transform: translateZ(0); backface-visibility: hidden; }
 
 /* ------------------------------------------------------------------------- */
 
@@ -85,7 +65,7 @@ h1, h2, .quote-massive, .title-serif { font-family: 'Playfair Display', serif; }
 .preloader-hidden { opacity: 0 !important; visibility: hidden !important; pointer-events: none; }
 
 /* CURSOR SATÉLITE ÉLITE */
-.cursor-led { position: fixed; top: 0; left: 0; width: 8px; height: 8px; background-color: #10b981; border-radius: 2px; z-index: 999999; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 8px rgba(16, 185, 129, 0.8), 0 0 15px rgba(16, 185, 129, 0.5); animation: led-breathe 2s infinite alternate; transition: background-color 0.2s, box-shadow 0.2s, transform 0.15s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform, background-color;}
+.cursor-led { position: fixed; top: 0; left: 0; width: 8px; height: 8px; background-color: #10b981; border-radius: 2px; z-index: 999999; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 8px rgba(16, 185, 129, 0.8), 0 0 15px rgba(16, 185, 129, 0.5); animation: led-breathe 2s infinite alternate; transition: background-color 0.2s, box-shadow 0.2s, transform 0.15s cubic-bezier(0.25, 1, 0.5, 1); }
 @keyframes led-breathe { 0% { opacity: 0.4; box-shadow: 0 0 4px rgba(16, 185, 129, 0.5); } 100% { opacity: 1; box-shadow: 0 0 12px rgba(16, 185, 129, 0.9); } }
 .cursor-led.tx-rx { animation: blink-txrx 0.15s infinite !important; background-color: #34d399; box-shadow: 0 0 12px #34d399; width: 12px; height: 12px; border-radius: 50%;}
 @keyframes blink-txrx { 0%, 100% { opacity: 1; } 33% { opacity: 0; } 66% { opacity: 0.8; } }
@@ -95,7 +75,7 @@ h1, h2, .quote-massive, .title-serif { font-family: 'Playfair Display', serif; }
    EFECTO: MASK REVEAL
    ============================================================== */
 .reveal-text { display: inline-flex; overflow: hidden; vertical-align: bottom; padding-bottom: 0.25em; padding-right: 0.15em; margin-bottom: -0.25em; margin-right: -0.15em;}
-.reveal-text .reveal-inner { display: inline-block; transform: translateY(110%); opacity: 0; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease; will-change: transform, opacity;}
+.reveal-text .reveal-inner { display: inline-block; transform: translateY(110%); opacity: 0; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease; }
 body.page-loaded .reveal-text .reveal-inner { transform: translateY(0); opacity: 1; }
 .hero-content h2 .reveal-inner { transition-delay: 0.1s; }
 .hero-content h1 .reveal-text:nth-child(1) .reveal-inner { transition-delay: 0.2s; }
@@ -126,10 +106,10 @@ nav.nav-scrolled .logo-container img { height: 45px; }
 .lang-toggle-link::after { display: none !important; }
 .mobile-menu-btn { display: none; background: transparent; border: none; outline: none; -webkit-appearance: none; }
 
-header, section { position: relative; z-index: 1; background-color: transparent !important; background-image: none !important; }
+/* Protegemos las secciones subiéndolas a la capa 10 para evitar colisiones con el fondo */
+header, section { position: relative; z-index: 10; background-color: transparent !important; background-image: none !important; }
 header { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; overflow: hidden; }
-#network-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-.hero-content { position: relative; z-index: 1; max-width: 800px; }
+.hero-content { position: relative; z-index: 10; max-width: 800px; }
 header h2 { color: var(--pink-premium); font-size: 14px; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 30px; font-weight: 800; font-family: 'Inter', sans-serif;}
 header h1 { font-size: clamp(45px, 7vw, 85px); line-height: 1.05; margin-bottom: 35px; font-weight: 800; letter-spacing: -2px; color: var(--dark-grey); }
 header p { font-size: 22px; color: var(--soft-grey); max-width: 600px; margin-bottom: 50px; font-weight: 300; line-height: 1.6; }
@@ -255,7 +235,7 @@ summary::after { content: '+'; font-size: 24px; color: var(--pink-premium); tran
 details[open] summary::after { content: '-'; transform: rotate(180deg); }
 .faq-content { padding: 0 30px 25px 30px; font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
 
-.legal-container { max-width: 900px; margin: 60px auto 100px auto; padding: 80px 8%; position: relative; z-index: 1; background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(251, 207, 232, 0.6); border-radius: 24px; box-shadow: 0 25px 50px rgba(0,0,0,0.05); transition: background 0.5s ease, border-color 0.5s ease; }
+.legal-container { max-width: 900px; margin: 60px auto 100px auto; padding: 80px 8%; position: relative; z-index: 10; background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(251, 207, 232, 0.6); border-radius: 24px; box-shadow: 0 25px 50px rgba(0,0,0,0.05); transition: background 0.5s ease, border-color 0.5s ease; }
 .legal-container h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 800; color: var(--dark-grey); margin-bottom: 10px; letter-spacing: -1px; }
 .legal-container .update-date { font-size: 14px; color: var(--pink-premium); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 50px; }
 .legal-container h2 { font-size: 20px; font-weight: 700; color: var(--dark-grey); margin-top: 50px; margin-bottom: 20px; border-bottom: 1px solid rgba(212, 0, 109, 0.15); padding-bottom: 10px; }
@@ -265,7 +245,7 @@ details[open] summary::after { content: '-'; transform: rotate(180deg); }
 .legal-container ul li { font-size: 16px; color: var(--soft-grey); margin-bottom: 10px; line-height: 1.8; }
 .legal-container strong { color: var(--dark-grey); font-weight: 600; }
 
-.mega-footer-dark { background-color: var(--dark-grey); color: var(--white); position: relative; z-index: 2; padding-top: 80px; border-top-left-radius: 40px; border-top-right-radius: 40px; transition: background-color 0.5s ease; }
+.mega-footer-dark { background-color: var(--dark-grey); color: var(--white); position: relative; z-index: 10; padding-top: 80px; border-top-left-radius: 40px; border-top-right-radius: 40px; transition: background-color 0.5s ease; }
 #contacto { background: transparent !important; color: var(--white); text-align: center; box-shadow: none !important; margin: 0; padding: 60px 5%; border-radius: 0; }
 #contacto h2 { font-size: 40px; margin-bottom: 25px; font-weight: 800; letter-spacing: -1px; color: var(--white); }
 #contacto p { color: #cbd5e1; }
@@ -328,7 +308,7 @@ body#privacidad-page .mobile-menu-btn { display: none !important; }
 @media (max-width: 900px) { body#privacidad-page .nav-links { position: static; width: auto; height: auto; background: transparent !important; flex-direction: row; display: flex; gap: 20px; align-items: center; visibility: visible; opacity: 1; padding-top: 0 !important; } body#privacidad-page .nav-links a.back-link .desktop-text { display: none; } body#privacidad-page .nav-links a.back-link svg { width: 24px; height: 24px; margin-right: 0 !important; } body#privacidad-page .nav-links a { margin: 0; transform: none; font-size: 14px; opacity: 1;} }
 
 /* ==============================================================
-   CAPA DE MODO OSCURO (ADAPTADA PARA AURORA)
+   CAPA DE MODO OSCURO
    ============================================================== */
 body.dark-theme { --white: #0f172a; --silver: #1e293b; --dark-grey: #f8fafc; --soft-grey: #94a3b8; --pink-premium: #f472b6; --border: #334155; --bg-liquid-3: #020617; background-color: var(--white); }
 body.dark-theme .orb-1 { background: rgba(212, 0, 109, 0.25) !important; } 
@@ -401,7 +381,7 @@ body.dark-theme ::-webkit-scrollbar-thumb { border-color: var(--dark-grey); }
 body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color: #050505; }
 
 /* ==============================================================
-   JBDA CUSTOM CALENDLY MODAL (NIVEL ÉLITE 100% NATIVO)
+   JBDA CUSTOM CALENDLY MODAL
    ============================================================== */
 .jbda-modal-overlay {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -420,7 +400,6 @@ body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color
 }
 .jbda-modal-overlay.hidden .jbda-modal-content { transform: scale(0.95); }
 
-/* Contenedor de Botón (Ya sin líneas matemáticas que se deformen) */
 .jbda-modal-close {
     position: fixed; top: 30px; right: 30px; 
     width: 44px; height: 44px;
@@ -433,7 +412,6 @@ body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color
 }
 .jbda-modal-close:hover { background-color: var(--pink-premium); transform: scale(1.05) rotate(90deg); }
 
-/* Efecto App Nativa en Celular (Evita el Notch) */
 @media (max-width: 900px) {
     .jbda-modal-overlay { align-items: flex-end; }
     .jbda-modal-content { 
