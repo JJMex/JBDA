@@ -367,25 +367,28 @@ body.dark-theme ::-webkit-scrollbar-thumb { border-color: var(--dark-grey); }
 body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color: #050505; }
 
 /* ==============================================================
-   OVERRIDE CALENDLY (ÉLITE & PWA FIX) - DISEÑO MATEMÁTICO PURO
+   OVERRIDE CALENDLY (ÉLITE & PWA FIX) - SOLUCIÓN JERARQUÍA CAPAS
    ============================================================== */
-/* 1. Fondo de cristal para la pantalla completa */
+/* 1. Contenedor Maestro: Fondo de cristal */
 .calendly-overlay { background-color: rgba(15, 23, 42, 0.4) !important; backdrop-filter: blur(15px) saturate(150%) !important; -webkit-backdrop-filter: blur(15px) saturate(150%) !important; z-index: 100000 !important;}
 
-/* 2. Empujar el cuadro del calendario hacia abajo */
+/* 2. Capa Cierra-Ventana: Debe ir POR DEBAJO del calendario para no interferir con los clics en los días */
+.calendly-close-overlay { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100% !important; height: 100% !important; background: transparent !important; z-index: 1 !important; border: none !important;}
+
+/* 3. Capa Calendario: Debe ir POR ENCIMA del cierra-ventana para ser clickeable */
+.calendly-popup { z-index: 2 !important; position: relative !important; }
+
+/* 4. Empujar el cuadro del calendario hacia abajo en móviles */
 @media (max-width: 900px) { .calendly-popup { padding: max(env(safe-area-inset-top, 90px), 90px) 15px 30px 15px !important; } }
 
-/* 3. Diseño del contenedor principal */
+/* 5. Diseño del contenedor blanco */
 .calendly-popup-content { border-radius: 24px !important; overflow: hidden !important; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; }
 
-/* 4. MANTENER EL OVERLAY INVISIBLE A PANTALLA COMPLETA (Para que cierre al tocar fuera) */
-.calendly-close-overlay { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100% !important; height: 100% !important; background: transparent !important; z-index: 100001 !important; border: none !important;}
-
-/* 5. CÍRCULO PRINCIPAL DEL BOTÓN (Laptop y Móvil) */
+/* 6. BOTÓN PREMIUM DE CERRAR ("X") */
 .calendly-popup-close { 
     position: fixed !important; 
-    top: 30px !important; /* Posición segura en Laptop */
-    right: 30px !important; /* Posición segura en Laptop */
+    top: 30px !important; 
+    right: 30px !important; 
     bottom: auto !important; 
     left: auto !important; 
     width: 44px !important; 
@@ -395,10 +398,10 @@ body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color
     box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
     border: 1px solid rgba(255,255,255,0.1) !important;
     opacity: 1 !important;
-    color: transparent !important; /* Escondemos cualquier texto residual */
-    background-image: none !important; /* ELIMINAMOS SVG, NADA DE IMÁGENES DEFORMADAS */
+    color: transparent !important; 
+    background-image: none !important; 
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-    z-index: 100005 !important;
+    z-index: 100005 !important; /* Siempre hasta arriba */
     display: block !important;
     cursor: pointer !important;
 }
@@ -418,26 +421,25 @@ body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color
     }
 }
 
-/* 6. DESTRUIR NATIVOS: Ocultamos SVGs y basura interna de Calendly */
+/* 7. DESTRUIR NATIVOS: Ocultamos SVGs y basura interna de Calendly */
 .calendly-close-overlay *, .calendly-popup-close > * { 
     display: none !important; 
     opacity: 0 !important; 
     visibility: hidden !important; 
 }
 
-/* 7. LA "X" PERFECTA: Dibujada con líneas matemáticas CSS (No se deforma jamás) */
+/* 8. LA "X" PERFECTA: Dibujada con líneas matemáticas CSS */
 .calendly-popup-close::before, .calendly-popup-close::after {
     content: "" !important;
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
-    width: 16px !important;  /* Largo de la línea (X delicada y elegante) */
-    height: 1.5px !important; /* Grosor fino de la línea */
+    width: 16px !important;  
+    height: 1.5px !important; 
     background-color: #ffffff !important;
     border-radius: 2px !important;
     display: block !important;
 }
 
-/* Cruzar las dos líneas */
 .calendly-popup-close::before { transform: translate(-50%, -50%) rotate(45deg) !important; }
 .calendly-popup-close::after { transform: translate(-50%, -50%) rotate(-45deg) !important; }
