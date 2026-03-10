@@ -62,10 +62,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 4. TRANSICIONES DE PÁGINA ---
     document.querySelectorAll('a').forEach(anchor => {
-        // Excluimos explícitamente calendly y cualquier cosa que empiece con mailto:
         if(anchor.href && !anchor.target && !anchor.id.includes('calendly') && !anchor.getAttribute('href').startsWith('mailto:')) {
             anchor.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
+                // Si es enlace interno, scroll suave
                 if (targetUrl && targetUrl.startsWith('#')) {
                     e.preventDefault(); closeMobileMenu(); 
                     setTimeout(() => {
@@ -73,6 +73,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         else { document.querySelector(targetUrl).scrollIntoView({behavior: 'smooth'}); }
                     }, 50);
                 } 
+                // Si es un enlace a tu academia (subdominio) o link externo, déjalo ir normal
+                else if (this.hostname !== window.location.hostname && !targetUrl.startsWith('.') && !targetUrl.startsWith('/')) {
+                    return; 
+                }
+                // Si es una página interna, usa el overlay de transición
                 else if (this.hostname === window.location.hostname || targetUrl.startsWith('.') || targetUrl.startsWith('/')) {
                     e.preventDefault();
                     if(overlay) { overlay.classList.remove('hidden'); setTimeout(() => { window.location.href = this.href; }, 400); } 
@@ -104,66 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 6. SIMULADOR DE ESTRÉS DINÁMICO ---
-    const slider = document.getElementById('traffic-slider');
-    const metricUsers = document.getElementById('metric-users');
-    const metricRps = document.getElementById('metric-rps');
-    const metricStatus = document.getElementById('metric-status');
-    const barTrad = document.getElementById('bar-trad');
-    const barJbda = document.getElementById('bar-jbda');
-    const statusTrad = document.getElementById('status-trad');
-    const statusJbda = document.getElementById('status-jbda');
-    const cpuTrad = document.getElementById('cpu-trad');
-    const cpuJbda = document.getElementById('cpu-jbda');
-
-    if (slider && barTrad && barJbda) {
-        slider.addEventListener('input', (e) => {
-            const val = parseInt(e.target.value);
-            const isEnglish = document.documentElement.lang === 'en';
-            
-            let users = Math.floor(150 + (val * 248.5)); 
-            let rps = Math.floor(300 + (val * 1497));    
-            metricUsers.innerText = users.toLocaleString();
-            metricRps.innerText = rps.toLocaleString();
-            metricStatus.classList.remove('status-green', 'status-yellow', 'status-red');
-
-            let tradWidth = 5 + (val * 1.5);
-            if(tradWidth > 100) tradWidth = 100;
-            barTrad.style.width = `${tradWidth}%`;
-            let cpuT = Math.min(100, Math.floor(15 + (val * 0.95)));
-            
-            if(val > 75) {
-                metricStatus.innerText = isEnglish ? 'CRITICAL' : 'CRÍTICO'; metricStatus.classList.add('status-red');
-                barTrad.style.backgroundColor = '#ef4444'; barTrad.parentElement.parentElement.classList.add('alert-shake');
-                statusTrad.innerText = isEnglish ? 'Latency: 999ms (FAILURE)' : 'Latencia: 999ms (CAÍDA)'; statusTrad.className = 'status status-red';
-                cpuTrad.innerText = isEnglish ? `CPU: 100% (CRASH)` : `CPU: 100% (COLAPSO)`; cpuTrad.className = 'cpu-load status-red';
-                slider.style.setProperty('--thumb-color', '#ef4444'); slider.style.setProperty('--thumb-glow', 'rgba(239, 68, 68, 0.6)');
-            } else if (val > 40) {
-                metricStatus.innerText = isEnglish ? 'Warning' : 'Riesgo'; metricStatus.classList.add('status-yellow');
-                barTrad.style.backgroundColor = '#f59e0b'; barTrad.parentElement.parentElement.classList.remove('alert-shake');
-                let latT = Math.floor(65 + (val-50)*8);
-                statusTrad.innerText = isEnglish ? `Latency: ${latT}ms` : `Latencia: ${latT}ms`; statusTrad.className = 'status status-yellow';
-                cpuTrad.innerText = `CPU: ${cpuT}%`; cpuTrad.className = 'cpu-load status-yellow';
-                slider.style.setProperty('--thumb-color', '#f59e0b'); slider.style.setProperty('--thumb-glow', 'rgba(245, 158, 11, 0.6)');
-            } else {
-                metricStatus.innerText = isEnglish ? 'Stable' : 'Estable'; metricStatus.classList.add('status-green');
-                barTrad.style.backgroundColor = '#10b981'; barTrad.parentElement.parentElement.classList.remove('alert-shake');
-                let latT = Math.floor(15 + val);
-                statusTrad.innerText = isEnglish ? `Latency: ${latT}ms` : `Latencia: ${latT}ms`; statusTrad.className = 'status status-green';
-                cpuTrad.innerText = `CPU: ${cpuT}%`; cpuTrad.className = 'cpu-load status-green';
-                slider.style.setProperty('--thumb-color', 'var(--pink-premium)'); slider.style.setProperty('--thumb-glow', 'rgba(212, 0, 109, 0.5)');
-            }
-
-            let jbdaWidth = 5 + (val * 0.15); 
-            let cpuJ = Math.floor(12 + (val * 0.33)); 
-            let latJ = 12 + Math.floor(val * 0.05);   
-            barJbda.style.width = `${jbdaWidth}%`; barJbda.style.backgroundColor = 'var(--pink-premium)';
-            statusJbda.innerText = isEnglish ? `Latency: ${latJ}ms (99.8% QoS)` : `Latencia: ${latJ}ms (99.8% QoS)`;
-            cpuJbda.innerText = isEnglish ? `CPU: ${cpuJ}% (Active Balancing)` : `CPU: ${cpuJ}% (Balanceo Activo)`;
-        });
-    }
-
-    // --- 7. BOTONES MAGNÉTICOS (FÍSICAS ÉLITE) ---
+    // --- 6. BOTONES MAGNÉTICOS (FÍSICAS ÉLITE) ---
     const magneticBtns = document.querySelectorAll('.magnetic-btn');
     magneticBtns.forEach(btn => {
         const baseTransition = 'box-shadow 0.4s ease, border-color 0.4s ease, color 0.3s ease';
@@ -190,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.addEventListener('touchend', () => { btn.style.transition = `${baseTransition}, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)`; btn.style.transform = `translate(0px, 0px) scale(1)`; });
     });
 
-    // --- 8. CONTADORES DINÁMICOS ---
+    // --- 7. CONTADORES DINÁMICOS ---
     const counters = document.querySelectorAll('.counter-val');
     if(counters.length > 0) {
         let observerCounters = new IntersectionObserver(entries => {
@@ -212,9 +158,9 @@ document.addEventListener("DOMContentLoaded", () => {
         counters.forEach(c => observerCounters.observe(c));
     }
 
-    // --- 9. SCROLL-FOCUS ---
+    // --- 8. SCROLL-FOCUS ---
     setTimeout(() => {
-        const focusCards = document.querySelectorAll('.card, .team-card, details');
+        const focusCards = document.querySelectorAll('.card, .team-card, details, .bento-card');
         if(focusCards.length > 0) {
             let observerFocus = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
@@ -228,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, 1200);
 
-    // --- 10. ANIMACIÓN SVG ---
+    // --- 9. ANIMACIÓN SVG ---
     const svgCards = document.querySelectorAll('.card');
     if(svgCards.length > 0) {
         let observerSvg = new IntersectionObserver(entries => {
@@ -237,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
         svgCards.forEach(c => observerSvg.observe(c));
     }
 
-    // --- 11. RED INTERACTIVA: PULSOS EFECTO COMETA (ÉLITE) ---
+    // --- 10. RED INTERACTIVA: PULSOS EFECTO COMETA (ÉLITE) ---
     const canvas = document.getElementById('network-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
@@ -370,7 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('resize', initCanvas); initCanvas(); animateCanvas();
     }
 
-    // --- 12. SOMBRA DE NAVBAR Y BARRA DE PROGRESO ---
+    // --- 11. SOMBRA DE NAVBAR Y BARRA DE PROGRESO ---
     const nav = document.getElementById('main-nav');
     const progressBar = document.getElementById('scroll-progress');
     window.addEventListener('scroll', () => { 
@@ -385,7 +331,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (typeof AOS !== 'undefined') { AOS.init({ duration: 1000, once: true, offset: 100 }); }
 
-    // --- 13. ENLACES CENTRALIZADOS Y PORTAPAPELES ÉLITE ---
+    // --- 12. ENLACES CENTRALIZADOS Y PORTAPAPELES ÉLITE ---
     if (typeof JBDA_CONFIG !== 'undefined') {
         const isEnglish = document.documentElement.lang === 'en';
         const mensaje = isEnglish ? JBDA_CONFIG.whatsappMsgEN : JBDA_CONFIG.whatsappMsgES;
@@ -395,9 +341,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if(document.getElementById('link-concierge-whatsapp')) document.getElementById('link-concierge-whatsapp').href = urlWhats; 
         if(document.getElementById('link-linkedin')) document.getElementById('link-linkedin').href = JBDA_CONFIG.linkedin;
 
-        // ==============================================================
-        // SISTEMA DE PORTAPAPELES (TARGETING UNIVERSAL ANTI-MAILTO)
-        // ==============================================================
+        // SISTEMA DE PORTAPAPELES
         const emailLinks = document.querySelectorAll('.link-email, a[href^="mailto:"]');
         let toastTimeout;
 
@@ -429,7 +373,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         document.execCommand('copy');
                         showToast();
                     } catch (err) {
-                        console.error('El portapapeles fue bloqueado por el sistema.');
+                        console.error('El portapapeles fue bloqueado.');
                     }
                     document.body.removeChild(textArea);
                 };
@@ -444,7 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        // TOAST (Notificación Premium con el nuevo ícono)
+        // TOAST (Notificación Premium)
         const showToast = () => {
             let toast = document.getElementById('jbda-toast');
             if (!toast) {
@@ -460,9 +404,7 @@ document.addEventListener("DOMContentLoaded", () => {
             toastTimeout = setTimeout(() => { toast.classList.remove('show'); }, 3000);
         };
 
-        // ==============================================================
         // MOTOR MODAL JBDA (CALENDLY)
-        // ==============================================================
         let customModal, customIframe;
         
         const initCustomCalendly = () => {
@@ -514,14 +456,14 @@ document.addEventListener("DOMContentLoaded", () => {
         if(document.getElementById('link-concierge-calendly')) document.getElementById('link-concierge-calendly').addEventListener('click', abrirCalendly);
     }
 
-    // --- 14. BOTÓN FLOTANTE ---
+    // --- 13. BOTÓN FLOTANTE ---
     const conciergeToggle = document.getElementById('concierge-toggle'); const conciergeMenu = document.getElementById('concierge-menu');
     if(conciergeToggle && conciergeMenu) {
         conciergeToggle.addEventListener('click', (e) => { e.stopPropagation(); conciergeMenu.classList.toggle('active'); });
         document.addEventListener('click', (event) => { if (!conciergeToggle.contains(event.target) && !conciergeMenu.contains(event.target)) { conciergeMenu.classList.remove('active'); } });
     }
 
-    // --- 15. MODO TERMINAL ---
+    // --- 14. MODO TERMINAL ---
     const terminalToggle = document.getElementById('terminal-toggle');
     if(terminalToggle) { terminalToggle.addEventListener('click', (e) => { e.stopPropagation(); document.body.classList.toggle('terminal-mode'); }); }
     document.addEventListener('contextmenu', event => event.preventDefault());
