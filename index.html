@@ -26,10 +26,11 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=2.0">
+    <!-- Forzamos la versión 4.0 para limpiar caché -->
+    <link rel="stylesheet" href="css/style.css?v=4.0">
 
     <script type="application/ld+json">
     {
@@ -100,7 +101,7 @@
         <section id="ecosistema" data-aos="fade-up">
             <div class="glass-track">
                 <span style="font-size: 12px; text-transform: uppercase; letter-spacing: 3px; color: var(--pink-premium); font-weight: 800; margin-bottom: 10px; display: block;">Ecosistema Multivendor</span>
-                <p style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--dark-grey); margin-bottom: 20px;">Capacidad de integración y experiencia operativa.</p>
+                <p style="font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 600; color: var(--dark-grey); margin-bottom: 20px; letter-spacing: -0.5px;">Capacidad de integración y experiencia operativa.</p>
                 <div class="marquee-wrapper">
                     <div class="marquee-track">
                         <img src="assets/Huawei.png" alt="Huawei" class="brand-logo"><img src="assets/Cisco.png" alt="Cisco" class="brand-logo"><img src="assets/Fortinet.png" alt="Fortinet" class="brand-logo"><img src="assets/Aruba.png" alt="Aruba" class="brand-logo"><img src="assets/3Com.png" alt="3Com" class="brand-logo"><img src="assets/H3C.png" alt="H3C" class="brand-logo"><img src="assets/ProxMox.png" alt="Proxmox" class="brand-logo">
@@ -110,27 +111,36 @@
             </div>
         </section>
 
-        <section id="manifiesto-global">
-            <div class="texto-manifiesto" data-aos="fade-right">
-                <p>La red no es un accesorio;<br> es el <span class='editorial-italic' style='color: var(--pink-premium);'>sistema circulatorio</span><br> de la empresa moderna.</p>
-                <p class="sub">En <strong>JBDA</strong> fusionamos la precisión de ingeniería de élite con una visión financiera de negocio orientada a resultados.</p>
-            </div>
-            <div class="cajas-filosofia">
-                <div class="filosofia-box" data-aos="fade-left" data-aos-delay="100">
-                    <h3>Misión</h3>
-                    <p>Transformar la infraestructura tecnológica de las organizaciones en un activo estratégico, garantizando continuidad operativa y rentabilidad.</p>
+        <div id="impacto-container">
+            <section id="impacto" data-aos="fade-up" data-aos-duration="1200">
+                <div class="impacto-texto">
+                    <span class="section-label" style="color: var(--pink-premium);">Capacidad de Impacto</span>
+                    <h2 class="title-serif reveal-text">Historial<br><span style="color: var(--pink-premium);">Directivo</span></h2>
                 </div>
-                <div class="filosofia-box asimetrica" data-aos="fade-left" data-aos-delay="200">
-                    <h3>Visión</h3>
-                    <p>Ser el estándar de excelencia en telecomunicaciones; el aliado al que los líderes de TI acuden cuando el rendimiento no es negociable.</p>
+                <div class="grid-impacto">
+                    <div class="impacto-item">
+                        <h3><span class="counter-val" data-target="85">0</span>%</h3>
+                        <h4>Mitigación de Caídas</h4>
+                        <p>Enfoque en reingeniería para reducir el downtime histórico.</p>
+                    </div>
+                    <div class="impacto-item">
+                        <h3><span class="counter-val" data-target="40">0</span>%</h3>
+                        <h4>Optimización de CAPEX</h4>
+                        <p>Reducción de sobreinversiones tecnológicas.</p>
+                    </div>
+                    <div class="impacto-item">
+                        <h3><span class="counter-val" data-target="99.8" data-decimal="true">0.0</span>%</h3>
+                        <h4>Disponibilidad Estándar</h4>
+                        <p>Nuestra métrica base para arquitecturas de misión crítica.</p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
         <section id="servicios">
             <div class="servicios-left">
                 <span class="section-label" data-aos="fade-right">Metodología Operativa</span>
-                <h2 class="title-serif reveal-text" style="font-size: clamp(36px, 5vw, 52px);" data-aos="fade-right">Sistema de Reingeniería JBDA</h2>
+                <h2 class="title-serif reveal-text" style="font-size: clamp(36px, 5vw, 52px);" data-aos="fade-right">Sistema de <span style="color: var(--pink-premium);">Reingeniería</span> JBDA</h2>
             </div>
             <div class="servicios-right">
                 <div class="card" data-aos="fade-up">
@@ -169,35 +179,9 @@
             </div>
         </section>
 
-        <div id="impacto-container">
-            <section id="impacto" data-aos="fade-up" data-aos-duration="1200">
-                <div class="impacto-texto">
-                    <span class="section-label" style="color: var(--pink-premium);">Capacidad de Impacto</span>
-                    <h2 class="title-serif reveal-text">Historial<br>Directivo</h2>
-                </div>
-                <div class="grid-impacto">
-                    <div class="impacto-item">
-                        <h3><span class="counter-val" data-target="85">0</span>%</h3>
-                        <h4>Mitigación de Caídas</h4>
-                        <p>Enfoque en reingeniería para reducir el downtime histórico.</p>
-                    </div>
-                    <div class="impacto-item">
-                        <h3><span class="counter-val" data-target="40">0</span>%</h3>
-                        <h4>Optimización de CAPEX</h4>
-                        <p>Reducción de sobreinversiones tecnológicas.</p>
-                    </div>
-                    <div class="impacto-item">
-                        <h3><span class="counter-val" data-target="99.8" data-decimal="true">0.0</span>%</h3>
-                        <h4>Disponibilidad Estándar</h4>
-                        <p>Nuestra métrica base para arquitecturas de misión crítica.</p>
-                    </div>
-                </div>
-            </section>
-        </div>
-
         <section id="diferenciadores">
             <div class="diff-left">
-                <h2 class="quote-massive" data-aos="fade-right">"No vendemos cajas;<br><span class=\"quote-highlight\">integramos soluciones."</span></h2>
+                <h2 class="quote-massive" data-aos="fade-right">No vendemos cajas;<br>integramos <span style="color: var(--pink-premium);">soluciones.</span></h2>
             </div>
             <div class="diff-right">
                 <div class="diff-item" data-aos="fade-up"><h4>Experiencia Multisectorial</h4><p>Trayectoria comprobada en entornos de misión crítica: Corporativo, Hotelería premium e Industria pesada.</p></div>
@@ -206,97 +190,93 @@
             </div>
         </section>
 
-<section id="saas-ecosystem">
-    <!-- Encabezado de la Sección -->
-    <div class="saas-intro" data-aos="fade-up">
-        <span class="section-label" style="justify-content: center; display: flex;">Innovación en la Nube</span>
-        <h2 class="title-serif reveal-text" style="font-size: clamp(36px, 5vw, 52px);">Ecosistema SaaS JBDA</h2>
-        <p>Arquitectura de software orientada a resultados. Más allá de la consultoría de infraestructura, desarrollamos plataformas en la nube diseñadas para optimizar la trazabilidad, retención y presencia digital de su empresa.</p>
-    </div>
-
-    <!-- Cuadrícula Horizontal de Plataformas -->
-    <div class="saas-grid">
-        
-        <!-- Tarjeta 1: vCard -->
-        <div class="card saas-card" data-aos="fade-up" data-aos-delay="0">
-            <div class="saas-card-content">
-                <!-- Icono de Contacto / Usuario -->
-                <div class="icon-wrapper">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                </div>
-                <h3><span style="color: var(--pink-premium);"></span> vCard</h3>
-                <h4>Tarjetas Inteligentes</h4>
-                <p>La evolución del networking corporativo. Transforme la información de su equipo en un código QR único que, al ser escaneado, guarda el contacto automáticamente en la agenda móvil.</p>
+        <section id="saas-ecosystem">
+            <div class="saas-intro" data-aos="fade-up">
+                <span class="section-label" style="justify-content: center; display: flex;">Innovación en la Nube</span>
+                <h2 class="title-serif reveal-text" style="font-size: clamp(36px, 5vw, 52px);">Ecosistema <span style="color: var(--pink-premium);">SaaS</span> JBDA</h2>
+                <p>Arquitectura de software orientada a resultados. Más allá de la consultoría de infraestructura, desarrollamos plataformas en la nube diseñadas para optimizar la trazabilidad, retención y presencia digital de su empresa.</p>
             </div>
-            <a href="https://vcard.jbda.com.mx" class="btn-main magnetic-btn" target="_blank" rel="noopener noreferrer" style="width: 100%; text-align: center; padding: 15px 0;">
-                Acceder
-            </a>
-        </div>
 
-        <!-- Tarjeta 2: QR Nexus -->
-        <div class="card saas-card" data-aos="fade-up" data-aos-delay="100">
-            <div class="saas-card-content">
-                <!-- Icono de Código QR -->
-                <div class="icon-wrapper">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="3" width="7" height="7" rx="1"></rect>
-                        <rect x="14" y="3" width="7" height="7" rx="1"></rect>
-                        <rect x="14" y="14" width="7" height="7" rx="1"></rect>
-                        <rect x="3" y="14" width="7" height="7" rx="1"></rect>
-                        <path d="M6 6h.01"></path>
-                        <path d="M17 6h.01"></path>
-                        <path d="M17 17h.01"></path>
-                        <path d="M6 17h.01"></path>
-                    </svg>
+            <div class="saas-grid">
+                <!-- Tarjeta 1: vCard -->
+                <div class="card saas-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="saas-card-content">
+                        <div class="icon-wrapper">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <h3>vCard</h3>
+                        <h4>Tarjetas Inteligentes</h4>
+                        <p>La evolución del networking corporativo. Transforme la información de su equipo en un código QR único que, al ser escaneado, guarda el contacto automáticamente en la agenda móvil.</p>
+                    </div>
+                    <a href="https://vcard.jbda.com.mx" class="btn-main magnetic-btn" target="_blank" rel="noopener noreferrer" style="width: 100%; text-align: center; padding: 15px 0;">
+                        Acceder
+                    </a>
                 </div>
-                <h3><span style="color: var(--pink-premium);"></span> QR Nexus</h3>
-                <h4>Analítica Avanzada</h4>
-                <p>Motor de conversión para marketing de alto rendimiento. Gestione campañas multiformato con telemetría profunda en tiempo real (geolocalización, dispositivos y SO).</p>
-            </div>
-            <a href="https://qr.jbda.com.mx" class="btn-main magnetic-btn" target="_blank" rel="noopener noreferrer" style="width: 100%; text-align: center; padding: 15px 0;">
-                Acceder
-            </a>
-        </div>
 
-        <!-- Tarjeta 3: Loyal Club -->
-        <div class="card saas-card" data-aos="fade-up" data-aos-delay="200">
-            <div class="saas-card-content">
-                <!-- Icono de Tarjeta de Lealtad -->
-                <div class="icon-wrapper">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="5" width="20" height="14" rx="2"></rect>
-                        <line x1="2" y1="10" x2="22" y2="10"></line>
-                        <path d="M7 15h.01"></path>
-                        <path d="M11 15h2"></path>
-                    </svg>
+                <!-- Tarjeta 2: QR Nexus -->
+                <div class="card saas-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="saas-card-content">
+                        <div class="icon-wrapper">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                                <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                                <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                                <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                                <path d="M6 6h.01"></path>
+                                <path d="M17 6h.01"></path>
+                                <path d="M17 17h.01"></path>
+                                <path d="M6 17h.01"></path>
+                            </svg>
+                        </div>
+                        <h3>QR Nexus</h3>
+                        <h4>Analítica Avanzada</h4>
+                        <p>Motor de conversión para marketing de alto rendimiento. Gestione campañas multiformato con telemetría profunda en tiempo real (geolocalización, dispositivos y SO).</p>
+                    </div>
+                    <a href="https://qr.jbda.com.mx" class="btn-main magnetic-btn" target="_blank" rel="noopener noreferrer" style="width: 100%; text-align: center; padding: 15px 0;">
+                        Acceder
+                    </a>
                 </div>
-                <h3><span style="color: var(--pink-premium);"></span> Loyal Club</h3>
-                <h4>Retención de Clientes</h4>
-                <p>Digitalización estratégica de programas de fidelización. Automatice la acumulación de puntos, escale la recurrencia y maximice el ciclo de vida del consumidor de forma autónoma.</p>
+
+                <!-- Tarjeta 3: Loyal Club -->
+                <div class="card saas-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="saas-card-content">
+                        <div class="icon-wrapper">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink-premium)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                                <line x1="2" y1="10" x2="22" y2="10"></line>
+                                <path d="M7 15h.01"></path>
+                                <path d="M11 15h2"></path>
+                            </svg>
+                        </div>
+                        <h3>Loyal Club</h3>
+                        <h4>Retención de Clientes</h4>
+                        <p>Digitalización estratégica de programas de fidelización. Automatice la acumulación de puntos, escale la recurrencia y maximice el ciclo de vida del consumidor de forma autónoma.</p>
+                    </div>
+                    <a href="https://loyal.jbda.com.mx" class="btn-main magnetic-btn" target="_blank" rel="noopener noreferrer" style="width: 100%; text-align: center; padding: 15px 0;">
+                        Acceder
+                    </a>
+                </div>
             </div>
-            <a href="https://loyal.jbda.com.mx" class="btn-main magnetic-btn" target="_blank" rel="noopener noreferrer" style="width: 100%; text-align: center; padding: 15px 0;">
-                Acceder
-            </a>
-        </div>
+        </section>
 
-    </div>
-</section>
-
+        <!-- SECCIÓN NUESTRA FIRMA (REDESIGN APPLE STYLE) -->
         <section id="nuestra-firma">
-            <span class="section-label" data-aos="fade-up">El Equipo Directivo</span>
-            <h2 class="title-serif reveal-text" data-aos="fade-up" style="font-size: clamp(36px, 5vw, 48px); margin-bottom: 40px;">Ingeniería guiada por visión de negocio.</h2>
-            <p class="manifesto" data-aos="fade-up">Nuestra firma nació de una observación crítica: las corporaciones gastaban millones en hardware sobredimensionado, mientras sus redes seguían presentando fallas estructurales. En JBDA, aseguramos que cada inversión tecnológica se traduzca en rentabilidad, seguridad y flujo operativo sin interrupciones.</p>
+            <span class="section-label" data-aos="fade-up">Filosofía & Liderazgo</span>
+            <div class="firma-header-content" data-aos="fade-up">
+                <h2 class="title-serif">La red no es un accesorio;<br>es el <span style="color: var(--pink-premium);">sistema circulatorio</span><br>de la empresa moderna.</h2>
+                <p class="manifesto">Nuestra firma nació de una observación crítica: las corporaciones gastaban millones en hardware sobredimensionado, mientras sus redes seguían presentando fallas estructurales. En JBDA fusionamos la precisión de ingeniería de élite con una visión financiera de negocio, asegurando que cada inversión tecnológica se traduzca en rentabilidad, seguridad y flujo operativo sin interrupciones.</p>
+            </div>
 
             <div class="team-grid">
-                <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="team-card card" data-aos="fade-up" data-aos-delay="0">
                     <span class="member-role">Socia Directora & CEO</span>
                     <h3 class="member-name">Lic. Danyssha Gutiérrez</h3>
                     <p class="member-bio">Con formación en Derecho y una aguda visión corporativa, Danyssha lidera la estrategia administrativa de JBDA. Su objetivo es claro: alinear la infraestructura tecnológica con los objetivos de negocio. Es especialista en optimización de presupuestos, asegurando que las organizaciones obtengan el máximo rendimiento del mercado sin sobreinversiones (CAPEX), garantizando rentabilidad y cumplimiento estratégico.</p>
                 </div>
-                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="team-card card" data-aos="fade-up" data-aos-delay="100">
                     <span class="member-role">Socio Director & CTO</span>
                     <h3 class="member-name">Ing. José Cruz</h3>
                     <p class="member-bio">Experto en el diseño y blindaje de redes de misión crítica. Ha liderado equipos de ingeniería en auditorías complejas, reingeniería y despliegues multivendor garantizando arquitecturas a prueba de fallos. Su enfoque operativo asegura la máxima cobertura, calidad de servicio (QoS) y una disponibilidad del 99.8% en cada sitio, transformando infraestructuras vulnerables en redes de alto rendimiento.</p>
@@ -307,7 +287,7 @@
         <section id="faq">
             <div class="faq-texto" data-aos="fade-right">
                 <span class="section-label">Respuestas Clave</span>
-                <h2 class="title-serif reveal-text">Preguntas<br>Frecuentes</h2>
+                <h2 class="title-serif reveal-text">Preguntas<br><span style="color: var(--pink-premium);">Frecuentes</span></h2>
             </div>
             <div class="faq-container" data-aos="fade-left">
                 <details>

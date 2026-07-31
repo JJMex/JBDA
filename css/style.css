@@ -20,8 +20,16 @@ html.lenis { height: auto; }
 #page-transition-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
 /* --- LIENZO INFINITO --- */
-body { font-family: 'Inter', sans-serif; color: var(--dark-grey); line-height: 1.8; -webkit-font-smoothing: antialiased; overflow-x: hidden; background-color: var(--white); transition: color 0.5s ease, background-color 0.5s ease; }
-
+body { 
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Plus Jakarta Sans", "Segoe UI", Roboto, sans-serif; 
+    color: var(--dark-grey); 
+    line-height: 1.8; 
+    -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale; /* Truco extra para que las letras se vean súper nítidas en Mac */
+    overflow-x: hidden; 
+    background-color: var(--white); 
+    transition: color 0.5s ease, background-color 0.5s ease; 
+}
 /* MINIMALISMO PURO: Ocultamos los cuadros y la lupa */
 .blueprint-grid { display: none !important; }
 
@@ -54,9 +62,13 @@ body::before { content: ""; position: fixed; top: -10vh; left: -10vw; width: 120
 
 /* ------------------------------------------------------------------------- */
 
-h1, h2, .quote-massive, .title-serif { font-family: 'Playfair Display', serif; }
+/* TIPOGRAFÍA GLOBAL APPLE NATIVA */
+h1, h2, h3, h4, h5, .quote-massive, .title-serif, .editorial-italic { 
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Plus Jakarta Sans", "Segoe UI", Roboto, sans-serif !important; 
+    letter-spacing: -1.2px; 
+}
+.editorial-italic { font-style: italic; font-weight: inherit; } /* Se eliminó el weight fijo para fluidez */
 ::selection { background-color: var(--pink-premium); color: #ffffff; }
-.editorial-italic { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500; }
 
 #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--white); z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.6s ease, visibility 0.6s ease, background-color 0.5s ease; }
 .preload-logo { width: 150px; height: auto; animation: pulse-logo 1s infinite alternate cubic-bezier(0.4, 0, 0.2, 1); transition: filter 0.5s ease; }
@@ -98,13 +110,17 @@ nav.nav-scrolled .logo-container img { height: 45px; }
 .lang-toggle-link::after { display: none !important; }
 .mobile-menu-btn { display: none; background: transparent; border: none; outline: none; -webkit-appearance: none; }
 
-header, section { position: relative; z-index: 10; background-color: transparent !important; background-image: none !important; }
-header { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; overflow: hidden; }
-.hero-content { position: relative; z-index: 10; max-width: 800px; }
-header h2 { color: var(--pink-premium); font-size: 14px; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 30px; font-weight: 800; font-family: 'Inter', sans-serif;}
-header h1 { font-size: clamp(45px, 7vw, 85px); line-height: 1.05; margin-bottom: 35px; font-weight: 800; letter-spacing: -2px; color: var(--dark-grey); }
-header p { font-size: 22px; color: var(--soft-grey); max-width: 600px; margin-bottom: 50px; font-weight: 300; line-height: 1.6; }
-.btn-main { display: inline-block; padding: 22px 48px; background-color: var(--dark-grey); color: var(--white); text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; border: 1px solid var(--dark-grey); font-family: 'Inter', sans-serif; position: relative; overflow: hidden; z-index: 1; transition: box-shadow 0.4s ease, border-color 0.4s ease, color 0.3s ease; }
+header { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 8%; overflow: hidden; text-align: center; }
+.hero-content { position: relative; z-index: 10; max-width: 900px; display: flex; flex-direction: column; align-items: center; }
+header h2 { color: var(--pink-premium); font-size: 14px; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 30px; font-weight: 800; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Plus Jakarta Sans", sans-serif;}
+header h1 { font-size: clamp(45px, 7vw, 85px); line-height: 1.05; margin-bottom: 35px; font-weight: 800; letter-spacing: -2.5px; color: var(--dark-grey); }
+header p { font-size: 22px; color: var(--soft-grey); max-width: 700px; margin-bottom: 50px; font-weight: 300; line-height: 1.6; }
+
+/* Actualizamos la clase para resaltar sin usar cursiva obligatoria */
+.editorial-italic { font-style: normal; color: var(--pink-premium); }
+
+/* BOTONES ESTILO PÍLDORA (APPLE) */
+.btn-main { display: inline-block; padding: 18px 42px; background-color: var(--dark-grey); color: var(--white); text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; border: 1px solid var(--dark-grey); font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif; position: relative; overflow: hidden; z-index: 1; transition: box-shadow 0.4s ease, border-color 0.4s ease, color 0.3s ease; }
 .btn-main::before { content: ''; position: absolute; top: var(--y, 50%); left: var(--x, 50%); width: 0; height: 0; background-color: var(--pink-premium); border-radius: 50%; transform: translate(-50%, -50%); transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1), height 0.5s cubic-bezier(0.25, 1, 0.5, 1); z-index: -1; }
 .btn-main:hover::before { width: 400px; height: 400px; }
 .btn-main:hover { color: var(--white); box-shadow: 0 15px 30px rgba(212, 0, 109, 0.3); border-color: var(--pink-premium); background-color: transparent; }
@@ -119,19 +135,11 @@ header p { font-size: 22px; color: var(--soft-grey); max-width: 600px; margin-bo
 .marquee-wrapper .brand-logo:hover { opacity: 1 !important; filter: grayscale(0%) !important; transform: scale(1.15); z-index: 10; position: relative; }
 @keyframes scroll-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-#manifiesto-global { padding: 80px 8% 80px 8%; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: center; }
-.texto-manifiesto p { font-size: clamp(28px, 4vw, 42px); font-family: 'Playfair Display', serif; font-weight: 700; color: var(--dark-grey); line-height: 1.2; letter-spacing: -1px; margin-bottom: 20px;}
-.texto-manifiesto p.sub { font-size: 20px; font-family: 'Inter', sans-serif; font-weight: 300; color: var(--soft-grey); line-height: 1.6; max-width: 600px; }
-.cajas-filosofia { display: flex; flex-direction: column; gap: 40px; }
-.filosofia-box { padding-left: 30px; border-left: 3px solid var(--pink-premium); }
-.filosofia-box.asimetrica { margin-left: 40px; }
-.filosofia-box h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: var(--pink-premium); margin-bottom: 15px; font-weight: 800; font-family: 'Inter', sans-serif; }
-.filosofia-box p { font-size: 17px; color: var(--soft-grey); line-height: 1.7; font-weight: 400; }
-
-.card, .team-card, details { background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(251, 207, 232, 0.6); border-radius: 12px; position: relative; transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease, filter 0.5s ease, opacity 0.5s ease, background 0.5s ease !important; will-change: transform, opacity, filter; }
+/* TARJETAS PREMIUM MINIMALISTAS */
+.card, .team-card, details { background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 24px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03); position: relative; transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease, filter 0.5s ease, opacity 0.5s ease, background 0.5s ease !important; will-change: transform, opacity, filter; }
 .scroll-dimmed { filter: grayscale(50%) opacity(60%) !important; }
 .scroll-focused { filter: grayscale(0%) opacity(100%) !important; }
-.card:hover, .team-card:hover, details:hover { transform: translateY(-8px) scale(1.02) !important; box-shadow: 0 25px 50px rgba(0,0,0,0.08) !important; border-color: var(--pink-premium) !important; filter: grayscale(0%) opacity(100%) !important; z-index: 2; }
+.card:hover, .team-card:hover, details:hover { transform: translateY(-8px) scale(1.02) !important; box-shadow: 0 30px 60px rgba(212, 0, 109, 0.05) !important; border-color: rgba(212, 0, 109, 0.3) !important; filter: grayscale(0%) opacity(100%) !important; z-index: 2; }
 
 .icon-wrapper { width: 56px; height: 56px; background: rgba(212, 0, 109, 0.08); border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; transition: all 0.4s ease; }
 .card:hover .icon-wrapper { background: var(--pink-premium); }
@@ -140,95 +148,95 @@ header p { font-size: 22px; color: var(--soft-grey); max-width: 600px; margin-bo
 .card.svg-animate .icon-wrapper svg * { animation: drawSvg 2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
 @keyframes drawSvg { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 
-#servicios { padding: 40px 8% 140px 8%; display: flex; align-items: flex-start; gap: 100px; }
+.section-label { color: var(--pink-premium); font-weight: 800; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; display: block; font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif; opacity: 0.9; }
+
+/* ==============================================================
+   AJUSTE DE ESPACIADOS GLOBALES (RITMO VERTICAL TOP 1)
+   ============================================================== */
+#impacto-container { padding: 40px 0; }
+#impacto { padding: 90px 8%; background-color: var(--dark-grey) !important; color: var(--white); margin: 0 4%; border-radius: 30px; box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15); display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: center; transition: background-color 0.5s ease; }
+
+/* Todas las secciones principales unificadas a 80px superior e inferior */
+#servicios { padding: 80px 8%; display: flex; align-items: flex-start; gap: 100px; }
+#diferenciadores { padding: 80px 8%; display: flex; align-items: flex-start; gap: 80px; }
+#saas-ecosystem { padding: 80px 8%; position: relative; z-index: 10; width: 100%; }
+#nuestra-firma { padding: 80px 8%; display: flex; flex-direction: column; gap: 60px; }
+#faq { padding: 80px 8% 120px 8%; display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: start; }
+
+/* Estructura Interna Servicios */
 .servicios-left { position: sticky; top: 160px; flex: 0 0 35%; }
-.servicios-right { flex: 1; display: flex; flex-direction: column; gap: 40px; padding-bottom: 80px; }
+.servicios-right { flex: 1; display: flex; flex-direction: column; gap: 40px; padding-bottom: 40px; }
 .servicios-right .card { position: sticky; box-shadow: 0 -10px 40px rgba(0,0,0,0.04); }
 .servicios-right .card:nth-child(1) { top: 140px; }
 .servicios-right .card:nth-child(2) { top: 160px; }
 .servicios-right .card:nth-child(3) { top: 180px; }
-.section-label { color: var(--pink-premium); font-weight: 800; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: block; font-family: 'Inter', sans-serif; }
 .card { padding: 60px 50px; }
-.card-num { font-size: 12px; font-weight: 800; color: var(--pink-premium); margin-bottom: 30px; display: block; position: absolute; top: 40px; right: 40px; opacity: 0.5; font-family: 'Inter', sans-serif;}
-.card h3 { font-size: 26px; margin-bottom: 20px; letter-spacing: -0.5px; font-weight: 700; color: var(--dark-grey); font-family: 'Inter', sans-serif;}
+.card-num { font-size: 12px; font-weight: 800; color: var(--pink-premium); margin-bottom: 30px; display: block; position: absolute; top: 40px; right: 40px; opacity: 0.5; font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif;}
+.card h3 { font-size: 26px; margin-bottom: 20px; font-weight: 700; color: var(--dark-grey); font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif; letter-spacing: -0.5px;}
 .card ul { list-style: none; }
 .card ul li { margin-bottom: 15px; font-size: 16px; color: var(--soft-grey); padding-left: 20px; border-left: 2px solid var(--pink-premium); line-height: 1.6; }
 
-#impacto-container { padding: 40px 0; }
-#impacto { padding: 90px 8%; background-color: var(--dark-grey) !important; color: var(--white); margin: 0 4%; border-radius: 30px; box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15); display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: center; transition: background-color 0.5s ease; }
+/* Estructura Interna Impacto */
 .impacto-texto { text-align: left; }
-.impacto-texto h2 { color: var(--white); font-size: clamp(32px, 4vw, 48px); letter-spacing: -1px; margin-top: 15px; line-height: 1.1; }
+.impacto-texto h2 { color: var(--white); font-size: clamp(32px, 4vw, 48px); letter-spacing: -1.5px; margin-top: 15px; line-height: 1.1; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Plus Jakarta Sans", sans-serif;}
 .grid-impacto { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
 .impacto-item:nth-child(3) { grid-column: span 2; }
-.impacto-item h3 { font-size: clamp(50px, 6vw, 75px); font-weight: 800; color: var(--pink-premium); line-height: 1; margin-bottom: 10px; letter-spacing: -2px; font-family: 'Inter', sans-serif; display: flex; align-items: baseline; gap: 2px;}
-.impacto-item h4 { font-size: 16px; color: var(--white); margin-bottom: 5px; font-weight: 700; font-family: 'Inter', sans-serif;}
+.impacto-item h3 { font-size: clamp(50px, 6vw, 75px); font-weight: 800; color: var(--pink-premium); line-height: 1; margin-bottom: 10px; letter-spacing: -2px; font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif; display: flex; align-items: baseline; gap: 2px;}
+.impacto-item h4 { font-size: 16px; color: var(--white); margin-bottom: 5px; font-weight: 700; font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif;}
 .impacto-item p { font-size: 14px; color: #cbd5e1; line-height: 1.6; font-weight: 300; }
 
-#diferenciadores { padding: 140px 8% 60px 8%; display: flex; align-items: flex-start; gap: 80px; }
+/* Estructura Interna Diferenciadores */
 .diff-left { position: sticky; top: 160px; flex: 0 0 45%; }
 .diff-right { flex: 1; display: flex; flex-direction: column; gap: 80px; padding-bottom: 50px; }
-.quote-massive { font-size: clamp(45px, 6vw, 75px); font-family: 'Playfair Display', serif; font-weight: 800; line-height: 1.05; letter-spacing: -2px; color: var(--dark-grey); }
-.quote-highlight { color: var(--pink-premium); font-style: italic; }
+.quote-massive { font-size: clamp(45px, 6vw, 75px); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Plus Jakarta Sans", sans-serif; font-weight: 800; line-height: 1.05; letter-spacing: -1.5px; color: var(--dark-grey); }
+.quote-highlight { color: var(--pink-premium); font-weight: 500; }
 .diff-item { padding-left: 30px; border-left: 2px solid var(--pink-premium); transition: all 0.3s ease; }
 .diff-item:hover { border-left-width: 6px; }
-.diff-item h4 { font-size: 16px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--pink-premium); font-weight: 800; font-family: 'Inter', sans-serif; }
+.diff-item h4 { font-size: 16px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--pink-premium); font-weight: 800; font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif; }
 .diff-item p { font-size: 18px; color: var(--soft-grey); font-weight: 300; line-height: 1.7; }
 
-/* ==============================================================
-   NUEVA SECCIÓN: JBDA ACADEMY (BENTO BOX)
-   ============================================================== */
-#saas-bento { padding: 40px 5%; }
-.bento-card { 
-    background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(251, 207, 232, 0.6); border-radius: 24px; box-shadow: 0 25px 50px rgba(0,0,0,0.05);
-    padding: 60px 80px; display: flex; align-items: center; justify-content: space-between; gap: 60px;
-    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease, border-color 0.4s ease;
-}
-.bento-card:hover { transform: translateY(-8px); box-shadow: 0 35px 60px rgba(212, 0, 109, 0.08); border-color: var(--pink-premium); }
-.bento-content { flex: 1; max-width: 650px; }
-.bento-content h3 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 45px); color: var(--dark-grey); margin-bottom: 20px; line-height: 1.1; letter-spacing: -1px; font-weight: 800; }
-.bento-content p { font-size: 18px; color: var(--soft-grey); line-height: 1.7; font-weight: 300; margin-bottom: 0; }
-.bento-action { flex: 0 0 auto; }
-.btn-academy { 
-    display: inline-flex; align-items: center; gap: 12px; padding: 22px 40px; 
-    background-color: transparent; color: var(--dark-grey); border: 1px solid var(--dark-grey); 
-    border-radius: 4px; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; 
-    text-decoration: none; transition: all 0.3s ease; font-family: 'Inter', sans-serif;
-}
-.btn-academy:hover { background-color: var(--pink-premium); color: var(--white); border-color: var(--pink-premium); box-shadow: 0 15px 30px rgba(212, 0, 109, 0.3); }
-.btn-academy svg { width: 20px; height: 20px; transition: transform 0.3s ease; }
-.btn-academy:hover svg { transform: translateX(5px); }
+/* Estructura Interna SaaS */
+.saas-intro { text-align: center; max-width: 800px; margin: 0 auto 60px auto; }
+.saas-intro p { font-size: 18px; color: var(--soft-grey); line-height: 1.7; font-weight: 300; margin-top: 20px; }
+.saas-grid { display: flex !important; flex-direction: row !important; gap: 30px; align-items: stretch; width: 100%; }
+.saas-card { flex: 1; min-width: 0; padding: 40px 30px; display: flex; flex-direction: column; justify-content: space-between; height: auto; }
+.saas-card-content { margin-bottom: 30px; }
+.saas-card h3 span { display: none !important; }
+.saas-card h3 { font-size: 24px; color: var(--dark-grey); margin-bottom: 5px; font-weight: 800; letter-spacing: -1.5px; }
+.saas-card h4 { font-size: 13px; color: var(--pink-premium); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 20px; }
+.saas-card p { font-size: 15px; color: var(--soft-grey); line-height: 1.7; margin-bottom: 0; }
 
-#nuestra-firma { padding: 120px 10%; }
-.manifesto { font-size: 22px; color: var(--soft-grey); font-weight: 300; max-width: 850px; margin-bottom: 80px; line-height: 1.6; border-left: 3px solid var(--pink-premium); padding-left: 30px; }
-.team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;}
-@media (min-width: 901px) { .team-card:nth-child(2) { margin-top: 80px; } }
-.team-card { padding: 50px 40px; }
-.member-role { color: var(--pink-premium); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; margin-bottom: 15px; display: block; font-family: 'Inter', sans-serif;}
-.member-name { font-size: 26px; color: var(--dark-grey); font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px; font-family: 'Inter', sans-serif;}
+/* Estructura Interna Nuestra Firma */
+.firma-header { margin-bottom: 0; }
+.firma-header-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 10px;}
+.firma-header-content h2 { font-size: clamp(32px, 4vw, 46px); line-height: 1.2; margin-bottom: 0; color: var(--dark-grey); letter-spacing: -1.5px; font-weight: 800;}
+.manifesto { font-size: 18px; color: var(--soft-grey); font-weight: 300; line-height: 1.8; border-left: 2px solid var(--pink-premium); padding-left: 25px; margin-bottom: 0; max-width: 100%; }
+.team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; align-items: stretch;}
+.team-card { padding: 50px 40px; display: flex; flex-direction: column; justify-content: flex-start; }
+.member-role { color: var(--pink-premium); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; margin-bottom: 15px; display: block; font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif;}
+.member-name { font-size: 26px; color: var(--dark-grey); font-weight: 700; margin-bottom: 20px; letter-spacing: -1.5px; font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif;}
 .member-bio { font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
 
-/* Animación Fluida en Acordeón */
-#faq { padding: 90px 8% 120px 8%; display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: start; }
+/* Estructura Interna FAQ */
 .faq-texto { position: sticky; top: 160px; } 
-.faq-texto h2 { font-size: clamp(36px, 4vw, 52px); margin-top: 15px; line-height: 1.1; }
+.faq-texto h2 { font-size: clamp(36px, 4vw, 52px); margin-top: 15px; line-height: 1.1; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Plus Jakarta Sans", sans-serif; letter-spacing: -1.5px;}
 .faq-container { width: 100%; }
 details { margin-bottom: 15px; overflow: hidden; }
 details[open] { border-color: var(--pink-premium) !important; box-shadow: 0 15px 30px rgba(212,0,109,0.08) !important; background: rgba(253, 242, 248, 0.8); }
 details[open] .faq-content { animation: slideDownFAQ 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 @keyframes slideDownFAQ { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-summary { padding: 25px 30px; font-size: 18px; font-weight: 700; color: var(--dark-grey); transition: color 0.3s ease; list-style: none; position: relative; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; cursor: pointer; }
+summary { padding: 25px 30px; font-size: 18px; font-weight: 700; color: var(--dark-grey); transition: color 0.3s ease; list-style: none; position: relative; display: flex; justify-content: space-between; align-items: center; font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif; cursor: pointer; }
 summary:hover { color: var(--pink-premium); }
 summary::-webkit-details-marker { display: none; }
 summary::after { content: '+'; font-size: 24px; color: var(--pink-premium); transition: transform 0.3s ease; font-weight: 400; }
 details[open] summary::after { content: '-'; transform: rotate(180deg); }
 .faq-content { padding: 0 30px 25px 30px; font-size: 16px; color: var(--soft-grey); line-height: 1.7; }
 
-.legal-container { max-width: 900px; margin: 60px auto 100px auto; padding: 80px 8%; position: relative; z-index: 10; background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(251, 207, 232, 0.6); border-radius: 24px; box-shadow: 0 25px 50px rgba(0,0,0,0.05); transition: background 0.5s ease, border-color 0.5s ease; }
-.legal-container h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 800; color: var(--dark-grey); margin-bottom: 10px; letter-spacing: -1px; }
+.legal-container { max-width: 900px; margin: 60px auto 100px auto; padding: 80px 8%; position: relative; z-index: 10; background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.03); transition: background 0.5s ease, border-color 0.5s ease; }
+.legal-container h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 800; color: var(--dark-grey); margin-bottom: 10px; letter-spacing: -1.5px; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Plus Jakarta Sans", sans-serif;}
 .legal-container .update-date { font-size: 14px; color: var(--pink-premium); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 50px; }
-.legal-container h2 { font-size: 20px; font-weight: 700; color: var(--dark-grey); margin-top: 50px; margin-bottom: 20px; border-bottom: 1px solid rgba(212, 0, 109, 0.15); padding-bottom: 10px; }
-.legal-container h3 { font-size: 16px; font-weight: 700; color: var(--dark-grey); margin-top: 30px; margin-bottom: 15px; }
+.legal-container h2 { font-size: 20px; font-weight: 700; color: var(--dark-grey); margin-top: 50px; margin-bottom: 20px; border-bottom: 1px solid rgba(212, 0, 109, 0.15); padding-bottom: 10px; font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif; letter-spacing: -1px;}
+.legal-container h3 { font-size: 16px; font-weight: 700; color: var(--dark-grey); margin-top: 30px; margin-bottom: 15px; font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif;}
 .legal-container p { font-size: 16px; color: var(--soft-grey); margin-bottom: 20px; line-height: 1.8; }
 .legal-container ul { margin-bottom: 25px; padding-left: 20px; }
 .legal-container ul li { font-size: 16px; color: var(--soft-grey); margin-bottom: 10px; line-height: 1.8; }
@@ -236,11 +244,11 @@ details[open] summary::after { content: '-'; transform: rotate(180deg); }
 
 .mega-footer-dark { background-color: var(--dark-grey); color: var(--white); position: relative; z-index: 10; padding-top: 80px; border-top-left-radius: 40px; border-top-right-radius: 40px; transition: background-color 0.5s ease; }
 #contacto { background: transparent !important; color: var(--white); text-align: center; box-shadow: none !important; margin: 0; padding: 60px 5%; border-radius: 0; }
-#contacto h2 { font-size: 40px; margin-bottom: 25px; font-weight: 800; letter-spacing: -1px; color: var(--white); }
+#contacto h2 { font-size: 40px; margin-bottom: 25px; font-weight: 800; letter-spacing: -1.5px; color: var(--white); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Plus Jakarta Sans", sans-serif;}
 #contacto p { color: #cbd5e1; }
 footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-between; align-items: flex-start; color: #cbd5e1; font-size: 14px; border: none !important; background: transparent !important;}
 .footer-col { flex: 1; min-width: 250px; }
-.footer-col h5 { color: var(--white); font-size: 16px; font-weight: 700; margin-bottom: 15px; font-family: 'Inter', sans-serif;}
+.footer-col h5 { color: var(--white); font-size: 16px; font-weight: 700; margin-bottom: 15px; font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif;}
 .footer-col p { margin-bottom: 8px; line-height: 1.6; }
 .social-link { display: flex; align-items: center; margin-bottom: 12px; font-weight: 600; color: var(--white) !important; transition: color 0.3s ease; text-decoration: none; }
 .social-link:hover { color: var(--pink-premium) !important; }
@@ -253,7 +261,7 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
 .concierge-toggle:hover { background-color: var(--pink-premium); }
 .concierge-menu { position: absolute; bottom: 75px; right: 0; background: rgba(253, 242, 248, 0.85); backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%); border: 1px solid rgba(212, 0, 109, 0.15); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 5px; width: 230px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
 .concierge-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
-.concierge-item { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--dark-grey); font-size: 14px; font-weight: 600; border-radius: 8px; transition: all 0.2s ease; font-family: 'Inter', sans-serif; cursor: pointer; }
+.concierge-item { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: var(--dark-grey); font-size: 14px; font-weight: 600; border-radius: 8px; transition: all 0.2s ease; font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif; cursor: pointer; }
 .concierge-item:hover { background: rgba(212, 0, 109, 0.08); color: var(--pink-premium); }
 
 /* ==============================================================
@@ -277,17 +285,19 @@ footer { padding: 60px 10% 80px 10%; display: flex; justify-content: space-betwe
     .nav-links a::after { display: none; }
     .nav-links.active a { opacity: 1; transform: translateY(0); }
     .nav-links.active a:nth-child(1) { transition-delay: 0.1s; } .nav-links.active a:nth-child(2) { transition-delay: 0.2s; } .nav-links.active a:nth-child(3) { transition-delay: 0.3s; } .nav-links.active a:nth-child(4) { transition-delay: 0.4s; } .nav-links.active a:nth-child(5) { transition-delay: 0.5s; } .nav-links.active a:nth-child(6) { transition-delay: 0.6s; }
-    #manifiesto-global { grid-template-columns: 1fr; padding: 60px 5%; gap: 40px;}
-    .filosofia-box.asimetrica { margin-left: 0; }
+    
     #ecosistema { padding: 40px 5%; } .glass-track { border-radius: 0; } 
     #servicios { flex-direction: column; padding: 60px 5%; gap: 40px; }
     .servicios-left { position: relative; top: 0; flex: 1; } .servicios-right { gap: 30px; } .servicios-right .card { position: relative; top: 0 !important; } 
     #impacto { grid-template-columns: 1fr; padding: 60px 5%; margin: 0 5%; border-radius: 20px; } .grid-impacto { grid-template-columns: 1fr; } .impacto-item:nth-child(3) { grid-column: span 1; }
-    #diferenciadores { flex-direction: column; padding: 80px 5% 40px 5%; gap: 50px; } .diff-left { position: relative; top: 0; flex: 1; } .diff-right { gap: 50px; padding-bottom: 0; } .diff-item { padding-left: 20px; }
-    #academia-bento { padding: 40px 5%; }
-    .bento-card { flex-direction: column; text-align: center; padding: 40px 30px; gap: 40px; }
-    #nuestra-firma { padding: 60px 5%; } .team-grid { grid-template-columns: 1fr; gap: 40px; }
+    #diferenciadores { flex-direction: column; padding: 60px 5%; gap: 50px; } .diff-left { position: relative; top: 0; flex: 1; } .diff-right { gap: 50px; padding-bottom: 0; } .diff-item { padding-left: 20px; }
+    #saas-ecosystem { padding: 60px 5%; }
+    .saas-grid { flex-direction: column !important; gap: 25px; }
+    #nuestra-firma { padding: 60px 5%; gap: 50px; }
+    .firma-header-content { grid-template-columns: 1fr; gap: 30px; }
+    .team-grid { grid-template-columns: 1fr; gap: 30px; }
     #faq { grid-template-columns: 1fr; padding: 60px 5%; gap: 30px;} .faq-texto { position: relative; top: 0; }
+    
     .legal-container { margin: 40px 5% 60px 5%; padding: 60px 8%; border-radius: 16px;}
     .mega-footer-dark { margin-top: 40px; border-top-left-radius: 20px; border-top-right-radius: 20px; padding-top: 40px;}
     #contacto { margin: 0; padding: 40px 5%; }
@@ -307,10 +317,7 @@ body.dark-theme .orb-3 { background: rgba(244, 114, 182, 0.15) !important; }
 body.dark-theme #page-transition-overlay { background: rgba(15, 23, 42, 0.2); }
 body.dark-theme nav.nav-scrolled { background: rgba(15, 23, 42, 0.8); border-bottom-color: rgba(255,255,255,0.05); }
 body.dark-theme .glass-track, body.dark-theme .graph-box { background: rgba(30, 41, 59, 0.5); border-color: rgba(244, 114, 182, 0.3); }
-body.dark-theme .card, body.dark-theme .team-card, body.dark-theme details, body.dark-theme .legal-container, body.dark-theme .bento-card { background: rgba(30, 41, 59, 0.6); border-color: rgba(244, 114, 182, 0.2); }
-body.dark-theme .bento-content h3 { color: #f8fafc; }
-body.dark-theme .bento-content p { color: #cbd5e1; }
-body.dark-theme .btn-academy { color: #f8fafc; border-color: #f8fafc; }
+body.dark-theme .card, body.dark-theme .team-card, body.dark-theme details, body.dark-theme .legal-container, body.dark-theme .saas-card { background: rgba(30, 41, 59, 0.6); border-color: rgba(244, 114, 182, 0.2); }
 body.dark-theme details[open] { background: rgba(15, 23, 42, 0.9); border-color: var(--pink-premium) !important; }
 body.dark-theme .concierge-menu { background: rgba(15, 23, 42, 0.95); border-color: rgba(244, 114, 182, 0.2); }
 body.dark-theme .metrics-dashboard { background: rgba(248, 250, 252, 0.05); border-color: rgba(248, 250, 252, 0.1); }
@@ -345,11 +352,12 @@ body.dark-theme nav::before { background: linear-gradient(to bottom, rgba(0,0,0,
    MODO TERMINAL MATRIX
    ============================================================== */
 body.terminal-mode, body.terminal-mode.dark-theme { background: #050505 !important; animation: none !important; }
-body.terminal-mode *, body.terminal-mode.dark-theme * { color: #00ff00 !important; font-family: 'Courier New', Courier, monospace !important; border-color: #004400 !important; text-shadow: 0 0 5px rgba(0, 255, 0, 0.5) !important; }
+/* Fuente nativa monoespaciada para Modo Terminal */
+body.terminal-mode *, body.terminal-mode.dark-theme * { color: #00ff00 !important; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important; border-color: #004400 !important; text-shadow: 0 0 5px rgba(0, 255, 0, 0.5) !important; }
 body.terminal-mode header, body.terminal-mode section, body.terminal-mode nav, body.terminal-mode .concierge-menu, body.terminal-mode.dark-theme nav.nav-scrolled { background-color: transparent !important; background-image: none !important; box-shadow: none !important; border: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important;}
-body.terminal-mode .card, body.terminal-mode .team-card, body.terminal-mode details, body.terminal-mode .glass-track, body.terminal-mode .legal-container, body.terminal-mode .bento-card, body.terminal-mode .graph-box, body.terminal-mode.dark-theme .card, body.terminal-mode.dark-theme .glass-track, body.terminal-mode.dark-theme .legal-container, body.terminal-mode.dark-theme details[open], body.terminal-mode.dark-theme .concierge-menu, body.terminal-mode.dark-theme .metrics-dashboard, body.terminal-mode.dark-theme .bento-card { background: #050505 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; filter: none !important; box-shadow: none !important;}
+body.terminal-mode .card, body.terminal-mode .team-card, body.terminal-mode details, body.terminal-mode .glass-track, body.terminal-mode .legal-container, body.terminal-mode .saas-card, body.terminal-mode .graph-box, body.terminal-mode.dark-theme .card, body.terminal-mode.dark-theme .glass-track, body.terminal-mode.dark-theme .legal-container, body.terminal-mode.dark-theme details[open], body.terminal-mode.dark-theme .concierge-menu, body.terminal-mode.dark-theme .metrics-dashboard, body.terminal-mode.dark-theme .saas-card { background: #050505 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; filter: none !important; box-shadow: none !important;}
 body.terminal-mode #impacto, body.terminal-mode .mega-footer-dark, body.terminal-mode.dark-theme #impacto, body.terminal-mode.dark-theme .mega-footer-dark { background-color: #050505 !important; border-top: 1px solid #00ff00 !important; }
-body.terminal-mode .btn-main, body.terminal-mode .btn-academy, body.terminal-mode.dark-theme .btn-main, body.terminal-mode.dark-theme .btn-academy { background-color: #002200 !important; border: 1px solid #00ff00 !important; color: #00ff00 !important; }
+body.terminal-mode .btn-main, body.terminal-mode.dark-theme .btn-main { background-color: #002200 !important; border: 1px solid #00ff00 !important; color: #00ff00 !important; }
 body.terminal-mode .brand-logo, body.terminal-mode img, body.terminal-mode.dark-theme img, body.terminal-mode.dark-theme .preload-logo { filter: sepia(100%) hue-rotate(90deg) saturate(300%) brightness(80%) contrast(200%) !important; }
 body.terminal-mode .icon-wrapper { background-color: rgba(0, 255, 0, 0.1) !important; }
 body.terminal-mode svg { stroke: #00ff00 !important; fill: none !important; }
@@ -358,7 +366,7 @@ body.terminal-mode .social-link svg, body.terminal-mode .concierge-item svg { fi
 body.terminal-mode .icon-wrapper svg { animation: none !important; stroke-dasharray: none !important; stroke-dashoffset: 0 !important;}
 body.terminal-mode .bar { background-color: #00ff00 !important; }
 body.terminal-mode::after { content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); z-index: 9999; background-size: 100% 2px, 3px 100%; pointer-events: none; opacity: 0.4; }
-#terminal-toggle { cursor: pointer !important; opacity: 0.2; font-family: monospace; transition: opacity 0.3s; margin-left: 5px; position: relative; z-index: 10000; pointer-events: auto; }
+#terminal-toggle { cursor: pointer !important; opacity: 0.2; transition: opacity 0.3s; margin-left: 5px; position: relative; z-index: 10000; pointer-events: auto; }
 #terminal-toggle:hover { opacity: 1; color: var(--pink-premium) !important; }
 body.terminal-mode .hamburger-lines .line { background-color: #00ff00 !important; }
 body.terminal-mode .mobile-menu-btn.open .hamburger-lines .line:nth-child(1), body.terminal-mode .mobile-menu-btn.open .hamburger-lines .line:nth-child(2) { background-color: #00ff00 !important; }
@@ -381,7 +389,7 @@ body.terminal-mode ::-webkit-scrollbar-thumb { background: #00ff00; border-color
     transform: translateX(-50%) translateY(20px);
     background: var(--dark-grey); color: var(--white);
     padding: 14px 28px; border-radius: 50px;
-    font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif;
     border: 1px solid rgba(212, 0, 109, 0.6);
     box-shadow: 0 15px 30px rgba(212, 0, 109, 0.25), 0 5px 15px rgba(0,0,0,0.4);
     opacity: 0; visibility: hidden;
@@ -436,46 +444,4 @@ body.dark-theme .jbda-toast {
         max-height: 100vh; border-radius: 24px 24px 0 0; border-bottom: none;
     }
     .jbda-modal-close { top: max(env(safe-area-inset-top, 10px), 10px); right: 20px; }
-}
-
-
-/* ==============================================================
-   SECCIÓN: ECOSISTEMA SAAS (TARJETAS HORIZONTALES - FIX FLEXBOX)
-   ============================================================== */
-#saas-ecosystem { padding: 80px 8% 120px 8%; position: relative; z-index: 10; width: 100%; }
-.saas-intro { text-align: center; max-width: 800px; margin: 0 auto 60px auto; }
-.saas-intro p { font-size: 18px; color: var(--soft-grey); line-height: 1.7; font-weight: 300; margin-top: 20px; }
-
-/* Forzamos alineación horizontal estricta con Flexbox para evitar conflictos de Grid */
-.saas-grid { 
-    display: flex !important; 
-    flex-direction: row !important; 
-    gap: 30px; 
-    align-items: stretch;
-    width: 100%;
-}
-
-/* Estilos internos de cada tarjeta para que mantengan la misma altura y ancho */
-.saas-card { 
-    flex: 1; 
-    min-width: 0;
-    padding: 40px 30px; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: space-between; 
-    height: auto; 
-}
-.saas-card-content { margin-bottom: 30px; }
-
-/* OCULTAMOS EL SÍMBOLO ">_" PARA QUE EL DISEÑO QUEDE LIMPIO CON LOS NUEVOS ICONOS SVG */
-.saas-card h3 span { display: none !important; }
-
-.saas-card h3 { font-size: 24px; color: var(--dark-grey); margin-bottom: 5px; font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: -0.5px; }
-.saas-card h4 { font-size: 13px; color: var(--pink-premium); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 20px; }
-.saas-card p { font-size: 15px; color: var(--soft-grey); line-height: 1.7; margin-bottom: 0; }
-
-/* Ajustes para Móvil: Pasa a 1 sola columna en pantallas pequeñas */
-@media (max-width: 900px) {
-    #saas-ecosystem { padding: 60px 5%; }
-    .saas-grid { flex-direction: column !important; gap: 25px; }
 }
