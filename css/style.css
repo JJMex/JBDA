@@ -437,3 +437,27 @@ body.dark-theme .jbda-toast {
     }
     .jbda-modal-close { top: max(env(safe-area-inset-top, 10px), 10px); right: 20px; }
 }
+
+
+/* ==============================================================
+   NUEVA SECCIÓN: ECOSISTEMA SAAS (TARJETAS)
+   ============================================================== */
+#saas-ecosystem { padding: 80px 8% 120px 8%; position: relative; z-index: 10; }
+.saas-intro { text-align: center; max-width: 800px; margin: 0 auto 60px auto; }
+.saas-intro p { font-size: 18px; color: var(--soft-grey); line-height: 1.7; font-weight: 300; margin-top: 20px; }
+
+/* Grid para Desktop */
+.saas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+
+/* Estilos internos de cada tarjeta */
+.saas-card { padding: 40px 30px; display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
+.saas-card-content { margin-bottom: 30px; }
+.saas-card h3 { font-size: 24px; color: var(--dark-grey); margin-bottom: 5px; font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: -0.5px; }
+.saas-card h4 { font-size: 13px; color: var(--pink-premium); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 15px; }
+.saas-card p { font-size: 15px; color: var(--soft-grey); line-height: 1.7; }
+
+/* Ajustes para Móvil */
+@media (max-width: 900px) {
+    #saas-ecosystem { padding: 60px 5%; }
+    .saas-grid { grid-template-columns: 1fr; gap: 25px; }
+}
